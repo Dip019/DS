@@ -5,31 +5,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>তোমার জন্য... ❤️</title>
+<title>আমাদের Date Plan ❤️</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- PDF GENERATOR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 
 /* =========================================================
-   GLOBAL
+   ROOT
 ========================================================= */
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 :root{
-    --pink:#ff4f8b;
-    --pink2:#ff8fb4;
-    --rose:#ff2f70;
-    --purple:#9b6cff;
-    --dark:#080510;
-    --white:#fff;
+    --pink:#ff477e;
+    --pink2:#ff8eaf;
+    --rose:#e92d63;
+    --purple:#8c62d9;
+
+    --dark:#08050b;
+    --dark2:#130914;
+
+    --glass:rgba(255,255,255,.075);
+    --border:rgba(255,255,255,.12);
+
+    --text:#fff;
+    --muted:rgba(255,255,255,.65);
 }
 
 html{
@@ -38,172 +49,140 @@ html{
 
 body{
     min-height:100vh;
-    overflow:hidden;
-    background:#080510;
-    color:white;
+    overflow-x:hidden;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,60,120,.15),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(130,70,220,.16),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #050308,
+            #160a17 50%,
+            #08040d
+        );
+
+    color:var(--text);
     font-family:"Noto Serif Bengali",serif;
 }
 
 /* =========================================================
-   MAIN BACKGROUND
+   BACKGROUND
 ========================================================= */
 
-#universe{
+#background{
     position:fixed;
     inset:0;
     overflow:hidden;
-    background:
-        radial-gradient(circle at 50% 40%,rgba(122,42,100,.22),transparent 35%),
-        radial-gradient(circle at 15% 80%,rgba(90,50,160,.20),transparent 35%),
-        radial-gradient(circle at 90% 20%,rgba(255,50,120,.12),transparent 30%),
-        linear-gradient(145deg,#05030a,#110718 50%,#07040d);
-}
-
-#stars{
-    position:absolute;
-    inset:0;
+    pointer-events:none;
+    z-index:0;
 }
 
 .star{
     position:absolute;
     width:2px;
     height:2px;
+    background:white;
     border-radius:50%;
-    background:#fff;
-    opacity:.5;
-    animation:twinkle 2s infinite alternate;
+    opacity:.4;
+
+    animation:
+        twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
+
     from{
         opacity:.15;
-        transform:scale(.7);
+        transform:scale(.6);
     }
+
     to{
         opacity:1;
-        transform:scale(1.6);
+        transform:scale(1.4);
     }
 }
 
-/* =========================================================
-   GLOWING ORBS
-========================================================= */
-
-.orb{
+.glow{
     position:absolute;
     border-radius:50%;
-    filter:blur(80px);
+    filter:blur(90px);
     opacity:.25;
-    animation:orbFloat 14s ease-in-out infinite alternate;
+    animation:glowFloat 12s ease-in-out infinite alternate;
 }
 
-.orb1{
+.glow.one{
     width:350px;
     height:350px;
-    background:#ff2d70;
-    top:-180px;
-    left:-100px;
+    background:#ff2e6d;
+    left:-180px;
+    top:15%;
 }
 
-.orb2{
+.glow.two{
     width:400px;
     height:400px;
-    background:#733cff;
-    right:-200px;
-    bottom:-200px;
+    background:#7747e8;
+    right:-220px;
+    bottom:-150px;
     animation-delay:3s;
 }
 
-.orb3{
-    width:220px;
-    height:220px;
-    background:#ff80bd;
-    left:45%;
-    top:50%;
-    opacity:.12;
-    animation-delay:6s;
-}
+@keyframes glowFloat{
 
-@keyframes orbFloat{
-    0%{
-        transform:translate(0,0) scale(1);
+    from{
+        transform:translate(0,0);
     }
-    100%{
-        transform:translate(70px,50px) scale(1.15);
+
+    to{
+        transform:translate(70px,-40px);
     }
 }
 
 /* =========================================================
-   MOON
+   FLOATING HEARTS
 ========================================================= */
 
-.moon{
-    position:absolute;
-    width:130px;
-    height:130px;
-    border-radius:50%;
-    right:10%;
-    top:9%;
-    background:
-        radial-gradient(circle at 35% 35%,#fff,#ffeaf2 55%,#ffcbdc);
-    box-shadow:
-        0 0 30px rgba(255,210,225,.35),
-        0 0 100px rgba(255,150,190,.15);
-    animation:moonFloat 5s ease-in-out infinite;
-}
-
-.moon:after{
-    content:"";
-    position:absolute;
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    background:#09050e;
-    left:-35px;
-    top:-10px;
-}
-
-@keyframes moonFloat{
-    0%,100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(12px);
-    }
-}
-
-/* =========================================================
-   FLOATING PETALS
-========================================================= */
-
-#petals{
+#floatingHearts{
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:3;
+    z-index:2;
 }
 
-.petal{
+.heartParticle{
     position:absolute;
-    top:-30px;
-    font-size:16px;
-    opacity:.7;
-    animation:petalFall linear forwards;
+    bottom:-40px;
+    opacity:0;
+    animation:heartRise linear forwards;
 }
 
-@keyframes petalFall{
+@keyframes heartRise{
+
     0%{
-        transform:translateY(-30px) rotate(0deg);
+        transform:translateY(0) rotate(0deg);
         opacity:0;
     }
+
     10%{
-        opacity:.8;
+        opacity:.6;
     }
+
     90%{
-        opacity:.5;
+        opacity:.4;
     }
+
     100%{
-        transform:translateY(110vh) rotate(540deg);
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
         opacity:0;
     }
 }
@@ -215,29 +194,35 @@ body{
 #app{
     position:relative;
     z-index:5;
-    width:100%;
-    height:100vh;
-}
 
-.scene{
     width:100%;
-    height:100vh;
+    min-height:100vh;
+
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+
     padding:25px;
-    animation:sceneIn 1s ease;
 }
 
-@keyframes sceneIn{
+.page{
+    width:min(850px,100%);
+    animation:pageIn .7s ease;
+}
+
+@keyframes pageIn{
+
     from{
         opacity:0;
-        transform:scale(1.04);
-        filter:blur(10px);
+        transform:
+            translateY(25px)
+            scale(.98);
+        filter:blur(7px);
     }
+
     to{
         opacity:1;
-        transform:scale(1);
+        transform:none;
         filter:blur(0);
     }
 }
@@ -247,129 +232,139 @@ body{
 ========================================================= */
 
 .card{
-    width:min(900px,100%);
-    max-height:92vh;
-    overflow:auto;
-    padding:55px 50px;
-    text-align:center;
+    width:100%;
+
+    padding:
+        clamp(28px,6vw,55px);
+
+    border-radius:34px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.075),
+            rgba(255,255,255,.085),
             rgba(255,255,255,.025)
         );
 
-    border:1px solid rgba(255,255,255,.12);
-
-    border-radius:36px;
+    border:1px solid var(--border);
 
     backdrop-filter:blur(30px);
     -webkit-backdrop-filter:blur(30px);
 
     box-shadow:
-        0 30px 100px rgba(0,0,0,.5),
-        inset 0 1px 0 rgba(255,255,255,.08);
+        0 35px 100px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.07);
 
-    scrollbar-width:none;
-}
-
-.card::-webkit-scrollbar{
-    display:none;
+    text-align:center;
 }
 
 /* =========================================================
    TYPOGRAPHY
 ========================================================= */
 
-.small{
-    font-size:13px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:#ff9dbd;
-    margin-bottom:18px;
-}
-
 .script{
     font-family:"Tiro Bangla",serif;
     font-style:italic;
-    color:#ff9fbe;
+    color:#ff9ebc;
+}
+
+.eyebrow{
+    font-size:12px;
+    letter-spacing:3px;
+    color:#ff9bb9;
+    margin-bottom:15px;
 }
 
 h1{
-    font-size:clamp(42px,8vw,82px);
+    font-size:clamp(38px,8vw,75px);
     line-height:1.2;
-    font-weight:600;
 }
 
 h2{
-    font-size:clamp(30px,5vw,52px);
-    line-height:1.3;
-    margin-bottom:20px;
+    font-size:clamp(28px,5vw,45px);
+    line-height:1.35;
+    margin-bottom:14px;
 }
 
 p{
-    font-size:17px;
-    line-height:2;
-    color:rgba(255,255,255,.72);
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.9;
 }
 
 /* =========================================================
-   GLOWING HEART
+   HERO HEART
 ========================================================= */
 
-.main-heart{
-    position:relative;
-    width:150px;
-    height:150px;
-    margin:0 auto 30px;
+.heroHeart{
+    width:130px;
+    height:130px;
+
+    margin:0 auto 25px;
 
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 
-    font-size:75px;
+    font-size:65px;
 
-    animation:heartBeat 1.5s infinite;
+    position:relative;
 
-    filter:drop-shadow(0 0 25px rgba(255,50,110,.8));
+    animation:heartbeat 1.5s infinite;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(255,50,110,.7)
+        );
 }
 
-.main-heart:before,
-.main-heart:after{
+.heroHeart:before,
+.heroHeart:after{
+
     content:"";
+
     position:absolute;
     inset:0;
+
+    border:1px solid rgba(255,90,140,.22);
+
     border-radius:50%;
-    border:1px solid rgba(255,100,150,.2);
+
     animation:ring 2.5s infinite;
 }
 
-.main-heart:after{
-    animation-delay:.8s;
+.heroHeart:after{
+    animation-delay:1s;
 }
 
-@keyframes heartBeat{
+@keyframes heartbeat{
+
     0%,100%{
         transform:scale(1);
     }
+
     15%{
         transform:scale(1.12);
     }
+
     30%{
         transform:scale(1);
     }
+
     45%{
         transform:scale(1.08);
     }
 }
 
 @keyframes ring{
-    0%{
+
+    from{
         transform:scale(.7);
         opacity:.8;
     }
-    100%{
+
+    to{
         transform:scale(1.7);
         opacity:0;
     }
@@ -380,505 +375,671 @@ p{
 ========================================================= */
 
 .btn{
-    position:relative;
+
     border:0;
     outline:0;
-    cursor:pointer;
 
-    margin-top:30px;
+    padding:15px 28px;
 
-    padding:16px 35px;
+    min-height:48px;
 
-    border-radius:100px;
+    border-radius:999px;
 
-    color:white;
     font-family:inherit;
-    font-size:16px;
+    font-size:15px;
     font-weight:600;
 
+    color:white;
+
     background:
-        linear-gradient(135deg,#ff3e79,#ff78a5);
+        linear-gradient(
+            135deg,
+            #ff3d77,
+            #ff7fa5
+        );
+
+    cursor:pointer;
+
+    margin-top:20px;
 
     box-shadow:
-        0 12px 35px rgba(255,45,105,.25),
-        inset 0 1px 0 rgba(255,255,255,.3);
+        0 12px 35px rgba(255,50,110,.25);
 
-    transition:.35s ease;
+    transition:.3s ease;
 }
 
 .btn:hover{
-    transform:translateY(-4px) scale(1.03);
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
     box-shadow:
-        0 18px 45px rgba(255,45,105,.4),
-        0 0 25px rgba(255,80,140,.2);
+        0 18px 45px
+        rgba(255,50,110,.4);
 }
 
 .btn:active{
-    transform:scale(.96);
+    transform:scale(.97);
 }
 
 .btn.secondary{
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.15);
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
     box-shadow:none;
 }
 
 /* =========================================================
-   CHAPTER INDICATOR
+   YES OPTIONS
 ========================================================= */
 
-.chapter{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
+.yesOptions{
 
-    padding:8px 16px;
-    border-radius:50px;
+    display:grid;
 
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.1);
+    grid-template-columns:
+        repeat(3,1fr);
 
-    color:#ffabc5;
-    font-size:13px;
+    gap:14px;
 
-    margin-bottom:25px;
+    max-width:650px;
+
+    margin:35px auto 0;
 }
 
-.chapter-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#ff5c91;
-    box-shadow:0 0 10px #ff5c91;
-}
+.yesOption{
 
-/* =========================================================
-   LEVEL 1 — ENVELOPE
-========================================================= */
+    padding:22px 15px;
 
-.envelope-wrap{
-    width:220px;
-    height:155px;
-    margin:30px auto;
-    position:relative;
-    cursor:pointer;
-    perspective:800px;
-}
+    border-radius:22px;
 
-.envelope{
-    width:100%;
-    height:100%;
-    position:relative;
-    background:#d93467;
-    border-radius:8px;
-    box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-
-.envelope:before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    border-left:110px solid transparent;
-    border-right:110px solid transparent;
-    border-top:90px solid #f35c89;
-    transform-origin:top;
-    transition:1s;
-    z-index:3;
-}
-
-.envelope.open:before{
-    transform:rotateX(180deg);
-}
-
-.letter{
-    position:absolute;
-    left:10%;
-    bottom:10px;
-    width:80%;
-    height:80%;
-    background:#fff6f9;
-    color:#9b3054;
-    border-radius:5px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-    transition:1s;
-    z-index:2;
-}
-
-.envelope.open .letter{
-    transform:translateY(-90px);
-}
-
-/* =========================================================
-   LEVEL 2 — CONSTELLATION
-========================================================= */
-
-.sky{
-    position:relative;
-    height:380px;
-    margin:25px auto;
-    max-width:750px;
-    border-radius:28px;
-    overflow:hidden;
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
     background:
-        radial-gradient(circle at center,rgba(87,50,150,.25),transparent 55%),
-        rgba(0,0,0,.25);
+        rgba(255,255,255,.045);
 
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.constellation-star{
-    position:absolute;
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:#fff;
-    box-shadow:0 0 15px 5px rgba(255,170,210,.8);
     cursor:pointer;
+
     transition:.3s;
 }
 
-.constellation-star:hover{
-    transform:scale(1.7);
-}
+.yesOption:hover{
 
-.constellation-star.active{
-    background:#ff82ac;
-}
-
-#lines{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-}
-
-#lines line{
-    stroke:rgba(255,120,170,.7);
-    stroke-width:1;
-    stroke-dasharray:5 5;
-    animation:lineGlow 2s infinite alternate;
-}
-
-@keyframes lineGlow{
-    from{opacity:.2;}
-    to{opacity:1;}
-}
-
-/* =========================================================
-   LEVEL 3 — MEMORY WORDS
-========================================================= */
-
-.memory-container{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    max-width:650px;
-    margin:35px auto;
-}
-
-.memory-tile{
-    height:120px;
-    border-radius:20px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    transform:translateY(-6px);
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(255,90,140,.10),
-            rgba(140,90,255,.08)
-        );
+        rgba(255,70,130,.1);
 
-    border:1px solid rgba(255,255,255,.10);
-
-    font-size:30px;
-
-    transition:.4s;
+    border-color:
+        rgba(255,100,160,.4);
 }
 
-.memory-tile:hover{
-    transform:translateY(-5px);
-    border-color:rgba(255,100,160,.4);
+.yesOption .emoji{
+    font-size:35px;
+    margin-bottom:8px;
 }
 
-.memory-tile.revealed{
-    background:rgba(255,255,255,.1);
-    transform:rotateY(360deg);
-}
-
-.memory-word{
-    font-size:17px;
-    color:#ffb0c8;
+.yesOption strong{
+    display:block;
+    font-size:16px;
 }
 
 /* =========================================================
-   LEVEL 4 — HEART CHOICES
+   PROGRESS
 ========================================================= */
 
-.choice-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
+.progressArea{
     max-width:700px;
-    margin:35px auto;
+    margin:0 auto 35px;
 }
 
-.choice{
-    position:relative;
-    padding:30px 20px;
-    border-radius:24px;
-    cursor:pointer;
+.progressInfo{
 
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
+    display:flex;
+    justify-content:space-between;
 
-    transition:.35s;
+    font-size:12px;
+
+    color:rgba(255,255,255,.45);
+
+    margin-bottom:8px;
+}
+
+.progress{
+
+    width:100%;
+    height:6px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border-radius:99px;
+
     overflow:hidden;
 }
 
-.choice:before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at center,rgba(255,70,130,.15),transparent 65%);
-    opacity:0;
-    transition:.35s;
+.progressBar{
+
+    height:100%;
+
+    border-radius:99px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3f78,
+            #ff9cbb,
+            #9b70e8
+        );
+
+    transition:
+        width .5s ease;
 }
 
-.choice:hover{
-    transform:translateY(-7px);
-    border-color:rgba(255,100,160,.5);
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
+/* =========================================================
+   FORM
+========================================================= */
+
+.formGroup{
+
+    max-width:650px;
+
+    margin:25px auto;
+
+    text-align:left;
 }
 
-.choice:hover:before{
-    opacity:1;
-}
+label{
 
-.choice-icon{
-    position:relative;
-    font-size:45px;
-    margin-bottom:12px;
-}
+    display:block;
 
-.choice strong{
-    position:relative;
-    font-size:20px;
-}
+    margin-bottom:9px;
 
-.choice p{
-    position:relative;
     font-size:14px;
-    margin-top:5px;
+
+    color:#ffb0c6;
+}
+
+input,
+textarea,
+select{
+
+    width:100%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    outline:0;
+
+    border-radius:16px;
+
+    padding:15px 16px;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    background:
+        rgba(0,0,0,.2);
+
+    transition:.25s;
+}
+
+select option{
+    background:#170c18;
+    color:white;
+}
+
+textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+    border-color:
+        rgba(255,100,160,.7);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(255,70,130,.08);
 }
 
 /* =========================================================
-   LEVEL 5
+   DATE/TIME
 ========================================================= */
 
-.final-question{
+.dateTimeGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:15px;
+}
+
+/* =========================================================
+   LOCATION CARDS
+========================================================= */
+
+.locationGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:15px;
+
     max-width:700px;
-    margin:auto;
+
+    margin:30px auto;
 }
 
-.final-question .heart-line{
-    font-size:35px;
-    letter-spacing:8px;
-    margin:25px 0;
-    animation:softPulse 2s infinite;
+.locationCard{
+
+    padding:22px;
+
+    border-radius:22px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    background:
+        rgba(255,255,255,.045);
+
+    cursor:pointer;
+
+    transition:.3s;
 }
 
-@keyframes softPulse{
-    0%,100%{opacity:.5;}
-    50%{opacity:1;}
+.locationCard.selected{
+
+    background:
+        rgba(255,70,130,.12);
+
+    border-color:
+        rgba(255,100,160,.65);
+
+    box-shadow:
+        0 0 25px
+        rgba(255,60,120,.1);
+}
+
+.locationCard:hover{
+    transform:translateY(-4px);
+}
+
+.locationIcon{
+    font-size:36px;
+    margin-bottom:8px;
 }
 
 /* =========================================================
-   FINAL SCREEN
+   FOOD GRID
 ========================================================= */
 
-.final-scene{
-    position:fixed;
-    inset:0;
-    z-index:50;
+.foodGrid{
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:13px;
+
+    max-width:700px;
+
+    margin:30px auto;
+}
+
+.foodCard{
+
+    padding:18px 10px;
+
+    border-radius:18px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.foodCard.selected{
+
+    background:
+        rgba(255,70,130,.12);
+
+    border-color:
+        rgba(255,100,160,.65);
+
+}
+
+.foodCard:hover{
+    transform:translateY(-3px);
+}
+
+.foodEmoji{
+    font-size:32px;
+}
+
+/* =========================================================
+   COLORS
+========================================================= */
+
+.colorGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:14px;
+
+    max-width:600px;
+
+    margin:30px auto;
+}
+
+.colorChoice{
+
+    padding:15px 8px;
+
+    border-radius:18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    cursor:pointer;
+
+    background:
+        rgba(255,255,255,.04);
+
+    transition:.3s;
+}
+
+.colorChoice.selected{
+
+    border-color:white;
+
+    transform:
+        translateY(-4px)
+        scale(1.02);
+
+}
+
+.colorCircle{
+
+    width:40px;
+    height:40px;
+
+    margin:auto auto 8px;
+
+    border-radius:50%;
+
+    border:2px solid
+        rgba(255,255,255,.4);
+}
+
+/* =========================================================
+   ACTIVITIES
+========================================================= */
+
+.activityGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+
+    max-width:650px;
+
+    margin:30px auto;
+}
+
+.activity{
 
     padding:20px;
 
+    border-radius:20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
     background:
-        radial-gradient(circle at center,rgba(255,40,110,.16),transparent 45%),
-        #07030b;
+        rgba(255,255,255,.045);
 
-    animation:finalIn 2s ease;
-}
+    cursor:pointer;
 
-@keyframes finalIn{
-    from{
-        opacity:0;
-    }
-    to{
-        opacity:1;
-    }
-}
-
-.final-content{
-    width:min(850px,100%);
-    text-align:center;
-    max-height:92vh;
-    overflow:auto;
-    scrollbar-width:none;
-}
-
-.final-content::-webkit-scrollbar{
-    display:none;
-}
-
-.final-symbol{
-    font-size:80px;
-    animation:heartBeat 1.4s infinite;
-    filter:drop-shadow(0 0 30px rgba(255,60,120,.8));
-}
-
-.final-title{
-    margin-top:20px;
-    font-size:clamp(42px,8vw,85px);
-}
-
-.final-subtitle{
-    color:#ff9fbd;
-    font-size:20px;
-    margin:15px 0 30px;
-}
-
-.letter-final{
     text-align:left;
 
-    padding:35px;
+    transition:.3s;
+}
+
+.activity.selected{
+
+    background:
+        rgba(255,70,130,.12);
+
+    border-color:
+        rgba(255,100,160,.6);
+}
+
+.activity:hover{
+    transform:translateY(-3px);
+}
+
+.activity span{
+    font-size:25px;
+    margin-right:8px;
+}
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summaryHero{
+
+    padding:30px;
 
     border-radius:28px;
 
     background:
         linear-gradient(
-            145deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.03)
+            135deg,
+            rgba(255,70,130,.12),
+            rgba(120,70,220,.1)
         );
 
-    border:1px solid rgba(255,255,255,.12);
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.07);
+    margin:25px 0;
 }
 
-.letter-final p{
-    font-size:18px;
-    line-height:2.1;
-    margin-bottom:15px;
-}
+.summaryTitle{
 
-.signature{
-    margin-top:30px;
     font-family:"Tiro Bangla",serif;
-    font-size:25px;
-    color:#ff9dbb;
-    text-align:right;
+
+    font-size:34px;
+
+    color:#ffabc4;
+}
+
+.summaryGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+
+    margin-top:25px;
+
+    text-align:left;
+}
+
+.summaryItem{
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+}
+
+.summaryItem .icon{
+    font-size:24px;
+    margin-bottom:7px;
+}
+
+.summaryItem small{
+
+    display:block;
+
+    color:
+        rgba(255,255,255,.4);
+
+    font-size:12px;
+
+    margin-bottom:5px;
+}
+
+.summaryItem strong{
+    font-size:16px;
+    color:#fff;
+}
+
+.noteBox{
+
+    margin-top:18px;
+
+    padding:22px;
+
+    border-radius:20px;
+
+    text-align:left;
+
+    background:
+        rgba(255,70,130,.07);
+
+    border-left:
+        3px solid
+        #ff5b91;
 }
 
 /* =========================================================
-   TYPEWRITER
+   CONFETTI
 ========================================================= */
 
-.typewriter{
-    min-height:70px;
-}
+.confetti{
 
-/* =========================================================
-   PARTICLE BURST
-========================================================= */
-
-.burst{
     position:fixed;
-    pointer-events:none;
+
+    top:-20px;
+
     z-index:100;
-    font-size:20px;
+
+    pointer-events:none;
+
+    animation:
+        fall linear forwards;
+}
+
+@keyframes fall{
+
+    to{
+
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity:0;
+    }
 }
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
 @media(max-width:650px){
 
-    .scene{
+    #app{
         padding:14px;
     }
 
     .card{
-        padding:35px 20px;
-        border-radius:28px;
-        max-height:94vh;
+        border-radius:27px;
     }
 
-    .moon{
-        width:75px;
-        height:75px;
-        right:7%;
-        top:5%;
+    .yesOptions{
+        grid-template-columns:1fr;
     }
 
-    .moon:after{
-        width:70px;
-        height:70px;
-        left:-20px;
-        top:-6px;
+    .locationGrid{
+        grid-template-columns:1fr;
+    }
+
+    .foodGrid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .colorGrid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .activityGrid{
+        grid-template-columns:1fr;
+    }
+
+    .summaryGrid{
+        grid-template-columns:1fr;
+    }
+
+    .dateTimeGrid{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        font-size:45px;
     }
 
     p{
         font-size:15px;
-    }
-
-    .main-heart{
-        transform:scale(.8);
-        margin-top:-10px;
-    }
-
-    .memory-container{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .memory-tile{
-        height:100px;
-    }
-
-    .choice-grid{
-        grid-template-columns:1fr;
-    }
-
-    .sky{
-        height:330px;
-    }
-
-    .letter-final{
-        padding:22px;
-    }
-
-    .letter-final p{
-        font-size:15px;
-        line-height:1.9;
-    }
-
-    .signature{
-        font-size:20px;
     }
 }
 
@@ -888,23 +1049,18 @@ p{
 
 <body>
 
-<!-- ======================================================
+<!-- =====================================================
      BACKGROUND
-====================================================== -->
+===================================================== -->
 
-<div id="universe">
+<div id="background">
 
-    <div id="stars"></div>
-
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
-
-    <div class="moon"></div>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
 
 </div>
 
-<div id="petals"></div>
+<div id="floatingHearts"></div>
 
 <div id="app"></div>
 
@@ -915,62 +1071,54 @@ p{
    ❤️ PERSONALIZATION
 ========================================================= */
 
-/*
-    এখান থেকে নাম পরিবর্তন করো।
-*/
-
 const YOUR_NAME = "তোমার মানুষ";
+
 const HER_NAME = "আমার প্রিয়";
 
 
-
-/*
-    শেষের Love Letter এখান থেকে পরিবর্তন করতে পারো।
-*/
-
-const LOVE_LETTER = [
-
-`তুমি জানো কি, এই পুরো ছোট্ট game-টা আসলে কোনো game ছিল না।`,
-
-`আমি শুধু একটা অজুহাত চেয়েছিলাম তোমাকে কয়েকটা মুহূর্তের জন্য আমার পৃথিবীর মধ্যে নিয়ে আসার।`,
-
-`কারণ তোমাকে নিয়ে আমার বলার মতো অনেক কথা আছে, কিন্তু সব কথা মুখে বলা যায় না।`,
-
-`তুমি আমার জীবনের সেই মানুষ, যার সাথে কথা বললে সময় কেমন করে যেন একটু দ্রুত চলে যায়। আর তোমাকে না দেখলে একটা সাধারণ দিনও কেমন যেন একটু অসম্পূর্ণ লাগে।`,
-
-`তোমার হাসি, তোমার অভিমান, তোমার ছোট ছোট পাগলামি—সবকিছু মিলিয়েই তুমি। আর সত্যি বলতে, আমি এই "তুমি"-টাকেই খুব ভালোবাসি।`,
-
-`জীবনে সবকিছু সবসময় perfect হবে না। হয়তো আমাদের মাঝে কখনো অভিমান হবে, মন খারাপ হবে, ভুল বোঝাবুঝিও হবে। কিন্তু একটা জিনিস যেন কখনো বদলে না যায়—আমরা যেন একে অপরকে বেছে নেওয়া বন্ধ না করি।`,
-
-`কারণ আমি চাই, অনেক বছর পরেও কোনো এক শান্ত রাতে তোমার পাশে বসে মনে হোক—হ্যাঁ, এই মানুষটাকেই তো আমি চেয়েছিলাম।`,
-
-`তুমি আমার কাছে শুধু "ভালোবাসার মানুষ" নও। তুমি আমার শান্তি, আমার হাসির কারণ, আমার প্রিয় notification, আর আমার অনেকগুলো ভবিষ্যৎ স্বপ্নের একটা বড় অংশ।`,
-
-`তাই আজ শুধু একটা কথাই বলতে চাই...`,
-
-`আমি জানি না ভবিষ্যৎ আমাদের কোথায় নিয়ে যাবে। কিন্তু যতদিন আমার হাতে choice থাকবে, আমি তোমাকেই বেছে নেব। বারবার। প্রতিবার। ❤️`
-
-];
-
-
-
 /* =========================================================
-   GAME STATE
+   STATE
 ========================================================= */
 
-let currentLevel = 0;
+const datePlan = {
+
+    going:false,
+
+    date:"",
+    time:"",
+
+    location:"",
+    customLocation:"",
+
+    food:[],
+
+    dressColor:"",
+
+    activities:[],
+
+    note:""
+
+};
 
 
 /* =========================================================
-   CREATE STARS
+   ELEMENT
+========================================================= */
+
+const app =
+    document.getElementById("app");
+
+
+/* =========================================================
+   BACKGROUND STARS
 ========================================================= */
 
 function createStars(){
 
-    const container =
-        document.getElementById("stars");
+    const bg =
+        document.getElementById("background");
 
-    for(let i=0;i<130;i++){
+    for(let i=0;i<120;i++){
 
         const star =
             document.createElement("div");
@@ -992,45 +1140,57 @@ function createStars(){
         star.style.animationDelay =
             Math.random()*4+"s";
 
-        container.appendChild(star);
+        bg.appendChild(star);
     }
 }
 
 
 /* =========================================================
-   PETALS
+   FLOATING HEARTS
 ========================================================= */
 
-function createPetal(){
+function floatingHeart(){
 
-    const p =
+    const heart =
         document.createElement("div");
 
-    p.className="petal";
+    heart.className="heartParticle";
 
-    const symbols=["🌸","♡","✦","♥","❀"];
+    const icons=[
+        "♡",
+        "♥",
+        "💕",
+        "💗",
+        "✨"
+    ];
 
-    p.innerText =
-        symbols[Math.floor(Math.random()*symbols.length)];
+    heart.innerText =
+        icons[
+            Math.floor(
+                Math.random()*icons.length
+            )
+        ];
 
-    p.style.left =
+    heart.style.left =
         Math.random()*100+"%";
 
-    p.style.fontSize =
-        (10+Math.random()*15)+"px";
+    heart.style.fontSize =
+        (12+Math.random()*18)+"px";
 
-    p.style.animationDuration =
-        (7+Math.random()*8)+"s";
+    heart.style.animationDuration =
+        (8+Math.random()*8)+"s";
 
-    document.getElementById("petals").appendChild(p);
+    document
+        .getElementById("floatingHearts")
+        .appendChild(heart);
 
     setTimeout(
-        ()=>p.remove(),
-        16000
+        ()=>heart.remove(),
+        17000
     );
 }
 
-setInterval(createPetal,900);
+setInterval(floatingHeart,800);
 
 
 /* =========================================================
@@ -1039,1011 +1199,197 @@ setInterval(createPetal,900);
 
 function render(html){
 
-    const old =
-        document.querySelector(".scene");
+    app.innerHTML=html;
 
-    if(old){
-
-        old.style.animation="none";
-        old.style.opacity="0";
-        old.style.transform="scale(.97)";
-    }
-
-    setTimeout(()=>{
-
-        document.getElementById("app").innerHTML=html;
-
-    },120);
-
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
 
 /* =========================================================
-   BUTTON SPARK
+   CONFETTI
 ========================================================= */
 
-document.addEventListener("click",e=>{
+function confetti(amount=80){
 
-    if(
-        e.target.classList.contains("btn") ||
-        e.target.classList.contains("choice") ||
-        e.target.classList.contains("memory-tile")
-    ){
+    const symbols=[
+        "♥",
+        "💕",
+        "✨",
+        "♡",
+        "✦"
+    ];
 
-        burst(
-            e.clientX,
-            e.clientY
-        );
+    for(let i=0;i<amount;i++){
 
-    }
-
-});
-
-
-/* =========================================================
-   BURST
-========================================================= */
-
-function burst(x,y){
-
-    const symbols=["❤️","✨","💕","✦","💗"];
-
-    for(let i=0;i<12;i++){
-
-        const el=
+        const c =
             document.createElement("div");
 
-        el.className="burst";
+        c.className="confetti";
 
-        el.innerText=
+        c.innerText =
             symbols[
                 Math.floor(
                     Math.random()*symbols.length
                 )
             ];
 
-        el.style.left=x+"px";
-        el.style.top=y+"px";
+        c.style.left =
+            Math.random()*100+"vw";
 
-        document.body.appendChild(el);
+        c.style.fontSize =
+            (10+Math.random()*15)+"px";
 
-        const angle=
-            Math.random()*Math.PI*2;
+        c.style.animationDuration =
+            (2.5+Math.random()*3)+"s";
 
-        const distance=
-            50+Math.random()*100;
+        c.style.animationDelay =
+            Math.random()*.8+"s";
 
-        const tx=
-            Math.cos(angle)*distance;
-
-        const ty=
-            Math.sin(angle)*distance;
-
-        el.animate(
-            [
-                {
-                    transform:"translate(-50%,-50%) scale(.3)",
-                    opacity:1
-                },
-                {
-                    transform:
-                        `translate(
-                            calc(-50% + ${tx}px),
-                            calc(-50% + ${ty}px)
-                        ) scale(1.3)`,
-                    opacity:0
-                }
-            ],
-            {
-                duration:800+Math.random()*500,
-                easing:"ease-out"
-            }
-        );
+        document.body.appendChild(c);
 
         setTimeout(
-            ()=>el.remove(),
-            1400
+            ()=>c.remove(),
+            6000
         );
     }
 }
 
 
 /* =========================================================
-   INTRO
+   STEP HEADER
 ========================================================= */
 
-function intro(){
+function stepHeader(step,title){
 
-    currentLevel=0;
+    return `
+
+        <div class="progressArea">
+
+            <div class="progressInfo">
+
+                <span>
+                    আমাদের Date Plan
+                </span>
+
+                <span>
+                    ${step} / 7
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    class="progressBar"
+                    style="width:${(step/7)*100}%">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="eyebrow">
+            ধাপ ${step} • ${title}
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   PAGE 1
+========================================================= */
+
+function home(){
 
     render(`
 
-        <div class="scene">
+        <div class="page">
 
             <div class="card">
 
-                <div class="main-heart">
+                <div class="heroHeart">
                     ❤️
                 </div>
 
                 <div class="script"
-                     style="font-size:24px;">
-                    তোমার জন্য একটা ছোট্ট গল্প...
+                     style="font-size:23px">
+
+                    একটা গুরুত্বপূর্ণ প্রশ্ন আছে...
+
                 </div>
 
                 <h1>
                     ${HER_NAME}
                 </h1>
 
-                <p style="max-width:600px;margin:auto">
+                <p style="max-width:600px;margin:20px auto">
 
-                    পৃথিবীতে কিছু মানুষ আসে,
-                    আর কোনো এক অদ্ভুত কারণে
-                    আমাদের পৃথিবীটা একটু সুন্দর হয়ে যায়।
+                    আমার সাথে একটা Date-এ যাবে? 🌹
 
                     <br><br>
 
-                    তুমি আমার কাছে ঠিক তেমনই একজন।
-
-                </p>
-
-                <button
-                    class="btn"
-                    onclick="level1()">
-
-                    গল্পটা শুরু করি ❤️
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `);
-}
-
-
-/* =========================================================
-   LEVEL 1
-   ENVELOPE
-========================================================= */
-
-function level1(){
-
-    currentLevel=1;
-
-    render(`
-
-        <div class="scene">
-
-            <div class="card">
-
-                <div class="chapter">
-                    <span class="chapter-dot"></span>
-                    অধ্যায় ১ • একটা চিঠি
-                </div>
-
-                <h2>
-                    তোমার জন্য একটা চিঠি আছে...
-                </h2>
-
-                <p>
-                    খুলবে?
-                </p>
-
-                <div
-                    class="envelope-wrap"
-                    onclick="openEnvelope()">
-
-                    <div
-                        class="envelope"
-                        id="envelope">
-
-                        <div class="letter">
-                            💌
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <p
-                    id="envelopeHint"
-                    style="font-size:14px;color:#ff9fbd">
-
-                    চিঠিটায় একটু চাপ দাও...
-                </p>
-
-                <button
-                    class="btn hidden"
-                    id="level1Next"
-                    onclick="level2()">
-
-                    পরের অধ্যায়ে যাওয়া যাক ✨
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `);
-
-}
-
-
-function openEnvelope(){
-
-    const envelope=
-        document.getElementById("envelope");
-
-    envelope.classList.add("open");
-
-    document.getElementById("envelopeHint").innerText=
-        "শুরুটা ছোট ছিল... কিন্তু গল্পটা অনেক বড়। ❤️";
-
-    document
-        .getElementById("level1Next")
-        .classList.remove("hidden");
-
-    burst(
-        window.innerWidth/2,
-        window.innerHeight/2
-    );
-}
-
-
-/* =========================================================
-   LEVEL 2
-   CONSTELLATION
-========================================================= */
-
-const starPositions=[
-    [15,25],
-    [31,18],
-    [45,30],
-    [59,20],
-    [73,31],
-    [83,48],
-    [68,58],
-    [52,51],
-    [36,62],
-    [22,49]
-];
-
-let clickedStars=[];
-
-function level2(){
-
-    currentLevel=2;
-    clickedStars=[];
-
-    render(`
-
-        <div class="scene">
-
-            <div class="card">
-
-                <div class="chapter">
-                    <span class="chapter-dot"></span>
-                    অধ্যায় ২ • আমাদের আকাশ
-                </div>
-
-                <h2>
-                    কিছু তারা তোমার অপেক্ষায় আছে...
-                </h2>
-
-                <p>
-                    একে একে তারাগুলো ছুঁয়ে দাও।
+                    এইবার কিন্তু শুধু "হ্যাঁ" বললেই হবে না...
                     <br>
-                    একটা ছোট্ট constellation বানাতে হবে। ✨
+                    আমাদের পুরো Date-টা তোমাকেই plan করতে হবে। 😌
+
                 </p>
 
-                <div
-                    class="sky"
-                    id="sky">
+                <div class="yesOptions">
 
-                    <svg
-                        id="lines"
-                        width="100%"
-                        height="100%"
-                        preserveAspectRatio="none">
-                    </svg>
+                    <div
+                        class="yesOption"
+                        onclick="startPlan('yes')">
+
+                        <div class="emoji">
+                            💕
+                        </div>
+
+                        <strong>
+                            অবশ্যই যাব!
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        class="yesOption"
+                        onclick="startPlan('yes')">
+
+                        <div class="emoji">
+                            🌹
+                        </div>
+
+                        <strong>
+                            হ্যাঁ, চল!
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        class="yesOption"
+                        onclick="startPlan('yes')">
+
+                        <div class="emoji">
+                            😌
+                        </div>
+
+                        <strong>
+                            এতক্ষণে জিজ্ঞেস করছো?
+                        </strong>
+
+                    </div>
 
                 </div>
-
-                <p id="starText"
-                   style="color:#ff9fbd">
-
-                    ১০টি তারার মধ্যে ০টি খুঁজে পেয়েছো
-                </p>
-
-                <button
-                    class="btn hidden"
-                    id="starNext"
-                    onclick="level3()">
-
-                    তারাগুলো জুড়ে ফেলেছি ✨
-
-                </button>
 
             </div>
 
         </div>
 
     `);
-
-    createConstellation();
-}
-
-
-function createConstellation(){
-
-    const sky=
-        document.getElementById("sky");
-
-    starPositions.forEach((pos,index)=>{
-
-        const star=
-            document.createElement("div");
-
-        star.className=
-            "constellation-star";
-
-        star.style.left=
-            pos[0]+"%";
-
-        star.style.top=
-            pos[1]+"%";
-
-        star.dataset.index=index;
-
-        star.onclick=()=>clickStar(star,index);
-
-        sky.appendChild(star);
-    });
-}
-
-
-function clickStar(star,index){
-
-    if(clickedStars.includes(index))
-        return;
-
-    clickedStars.push(index);
-
-    star.classList.add("active");
-
-    if(clickedStars.length>1){
-
-        const previousIndex=
-            clickedStars[clickedStars.length-2];
-
-        drawLine(
-            previousIndex,
-            index
-        );
-
-    }
-
-    document.getElementById("starText").innerText=
-        `১০টি তারার মধ্যে ${clickedStars.length}টি খুঁজে পেয়েছো`;
-
-    burst(
-        star.getBoundingClientRect().left,
-        star.getBoundingClientRect().top
-    );
-
-    if(clickedStars.length===10){
-
-        document.getElementById("starText").innerText=
-            "দেখো... আমাদের নিজেদের একটা আকাশ তৈরি হয়ে গেছে। ❤️";
-
-        document
-            .getElementById("starNext")
-            .classList.remove("hidden");
-
-        createHeartConstellation();
-    }
-}
-
-
-function drawLine(a,b){
-
-    const svg=
-        document.getElementById("lines");
-
-    const x1=
-        starPositions[a][0];
-
-    const y1=
-        starPositions[a][1];
-
-    const x2=
-        starPositions[b][0];
-
-    const y2=
-        starPositions[b][1];
-
-    const line=
-        document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "line"
-        );
-
-    line.setAttribute("x1",x1+"%");
-    line.setAttribute("y1",y1+"%");
-
-    line.setAttribute("x2",x2+"%");
-    line.setAttribute("y2",y2+"%");
-
-    svg.appendChild(line);
-}
-
-
-function createHeartConstellation(){
-
-    const sky=
-        document.getElementById("sky");
-
-    const heart=
-        document.createElement("div");
-
-    heart.innerText="❤️";
-
-    heart.style.position="absolute";
-    heart.style.left="45%";
-    heart.style.top="38%";
-    heart.style.fontSize="55px";
-    heart.style.filter=
-        "drop-shadow(0 0 20px #ff4f8b)";
-
-    heart.style.animation=
-        "heartBeat 1.3s infinite";
-
-    sky.appendChild(heart);
-}
-
-
-/* =========================================================
-   LEVEL 3
-   MEMORY
-========================================================= */
-
-const memoryWords=[
-    "হাসি",
-    "অভিমান",
-    "ভালোবাসা",
-    "পাগলামি",
-    "আড্ডা",
-    "স্বপ্ন"
-];
-
-let revealed=0;
-
-function level3(){
-
-    currentLevel=3;
-    revealed=0;
-
-    render(`
-
-        <div class="scene">
-
-            <div class="card">
-
-                <div class="chapter">
-                    <span class="chapter-dot"></span>
-                    অধ্যায় ৩ • কিছু অনুভূতি
-                </div>
-
-                <h2>
-                    কিছু শব্দ লুকিয়ে আছে...
-                </h2>
-
-                <p>
-                    প্রতিটা card খুলে দেখো।
-                    <br>
-                    সবগুলো reveal করতে পারলেই পরের গল্পটা শুরু হবে।
-                </p>
-
-                <div
-                    class="memory-container"
-                    id="memory">
-
-                </div>
-
-                <p
-                    id="memoryText"
-                    style="font-size:14px;color:#ff9fbd">
-
-                    ৬টির মধ্যে ০টি খুলেছো
-                </p>
-
-                <button
-                    class="btn hidden"
-                    id="memoryNext"
-                    onclick="level4()">
-
-                    বুঝেছি... 💗
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `);
-
-    createMemory();
-}
-
-
-function createMemory(){
-
-    const container=
-        document.getElementById("memory");
-
-    const shuffled=
-        [...memoryWords]
-        .sort(()=>Math.random()-.5);
-
-    shuffled.forEach(word=>{
-
-        const tile=
-            document.createElement("div");
-
-        tile.className="memory-tile";
-
-        tile.innerHTML="✦";
-
-        tile.onclick=function(){
-
-            if(tile.classList.contains("revealed"))
-                return;
-
-            tile.classList.add("revealed");
-
-            tile.innerHTML=
-                `<span class="memory-word">${word}</span>`;
-
-            revealed++;
-
-            document.getElementById("memoryText").innerText=
-                `৬টির মধ্যে ${revealed}টি খুলেছো`;
-
-            burst(
-                tile.getBoundingClientRect().left,
-                tile.getBoundingClientRect().top
-            );
-
-            if(revealed===6){
-
-                document.getElementById("memoryText").innerText=
-                    "হয়তো এই ছয়টা শব্দের মধ্যেই আমাদের গল্পটা লুকিয়ে আছে... ❤️";
-
-                document
-                    .getElementById("memoryNext")
-                    .classList.remove("hidden");
-            }
-        };
-
-        container.appendChild(tile);
-    });
-}
-
-
-/* =========================================================
-   LEVEL 4
-   CHOICE
-========================================================= */
-
-function level4(){
-
-    currentLevel=4;
-
-    render(`
-
-        <div class="scene">
-
-            <div class="card">
-
-                <div class="chapter">
-                    <span class="chapter-dot"></span>
-                    অধ্যায় ৪ • যদি তুমি আর আমি...
-                </div>
-
-                <h2>
-                    একটা দিন শুধু আমাদের হলে,
-                    কী করতে চাইবে?
-                </h2>
-
-                <p>
-                    যেকোনো একটা বেছে নাও।
-                    <br>
-                    তোমার choice-টা কিন্তু আমি মনে রাখব। 👀
-                </p>
-
-                <div class="choice-grid">
-
-                    <div
-                        class="choice"
-                        onclick="chooseDate('🌙','চুপচাপ তোমার পাশে বসে আকাশ দেখতাম।')">
-
-                        <div class="choice-icon">
-                            🌙
-                        </div>
-
-                        <strong>
-                            রাতের আকাশ
-                        </strong>
-
-                        <p>
-                            শুধু তুমি, আমি আর তারা।
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="choice"
-                        onclick="chooseDate('🌊','তোমার সাথে সমুদ্রের পাশে অনেকক্ষণ হাঁটতাম।')">
-
-                        <div class="choice-icon">
-                            🌊
-                        </div>
-
-                        <strong>
-                            সমুদ্র
-                        </strong>
-
-                        <p>
-                            ঢেউয়ের শব্দ আর অনেক গল্প।
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="choice"
-                        onclick="chooseDate('☕','একটা cozy café-তে বসে তোমার সাথে ঘণ্টার পর ঘণ্টা কথা বলতাম।')">
-
-                        <div class="choice-icon">
-                            ☕
-                        </div>
-
-                        <strong>
-                            Cozy Date
-                        </strong>
-
-                        <p>
-                            Coffee, কথা আর তোমার হাসি।
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="choice"
-                        onclick="chooseDate('🏡','কোথাও না। শুধু তোমার পাশে একটা শান্ত দিন কাটাতাম।')">
-
-                        <div class="choice-icon">
-                            🏡
-                        </div>
-
-                        <strong>
-                            কোথাও না
-                        </strong>
-
-                        <p>
-                            কারণ জায়গাটা নয়, মানুষটাই আসল।
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div id="choiceResult"></div>
-
-            </div>
-
-        </div>
-
-    `);
-}
-
-
-function chooseDate(icon,text){
-
-    document.getElementById("choiceResult").innerHTML=`
-
-        <div style="
-            margin-top:25px;
-            padding:20px;
-            border-radius:20px;
-            background:rgba(255,80,140,.08);
-            border:1px solid rgba(255,100,160,.15);
-            animation:sceneIn .6s ease;
-        ">
-
-            <div style="font-size:35px">
-                ${icon}
-            </div>
-
-            <p style="color:#ffb0c8">
-                ${text}
-            </p>
-
-            <button
-                class="btn"
-                onclick="level5()">
-
-                শেষ অধ্যায়ে যাই? ❤️
-
-            </button>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   LEVEL 5
-========================================================= */
-
-function level5(){
-
-    currentLevel=5;
-
-    render(`
-
-        <div class="scene">
-
-            <div class="card final-question">
-
-                <div class="chapter">
-                    <span class="chapter-dot"></span>
-                    অধ্যায় ৫ • শেষ প্রশ্ন
-                </div>
-
-                <div class="main-heart">
-                    💗
-                </div>
-
-                <h2>
-                    ${HER_NAME}...
-                </h2>
-
-                <div
-                    class="typewriter"
-                    id="finalTyping">
-                </div>
-
-                <div class="heart-line">
-                    ♡ &nbsp; ♡ &nbsp; ♡
-                </div>
-
-                <button
-                    class="btn"
-                    onclick="finalReveal()">
-
-                    আমার একটা কথা শুনবে? ❤️
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `);
-
-    typeFinalQuestion();
-}
-
-
-function typeFinalQuestion(){
-
-    const text=
-        "তুমি কি আমার জীবনের এই গল্পটার পরের অধ্যায়গুলোতেও আমার সাথে থাকবে?";
-
-    const target=
-        document.getElementById("finalTyping");
-
-    let i=0;
-
-    target.style.fontSize="20px";
-    target.style.color="#fff";
-    target.style.lineHeight="2";
-
-    const timer=setInterval(()=>{
-
-        target.innerText=
-            text.substring(0,i);
-
-        i++;
-
-        if(i>text.length)
-            clearInterval(timer);
-
-    },55);
-}
-
-
-/* =========================================================
-   FINAL REVEAL
-========================================================= */
-
-function finalReveal(){
-
-    createBigHeartExplosion();
-
-    setTimeout(()=>{
-
-        document.getElementById("app").innerHTML=`
-
-            <div class="final-scene">
-
-                <div class="final-content">
-
-                    <div class="final-symbol">
-                        ❤️
-                    </div>
-
-                    <div class="script"
-                         style="font-size:23px">
-
-                        আর একটা শেষ কথা...
-
-                    </div>
-
-                    <h1 class="final-title">
-                        ${HER_NAME}
-                    </h1>
-
-                    <div class="final-subtitle">
-                        এই গল্পটার সবচেয়ে সুন্দর অংশ তুমি।
-                    </div>
-
-                    <div class="letter-final">
-
-                        ${LOVE_LETTER
-                            .map(
-                                line =>
-                                `<p>${line}</p>`
-                            )
-                            .join("")
-                        }
-
-                        <div class="signature">
-                            — ${YOUR_NAME} ❤️
-                        </div>
-
-                    </div>
-
-                    <button
-                        class="btn"
-                        onclick="restart()">
-
-                        আবার শুরু করি 🌙
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-    },800);
-
-}
-
-
-/* =========================================================
-   HEART EXPLOSION
-========================================================= */
-
-function createBigHeartExplosion(){
-
-    const symbols=[
-        "❤️",
-        "💕",
-        "💗",
-        "💖",
-        "💘",
-        "✨",
-        "🌸"
-    ];
-
-    for(let i=0;i<100;i++){
-
-        const el=
-            document.createElement("div");
-
-        el.style.position="fixed";
-        el.style.left="50%";
-        el.style.top="50%";
-        el.style.zIndex="1000";
-        el.style.pointerEvents="none";
-
-        el.innerText=
-            symbols[
-                Math.floor(
-                    Math.random()*symbols.length
-                )
-            ];
-
-        const angle=
-            Math.random()*Math.PI*2;
-
-        const distance=
-            100+Math.random()*550;
-
-        const x=
-            Math.cos(angle)*distance;
-
-        const y=
-            Math.sin(angle)*distance;
-
-        el.animate(
-            [
-                {
-                    transform:
-                        "translate(-50%,-50%) scale(.2)",
-                    opacity:1
-                },
-                {
-                    transform:
-                        `translate(
-                            calc(-50% + ${x}px),
-                            calc(-50% + ${y}px)
-                        ) rotate(${Math.random()*720}deg)
-                        scale(${.6+Math.random()})`,
-                    opacity:0
-                }
-            ],
-            {
-                duration:
-                    1300+Math.random()*1500,
-                easing:"cubic-bezier(.1,.8,.2,1)"
-            }
-        );
-
-        document.body.appendChild(el);
-
-        setTimeout(
-            ()=>el.remove(),
-            3000
-        );
-    }
-
-    /* extra bursts */
-
-    for(let i=0;i<80;i++){
-
-        setTimeout(()=>{
-
-            burst(
-                Math.random()*window.innerWidth,
-                Math.random()*window.innerHeight
-            );
-
-        },Math.random()*1800);
-
-    }
-}
-
-
-/* =========================================================
-   RESTART
-========================================================= */
-
-function restart(){
-
-    intro();
-
 }
 
 
@@ -2051,8 +1397,1521 @@ function restart(){
    START
 ========================================================= */
 
+function startPlan(){
+
+    datePlan.going=true;
+
+    step1();
+}
+
+
+/* =========================================================
+   STEP 1 — DATE
+========================================================= */
+
+function step1(){
+
+    render(`
+
+        <div class="page">
+
+            <div class="card">
+
+                ${stepHeader(
+                    1,
+                    "কবে দেখা হবে?"
+                )}
+
+                <h2>
+                    আমাদের Date কবে? 🌙
+                </h2>
+
+                <p>
+                    এমন একটা দিন বেছে নাও
+                    যেদিন শুধু আমাদের জন্য একটু সময় থাকবে।
+                </p>
+
+                <div class="formGroup">
+
+                    <label>
+                        📅 Date
+                    </label>
+
+                    <input
+                        id="dateInput"
+                        type="date"
+                    >
+
+                </div>
+
+                <div class="dateTimeGrid">
+
+                    <div class="formGroup">
+
+                        <label>
+                            🕐 দেখা হবে কয়টায়?
+                        </label>
+
+                        <input
+                            id="timeInput"
+                            type="time"
+                        >
+
+                    </div>
+
+                    <div class="formGroup">
+
+                        <label>
+                            ⏳ আনুমানিক কতক্ষণ?
+                        </label>
+
+                        <select id="durationInput">
+
+                            <option value="">
+                                বেছে নাও
+                            </option>
+
+                            <option>
+                                ১–২ ঘণ্টা
+                            </option>
+
+                            <option>
+                                ২–৩ ঘণ্টা
+                            </option>
+
+                            <option>
+                                ৩–৫ ঘণ্টা
+                            </option>
+
+                            <option>
+                                পুরো দিন ❤️
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="saveStep1()">
+
+                    পরেরটা দেখি ✨
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+}
+
+
+function saveStep1(){
+
+    const date =
+        document.getElementById("dateInput").value;
+
+    const time =
+        document.getElementById("timeInput").value;
+
+    if(!date || !time){
+
+        alert("Date আর সময় দুটোই বেছে নাও ❤️");
+
+        return;
+    }
+
+    datePlan.date=date;
+    datePlan.time=time;
+
+    step2();
+}
+
+
+/* =========================================================
+   STEP 2 — LOCATION
+========================================================= */
+
+function step2(){
+
+    render(`
+
+        <div class="page">
+
+            <div class="card">
+
+                ${stepHeader(
+                    2,
+                    "কোথায় যাব?"
+                )}
+
+                <h2>
+                    আমাদের Date কোথায় হবে? 📍
+                </h2>
+
+                <p>
+                    জায়গাটা বেছে নাও।
+                </p>
+
+                <div class="locationGrid">
+
+                    <div
+                        class="locationCard"
+                        onclick="selectLocation(this,'☕ Café')">
+
+                        <div class="locationIcon">
+                            ☕
+                        </div>
+
+                        <strong>
+                            Cozy Café
+                        </strong>
+
+                        <p>
+                            Coffee + গল্প
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="locationCard"
+                        onclick="selectLocation(this,'🍽️ Restaurant')">
+
+                        <div class="locationIcon">
+                            🍽️
+                        </div>
+
+                        <strong>
+                            Restaurant
+                        </strong>
+
+                        <p>
+                            সুন্দর dinner
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="locationCard"
+                        onclick="selectLocation(this,'🌳 Park')">
+
+                        <div class="locationIcon">
+                            🌳
+                        </div>
+
+                        <strong>
+                            Park
+                        </strong>
+
+                        <p>
+                            হাঁটাহাঁটি + আড্ডা
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="locationCard"
+                        onclick="selectLocation(this,'🎬 Cinema')">
+
+                        <div class="locationIcon">
+                            🎬
+                        </div>
+
+                        <strong>
+                            Cinema
+                        </strong>
+
+                        <p>
+                            Movie date
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="formGroup">
+
+                    <label>
+                        📍 অথবা নিজের জায়গা লিখে দাও
+                    </label>
+
+                    <input
+                        id="customLocation"
+                        placeholder="যেমন: Bashundhara City / Dhanmondi Lake..."
+                    >
+
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="saveStep2()">
+
+                    ঠিক আছে ❤️
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+}
+
+
+function selectLocation(el,value){
+
+    document
+        .querySelectorAll(".locationCard")
+        .forEach(x=>
+            x.classList.remove("selected")
+        );
+
+    el.classList.add("selected");
+
+    datePlan.location=value;
+
+}
+
+
+function saveStep2(){
+
+    const custom =
+        document
+            .getElementById("customLocation")
+            .value
+            .trim();
+
+    if(custom){
+
+        datePlan.customLocation=custom;
+
+    }
+
+    if(
+        !datePlan.location &&
+        !datePlan.customLocation
+    ){
+
+        alert("একটা জায়গা তো বেছে নাও ❤️");
+
+        return;
+    }
+
+    step3();
+}
+
+
+/* =========================================================
+   STEP 3 — FOOD
+========================================================= */
+
+function step3(){
+
+    render(`
+
+        <div class="page">
+
+            <div class="card">
+
+                ${stepHeader(
+                    3,
+                    "কি খাওয়া হবে?"
+                )}
+
+                <h2>
+                    Date-এ কী খাবে? 🍽️
+                </h2>
+
+                <p>
+                    একাধিক option বেছে নিতে পারো।
+                </p>
+
+                <div class="foodGrid">
+
+                    ${foodOption("🍕","Pizza")}
+                    ${foodOption("🍔","Burger")}
+                    ${foodOption("🍝","Pasta")}
+                    ${foodOption("🍣","Sushi")}
+                    ${foodOption("🍗","Chicken")}
+                    ${foodOption("🥗","Salad")}
+                    ${foodOption("🍰","Cake")}
+                    ${foodOption("🍨","Ice Cream")}
+                    ${foodOption("☕","Coffee")}
+
+                </div>
+
+                <div class="formGroup">
+
+                    <label>
+                        🍴 অন্য কিছু?
+                    </label>
+
+                    <input
+                        id="customFood"
+                        placeholder="যেমন: বিরিয়ানি, ফুচকা..."
+                    >
+
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="saveStep3()">
+
+                    ক্ষুধা লাগছে 😋
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+}
+
+
+function foodOption(icon,name){
+
+    return `
+
+        <div
+            class="foodCard"
+            onclick="toggleFood(this,'${name}')">
+
+            <div class="foodEmoji">
+                ${icon}
+            </div>
+
+            <div>
+                ${name}
+            </div>
+
+        </div>
+    `;
+}
+
+
+function toggleFood(el,name){
+
+    el.classList.toggle("selected");
+
+    if(
+        datePlan.food.includes(name)
+    ){
+
+        datePlan.food =
+            datePlan.food.filter(
+                x=>x!==name
+            );
+
+    }else{
+
+        datePlan.food.push(name);
+
+    }
+}
+
+
+function saveStep3(){
+
+    const custom =
+        document
+            .getElementById("customFood")
+            .value
+            .trim();
+
+    if(custom){
+
+        datePlan.food.push(custom);
+
+    }
+
+    if(datePlan.food.length===0){
+
+        alert("কমপক্ষে একটা খাবার তো বেছে নাও 😋");
+
+        return;
+    }
+
+    step4();
+}
+
+
+/* =========================================================
+   STEP 4 — DRESS COLOR
+========================================================= */
+
+function step4(){
+
+    render(`
+
+        <div class="page">
+
+            <div class="card">
+
+                ${stepHeader(
+                    4,
+                    "আজ কী রঙের dress?"
+                )}
+
+                <h2>
+                    তোমার Date outfit-এর color কী হবে? 👗
+                </h2>
+
+                <p>
+                    কারণ আমি আগে থেকেই imagine করতে চাই। 👀
+                </p>
+
+                <div class="colorGrid">
+
+                    ${colorOption("#ff557d","লাল")}
+                    ${colorOption("#f5f5f5","সাদা")}
+                    ${colorOption("#111111","কালো")}
+                    ${colorOption("#f5b642","হলুদ")}
+                    ${colorOption("#d66b9c","গোলাপি")}
+                    ${colorOption("#5b82d8","নীল")}
+                    ${colorOption("#5b9b68","সবুজ")}
+                    ${colorOption("#9b6ac9","বেগুনি")}
+
+                </div>
+
+                <div class="formGroup">
+
+                    <label>
+                        👗 অন্য কোনো color / outfit?
+                    </label>
+
+                    <input
+                        id="customColor"
+                        placeholder="যেমন: Lavender saree..."
+                    >
+
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="saveStep4()">
+
+                    সুন্দর! ✨
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+}
+
+
+function colorOption(color,name){
+
+    return `
+
+        <div
+            class="colorChoice"
+            onclick="selectColor(this,'${name}')">
+
+            <div
+                class="colorCircle"
+                style="background:${color}">
+            </div>
+
+            ${name}
+
+        </div>
+
+    `;
+}
+
+
+function selectColor(el,name){
+
+    document
+        .querySelectorAll(".colorChoice")
+        .forEach(x=>
+            x.classList.remove("selected")
+        );
+
+    el.classList.add("selected");
+
+    datePlan.dressColor=name;
+}
+
+
+function saveStep4(){
+
+    const custom =
+        document
+            .getElementById("customColor")
+            .value
+            .trim();
+
+    if(custom){
+
+        datePlan.dressColor=custom;
+
+    }
+
+    if(!datePlan.dressColor){
+
+        alert("Dress-এর color-টা তো বলো 👗❤️");
+
+        return;
+    }
+
+    step5();
+}
+
+
+/* =========================================================
+   STEP 5 — ACTIVITIES
+========================================================= */
+
+function step5(){
+
+    render(`
+
+        <div class="page">
+
+            <div class="card">
+
+                ${stepHeader(
+                    5,
+                    "কি কি করব?"
+                )}
+
+                <h2>
+                    Date-এ কী কী হবে? ✨
+                </h2>
+
+                <p>
+                    যতগুলো ইচ্ছা select করো।
+                </p>
+
+                <div class="activityGrid">
+
+                    ${activity("📸","ছবি তুলব")}
+                    ${activity("🚶","একসাথে হাঁটব")}
+                    ${activity("🎬","Movie দেখব")}
+                    ${activity("☕","Coffee date")}
+                    ${activity("🌆","শহর ঘুরব")}
+                    ${activity("🎁","একটা surprise থাকবে")}
+                    ${activity("🎵","Music শুনব")}
+                    ${activity("💬","অনেক গল্প করব")}
+
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="saveStep5()">
+
+                    আরও একটা জিনিস... 💌
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+}
+
+
+function activity(icon,name){
+
+    return `
+
+        <div
+            class="activity"
+            onclick="toggleActivity(this,'${name}')">
+
+            <span>
+                ${icon}
+            </span>
+
+            ${name}
+
+        </div>
+
+    `;
+}
+
+
+function toggleActivity(el,name){
+
+    el.classList.toggle("selected");
+
+    if(datePlan.activities.includes(name)){
+
+        datePlan.activities =
+            datePlan.activities.filter(
+                x=>x!==name
+            );
+
+    }else{
+
+        datePlan.activities.push(name);
+
+    }
+}
+
+
+function saveStep5(){
+
+    if(datePlan.activities.length===0){
+
+        alert("একটা activity তো বেছে নাও ❤️");
+
+        return;
+    }
+
+    step6();
+}
+
+
+/* =========================================================
+   STEP 6 — PERSONAL NOTE
+========================================================= */
+
+function step6(){
+
+    render(`
+
+        <div class="page">
+
+            <div class="card">
+
+                ${stepHeader(
+                    6,
+                    "একটা ছোট্ট কথা"
+                )}
+
+                <h2>
+                    আমার জন্য কিছু লিখবে? 💌
+                </h2>
+
+                <p>
+                    Date-এর আগে আমাকে একটা ছোট্ট message
+                    লিখে যেতে পারো।
+                </p>
+
+                <div class="formGroup">
+
+                    <label>
+                        💕 তোমার message
+                    </label>
+
+                    <textarea
+                        id="noteInput"
+                        placeholder="যেমন: সেদিন কিন্তু সুন্দর করে dress করে আসবে... ❤️">
+                    </textarea>
+
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="saveStep6()">
+
+                    শেষ ধাপে যাই 🌹
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+}
+
+
+function saveStep6(){
+
+    datePlan.note =
+        document
+            .getElementById("noteInput")
+            .value
+            .trim();
+
+    step7();
+}
+
+
+/* =========================================================
+   STEP 7 — SUMMARY
+========================================================= */
+
+function step7(){
+
+    render(`
+
+        <div class="page">
+
+            <div class="card">
+
+                ${stepHeader(
+                    7,
+                    "আমাদের Date Plan"
+                )}
+
+                <div class="heroHeart">
+                    💖
+                </div>
+
+                <h2>
+                    Date Plan Ready!
+                </h2>
+
+                <p>
+                    ${HER_NAME}, তুমি আমাদের Date-এর
+                    পুরো plan বানিয়ে ফেলেছো। ❤️
+                </p>
+
+                <div class="summaryHero">
+
+                    <div class="summaryTitle">
+                        আমাদের Date 🌹
+                    </div>
+
+                    <p>
+                        ${formatDate(datePlan.date)}
+                        •
+                        ${formatTime(datePlan.time)}
+                    </p>
+
+                </div>
+
+
+                <div class="summaryGrid">
+
+                    <div class="summaryItem">
+
+                        <div class="icon">
+                            📅
+                        </div>
+
+                        <small>
+                            DATE
+                        </small>
+
+                        <strong>
+                            ${formatDate(datePlan.date)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summaryItem">
+
+                        <div class="icon">
+                            🕐
+                        </div>
+
+                        <small>
+                            TIME
+                        </small>
+
+                        <strong>
+                            ${formatTime(datePlan.time)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summaryItem">
+
+                        <div class="icon">
+                            📍
+                        </div>
+
+                        <small>
+                            LOCATION
+                        </small>
+
+                        <strong>
+                            ${locationText()}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summaryItem">
+
+                        <div class="icon">
+                            🍽️
+                        </div>
+
+                        <small>
+                            FOOD
+                        </small>
+
+                        <strong>
+                            ${datePlan.food.join(", ")}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summaryItem">
+
+                        <div class="icon">
+                            👗
+                        </div>
+
+                        <small>
+                            DRESS COLOR
+                        </small>
+
+                        <strong>
+                            ${datePlan.dressColor}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summaryItem">
+
+                        <div class="icon">
+                            ✨
+                        </div>
+
+                        <small>
+                            ACTIVITIES
+                        </small>
+
+                        <strong>
+                            ${datePlan.activities.join(", ")}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                ${
+                    datePlan.note
+                    ?
+                    `
+                    <div class="noteBox">
+
+                        <small>
+                            💌 ${HER_NAME}-এর message
+                        </small>
+
+                        <p style="margin-top:8px;color:white">
+                            ${escapeHTML(datePlan.note)}
+                        </p>
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                <button
+                    class="btn"
+                    onclick="downloadPDF()">
+
+                    📜 আমাদের Date Plan PDF
+                    ডাউনলোড করো
+
+                </button>
+
+                <br>
+
+                <button
+                    class="btn secondary"
+                    onclick="home()">
+
+                    আবার নতুন করে বানাই
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+    confetti(70);
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDate(value){
+
+    if(!value)
+        return "—";
+
+    const parts =
+        value.split("-");
+
+    const d =
+        new Date(
+            Number(parts[0]),
+            Number(parts[1])-1,
+            Number(parts[2])
+        );
+
+    return d.toLocaleDateString(
+        "bn-BD",
+        {
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    );
+}
+
+
+function formatTime(value){
+
+    if(!value)
+        return "—";
+
+    const [h,m]=
+        value.split(":");
+
+    let hour=
+        parseInt(h);
+
+    const minute=m;
+
+    const suffix =
+        hour>=12
+        ? "PM"
+        : "AM";
+
+    hour =
+        hour%12 || 12;
+
+    return `${hour}:${minute} ${suffix}`;
+}
+
+
+function locationText(){
+
+    if(
+        datePlan.customLocation
+    )
+        return datePlan.customLocation;
+
+    return datePlan.location;
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+/* =========================================================
+   PDF
+========================================================= */
+
+async function downloadPDF(){
+
+    const {
+        jsPDF
+    } = window.jspdf;
+
+    const pdf =
+        new jsPDF({
+            orientation:"portrait",
+            unit:"mm",
+            format:"a4"
+        });
+
+
+    /*
+       IMPORTANT:
+       jsPDF does not natively support Bengali
+       Unicode fonts.
+
+       Therefore this PDF uses an elegant
+       Latin transliteration-safe layout for
+       browser compatibility.
+
+       The original Bengali information is also
+       included through a rendered summary image.
+    */
+
+
+    /* =====================================================
+       PAGE BACKGROUND
+    ===================================================== */
+
+    pdf.setFillColor(
+        20,
+        8,
+        20
+    );
+
+    pdf.rect(
+        0,
+        0,
+        210,
+        297,
+        "F"
+    );
+
+
+    /* =====================================================
+       DECORATIVE TOP
+    ===================================================== */
+
+    pdf.setFillColor(
+        235,
+        55,
+        105
+    );
+
+    pdf.circle(
+        105,
+        45,
+        28,
+        "F"
+    );
+
+    pdf.setFillColor(
+        255,
+        255,
+        255
+    );
+
+    pdf.setFontSize(30);
+
+    pdf.text(
+        "♥",
+        105,
+        54,
+        {
+            align:"center"
+        }
+    );
+
+
+    /* =====================================================
+       TITLE
+    ===================================================== */
+
+    pdf.setFontSize(28);
+
+    pdf.setTextColor(
+        255,
+        255,
+        255
+    );
+
+    pdf.text(
+        "OUR DATE PLAN",
+        105,
+        92,
+        {
+            align:"center"
+        }
+    );
+
+
+    pdf.setFontSize(12);
+
+    pdf.setTextColor(
+        255,
+        155,
+        185
+    );
+
+    pdf.text(
+        "A little plan made with a lot of love",
+        105,
+        101,
+        {
+            align:"center"
+        }
+    );
+
+
+    /* =====================================================
+       COUPLE
+    ===================================================== */
+
+    pdf.setFontSize(18);
+
+    pdf.setTextColor(
+        255,
+        255,
+        255
+    );
+
+    pdf.text(
+        `${YOUR_NAME}  ♥  ${HER_NAME}`,
+        105,
+        120,
+        {
+            align:"center"
+        }
+    );
+
+
+    /* =====================================================
+       DATE HERO
+    ===================================================== */
+
+    pdf.setFillColor(
+        45,
+        20,
+        42
+    );
+
+    roundedRect(
+        pdf,
+        25,
+        135,
+        160,
+        38,
+        8,
+        "F"
+    );
+
+    pdf.setFontSize(11);
+
+    pdf.setTextColor(
+        255,
+        150,
+        180
+    );
+
+    pdf.text(
+        "DATE",
+        35,
+        148
+    );
+
+    pdf.setFontSize(17);
+
+    pdf.setTextColor(
+        255,
+        255,
+        255
+    );
+
+    pdf.text(
+        formatDate(datePlan.date),
+        35,
+        159
+    );
+
+    pdf.setFontSize(11);
+
+    pdf.setTextColor(
+        255,
+        150,
+        180
+    );
+
+    pdf.text(
+        "TIME",
+        125,
+        148
+    );
+
+    pdf.setFontSize(17);
+
+    pdf.setTextColor(
+        255,
+        255,
+        255
+    );
+
+    pdf.text(
+        formatTime(datePlan.time),
+        125,
+        159
+    );
+
+
+    /* =====================================================
+       DETAILS
+    ===================================================== */
+
+    let y=190;
+
+    const details=[
+
+        [
+            "LOCATION",
+            locationText()
+        ],
+
+        [
+            "FOOD",
+            datePlan.food.join(", ")
+        ],
+
+        [
+            "DRESS COLOR",
+            datePlan.dressColor
+        ],
+
+        [
+            "ACTIVITIES",
+            datePlan.activities.join(", ")
+        ]
+
+    ];
+
+
+    details.forEach(
+        ([label,value])=>{
+
+            pdf.setFillColor(
+                32,
+                15,
+                30
+            );
+
+            roundedRect(
+                pdf,
+                25,
+                y,
+                160,
+                17,
+                5,
+                "F"
+            );
+
+            pdf.setFontSize(8);
+
+            pdf.setTextColor(
+                255,
+                125,
+                160
+            );
+
+            pdf.text(
+                label,
+                33,
+                y+7
+            );
+
+            pdf.setFontSize(10);
+
+            pdf.setTextColor(
+                255,
+                255,
+                255
+            );
+
+            const lines =
+                pdf.splitTextToSize(
+                    String(value),
+                    100
+                );
+
+            pdf.text(
+                lines,
+                78,
+                y+7
+            );
+
+            y +=
+                21 +
+                Math.max(
+                    0,
+                    lines.length-1
+                )*4;
+
+        }
+    );
+
+
+    /* =====================================================
+       NOTE
+    ===================================================== */
+
+    if(datePlan.note){
+
+        if(y>245){
+
+            pdf.addPage();
+
+            pdf.setFillColor(
+                20,
+                8,
+                20
+            );
+
+            pdf.rect(
+                0,
+                0,
+                210,
+                297,
+                "F"
+            );
+
+            y=30;
+
+        }
+
+        pdf.setFillColor(
+            45,
+            20,
+            42
+        );
+
+        roundedRect(
+            pdf,
+            25,
+            y,
+            160,
+            35,
+            7,
+            "F"
+        );
+
+        pdf.setFontSize(9);
+
+        pdf.setTextColor(
+            255,
+            150,
+            180
+        );
+
+        pdf.text(
+            `${HER_NAME}'S NOTE`,
+            33,
+            y+10
+        );
+
+        pdf.setFontSize(10);
+
+        pdf.setTextColor(
+            255,
+            255,
+            255
+        );
+
+        const noteLines =
+            pdf.splitTextToSize(
+                datePlan.note,
+                140
+            );
+
+        pdf.text(
+            noteLines,
+            33,
+            y+19
+        );
+
+        y+=48;
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    pdf.setFontSize(12);
+
+    pdf.setTextColor(
+        255,
+        150,
+        180
+    );
+
+    pdf.text(
+        "Made for a very special date ♥",
+        105,
+        280,
+        {
+            align:"center"
+        }
+    );
+
+    pdf.setFontSize(8);
+
+    pdf.setTextColor(
+        120,
+        100,
+        120
+    );
+
+    pdf.text(
+        "Keep this plan. One day it will become a memory.",
+        105,
+        287,
+        {
+            align:"center"
+        }
+    );
+
+
+    /* =====================================================
+       SAVE
+    ===================================================== */
+
+    pdf.save(
+        "Our-Date-Plan.pdf"
+    );
+
+}
+
+
+/* =========================================================
+   PDF ROUNDED RECT HELPER
+========================================================= */
+
+function roundedRect(
+    pdf,
+    x,
+    y,
+    w,
+    h,
+    r,
+    style
+){
+
+    pdf.roundedRect(
+        x,
+        y,
+        w,
+        h,
+        r,
+        r,
+        style
+    );
+
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
 createStars();
-intro();
+
+home();
 
 </script>
 
