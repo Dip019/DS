@@ -1,645 +1,910 @@
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Game For You ❤️</title>
+
+<title>তোমার জন্য... ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
+
 /* =========================================================
-   LOVE GAME — COMPLETE SINGLE FILE
-   ========================================================= */
+   GLOBAL
+========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-:root {
-    --pink: #ff4f81;
-    --hot-pink: #ff2f68;
-    --purple: #9b5de5;
-    --deep: #160b22;
-    --card: rgba(255,255,255,0.10);
-    --border: rgba(255,255,255,0.18);
-    --white: #ffffff;
+:root{
+    --pink:#ff4f8b;
+    --pink2:#ff8fb4;
+    --rose:#ff2f70;
+    --purple:#9b6cff;
+    --dark:#080510;
+    --white:#fff;
 }
 
-html, body {
-    width: 100%;
-    min-height: 100%;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    font-family: "DM Sans", sans-serif;
+body{
+    min-height:100vh;
+    overflow:hidden;
+    background:#080510;
+    color:white;
+    font-family:"Noto Serif Bengali",serif;
+}
+
+/* =========================================================
+   MAIN BACKGROUND
+========================================================= */
+
+#universe{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
     background:
-        radial-gradient(circle at 20% 20%, rgba(255, 55, 120, .20), transparent 30%),
-        radial-gradient(circle at 80% 70%, rgba(155, 93, 229, .20), transparent 35%),
-        linear-gradient(135deg, #120818, #250b28 50%, #100817);
-    color: white;
-    overflow-x: hidden;
+        radial-gradient(circle at 50% 40%,rgba(122,42,100,.22),transparent 35%),
+        radial-gradient(circle at 15% 80%,rgba(90,50,160,.20),transparent 35%),
+        radial-gradient(circle at 90% 20%,rgba(255,50,120,.12),transparent 30%),
+        linear-gradient(145deg,#05030a,#110718 50%,#07040d);
 }
 
-/* ================= BACKGROUND ================= */
-
-.background {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
+#stars{
+    position:absolute;
+    inset:0;
 }
 
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(70px);
-    opacity: .35;
-    animation: floatOrb 12s ease-in-out infinite alternate;
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:#fff;
+    opacity:.5;
+    animation:twinkle 2s infinite alternate;
 }
 
-.orb.one {
-    width: 250px;
-    height: 250px;
-    background: #ff3675;
-    left: -80px;
-    top: 10%;
-}
-
-.orb.two {
-    width: 300px;
-    height: 300px;
-    background: #8f4fff;
-    right: -100px;
-    bottom: 5%;
-    animation-delay: 3s;
-}
-
-.orb.three {
-    width: 180px;
-    height: 180px;
-    background: #ff9bce;
-    left: 45%;
-    top: -80px;
-    animation-delay: 5s;
-}
-
-@keyframes floatOrb {
-    from {
-        transform: translate(0,0) scale(1);
+@keyframes twinkle{
+    from{
+        opacity:.15;
+        transform:scale(.7);
     }
-    to {
-        transform: translate(40px,30px) scale(1.2);
+    to{
+        opacity:1;
+        transform:scale(1.6);
     }
 }
 
-/* ================= FLOATING HEARTS ================= */
+/* =========================================================
+   GLOWING ORBS
+========================================================= */
 
-.bg-heart {
-    position: fixed;
-    bottom: -50px;
-    color: rgba(255, 100, 150, .35);
-    font-size: 18px;
-    animation: riseHeart linear infinite;
-    pointer-events: none;
-    z-index: 1;
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.25;
+    animation:orbFloat 14s ease-in-out infinite alternate;
 }
 
-@keyframes riseHeart {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: .8;
-    }
-
-    90% {
-        opacity: .6;
-    }
-
-    100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
+.orb1{
+    width:350px;
+    height:350px;
+    background:#ff2d70;
+    top:-180px;
+    left:-100px;
 }
 
-/* ================= APP ================= */
-
-#app {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
+.orb2{
+    width:400px;
+    height:400px;
+    background:#733cff;
+    right:-200px;
+    bottom:-200px;
+    animation-delay:3s;
 }
 
-.screen {
-    width: 100%;
-    max-width: 850px;
-    min-height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.orb3{
+    width:220px;
+    height:220px;
+    background:#ff80bd;
+    left:45%;
+    top:50%;
+    opacity:.12;
+    animation-delay:6s;
 }
 
-.card {
-    width: 100%;
-    padding: 45px;
-    border-radius: 30px;
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.10);
-    text-align: center;
-    animation: cardIn .7s ease;
-}
-
-@keyframes cardIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(.97);
+@keyframes orbFloat{
+    0%{
+        transform:translate(0,0) scale(1);
     }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+    100%{
+        transform:translate(70px,50px) scale(1.15);
     }
 }
 
-/* ================= START SCREEN ================= */
+/* =========================================================
+   MOON
+========================================================= */
 
-.big-heart {
-    font-size: 90px;
-    display: inline-block;
-    filter: drop-shadow(0 0 25px rgba(255,60,110,.7));
-    animation: heartbeat 1.4s infinite;
-}
-
-@keyframes heartbeat {
-    0%,100% {
-        transform: scale(1);
-    }
-
-    15% {
-        transform: scale(1.18);
-    }
-
-    30% {
-        transform: scale(1);
-    }
-
-    45% {
-        transform: scale(1.12);
-    }
-
-    60% {
-        transform: scale(1);
-    }
-}
-
-.script {
-    font-family: Pacifico, cursive;
-    color: #ff9cbd;
-}
-
-h1 {
-    font-size: clamp(38px, 7vw, 68px);
-    line-height: 1.1;
-    margin: 20px 0;
-}
-
-h2 {
-    font-size: clamp(28px, 5vw, 45px);
-    margin-bottom: 15px;
-}
-
-p {
-    color: rgba(255,255,255,.78);
-    line-height: 1.7;
-    font-size: 16px;
-}
-
-.subtitle {
-    max-width: 600px;
-    margin: 0 auto 30px;
-}
-
-/* ================= BUTTON ================= */
-
-.btn {
-    border: none;
-    outline: none;
-    cursor: pointer;
-    color: white;
-    padding: 15px 30px;
-    border-radius: 999px;
-    font-size: 16px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #ff4f81, #ff2868);
-    box-shadow:
-        0 10px 30px rgba(255,47,104,.3),
-        inset 0 1px 0 rgba(255,255,255,.25);
-    transition: .25s ease;
-    margin: 8px;
-}
-
-.btn:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 15px 35px rgba(255,47,104,.45);
-}
-
-.btn:active {
-    transform: scale(.96);
-}
-
-.btn.secondary {
-    background: rgba(255,255,255,.10);
-    border: 1px solid rgba(255,255,255,.16);
-    box-shadow: none;
-}
-
-/* ================= PROGRESS ================= */
-
-.progress-wrap {
-    width: 100%;
-    max-width: 650px;
-    margin: 0 auto 35px;
-}
-
-.progress-top {
-    display: flex;
-    justify-content: space-between;
-    color: rgba(255,255,255,.6);
-    font-size: 13px;
-    margin-bottom: 8px;
-}
-
-.progress {
-    height: 7px;
-    border-radius: 99px;
-    background: rgba(255,255,255,.12);
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, #ff4f81, #ff9ec4, #a96bff);
-    transition: width .5s ease;
-}
-
-/* ================= QUESTION ================= */
-
-.question-number {
-    color: #ff9cbd;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-}
-
-.answers {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin: 30px 0;
-}
-
-.answer {
-    padding: 18px;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,.13);
-    background: rgba(255,255,255,.06);
-    color: white;
-    cursor: pointer;
-    transition: .25s ease;
-    font-size: 15px;
-}
-
-.answer:hover {
-    transform: translateY(-3px);
-    background: rgba(255,79,129,.15);
-    border-color: rgba(255,100,150,.5);
-}
-
-.answer.correct {
-    background: rgba(60,220,140,.20);
-    border-color: rgba(80,255,160,.7);
-}
-
-.answer.wrong {
-    background: rgba(255,50,80,.20);
-    border-color: rgba(255,70,90,.7);
-}
-
-/* ================= CATCH HEART ================= */
-
-.game-area {
-    height: 330px;
-    margin: 25px 0;
-    border-radius: 25px;
+.moon{
+    position:absolute;
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    right:10%;
+    top:9%;
     background:
-        radial-gradient(circle at center, rgba(255,80,130,.08), transparent 50%),
-        rgba(0,0,0,.12);
-    border: 1px solid rgba(255,255,255,.10);
-    position: relative;
-    overflow: hidden;
+        radial-gradient(circle at 35% 35%,#fff,#ffeaf2 55%,#ffcbdc);
+    box-shadow:
+        0 0 30px rgba(255,210,225,.35),
+        0 0 100px rgba(255,150,190,.15);
+    animation:moonFloat 5s ease-in-out infinite;
 }
 
-.catch-heart {
-    position: absolute;
-    font-size: 35px;
-    cursor: pointer;
-    user-select: none;
-    animation: heartPulse .7s infinite alternate;
-    filter: drop-shadow(0 0 12px rgba(255,70,120,.8));
-    transition: transform .15s;
+.moon:after{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:#09050e;
+    left:-35px;
+    top:-10px;
 }
 
-.catch-heart:hover {
-    transform: scale(1.25);
-}
-
-@keyframes heartPulse {
-    from {
-        transform: scale(.9);
+@keyframes moonFloat{
+    0%,100%{
+        transform:translateY(0);
     }
-
-    to {
-        transform: scale(1.15);
+    50%{
+        transform:translateY(12px);
     }
 }
 
-.game-stats {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 15px;
+/* =========================================================
+   FLOATING PETALS
+========================================================= */
+
+#petals{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:3;
 }
 
-.stat strong {
-    display: block;
-    font-size: 28px;
-    color: #ff9cbd;
+.petal{
+    position:absolute;
+    top:-30px;
+    font-size:16px;
+    opacity:.7;
+    animation:petalFall linear forwards;
 }
 
-.stat span {
-    font-size: 12px;
-    color: rgba(255,255,255,.5);
-}
-
-/* ================= MEMORY GAME ================= */
-
-.memory-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    max-width: 500px;
-    margin: 30px auto;
-}
-
-.memory-card {
-    aspect-ratio: 1;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,.15);
-    background: linear-gradient(135deg, rgba(255,79,129,.15), rgba(155,93,229,.12));
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    transition: .3s;
-}
-
-.memory-card:hover {
-    transform: scale(1.04);
-}
-
-.memory-card.flipped {
-    background: rgba(255,255,255,.12);
-    transform: rotateY(180deg);
-}
-
-.memory-card.matched {
-    background: rgba(255,80,140,.25);
-    border-color: rgba(255,120,170,.6);
-}
-
-/* ================= CHOICE ================= */
-
-.choice-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin: 30px auto;
-    max-width: 650px;
-}
-
-.choice {
-    padding: 25px 15px;
-    border-radius: 20px;
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.12);
-    cursor: pointer;
-    transition: .3s;
-}
-
-.choice:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255,100,160,.6);
-    background: rgba(255,70,130,.12);
-}
-
-.choice-icon {
-    font-size: 38px;
-    margin-bottom: 10px;
-}
-
-/* ================= FINAL ================= */
-
-.final-screen {
-    min-height: 100vh;
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.final-card {
-    max-width: 780px;
-    position: relative;
-    padding: 55px;
-}
-
-.final-heart {
-    font-size: 80px;
-    animation: heartbeat 1.3s infinite;
-}
-
-.love-letter {
-    margin-top: 25px;
-    text-align: left;
-    padding: 28px;
-    border-radius: 22px;
-    background: rgba(255,255,255,.06);
-    border-left: 3px solid #ff5c91;
-}
-
-.love-letter p {
-    font-size: 17px;
-    margin-bottom: 14px;
-}
-
-.signature {
-    font-family: Pacifico, cursive;
-    color: #ff9fbe;
-    font-size: 26px;
-    margin-top: 20px;
-}
-
-/* ================= CONFETTI ================= */
-
-.confetti {
-    position: fixed;
-    width: 9px;
-    height: 14px;
-    top: -20px;
-    z-index: 999;
-    pointer-events: none;
-    animation: confettiFall linear forwards;
-}
-
-@keyframes confettiFall {
-    to {
-        transform:
-            translateY(110vh)
-            rotate(720deg);
-        opacity: 0;
+@keyframes petalFall{
+    0%{
+        transform:translateY(-30px) rotate(0deg);
+        opacity:0;
+    }
+    10%{
+        opacity:.8;
+    }
+    90%{
+        opacity:.5;
+    }
+    100%{
+        transform:translateY(110vh) rotate(540deg);
+        opacity:0;
     }
 }
 
-/* ================= SPARKLES ================= */
+/* =========================================================
+   APP
+========================================================= */
 
-.sparkle {
-    position: fixed;
-    pointer-events: none;
-    font-size: 20px;
-    z-index: 998;
-    animation: sparkleOut 1s ease forwards;
+#app{
+    position:relative;
+    z-index:5;
+    width:100%;
+    height:100vh;
 }
 
-@keyframes sparkleOut {
-    0% {
-        opacity: 1;
-        transform: scale(.5);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(1.7) translateY(-30px);
-    }
+.scene{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+    animation:sceneIn 1s ease;
 }
 
-/* ================= SHAKE ================= */
-
-.shake {
-    animation: shake .4s ease;
-}
-
-@keyframes shake {
-    0%,100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width: 650px) {
-
-    #app {
-        padding: 14px;
+@keyframes sceneIn{
+    from{
+        opacity:0;
+        transform:scale(1.04);
+        filter:blur(10px);
     }
-
-    .screen {
-        min-height: 90vh;
-    }
-
-    .card {
-        padding: 28px 20px;
-        border-radius: 24px;
-    }
-
-    .big-heart {
-        font-size: 70px;
-    }
-
-    .answers,
-    .choice-container {
-        grid-template-columns: 1fr;
-    }
-
-    .memory-grid {
-        gap: 8px;
-    }
-
-    .memory-card {
-        font-size: 23px;
-        border-radius: 11px;
-    }
-
-    .game-area {
-        height: 280px;
-    }
-
-    .final-card {
-        padding: 35px 22px;
-    }
-
-    .love-letter {
-        padding: 20px;
-    }
-
-    .love-letter p {
-        font-size: 15px;
+    to{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
     }
 }
 
-/* ================= HIDDEN ================= */
+/* =========================================================
+   GLASS CARD
+========================================================= */
 
-.hidden {
-    display: none !important;
+.card{
+    width:min(900px,100%);
+    max-height:92vh;
+    overflow:auto;
+    padding:55px 50px;
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:36px;
+
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    scrollbar-width:none;
 }
 
-.fade {
-    animation: cardIn .6s ease;
+.card::-webkit-scrollbar{
+    display:none;
 }
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+.small{
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#ff9dbd;
+    margin-bottom:18px;
+}
+
+.script{
+    font-family:"Tiro Bangla",serif;
+    font-style:italic;
+    color:#ff9fbe;
+}
+
+h1{
+    font-size:clamp(42px,8vw,82px);
+    line-height:1.2;
+    font-weight:600;
+}
+
+h2{
+    font-size:clamp(30px,5vw,52px);
+    line-height:1.3;
+    margin-bottom:20px;
+}
+
+p{
+    font-size:17px;
+    line-height:2;
+    color:rgba(255,255,255,.72);
+}
+
+/* =========================================================
+   GLOWING HEART
+========================================================= */
+
+.main-heart{
+    position:relative;
+    width:150px;
+    height:150px;
+    margin:0 auto 30px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:75px;
+
+    animation:heartBeat 1.5s infinite;
+
+    filter:drop-shadow(0 0 25px rgba(255,50,110,.8));
+}
+
+.main-heart:before,
+.main-heart:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    border:1px solid rgba(255,100,150,.2);
+    animation:ring 2.5s infinite;
+}
+
+.main-heart:after{
+    animation-delay:.8s;
+}
+
+@keyframes heartBeat{
+    0%,100%{
+        transform:scale(1);
+    }
+    15%{
+        transform:scale(1.12);
+    }
+    30%{
+        transform:scale(1);
+    }
+    45%{
+        transform:scale(1.08);
+    }
+}
+
+@keyframes ring{
+    0%{
+        transform:scale(.7);
+        opacity:.8;
+    }
+    100%{
+        transform:scale(1.7);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.btn{
+    position:relative;
+    border:0;
+    outline:0;
+    cursor:pointer;
+
+    margin-top:30px;
+
+    padding:16px 35px;
+
+    border-radius:100px;
+
+    color:white;
+    font-family:inherit;
+    font-size:16px;
+    font-weight:600;
+
+    background:
+        linear-gradient(135deg,#ff3e79,#ff78a5);
+
+    box-shadow:
+        0 12px 35px rgba(255,45,105,.25),
+        inset 0 1px 0 rgba(255,255,255,.3);
+
+    transition:.35s ease;
+}
+
+.btn:hover{
+    transform:translateY(-4px) scale(1.03);
+    box-shadow:
+        0 18px 45px rgba(255,45,105,.4),
+        0 0 25px rgba(255,80,140,.2);
+}
+
+.btn:active{
+    transform:scale(.96);
+}
+
+.btn.secondary{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:none;
+}
+
+/* =========================================================
+   CHAPTER INDICATOR
+========================================================= */
+
+.chapter{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:8px 16px;
+    border-radius:50px;
+
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+
+    color:#ffabc5;
+    font-size:13px;
+
+    margin-bottom:25px;
+}
+
+.chapter-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#ff5c91;
+    box-shadow:0 0 10px #ff5c91;
+}
+
+/* =========================================================
+   LEVEL 1 — ENVELOPE
+========================================================= */
+
+.envelope-wrap{
+    width:220px;
+    height:155px;
+    margin:30px auto;
+    position:relative;
+    cursor:pointer;
+    perspective:800px;
+}
+
+.envelope{
+    width:100%;
+    height:100%;
+    position:relative;
+    background:#d93467;
+    border-radius:8px;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.envelope:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    border-left:110px solid transparent;
+    border-right:110px solid transparent;
+    border-top:90px solid #f35c89;
+    transform-origin:top;
+    transition:1s;
+    z-index:3;
+}
+
+.envelope.open:before{
+    transform:rotateX(180deg);
+}
+
+.letter{
+    position:absolute;
+    left:10%;
+    bottom:10px;
+    width:80%;
+    height:80%;
+    background:#fff6f9;
+    color:#9b3054;
+    border-radius:5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    transition:1s;
+    z-index:2;
+}
+
+.envelope.open .letter{
+    transform:translateY(-90px);
+}
+
+/* =========================================================
+   LEVEL 2 — CONSTELLATION
+========================================================= */
+
+.sky{
+    position:relative;
+    height:380px;
+    margin:25px auto;
+    max-width:750px;
+    border-radius:28px;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at center,rgba(87,50,150,.25),transparent 55%),
+        rgba(0,0,0,.25);
+
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.constellation-star{
+    position:absolute;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 15px 5px rgba(255,170,210,.8);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.constellation-star:hover{
+    transform:scale(1.7);
+}
+
+.constellation-star.active{
+    background:#ff82ac;
+}
+
+#lines{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+#lines line{
+    stroke:rgba(255,120,170,.7);
+    stroke-width:1;
+    stroke-dasharray:5 5;
+    animation:lineGlow 2s infinite alternate;
+}
+
+@keyframes lineGlow{
+    from{opacity:.2;}
+    to{opacity:1;}
+}
+
+/* =========================================================
+   LEVEL 3 — MEMORY WORDS
+========================================================= */
+
+.memory-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    max-width:650px;
+    margin:35px auto;
+}
+
+.memory-tile{
+    height:120px;
+    border-radius:20px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,90,140,.10),
+            rgba(140,90,255,.08)
+        );
+
+    border:1px solid rgba(255,255,255,.10);
+
+    font-size:30px;
+
+    transition:.4s;
+}
+
+.memory-tile:hover{
+    transform:translateY(-5px);
+    border-color:rgba(255,100,160,.4);
+}
+
+.memory-tile.revealed{
+    background:rgba(255,255,255,.1);
+    transform:rotateY(360deg);
+}
+
+.memory-word{
+    font-size:17px;
+    color:#ffb0c8;
+}
+
+/* =========================================================
+   LEVEL 4 — HEART CHOICES
+========================================================= */
+
+.choice-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    max-width:700px;
+    margin:35px auto;
+}
+
+.choice{
+    position:relative;
+    padding:30px 20px;
+    border-radius:24px;
+    cursor:pointer;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+
+    transition:.35s;
+    overflow:hidden;
+}
+
+.choice:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at center,rgba(255,70,130,.15),transparent 65%);
+    opacity:0;
+    transition:.35s;
+}
+
+.choice:hover{
+    transform:translateY(-7px);
+    border-color:rgba(255,100,160,.5);
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.choice:hover:before{
+    opacity:1;
+}
+
+.choice-icon{
+    position:relative;
+    font-size:45px;
+    margin-bottom:12px;
+}
+
+.choice strong{
+    position:relative;
+    font-size:20px;
+}
+
+.choice p{
+    position:relative;
+    font-size:14px;
+    margin-top:5px;
+}
+
+/* =========================================================
+   LEVEL 5
+========================================================= */
+
+.final-question{
+    max-width:700px;
+    margin:auto;
+}
+
+.final-question .heart-line{
+    font-size:35px;
+    letter-spacing:8px;
+    margin:25px 0;
+    animation:softPulse 2s infinite;
+}
+
+@keyframes softPulse{
+    0%,100%{opacity:.5;}
+    50%{opacity:1;}
+}
+
+/* =========================================================
+   FINAL SCREEN
+========================================================= */
+
+.final-scene{
+    position:fixed;
+    inset:0;
+    z-index:50;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:
+        radial-gradient(circle at center,rgba(255,40,110,.16),transparent 45%),
+        #07030b;
+
+    animation:finalIn 2s ease;
+}
+
+@keyframes finalIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+.final-content{
+    width:min(850px,100%);
+    text-align:center;
+    max-height:92vh;
+    overflow:auto;
+    scrollbar-width:none;
+}
+
+.final-content::-webkit-scrollbar{
+    display:none;
+}
+
+.final-symbol{
+    font-size:80px;
+    animation:heartBeat 1.4s infinite;
+    filter:drop-shadow(0 0 30px rgba(255,60,120,.8));
+}
+
+.final-title{
+    margin-top:20px;
+    font-size:clamp(42px,8vw,85px);
+}
+
+.final-subtitle{
+    color:#ff9fbd;
+    font-size:20px;
+    margin:15px 0 30px;
+}
+
+.letter-final{
+    text-align:left;
+
+    padding:35px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.03)
+        );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+.letter-final p{
+    font-size:18px;
+    line-height:2.1;
+    margin-bottom:15px;
+}
+
+.signature{
+    margin-top:30px;
+    font-family:"Tiro Bangla",serif;
+    font-size:25px;
+    color:#ff9dbb;
+    text-align:right;
+}
+
+/* =========================================================
+   TYPEWRITER
+========================================================= */
+
+.typewriter{
+    min-height:70px;
+}
+
+/* =========================================================
+   PARTICLE BURST
+========================================================= */
+
+.burst{
+    position:fixed;
+    pointer-events:none;
+    z-index:100;
+    font-size:20px;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+    .scene{
+        padding:14px;
+    }
+
+    .card{
+        padding:35px 20px;
+        border-radius:28px;
+        max-height:94vh;
+    }
+
+    .moon{
+        width:75px;
+        height:75px;
+        right:7%;
+        top:5%;
+    }
+
+    .moon:after{
+        width:70px;
+        height:70px;
+        left:-20px;
+        top:-6px;
+    }
+
+    p{
+        font-size:15px;
+    }
+
+    .main-heart{
+        transform:scale(.8);
+        margin-top:-10px;
+    }
+
+    .memory-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .memory-tile{
+        height:100px;
+    }
+
+    .choice-grid{
+        grid-template-columns:1fr;
+    }
+
+    .sky{
+        height:330px;
+    }
+
+    .letter-final{
+        padding:22px;
+    }
+
+    .letter-final p{
+        font-size:15px;
+        line-height:1.9;
+    }
+
+    .signature{
+        font-size:20px;
+    }
+}
+
 </style>
 </head>
 
+
 <body>
 
-<div class="background">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
+<!-- ======================================================
+     BACKGROUND
+====================================================== -->
+
+<div id="universe">
+
+    <div id="stars"></div>
+
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <div class="moon"></div>
+
 </div>
 
-<div id="floatingHearts"></div>
+<div id="petals"></div>
 
 <div id="app"></div>
 
@@ -647,1171 +912,1147 @@ p {
 <script>
 
 /* =========================================================
-   ❤️ PERSONALIZE YOUR GAME HERE
-   ========================================================= */
-
-const YOU = "Your Name";
-const HER = "My Love";
+   ❤️ PERSONALIZATION
+========================================================= */
 
 /*
-   Change the final message here.
+    এখান থেকে নাম পরিবর্তন করো।
 */
-const FINAL_MESSAGE = `
-If you ever wonder how important you are to me,
-just remember this little game.
 
-Every level was created for one simple reason —
-to remind you that somewhere in this huge world,
-there is someone who feels incredibly lucky
-to have you in his life.
+const YOUR_NAME = "তোমার মানুষ";
+const HER_NAME = "আমার প্রিয়";
 
-You are not just someone I love.
 
-You are the person who makes ordinary moments
-feel special, boring days feel brighter,
-and my world feel a little more beautiful.
 
-I don't know what the future has planned for us,
-but I know one thing...
+/*
+    শেষের Love Letter এখান থেকে পরিবর্তন করতে পারো।
+*/
 
-If I get to choose,
-I will keep choosing you.
+const LOVE_LETTER = [
 
-Again.
-And again.
-And again. ❤️
+`তুমি জানো কি, এই পুরো ছোট্ট game-টা আসলে কোনো game ছিল না।`,
 
-Thank you for being you.
+`আমি শুধু একটা অজুহাত চেয়েছিলাম তোমাকে কয়েকটা মুহূর্তের জন্য আমার পৃথিবীর মধ্যে নিয়ে আসার।`,
 
-I love you more than these little words
-could ever explain.
-`;
+`কারণ তোমাকে নিয়ে আমার বলার মতো অনেক কথা আছে, কিন্তু সব কথা মুখে বলা যায় না।`,
+
+`তুমি আমার জীবনের সেই মানুষ, যার সাথে কথা বললে সময় কেমন করে যেন একটু দ্রুত চলে যায়। আর তোমাকে না দেখলে একটা সাধারণ দিনও কেমন যেন একটু অসম্পূর্ণ লাগে।`,
+
+`তোমার হাসি, তোমার অভিমান, তোমার ছোট ছোট পাগলামি—সবকিছু মিলিয়েই তুমি। আর সত্যি বলতে, আমি এই "তুমি"-টাকেই খুব ভালোবাসি।`,
+
+`জীবনে সবকিছু সবসময় perfect হবে না। হয়তো আমাদের মাঝে কখনো অভিমান হবে, মন খারাপ হবে, ভুল বোঝাবুঝিও হবে। কিন্তু একটা জিনিস যেন কখনো বদলে না যায়—আমরা যেন একে অপরকে বেছে নেওয়া বন্ধ না করি।`,
+
+`কারণ আমি চাই, অনেক বছর পরেও কোনো এক শান্ত রাতে তোমার পাশে বসে মনে হোক—হ্যাঁ, এই মানুষটাকেই তো আমি চেয়েছিলাম।`,
+
+`তুমি আমার কাছে শুধু "ভালোবাসার মানুষ" নও। তুমি আমার শান্তি, আমার হাসির কারণ, আমার প্রিয় notification, আর আমার অনেকগুলো ভবিষ্যৎ স্বপ্নের একটা বড় অংশ।`,
+
+`তাই আজ শুধু একটা কথাই বলতে চাই...`,
+
+`আমি জানি না ভবিষ্যৎ আমাদের কোথায় নিয়ে যাবে। কিন্তু যতদিন আমার হাতে choice থাকবে, আমি তোমাকেই বেছে নেব। বারবার। প্রতিবার। ❤️`
+
+];
+
 
 
 /* =========================================================
    GAME STATE
-   ========================================================= */
+========================================================= */
 
-let level = 0;
-let score = 0;
-
-const app = document.getElementById("app");
+let currentLevel = 0;
 
 
 /* =========================================================
-   BACKGROUND HEARTS
-   ========================================================= */
+   CREATE STARS
+========================================================= */
 
-function createBackgroundHeart() {
+function createStars(){
 
-    const heart = document.createElement("div");
+    const container =
+        document.getElementById("stars");
 
-    heart.className = "bg-heart";
+    for(let i=0;i<130;i++){
 
-    const hearts = ["❤️","💕","💗","💖","💘","💓","♥"];
-
-    heart.innerText =
-        hearts[Math.floor(Math.random() * hearts.length)];
-
-    heart.style.left =
-        Math.random() * 100 + "%";
-
-    heart.style.fontSize =
-        (12 + Math.random() * 22) + "px";
-
-    heart.style.animationDuration =
-        (7 + Math.random() * 9) + "s";
-
-    heart.style.animationDelay =
-        Math.random() * 3 + "s";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 18000);
-}
-
-setInterval(createBackgroundHeart, 600);
-
-
-/* =========================================================
-   SPARKLE EFFECT
-   ========================================================= */
-
-function sparkle(x, y) {
-
-    const s = document.createElement("div");
-
-    s.className = "sparkle";
-    s.innerText = "✨";
-
-    s.style.left = x + "px";
-    s.style.top = y + "px";
-
-    document.body.appendChild(s);
-
-    setTimeout(() => s.remove(), 1000);
-}
-
-
-/* =========================================================
-   CONFETTI
-   ========================================================= */
-
-function confetti(count = 100) {
-
-    for(let i = 0; i < count; i++) {
-
-        const c = document.createElement("div");
-
-        c.className = "confetti";
-
-        const symbols = ["♥","✦","●","◆","★"];
-
-        c.innerText =
-            symbols[Math.floor(Math.random() * symbols.length)];
-
-        c.style.left =
-            Math.random() * 100 + "vw";
-
-        c.style.fontSize =
-            (8 + Math.random() * 15) + "px";
-
-        c.style.animationDuration =
-            (2.5 + Math.random() * 3) + "s";
-
-        c.style.animationDelay =
-            Math.random() * .8 + "s";
-
-        document.body.appendChild(c);
-
-        setTimeout(() => c.remove(), 6000);
-    }
-}
-
-
-/* =========================================================
-   SCREEN HELPER
-   ========================================================= */
-
-function render(content, extraClass = "") {
-
-    app.innerHTML = `
-        <div class="screen ${extraClass}">
-            ${content}
-        </div>
-    `;
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* =========================================================
-   START SCREEN
-   ========================================================= */
-
-function startScreen() {
-
-    render(`
-
-        <div class="card">
-
-            <div class="big-heart">❤️</div>
-
-            <div class="script">
-                A little something for you...
-            </div>
-
-            <h1>
-                Hey, ${HER}
-            </h1>
-
-            <p class="subtitle">
-                I made you a tiny game.
-                <br>
-                There are 5 levels.
-                <br><br>
-                And there might be a little surprise
-                waiting at the end...
-            </p>
-
-            <button class="btn" onclick="startGame()">
-                Start Our Story 💕
-            </button>
-
-        </div>
-    `);
-}
-
-
-/* =========================================================
-   START GAME
-   ========================================================= */
-
-function startGame() {
-
-    level = 1;
-    score = 0;
-
-    showLevel1();
-}
-
-
-/* =========================================================
-   PROGRESS
-   ========================================================= */
-
-function progressHTML() {
-
-    return `
-        <div class="progress-wrap">
-
-            <div class="progress-top">
-                <span>Our little journey</span>
-                <span>Level ${level} / 5</span>
-            </div>
-
-            <div class="progress">
-                <div
-                    class="progress-bar"
-                    style="width:${(level/5)*100}%"
-                ></div>
-            </div>
-
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   LEVEL 1
-   ========================================================= */
-
-const questions = [
-
-    {
-        question: "What do you think makes me smile the most?",
-        answers: [
-            "You ❤️",
-            "Money 💰",
-            "Food 🍕",
-            "Sleeping 😴"
-        ],
-        correct: 0
-    },
-
-    {
-        question: "If we could disappear somewhere together, what sounds best?",
-        answers: [
-            "A cozy little trip 🌙",
-            "Office work 💻",
-            "Grocery shopping 🛒",
-            "Standing in a queue 😭"
-        ],
-        correct: 0
-    },
-
-    {
-        question: "What is my favorite thing about you?",
-        answers: [
-            "Your heart ❤️",
-            "Your kindness 🌸",
-            "Your smile 😊",
-            "All of the above 💖"
-        ],
-        correct: 3
-    }
-
-];
-
-let questionIndex = 0;
-
-function showLevel1() {
-
-    questionIndex = 0;
-
-    renderLevel1Question();
-}
-
-
-function renderLevel1Question() {
-
-    const q = questions[questionIndex];
-
-    render(`
-
-        <div class="card">
-
-            ${progressHTML()}
-
-            <div class="question-number">
-                Level 1 • Question ${questionIndex + 1}
-            </div>
-
-            <h2>${q.question}</h2>
-
-            <div class="answers">
-
-                ${q.answers.map((answer, i) => `
-
-                    <button
-                        class="answer"
-                        onclick="answerQuestion(${i})"
-                    >
-                        ${answer}
-                    </button>
-
-                `).join("")}
-
-            </div>
-
-            <p>
-                Don't overthink it... 👀
-            </p>
-
-        </div>
-    `);
-}
-
-
-function answerQuestion(index) {
-
-    const q = questions[questionIndex];
-
-    const buttons =
-        document.querySelectorAll(".answer");
-
-    buttons.forEach(btn => btn.disabled = true);
-
-    if(index === q.correct) {
-
-        buttons[index].classList.add("correct");
-
-        score += 10;
-
-        sparkle(
-            window.innerWidth / 2,
-            window.innerHeight / 2
-        );
-
-    } else {
-
-        buttons[index].classList.add("wrong");
-
-        buttons[q.correct].classList.add("correct");
-    }
-
-    setTimeout(() => {
-
-        questionIndex++;
-
-        if(questionIndex >= questions.length) {
-
-            showLevelComplete(
-                1,
-                "Not bad... ❤️",
-                "You survived the first level.",
-                showLevel2
-            );
-
-        } else {
-
-            renderLevel1Question();
-
-        }
-
-    }, 900);
-}
-
-
-/* =========================================================
-   LEVEL COMPLETE
-   ========================================================= */
-
-function showLevelComplete(
-    completedLevel,
-    title,
-    message,
-    nextFunction
-) {
-
-    confetti(50);
-
-    render(`
-
-        <div class="card">
-
-            <div class="big-heart">💖</div>
-
-            <div class="question-number">
-                LEVEL ${completedLevel} COMPLETE
-            </div>
-
-            <h2>${title}</h2>
-
-            <p class="subtitle">
-                ${message}
-            </p>
-
-            <button class="btn" onclick="(${nextFunction.name})()">
-                Continue 💕
-            </button>
-
-        </div>
-    `);
-}
-
-
-/* =========================================================
-   LEVEL 2 — CATCH HEARTS
-   ========================================================= */
-
-let heartsCaught = 0;
-let heartsNeeded = 8;
-let heartTimer;
-let heartInterval;
-
-function showLevel2() {
-
-    heartsCaught = 0;
-
-    render(`
-
-        <div class="card">
-
-            ${progressHTML()}
-
-            <div class="question-number">
-                Level 2 • Catch My Heart
-            </div>
-
-            <h2>
-                Catch the hearts! 💕
-            </h2>
-
-            <p>
-                You have 20 seconds.
-                <br>
-                Catch at least ${heartsNeeded} hearts.
-            </p>
-
-            <div class="game-stats">
-
-                <div class="stat">
-                    <strong id="heartScore">0</strong>
-                    <span>HEARTS</span>
-                </div>
-
-                <div class="stat">
-                    <strong id="heartTime">20</strong>
-                    <span>SECONDS</span>
-                </div>
-
-            </div>
-
-            <div
-                class="game-area"
-                id="heartGame"
-            ></div>
-
-        </div>
-    `);
-
-    startHeartGame();
-}
-
-
-function startHeartGame() {
-
-    let time = 20;
-
-    heartTimer = setInterval(() => {
-
-        time--;
-
-        const timer =
-            document.getElementById("heartTime");
-
-        if(timer)
-            timer.innerText = time;
-
-        if(time <= 0) {
-
-            clearInterval(heartTimer);
-            clearInterval(heartInterval);
-
-            if(heartsCaught >= heartsNeeded) {
-
-                showLevelComplete(
-                    2,
-                    "You caught my heart! ❤️",
-                    "Okay... that was actually adorable.",
-                    showLevel3
-                );
-
-            } else {
-
-                render(`
-
-                    <div class="card">
-
-                        <div class="big-heart">🥺</div>
-
-                        <h2>Almost!</h2>
-
-                        <p class="subtitle">
-                            My heart is a little slippery.
-                            <br>
-                            Let's try again.
-                        </p>
-
-                        <button
-                            class="btn"
-                            onclick="showLevel2()"
-                        >
-                            Try Again 💗
-                        </button>
-
-                    </div>
-                `);
-
-            }
-        }
-
-    }, 1000);
-
-    heartInterval = setInterval(spawnHeart, 650);
-}
-
-
-function spawnHeart() {
-
-    const area =
-        document.getElementById("heartGame");
-
-    if(!area) return;
-
-    const heart =
-        document.createElement("div");
-
-    heart.className = "catch-heart";
-
-    const choices =
-        ["❤️","💖","💗","💘","💕"];
-
-    heart.innerText =
-        choices[Math.floor(Math.random() * choices.length)];
-
-    const maxX =
-        area.clientWidth - 45;
-
-    const maxY =
-        area.clientHeight - 45;
-
-    heart.style.left =
-        Math.max(5, Math.random() * maxX) + "px";
-
-    heart.style.top =
-        Math.max(5, Math.random() * maxY) + "px";
-
-    heart.onclick = function(e) {
-
-        heartsCaught++;
-
-        score += 5;
-
-        document.getElementById("heartScore").innerText =
-            heartsCaught;
-
-        sparkle(
-            e.clientX,
-            e.clientY
-        );
-
-        heart.remove();
-
-        if(heartsCaught >= heartsNeeded) {
-
-            clearInterval(heartTimer);
-            clearInterval(heartInterval);
-
-            setTimeout(() => {
-
-                showLevelComplete(
-                    2,
-                    "You caught my heart! ❤️",
-                    "And somehow you made it look easy.",
-                    showLevel3
-                );
-
-            }, 300);
-
-        }
-    };
-
-    area.appendChild(heart);
-
-    setTimeout(() => {
-
-        if(heart.isConnected)
-            heart.remove();
-
-    }, 1400);
-}
-
-
-/* =========================================================
-   LEVEL 3 — MEMORY
-   ========================================================= */
-
-let memoryValues = [];
-let firstCard = null;
-let secondCard = null;
-let lockBoard = false;
-let matchedPairs = 0;
-
-function showLevel3() {
-
-    const emojis = [
-        "❤️","❤️",
-        "🌹","🌹",
-        "💍","💍",
-        "🌙","🌙",
-        "✨","✨",
-        "🥰","🥰",
-        "💕","💕",
-        "💋","💋"
-    ];
-
-    memoryValues =
-        emojis.sort(() => Math.random() - .5);
-
-    matchedPairs = 0;
-    firstCard = null;
-    secondCard = null;
-    lockBoard = false;
-
-    render(`
-
-        <div class="card">
-
-            ${progressHTML()}
-
-            <div class="question-number">
-                Level 3 • Memory of Us
-            </div>
-
-            <h2>
-                Find the matching hearts 💞
-            </h2>
-
-            <p>
-                Match all the pairs to unlock the next level.
-            </p>
-
-            <div
-                class="memory-grid"
-                id="memoryGrid"
-            ></div>
-
-        </div>
-    `);
-
-    createMemoryBoard();
-}
-
-
-function createMemoryBoard() {
-
-    const grid =
-        document.getElementById("memoryGrid");
-
-    memoryValues.forEach((value, index) => {
-
-        const card =
+        const star =
             document.createElement("div");
 
-        card.className = "memory-card";
+        star.className="star";
 
-        card.dataset.value = value;
-        card.dataset.index = index;
+        star.style.left =
+            Math.random()*100+"%";
 
-        card.innerText = "💗";
+        star.style.top =
+            Math.random()*100+"%";
 
-        card.onclick =
-            () => flipCard(card);
+        const size =
+            Math.random()*2.5+.5;
 
-        grid.appendChild(card);
-    });
-}
+        star.style.width=size+"px";
+        star.style.height=size+"px";
 
+        star.style.animationDelay =
+            Math.random()*4+"s";
 
-function flipCard(card) {
-
-    if(lockBoard) return;
-    if(card === firstCard) return;
-    if(card.classList.contains("matched")) return;
-
-    card.classList.add("flipped");
-    card.innerText = card.dataset.value;
-
-    if(!firstCard) {
-
-        firstCard = card;
-        return;
-    }
-
-    secondCard = card;
-
-    checkMemoryMatch();
-}
-
-
-function checkMemoryMatch() {
-
-    const match =
-        firstCard.dataset.value ===
-        secondCard.dataset.value;
-
-    if(match) {
-
-        firstCard.classList.add("matched");
-        secondCard.classList.add("matched");
-
-        matchedPairs++;
-
-        resetMemoryCards();
-
-        if(matchedPairs === 8) {
-
-            setTimeout(() => {
-
-                showLevelComplete(
-                    3,
-                    "You remembered them all! ✨",
-                    "Maybe that's a sign we should make more memories together.",
-                    showLevel4
-                );
-
-            }, 600);
-        }
-
-    } else {
-
-        lockBoard = true;
-
-        setTimeout(() => {
-
-            firstCard.classList.remove("flipped");
-            secondCard.classList.remove("flipped");
-
-            firstCard.innerText = "💗";
-            secondCard.innerText = "💗";
-
-            resetMemoryCards();
-
-        }, 800);
+        container.appendChild(star);
     }
 }
 
 
-function resetMemoryCards() {
-
-    [firstCard, secondCard] =
-        [null, null];
-
-    lockBoard = false;
-}
-
-
 /* =========================================================
-   LEVEL 4 — CHOICES
-   ========================================================= */
+   PETALS
+========================================================= */
 
-function showLevel4() {
+function createPetal(){
 
-    render(`
+    const p =
+        document.createElement("div");
 
-        <div class="card">
+    p.className="petal";
 
-            ${progressHTML()}
+    const symbols=["🌸","♡","✦","♥","❀"];
 
-            <div class="question-number">
-                Level 4 • One Important Question
-            </div>
+    p.innerText =
+        symbols[Math.floor(Math.random()*symbols.length)];
 
-            <h2>
-                What should we do together? 🌙
-            </h2>
+    p.style.left =
+        Math.random()*100+"%";
 
-            <p>
-                There is no wrong answer...
-                but choose carefully. 👀
-            </p>
+    p.style.fontSize =
+        (10+Math.random()*15)+"px";
 
-            <div class="choice-container">
+    p.style.animationDuration =
+        (7+Math.random()*8)+"s";
 
-                <div
-                    class="choice"
-                    onclick="chooseLove('movie')"
-                >
-                    <div class="choice-icon">🎬</div>
-                    <strong>Movie Night</strong>
-                    <p>Blanket + snacks + you.</p>
-                </div>
+    document.getElementById("petals").appendChild(p);
 
-                <div
-                    class="choice"
-                    onclick="chooseLove('trip')"
-                >
-                    <div class="choice-icon">🌍</div>
-                    <strong>Little Trip</strong>
-                    <p>Just disappear somewhere.</p>
-                </div>
-
-                <div
-                    class="choice"
-                    onclick="chooseLove('food')"
-                >
-                    <div class="choice-icon">🍕</div>
-                    <strong>Food Date</strong>
-                    <p>Because food makes everything better.</p>
-                </div>
-
-                <div
-                    class="choice"
-                    onclick="chooseLove('forever')"
-                >
-                    <div class="choice-icon">💍</div>
-                    <strong>Something More</strong>
-                    <p>Maybe... forever?</p>
-                </div>
-
-            </div>
-
-        </div>
-    `);
-}
-
-
-function chooseLove(choice) {
-
-    let message = "";
-
-    if(choice === "movie") {
-
-        message =
-            "Good choice. But I'm probably going to spend half the movie looking at you. 😌❤️";
-
-    } else if(choice === "trip") {
-
-        message =
-            "Pack your bags. Somewhere beautiful sounds better when you're there. 🌍💕";
-
-    } else if(choice === "food") {
-
-        message =
-            "Excellent choice. I'll bring the food. You just bring that smile. 😋❤️";
-
-    } else {
-
-        message =
-            "Hmm... now THAT is the answer I was hoping for. 👀💍❤️";
-
-    }
-
-    render(`
-
-        <div class="card">
-
-            <div class="big-heart">🥰</div>
-
-            <h2>
-                I like your answer.
-            </h2>
-
-            <p class="subtitle">
-                ${message}
-            </p>
-
-            <button
-                class="btn"
-                onclick="showLevel5()"
-            >
-                One More Level 💖
-            </button>
-
-        </div>
-    `);
-}
-
-
-/* =========================================================
-   LEVEL 5 — FINAL QUESTION
-   ========================================================= */
-
-function showLevel5() {
-
-    render(`
-
-        <div class="card">
-
-            ${progressHTML()}
-
-            <div class="question-number">
-                Level 5 • The Final Question
-            </div>
-
-            <div class="big-heart">
-                💗
-            </div>
-
-            <h2>
-                ${HER}, will you stay with me
-                through all the little moments?
-            </h2>
-
-            <p class="subtitle">
-                The random laughs.
-                <br>
-                The silly arguments.
-                <br>
-                The late-night conversations.
-                <br>
-                The adventures.
-                <br>
-                And all the ordinary days in between.
-            </p>
-
-            <div style="margin-top:25px">
-
-                <button
-                    class="btn"
-                    onclick="finalYes()"
-                >
-                    Yes ❤️
-                </button>
-
-                <button
-                    class="btn secondary"
-                    id="noButton"
-                    onclick="runAway()"
-                >
-                    No 🙈
-                </button>
-
-            </div>
-
-        </div>
-    `);
-}
-
-
-/* =========================================================
-   RUNAWAY NO BUTTON
-   ========================================================= */
-
-function runAway() {
-
-    const btn =
-        document.getElementById("noButton");
-
-    if(!btn) return;
-
-    btn.style.position = "fixed";
-
-    const maxX =
-        window.innerWidth - btn.offsetWidth - 20;
-
-    const maxY =
-        window.innerHeight - btn.offsetHeight - 20;
-
-    btn.style.left =
-        Math.random() * maxX + "px";
-
-    btn.style.top =
-        Math.random() * maxY + "px";
-
-    btn.innerText =
-        ["Are you sure? 🥺",
-         "Try again 😭",
-         "Nope 😂",
-         "You can't escape ❤️",
-         "Nice try 😏"][Math.floor(Math.random()*5)];
-
-    sparkle(
-        Math.random() * window.innerWidth,
-        Math.random() * window.innerHeight
+    setTimeout(
+        ()=>p.remove(),
+        16000
     );
 }
 
-
-/* =========================================================
-   FINAL SCREEN
-   ========================================================= */
-
-function finalYes() {
-
-    confetti(180);
-
-    setTimeout(() => {
-
-        render(`
-
-            <div class="final-screen">
-
-                <div class="card final-card">
-
-                    <div class="final-heart">
-                        💖
-                    </div>
-
-                    <div class="script">
-                        You made it to the end...
-                    </div>
-
-                    <h1>
-                        ${HER}
-                    </h1>
-
-                    <div class="love-letter">
-
-                        ${FINAL_MESSAGE
-                            .trim()
-                            .split("\n")
-                            .map(line =>
-                                line.trim()
-                                ? `<p>${line}</p>`
-                                : ""
-                            )
-                            .join("")
-                        }
-
-                        <div class="signature">
-                            — ${YOU} ❤️
-                        </div>
-
-                    </div>
-
-                    <button
-                        class="btn"
-                        onclick="restartGame()"
-                    >
-                        Play Again 💕
-                    </button>
-
-                </div>
-
-            </div>
-
-        `);
-
-        createMassiveHeartExplosion();
-
-    }, 500);
-}
+setInterval(createPetal,900);
 
 
 /* =========================================================
-   FINAL HEART EXPLOSION
-   ========================================================= */
+   RENDER
+========================================================= */
 
-function createMassiveHeartExplosion() {
+function render(html){
 
-    const hearts =
-        ["❤️","💖","💕","💗","💘","💓","💞","✨"];
+    const old =
+        document.querySelector(".scene");
 
-    for(let i = 0; i < 70; i++) {
+    if(old){
 
-        const h =
-            document.createElement("div");
-
-        h.style.position = "fixed";
-        h.style.left = "50%";
-        h.style.top = "50%";
-        h.style.zIndex = "999";
-        h.style.pointerEvents = "none";
-
-        h.innerText =
-            hearts[Math.floor(Math.random()*hearts.length)];
-
-        const angle =
-            Math.random() * Math.PI * 2;
-
-        const distance =
-            100 + Math.random() * 450;
-
-        const x =
-            Math.cos(angle) * distance;
-
-        const y =
-            Math.sin(angle) * distance;
-
-        h.animate(
-            [
-                {
-                    transform: "translate(-50%, -50%) scale(.2)",
-                    opacity: 1
-                },
-                {
-                    transform:
-                        `translate(calc(-50% + ${x}px),
-                                   calc(-50% + ${y}px))
-                         scale(${.7 + Math.random()})`,
-                    opacity: 0
-                }
-            ],
-            {
-                duration: 1500 + Math.random()*1000,
-                easing: "cubic-bezier(.2,.8,.3,1)"
-            }
-        );
-
-        document.body.appendChild(h);
-
-        setTimeout(() => h.remove(), 2800);
+        old.style.animation="none";
+        old.style.opacity="0";
+        old.style.transform="scale(.97)";
     }
+
+    setTimeout(()=>{
+
+        document.getElementById("app").innerHTML=html;
+
+    },120);
+
 }
 
 
 /* =========================================================
-   RESTART
-   ========================================================= */
+   BUTTON SPARK
+========================================================= */
 
-function restartGame() {
-
-    startScreen();
-}
-
-
-/* =========================================================
-   CLICK SPARKLES
-   ========================================================= */
-
-document.addEventListener("click", function(e) {
+document.addEventListener("click",e=>{
 
     if(
-        e.target.tagName === "BUTTON" ||
+        e.target.classList.contains("btn") ||
         e.target.classList.contains("choice") ||
-        e.target.classList.contains("memory-card")
-    ) {
+        e.target.classList.contains("memory-tile")
+    ){
 
-        sparkle(
+        burst(
             e.clientX,
             e.clientY
         );
+
     }
 
 });
 
 
 /* =========================================================
-   INITIALIZE
-   ========================================================= */
+   BURST
+========================================================= */
 
-startScreen();
+function burst(x,y){
+
+    const symbols=["❤️","✨","💕","✦","💗"];
+
+    for(let i=0;i<12;i++){
+
+        const el=
+            document.createElement("div");
+
+        el.className="burst";
+
+        el.innerText=
+            symbols[
+                Math.floor(
+                    Math.random()*symbols.length
+                )
+            ];
+
+        el.style.left=x+"px";
+        el.style.top=y+"px";
+
+        document.body.appendChild(el);
+
+        const angle=
+            Math.random()*Math.PI*2;
+
+        const distance=
+            50+Math.random()*100;
+
+        const tx=
+            Math.cos(angle)*distance;
+
+        const ty=
+            Math.sin(angle)*distance;
+
+        el.animate(
+            [
+                {
+                    transform:"translate(-50%,-50%) scale(.3)",
+                    opacity:1
+                },
+                {
+                    transform:
+                        `translate(
+                            calc(-50% + ${tx}px),
+                            calc(-50% + ${ty}px)
+                        ) scale(1.3)`,
+                    opacity:0
+                }
+            ],
+            {
+                duration:800+Math.random()*500,
+                easing:"ease-out"
+            }
+        );
+
+        setTimeout(
+            ()=>el.remove(),
+            1400
+        );
+    }
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+function intro(){
+
+    currentLevel=0;
+
+    render(`
+
+        <div class="scene">
+
+            <div class="card">
+
+                <div class="main-heart">
+                    ❤️
+                </div>
+
+                <div class="script"
+                     style="font-size:24px;">
+                    তোমার জন্য একটা ছোট্ট গল্প...
+                </div>
+
+                <h1>
+                    ${HER_NAME}
+                </h1>
+
+                <p style="max-width:600px;margin:auto">
+
+                    পৃথিবীতে কিছু মানুষ আসে,
+                    আর কোনো এক অদ্ভুত কারণে
+                    আমাদের পৃথিবীটা একটু সুন্দর হয়ে যায়।
+
+                    <br><br>
+
+                    তুমি আমার কাছে ঠিক তেমনই একজন।
+
+                </p>
+
+                <button
+                    class="btn"
+                    onclick="level1()">
+
+                    গল্পটা শুরু করি ❤️
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+}
+
+
+/* =========================================================
+   LEVEL 1
+   ENVELOPE
+========================================================= */
+
+function level1(){
+
+    currentLevel=1;
+
+    render(`
+
+        <div class="scene">
+
+            <div class="card">
+
+                <div class="chapter">
+                    <span class="chapter-dot"></span>
+                    অধ্যায় ১ • একটা চিঠি
+                </div>
+
+                <h2>
+                    তোমার জন্য একটা চিঠি আছে...
+                </h2>
+
+                <p>
+                    খুলবে?
+                </p>
+
+                <div
+                    class="envelope-wrap"
+                    onclick="openEnvelope()">
+
+                    <div
+                        class="envelope"
+                        id="envelope">
+
+                        <div class="letter">
+                            💌
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <p
+                    id="envelopeHint"
+                    style="font-size:14px;color:#ff9fbd">
+
+                    চিঠিটায় একটু চাপ দাও...
+                </p>
+
+                <button
+                    class="btn hidden"
+                    id="level1Next"
+                    onclick="level2()">
+
+                    পরের অধ্যায়ে যাওয়া যাক ✨
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+}
+
+
+function openEnvelope(){
+
+    const envelope=
+        document.getElementById("envelope");
+
+    envelope.classList.add("open");
+
+    document.getElementById("envelopeHint").innerText=
+        "শুরুটা ছোট ছিল... কিন্তু গল্পটা অনেক বড়। ❤️";
+
+    document
+        .getElementById("level1Next")
+        .classList.remove("hidden");
+
+    burst(
+        window.innerWidth/2,
+        window.innerHeight/2
+    );
+}
+
+
+/* =========================================================
+   LEVEL 2
+   CONSTELLATION
+========================================================= */
+
+const starPositions=[
+    [15,25],
+    [31,18],
+    [45,30],
+    [59,20],
+    [73,31],
+    [83,48],
+    [68,58],
+    [52,51],
+    [36,62],
+    [22,49]
+];
+
+let clickedStars=[];
+
+function level2(){
+
+    currentLevel=2;
+    clickedStars=[];
+
+    render(`
+
+        <div class="scene">
+
+            <div class="card">
+
+                <div class="chapter">
+                    <span class="chapter-dot"></span>
+                    অধ্যায় ২ • আমাদের আকাশ
+                </div>
+
+                <h2>
+                    কিছু তারা তোমার অপেক্ষায় আছে...
+                </h2>
+
+                <p>
+                    একে একে তারাগুলো ছুঁয়ে দাও।
+                    <br>
+                    একটা ছোট্ট constellation বানাতে হবে। ✨
+                </p>
+
+                <div
+                    class="sky"
+                    id="sky">
+
+                    <svg
+                        id="lines"
+                        width="100%"
+                        height="100%"
+                        preserveAspectRatio="none">
+                    </svg>
+
+                </div>
+
+                <p id="starText"
+                   style="color:#ff9fbd">
+
+                    ১০টি তারার মধ্যে ০টি খুঁজে পেয়েছো
+                </p>
+
+                <button
+                    class="btn hidden"
+                    id="starNext"
+                    onclick="level3()">
+
+                    তারাগুলো জুড়ে ফেলেছি ✨
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+    createConstellation();
+}
+
+
+function createConstellation(){
+
+    const sky=
+        document.getElementById("sky");
+
+    starPositions.forEach((pos,index)=>{
+
+        const star=
+            document.createElement("div");
+
+        star.className=
+            "constellation-star";
+
+        star.style.left=
+            pos[0]+"%";
+
+        star.style.top=
+            pos[1]+"%";
+
+        star.dataset.index=index;
+
+        star.onclick=()=>clickStar(star,index);
+
+        sky.appendChild(star);
+    });
+}
+
+
+function clickStar(star,index){
+
+    if(clickedStars.includes(index))
+        return;
+
+    clickedStars.push(index);
+
+    star.classList.add("active");
+
+    if(clickedStars.length>1){
+
+        const previousIndex=
+            clickedStars[clickedStars.length-2];
+
+        drawLine(
+            previousIndex,
+            index
+        );
+
+    }
+
+    document.getElementById("starText").innerText=
+        `১০টি তারার মধ্যে ${clickedStars.length}টি খুঁজে পেয়েছো`;
+
+    burst(
+        star.getBoundingClientRect().left,
+        star.getBoundingClientRect().top
+    );
+
+    if(clickedStars.length===10){
+
+        document.getElementById("starText").innerText=
+            "দেখো... আমাদের নিজেদের একটা আকাশ তৈরি হয়ে গেছে। ❤️";
+
+        document
+            .getElementById("starNext")
+            .classList.remove("hidden");
+
+        createHeartConstellation();
+    }
+}
+
+
+function drawLine(a,b){
+
+    const svg=
+        document.getElementById("lines");
+
+    const x1=
+        starPositions[a][0];
+
+    const y1=
+        starPositions[a][1];
+
+    const x2=
+        starPositions[b][0];
+
+    const y2=
+        starPositions[b][1];
+
+    const line=
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "line"
+        );
+
+    line.setAttribute("x1",x1+"%");
+    line.setAttribute("y1",y1+"%");
+
+    line.setAttribute("x2",x2+"%");
+    line.setAttribute("y2",y2+"%");
+
+    svg.appendChild(line);
+}
+
+
+function createHeartConstellation(){
+
+    const sky=
+        document.getElementById("sky");
+
+    const heart=
+        document.createElement("div");
+
+    heart.innerText="❤️";
+
+    heart.style.position="absolute";
+    heart.style.left="45%";
+    heart.style.top="38%";
+    heart.style.fontSize="55px";
+    heart.style.filter=
+        "drop-shadow(0 0 20px #ff4f8b)";
+
+    heart.style.animation=
+        "heartBeat 1.3s infinite";
+
+    sky.appendChild(heart);
+}
+
+
+/* =========================================================
+   LEVEL 3
+   MEMORY
+========================================================= */
+
+const memoryWords=[
+    "হাসি",
+    "অভিমান",
+    "ভালোবাসা",
+    "পাগলামি",
+    "আড্ডা",
+    "স্বপ্ন"
+];
+
+let revealed=0;
+
+function level3(){
+
+    currentLevel=3;
+    revealed=0;
+
+    render(`
+
+        <div class="scene">
+
+            <div class="card">
+
+                <div class="chapter">
+                    <span class="chapter-dot"></span>
+                    অধ্যায় ৩ • কিছু অনুভূতি
+                </div>
+
+                <h2>
+                    কিছু শব্দ লুকিয়ে আছে...
+                </h2>
+
+                <p>
+                    প্রতিটা card খুলে দেখো।
+                    <br>
+                    সবগুলো reveal করতে পারলেই পরের গল্পটা শুরু হবে।
+                </p>
+
+                <div
+                    class="memory-container"
+                    id="memory">
+
+                </div>
+
+                <p
+                    id="memoryText"
+                    style="font-size:14px;color:#ff9fbd">
+
+                    ৬টির মধ্যে ০টি খুলেছো
+                </p>
+
+                <button
+                    class="btn hidden"
+                    id="memoryNext"
+                    onclick="level4()">
+
+                    বুঝেছি... 💗
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+    createMemory();
+}
+
+
+function createMemory(){
+
+    const container=
+        document.getElementById("memory");
+
+    const shuffled=
+        [...memoryWords]
+        .sort(()=>Math.random()-.5);
+
+    shuffled.forEach(word=>{
+
+        const tile=
+            document.createElement("div");
+
+        tile.className="memory-tile";
+
+        tile.innerHTML="✦";
+
+        tile.onclick=function(){
+
+            if(tile.classList.contains("revealed"))
+                return;
+
+            tile.classList.add("revealed");
+
+            tile.innerHTML=
+                `<span class="memory-word">${word}</span>`;
+
+            revealed++;
+
+            document.getElementById("memoryText").innerText=
+                `৬টির মধ্যে ${revealed}টি খুলেছো`;
+
+            burst(
+                tile.getBoundingClientRect().left,
+                tile.getBoundingClientRect().top
+            );
+
+            if(revealed===6){
+
+                document.getElementById("memoryText").innerText=
+                    "হয়তো এই ছয়টা শব্দের মধ্যেই আমাদের গল্পটা লুকিয়ে আছে... ❤️";
+
+                document
+                    .getElementById("memoryNext")
+                    .classList.remove("hidden");
+            }
+        };
+
+        container.appendChild(tile);
+    });
+}
+
+
+/* =========================================================
+   LEVEL 4
+   CHOICE
+========================================================= */
+
+function level4(){
+
+    currentLevel=4;
+
+    render(`
+
+        <div class="scene">
+
+            <div class="card">
+
+                <div class="chapter">
+                    <span class="chapter-dot"></span>
+                    অধ্যায় ৪ • যদি তুমি আর আমি...
+                </div>
+
+                <h2>
+                    একটা দিন শুধু আমাদের হলে,
+                    কী করতে চাইবে?
+                </h2>
+
+                <p>
+                    যেকোনো একটা বেছে নাও।
+                    <br>
+                    তোমার choice-টা কিন্তু আমি মনে রাখব। 👀
+                </p>
+
+                <div class="choice-grid">
+
+                    <div
+                        class="choice"
+                        onclick="chooseDate('🌙','চুপচাপ তোমার পাশে বসে আকাশ দেখতাম।')">
+
+                        <div class="choice-icon">
+                            🌙
+                        </div>
+
+                        <strong>
+                            রাতের আকাশ
+                        </strong>
+
+                        <p>
+                            শুধু তুমি, আমি আর তারা।
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="choice"
+                        onclick="chooseDate('🌊','তোমার সাথে সমুদ্রের পাশে অনেকক্ষণ হাঁটতাম।')">
+
+                        <div class="choice-icon">
+                            🌊
+                        </div>
+
+                        <strong>
+                            সমুদ্র
+                        </strong>
+
+                        <p>
+                            ঢেউয়ের শব্দ আর অনেক গল্প।
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="choice"
+                        onclick="chooseDate('☕','একটা cozy café-তে বসে তোমার সাথে ঘণ্টার পর ঘণ্টা কথা বলতাম।')">
+
+                        <div class="choice-icon">
+                            ☕
+                        </div>
+
+                        <strong>
+                            Cozy Date
+                        </strong>
+
+                        <p>
+                            Coffee, কথা আর তোমার হাসি।
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="choice"
+                        onclick="chooseDate('🏡','কোথাও না। শুধু তোমার পাশে একটা শান্ত দিন কাটাতাম।')">
+
+                        <div class="choice-icon">
+                            🏡
+                        </div>
+
+                        <strong>
+                            কোথাও না
+                        </strong>
+
+                        <p>
+                            কারণ জায়গাটা নয়, মানুষটাই আসল।
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div id="choiceResult"></div>
+
+            </div>
+
+        </div>
+
+    `);
+}
+
+
+function chooseDate(icon,text){
+
+    document.getElementById("choiceResult").innerHTML=`
+
+        <div style="
+            margin-top:25px;
+            padding:20px;
+            border-radius:20px;
+            background:rgba(255,80,140,.08);
+            border:1px solid rgba(255,100,160,.15);
+            animation:sceneIn .6s ease;
+        ">
+
+            <div style="font-size:35px">
+                ${icon}
+            </div>
+
+            <p style="color:#ffb0c8">
+                ${text}
+            </p>
+
+            <button
+                class="btn"
+                onclick="level5()">
+
+                শেষ অধ্যায়ে যাই? ❤️
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   LEVEL 5
+========================================================= */
+
+function level5(){
+
+    currentLevel=5;
+
+    render(`
+
+        <div class="scene">
+
+            <div class="card final-question">
+
+                <div class="chapter">
+                    <span class="chapter-dot"></span>
+                    অধ্যায় ৫ • শেষ প্রশ্ন
+                </div>
+
+                <div class="main-heart">
+                    💗
+                </div>
+
+                <h2>
+                    ${HER_NAME}...
+                </h2>
+
+                <div
+                    class="typewriter"
+                    id="finalTyping">
+                </div>
+
+                <div class="heart-line">
+                    ♡ &nbsp; ♡ &nbsp; ♡
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="finalReveal()">
+
+                    আমার একটা কথা শুনবে? ❤️
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+    typeFinalQuestion();
+}
+
+
+function typeFinalQuestion(){
+
+    const text=
+        "তুমি কি আমার জীবনের এই গল্পটার পরের অধ্যায়গুলোতেও আমার সাথে থাকবে?";
+
+    const target=
+        document.getElementById("finalTyping");
+
+    let i=0;
+
+    target.style.fontSize="20px";
+    target.style.color="#fff";
+    target.style.lineHeight="2";
+
+    const timer=setInterval(()=>{
+
+        target.innerText=
+            text.substring(0,i);
+
+        i++;
+
+        if(i>text.length)
+            clearInterval(timer);
+
+    },55);
+}
+
+
+/* =========================================================
+   FINAL REVEAL
+========================================================= */
+
+function finalReveal(){
+
+    createBigHeartExplosion();
+
+    setTimeout(()=>{
+
+        document.getElementById("app").innerHTML=`
+
+            <div class="final-scene">
+
+                <div class="final-content">
+
+                    <div class="final-symbol">
+                        ❤️
+                    </div>
+
+                    <div class="script"
+                         style="font-size:23px">
+
+                        আর একটা শেষ কথা...
+
+                    </div>
+
+                    <h1 class="final-title">
+                        ${HER_NAME}
+                    </h1>
+
+                    <div class="final-subtitle">
+                        এই গল্পটার সবচেয়ে সুন্দর অংশ তুমি।
+                    </div>
+
+                    <div class="letter-final">
+
+                        ${LOVE_LETTER
+                            .map(
+                                line =>
+                                `<p>${line}</p>`
+                            )
+                            .join("")
+                        }
+
+                        <div class="signature">
+                            — ${YOUR_NAME} ❤️
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="btn"
+                        onclick="restart()">
+
+                        আবার শুরু করি 🌙
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    },800);
+
+}
+
+
+/* =========================================================
+   HEART EXPLOSION
+========================================================= */
+
+function createBigHeartExplosion(){
+
+    const symbols=[
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "💘",
+        "✨",
+        "🌸"
+    ];
+
+    for(let i=0;i<100;i++){
+
+        const el=
+            document.createElement("div");
+
+        el.style.position="fixed";
+        el.style.left="50%";
+        el.style.top="50%";
+        el.style.zIndex="1000";
+        el.style.pointerEvents="none";
+
+        el.innerText=
+            symbols[
+                Math.floor(
+                    Math.random()*symbols.length
+                )
+            ];
+
+        const angle=
+            Math.random()*Math.PI*2;
+
+        const distance=
+            100+Math.random()*550;
+
+        const x=
+            Math.cos(angle)*distance;
+
+        const y=
+            Math.sin(angle)*distance;
+
+        el.animate(
+            [
+                {
+                    transform:
+                        "translate(-50%,-50%) scale(.2)",
+                    opacity:1
+                },
+                {
+                    transform:
+                        `translate(
+                            calc(-50% + ${x}px),
+                            calc(-50% + ${y}px)
+                        ) rotate(${Math.random()*720}deg)
+                        scale(${.6+Math.random()})`,
+                    opacity:0
+                }
+            ],
+            {
+                duration:
+                    1300+Math.random()*1500,
+                easing:"cubic-bezier(.1,.8,.2,1)"
+            }
+        );
+
+        document.body.appendChild(el);
+
+        setTimeout(
+            ()=>el.remove(),
+            3000
+        );
+    }
+
+    /* extra bursts */
+
+    for(let i=0;i<80;i++){
+
+        setTimeout(()=>{
+
+            burst(
+                Math.random()*window.innerWidth,
+                Math.random()*window.innerHeight
+            );
+
+        },Math.random()*1800);
+
+    }
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restart(){
+
+    intro();
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+createStars();
+intro();
 
 </script>
 
