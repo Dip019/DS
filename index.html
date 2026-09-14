@@ -1393,13 +1393,13 @@ function step2(){
                 <div class="form-group">
 
                     <label>
-                        📍 অথবা নিজের location লিখো
+                        📍 অথবা তোমার যে location ভালো লাগে
                     </label>
 
                     <input
                         id="locationInput"
                         value="${escapeHTML(plan.customLocation)}"
-                        placeholder="যেমন: Dhanmondi Lake">
+                        placeholder="যেমন: তোমার যেখানে ভালো লাগে">
 
                 </div>
 
@@ -1549,14 +1549,8 @@ function step3(){
 
                 <div class="option-grid grid-3">
 
-                    ${foodOption("🍕","Pizza")}
-                    ${foodOption("🍔","Burger")}
-                    ${foodOption("🍝","Pasta")}
-                    ${foodOption("🍗","Chicken")}
-                    ${foodOption("🍰","Cake")}
                     ${foodOption("🍨","Ice Cream")}
                     ${foodOption("☕","Coffee")}
-                    ${foodOption("🥤","Drinks")}
                     ${foodOption("🍛","বিরিয়ানি")}
 
                 </div>
@@ -1571,7 +1565,7 @@ function step3(){
                     <input
                         id="customFoodInput"
                         value="${escapeHTML(plan.customFood)}"
-                        placeholder="নিজের পছন্দের খাবার">
+                        placeholder="তোমার যেটা ভালো লাগে">
 
                 </div>
 
