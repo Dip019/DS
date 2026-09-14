@@ -4,15 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#05030a">
-
-<title>Sornali — The Ultimate Love Escape Room</title>
+<title>Sornali — Love Escape Room</title>
 
 <style>
-
 /* =========================================================
    RESET
 ========================================================= */
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -20,8 +17,7 @@
     -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
     width:100%;
     height:100%;
     overflow:hidden;
@@ -36,14 +32,12 @@ body{
 }
 
 button{
-    font:inherit;
+    font-family:inherit;
 }
 
-
 /* =========================================================
-   MAIN
+   APP
 ========================================================= */
-
 #app{
     position:relative;
     width:100%;
@@ -54,26 +48,21 @@ button{
     background:
         radial-gradient(
             circle at 50% 45%,
-            rgba(135,30,105,.18),
-            transparent 32%
+            rgba(130,25,100,.18),
+            transparent 34%
         ),
         radial-gradient(
             circle at 50% 100%,
-            rgba(90,20,80,.15),
-            transparent 48%
+            rgba(90,20,80,.16),
+            transparent 50%
         ),
         linear-gradient(
             180deg,
             #030208 0%,
-            #09040f 52%,
+            #0a0411 52%,
             #020207 100%
         );
 }
-
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
 
 #stars{
     position:absolute;
@@ -82,52 +71,6 @@ button{
     height:100%;
     pointer-events:none;
 }
-
-.glow{
-    position:absolute;
-    left:50%;
-    top:48%;
-
-    width:70vmax;
-    height:70vmax;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,40,150,.10),
-            rgba(130,30,110,.04) 42%,
-            transparent 70%
-        );
-
-    filter:blur(25px);
-
-    animation:
-        glowPulse 7s ease-in-out infinite;
-
-    pointer-events:none;
-}
-
-@keyframes glowPulse{
-
-    0%,100%{
-        transform:translate(-50%,-50%) scale(.85);
-        opacity:.5;
-    }
-
-    50%{
-        transform:translate(-50%,-50%) scale(1.12);
-        opacity:1;
-    }
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
 
 #particles{
     position:absolute;
@@ -138,11 +81,45 @@ button{
     z-index:100;
 }
 
+.ambient{
+    position:absolute;
+    width:75vmax;
+    height:75vmax;
+    left:50%;
+    top:48%;
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,40,150,.09),
+            transparent 68%
+        );
+
+    filter:blur(30px);
+
+    animation:
+        ambientPulse 8s ease-in-out infinite;
+
+    pointer-events:none;
+}
+
+@keyframes ambientPulse{
+    0%,100%{
+        transform:translate(-50%,-50%) scale(.85);
+        opacity:.5;
+    }
+    50%{
+        transform:translate(-50%,-50%) scale(1.15);
+        opacity:1;
+    }
+}
 
 /* =========================================================
-   SCREENS
+   SCREEN SYSTEM
 ========================================================= */
-
 .screen{
     position:absolute;
     inset:0;
@@ -172,18 +149,14 @@ button{
     transform:scale(1);
 }
 
-
 /* =========================================================
    HEADER
 ========================================================= */
-
 .header{
     width:100%;
-
     padding:
-        max(20px,env(safe-area-inset-top))
-        20px
-        0;
+        max(18px,env(safe-area-inset-top))
+        18px 0;
 
     display:flex;
     justify-content:space-between;
@@ -196,7 +169,7 @@ button{
     font-family:Arial,sans-serif;
     font-size:9px;
     letter-spacing:4px;
-    color:rgba(255,255,255,.35);
+    color:rgba(255,255,255,.34);
 }
 
 .level{
@@ -206,30 +179,23 @@ button{
     color:rgba(255,130,195,.7);
 }
 
-
 /* =========================================================
-   TITLES
+   TYPOGRAPHY
 ========================================================= */
-
 .title{
-    margin-top:32px;
+    margin-top:20px;
 
-    font-size:
-        clamp(28px,7vw,48px);
-
+    font-size:clamp(28px,7vw,48px);
     font-weight:400;
-
     text-align:center;
-
-    letter-spacing:1px;
 
     background:
         linear-gradient(
             100deg,
             #fff,
-            #ffbddd,
+            #ffb7dc,
             #fff,
-            #ff75b5,
+            #ff72b2,
             #fff
         );
 
@@ -240,8 +206,7 @@ button{
 
     color:transparent;
 
-    animation:
-        titleShine 6s linear infinite;
+    animation:titleShine 6s linear infinite;
 }
 
 @keyframes titleShine{
@@ -251,39 +216,31 @@ button{
 }
 
 .subtitle{
-    margin-top:10px;
-
-    padding:0 25px;
+    margin-top:9px;
+    padding:0 24px;
 
     max-width:600px;
 
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    line-height:1.7;
     text-align:center;
 
-    font-family:Arial,sans-serif;
-
-    font-size:11px;
-
-    line-height:1.7;
-
-    letter-spacing:1px;
-
-    color:rgba(255,255,255,.40);
+    color:rgba(255,255,255,.42);
 }
-
 
 /* =========================================================
    INTRO
 ========================================================= */
-
 #intro{
     justify-content:center;
 }
 
-.start-orb{
+.orb{
     position:relative;
 
-    width:145px;
-    height:145px;
+    width:150px;
+    height:150px;
 
     display:flex;
     align-items:center;
@@ -295,24 +252,22 @@ button{
 .orb-ring{
     position:absolute;
 
-    width:145px;
-    height:145px;
+    width:150px;
+    height:150px;
 
     border-radius:50%;
 
-    border:
-        1px solid rgba(255,110,185,.25);
+    border:1px solid rgba(255,100,180,.25);
 
     animation:
         orbRing 3s ease-in-out infinite;
 }
 
-.orb-ring.two{
+.orb-ring.small{
     width:105px;
     height:105px;
 
-    border-color:
-        rgba(255,255,255,.13);
+    border-color:rgba(255,255,255,.14);
 
     animation-delay:.5s;
 }
@@ -327,144 +282,336 @@ button{
         radial-gradient(
             circle at 30% 25%,
             #fff,
-            #ffd6e9 18%,
-            #ff5ca5 48%,
-            #9b0750
+            #ffd7ea 18%,
+            #ff55a4 48%,
+            #980650
         );
 
     box-shadow:
         0 0 12px #fff,
-        0 0 35px rgba(255,70,170,.95),
+        0 0 38px rgba(255,60,170,.95),
         0 0 90px rgba(255,20,130,.45);
 
     animation:
-        orbPulse 2s ease-in-out infinite;
+        orbCore 2s ease-in-out infinite;
 }
 
 @keyframes orbRing{
-
     0%,100%{
-        transform:scale(.82);
+        transform:scale(.8);
         opacity:.25;
     }
-
     50%{
         transform:scale(1.15);
         opacity:1;
     }
 }
 
-@keyframes orbPulse{
-
+@keyframes orbCore{
     0%,100%{
         transform:scale(.8);
     }
-
     50%{
         transform:scale(1.15);
     }
 }
 
-.start-title{
+.intro-title{
     margin-top:35px;
 
     font-size:
         clamp(30px,8vw,52px);
 
     font-weight:400;
-
     text-align:center;
 }
 
-.start-sub{
-    margin-top:12px;
+.start{
+    margin-top:15px;
 
     font-family:Arial,sans-serif;
-
     font-size:10px;
-
     letter-spacing:4px;
-
-    color:rgba(255,255,255,.38);
-
     text-transform:uppercase;
+
+    color:rgba(255,255,255,.4);
 
     animation:blink 2s ease-in-out infinite;
 }
 
 @keyframes blink{
-
-    0%,100%{
-        opacity:.3;
-    }
-
-    50%{
-        opacity:1;
-    }
+    0%,100%{opacity:.3}
+    50%{opacity:1}
 }
 
-
 /* =========================================================
-   GENERIC ROOM
+   LEVEL CARD
 ========================================================= */
-
-.room{
+.game-card{
     position:relative;
 
-    width:min(850px,92vw);
+    width:min(850px,93vw);
 
     flex:1;
 
     margin:
-        25px 0
-        max(25px,env(safe-area-inset-bottom));
+        20px 0
+        max(20px,env(safe-area-inset-bottom));
 
-    border-radius:22px;
+    border-radius:24px;
 
     overflow:hidden;
 
-    border:
-        1px solid rgba(255,130,190,.13);
+    border:1px solid rgba(255,120,190,.13);
 
     background:
         linear-gradient(
             145deg,
             rgba(255,255,255,.035),
-            rgba(255,255,255,.008)
+            rgba(255,255,255,.007)
         );
 
     box-shadow:
-        inset 0 0 60px rgba(255,30,150,.025),
+        inset 0 0 70px rgba(255,30,150,.025),
         0 30px 90px rgba(0,0,0,.5);
 }
 
-.room:before{
-    content:"";
-
+/* =========================================================
+   LEVEL 1 ROOM
+========================================================= */
+.room-floor{
     position:absolute;
-    inset:0;
+    left:0;
+    right:0;
+    bottom:0;
+    height:24%;
 
     background:
         linear-gradient(
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
+            180deg,
+            transparent,
+            rgba(0,0,0,.35)
         );
 
-    background-size:45px 45px;
-
-    opacity:.5;
+    border-top:1px solid rgba(255,255,255,.04);
 }
 
+.room-light{
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    left:50%;
+    top:45%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,60,170,.08),
+            transparent 70%
+        );
+
+    pointer-events:none;
+}
 
 /* =========================================================
-   LEVEL 1
+   SEARCH OBJECTS
 ========================================================= */
+.object{
+    position:absolute;
 
+    width:82px;
+    height:82px;
+
+    border:0;
+    background:transparent;
+
+    cursor:pointer;
+
+    z-index:10;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:
+        transform .3s ease,
+        opacity .5s ease;
+}
+
+.object:active{
+    transform:scale(.85);
+}
+
+.object-glow{
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,70,175,.22),
+            transparent 70%
+        );
+
+    animation:
+        objectPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes objectPulse{
+    0%,100%{
+        transform:scale(.75);
+        opacity:.3;
+    }
+    50%{
+        transform:scale(1.2);
+        opacity:1;
+    }
+}
+
+/* REAL HEART */
+.heart-icon{
+    position:relative;
+
+    width:34px;
+    height:34px;
+
+    transform:rotate(-45deg);
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffd6e9,
+            #ff4c9c 50%,
+            #a50a57
+        );
+
+    border-radius:5px;
+
+    box-shadow:
+        0 0 15px rgba(255,70,170,.9),
+        0 0 35px rgba(255,30,150,.5);
+
+    z-index:2;
+}
+
+.heart-icon:before,
+.heart-icon:after{
+    content:"";
+
+    position:absolute;
+
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    background:inherit;
+}
+
+.heart-icon:before{
+    left:17px;
+}
+
+.heart-icon:after{
+    top:-17px;
+}
+
+/* REAL STAR */
+.star-icon{
+    position:relative;
+
+    width:50px;
+    height:50px;
+
+    z-index:2;
+
+    color:#ffe8f4;
+
+    font-family:Arial,sans-serif;
+
+    font-size:50px;
+    line-height:50px;
+
+    text-shadow:
+        0 0 7px #fff,
+        0 0 20px rgba(255,110,190,.95),
+        0 0 40px rgba(255,60,160,.65);
+}
+
+/* REAL MOON */
+.moon-icon{
+    position:relative;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #ffd5e8 50%,
+            #f28bb9
+        );
+
+    box-shadow:
+        0 0 18px rgba(255,180,220,.75),
+        0 0 40px rgba(255,80,170,.4);
+
+    z-index:2;
+}
+
+.moon-icon:after{
+    content:"";
+
+    position:absolute;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    left:14px;
+    top:-7px;
+
+    background:#120816;
+}
+
+#objectHeart{
+    left:15%;
+    top:24%;
+}
+
+#objectStar{
+    right:14%;
+    top:30%;
+}
+
+#objectMoon{
+    left:45%;
+    bottom:21%;
+}
+
+.object.found{
+    opacity:0;
+    transform:scale(1.8);
+    pointer-events:none;
+}
+
+/* =========================================================
+   SEARCH COUNTER / MESSAGE
+========================================================= */
 .counter{
     position:absolute;
 
@@ -474,140 +621,35 @@ button{
     transform:translateX(-50%);
 
     font-family:Arial,sans-serif;
-
     font-size:9px;
-
     letter-spacing:3px;
 
     color:rgba(255,255,255,.38);
 
     white-space:nowrap;
 
-    z-index:5;
+    z-index:15;
 }
 
-.hidden-object{
-    position:absolute;
-
-    width:64px;
-    height:64px;
-
-    border:0;
-
-    background:transparent;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    z-index:10;
-
-    transition:
-        transform .25s ease,
-        opacity .4s ease;
-}
-
-.hidden-object:active{
-    transform:scale(.82);
-}
-
-.object-halo{
-    position:absolute;
-
-    width:70px;
-    height:70px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,70,170,.20),
-            transparent 70%
-        );
-
-    animation:
-        objectPulse 2.2s ease-in-out infinite;
-}
-
-@keyframes objectPulse{
-
-    0%,100%{
-        transform:scale(.75);
-        opacity:.25;
-    }
-
-    50%{
-        transform:scale(1.15);
-        opacity:1;
-    }
-}
-
-.object-shape{
-    position:relative;
-    z-index:2;
-
-    width:38px;
-    height:38px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-family:Arial,sans-serif;
-
-    font-size:27px;
-
-    color:#ffd6ea;
-
-    text-shadow:
-        0 0 15px rgba(255,80,175,.9);
-}
-
-.hidden-object.found{
-    opacity:0;
-
-    transform:scale(1.8);
-
-    pointer-events:none;
-}
-
-#object1{
-    left:15%;
-    top:25%;
-}
-
-#object2{
-    right:17%;
-    top:30%;
-}
-
-#object3{
-    left:46%;
-    bottom:22%;
-}
-
-.room-message{
+.message{
     position:absolute;
 
     left:50%;
-    bottom:20px;
+    bottom:18px;
 
     transform:translateX(-50%);
 
-    width:min(450px,80%);
+    width:min(480px,82%);
 
-    padding:12px 16px;
+    padding:14px 16px;
 
-    border-radius:14px;
-
-    border:
-        1px solid rgba(255,140,195,.10);
+    border-radius:15px;
 
     background:
-        rgba(8,3,12,.75);
+        rgba(7,3,12,.80);
+
+    border:
+        1px solid rgba(255,130,190,.12);
 
     backdrop-filter:blur(12px);
 
@@ -615,83 +657,173 @@ button{
 
     font-size:10px;
 
-    letter-spacing:1px;
-
-    line-height:1.5;
-
-    color:rgba(255,255,255,.42);
+    line-height:1.6;
 
     text-align:center;
+
+    color:rgba(255,255,255,.48);
 
     z-index:20;
 }
 
-
 /* =========================================================
-   LEVEL 2 CODE
+   CLUE REVEAL
 ========================================================= */
+.clue-reveal{
+    position:absolute;
+    inset:0;
 
-.lock-box{
-    width:min(420px,88vw);
+    z-index:50;
 
-    margin:auto;
-
-    padding:28px 20px;
-
-    border-radius:24px;
-
-    border:
-        1px solid rgba(255,130,190,.15);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.05),
-            rgba(255,255,255,.01)
-        );
+        rgba(4,2,8,.88);
 
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.5);
+    backdrop-filter:blur(12px);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:
+        opacity .5s ease,
+        visibility .5s ease;
+}
+
+.clue-reveal.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.clue-object{
+    font-family:Arial,sans-serif;
+
+    font-size:14px;
+
+    letter-spacing:4px;
+
+    color:rgba(255,255,255,.4);
+
+    text-transform:uppercase;
+}
+
+.clue-number{
+    margin-top:18px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:clamp(65px,18vw,100px);
+
+    font-weight:200;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 20px rgba(255,100,185,.9),
+        0 0 60px rgba(255,40,150,.55);
+}
+
+.clue-description{
+    margin-top:10px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    color:rgba(255,255,255,.4);
 
     text-align:center;
 }
 
-.lock-icon{
-    font-size:42px;
+.clue-continue{
+    margin-top:30px;
 
-    margin-bottom:12px;
+    padding:13px 24px;
 
-    filter:
-        drop-shadow(
-            0 0 15px rgba(255,90,180,.7)
-        );
-}
+    border-radius:30px;
 
-.lock-label{
+    border:
+        1px solid rgba(255,130,190,.22);
+
+    background:
+        rgba(255,60,160,.10);
+
+    color:#ffd5e8;
+
     font-family:Arial,sans-serif;
 
     font-size:9px;
 
     letter-spacing:3px;
 
-    color:rgba(255,255,255,.38);
-
-    margin-bottom:20px;
+    cursor:pointer;
 }
 
-.code-display{
+/* =========================================================
+   CODE LEVEL
+========================================================= */
+.center-content{
+    width:100%;
+    flex:1;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.lock{
+    width:min(430px,88vw);
+
+    padding:30px 20px;
+
+    border-radius:24px;
+
+    border:
+        1px solid rgba(255,120,190,.15);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.008)
+        );
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.5);
+
+    text-align:center;
+}
+
+.lock-top{
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    color:rgba(255,255,255,.35);
+}
+
+.code{
+    margin:22px 0;
+
     display:flex;
 
     justify-content:center;
 
-    gap:9px;
-
-    margin-bottom:20px;
+    gap:10px;
 }
 
-.code-digit{
-    width:50px;
-    height:58px;
+.digit{
+    width:52px;
+    height:60px;
 
     display:flex;
     align-items:center;
@@ -699,24 +831,24 @@ button{
 
     border-radius:11px;
 
-    border:
-        1px solid rgba(255,130,190,.18);
-
     background:
         rgba(255,255,255,.035);
 
-    color:#ffd3e8;
+    border:
+        1px solid rgba(255,120,190,.18);
+
+    color:#ffd5e9;
 
     font-family:Arial,sans-serif;
 
-    font-size:23px;
+    font-size:25px;
 
     box-shadow:
-        inset 0 0 18px rgba(255,40,150,.04);
+        inset 0 0 20px rgba(255,40,150,.04);
 }
 
-.keypad{
-    width:min(270px,100%);
+.pad-grid{
+    width:min(280px,100%);
 
     margin:auto;
 
@@ -739,7 +871,7 @@ button{
     background:
         rgba(255,255,255,.045);
 
-    color:white;
+    color:#fff;
 
     cursor:pointer;
 
@@ -756,17 +888,17 @@ button{
     transform:scale(.90);
 
     background:
-        rgba(255,60,160,.22);
+        rgba(255,50,160,.2);
 }
 
 .pad.special{
-    color:#ff9bc7;
+    color:#ff91c0;
 }
 
 .code-status{
     min-height:18px;
 
-    margin-top:14px;
+    margin-top:15px;
 
     font-family:Arial,sans-serif;
 
@@ -777,328 +909,472 @@ button{
     color:rgba(255,255,255,.35);
 }
 
+.code-hint{
+    margin-bottom:20px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    line-height:1.6;
+
+    color:rgba(255,255,255,.32);
+}
 
 /* =========================================================
-   LEVEL 3 HEART PUZZLE
+   HEART PUZZLE
 ========================================================= */
+.puzzle-area{
+    flex:1;
 
-.puzzle-container{
-    margin:auto;
-
-    width:min(430px,90vw);
-
-    text-align:center;
-}
-
-.puzzle{
-    position:relative;
-
-    width:min(310px,76vw);
-    height:min(310px,76vw);
-
-    margin:22px auto;
+    width:100%;
 
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
+
+    padding:15px;
 }
 
-.puzzle-ring{
+.heart-target{
+    position:relative;
+
+    width:min(280px,72vw);
+    height:min(280px,72vw);
+
+    margin-bottom:20px;
+}
+
+/*
+   Clean heart silhouette behind puzzle.
+*/
+.target-heart{
     position:absolute;
 
-    border-radius:50%;
+    width:145px;
+    height:145px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-43%)
+        rotate(-45deg);
+
+    background:
+        rgba(255,80,165,.035);
 
     border:
-        1px solid rgba(255,100,180,.28);
+        1px solid rgba(255,100,180,.15);
 
-    box-shadow:
-        0 0 20px rgba(255,50,150,.06),
-        inset 0 0 20px rgba(255,50,150,.03);
-
-    cursor:pointer;
-
-    transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        border-color .3s;
+    border-radius:12px;
 }
 
-.puzzle-ring:before{
+.target-heart:before,
+.target-heart:after{
     content:"";
 
     position:absolute;
 
-    left:50%;
-    top:-5px;
-
-    width:10px;
-    height:10px;
-
-    transform:translateX(-50%);
+    width:145px;
+    height:145px;
 
     border-radius:50%;
 
-    background:#ff76b5;
+    background:rgba(255,80,165,.035);
 
-    box-shadow:
-        0 0 12px rgba(255,80,170,.9);
+    border:
+        1px solid rgba(255,100,180,.15);
 }
 
-.ring1{
-    width:275px;
-    height:275px;
+.target-heart:before{
+    left:72px;
 }
 
-.ring2{
-    width:215px;
-    height:215px;
+.target-heart:after{
+    top:-72px;
 }
 
-.ring3{
-    width:155px;
-    height:155px;
-}
-
-.ring4{
-    width:95px;
-    height:95px;
-}
-
-.heart-center{
+.puzzle-grid{
     position:absolute;
 
-    width:44px;
-    height:44px;
+    inset:0;
 
-    transform:rotate(-45deg);
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    grid-template-rows:
+        repeat(3,1fr);
+
+    gap:8px;
+
+    z-index:5;
+}
+
+.piece{
+    position:relative;
+
+    border-radius:13px;
+
+    border:
+        1px solid rgba(255,150,205,.20);
 
     background:
         linear-gradient(
             145deg,
-            #ffd3e7,
-            #ff4f9d 50%,
-            #a50c57
+            rgba(255,95,175,.15),
+            rgba(100,15,70,.28)
         );
 
-    box-shadow:
-        0 0 20px rgba(255,60,160,.8),
-        0 0 55px rgba(255,30,140,.35);
+    cursor:pointer;
 
-    z-index:3;
+    overflow:hidden;
 
-    pointer-events:none;
-
-    animation:
-        centerHeart 2s ease-in-out infinite;
+    transition:
+        transform .35s ease,
+        border-color .3s,
+        background .3s;
 }
 
-.heart-center:before,
-.heart-center:after{
+.piece:active{
+    transform:scale(.94);
+}
+
+.piece-inner{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:46px;
+    height:46px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-45deg);
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffd5e8,
+            #ff4c9c 50%,
+            #9d0950
+        );
+
+    border-radius:7px;
+
+    box-shadow:
+        0 0 16px rgba(255,60,160,.45);
+
+    opacity:.75;
+}
+
+.piece-inner:before,
+.piece-inner:after{
     content:"";
 
     position:absolute;
 
-    width:44px;
-    height:44px;
+    width:46px;
+    height:46px;
 
     border-radius:50%;
 
     background:inherit;
 }
 
-.heart-center:before{
-    left:22px;
+.piece-inner:before{
+    left:23px;
 }
 
-.heart-center:after{
-    top:-22px;
+.piece-inner:after{
+    top:-23px;
 }
 
-@keyframes centerHeart{
+.piece.correct{
+    border-color:
+        rgba(255,170,215,.45);
 
-    0%,100%{
-        transform:rotate(-45deg) scale(.9);
-    }
+    background:
+        rgba(255,80,170,.10);
 
-    50%{
-        transform:rotate(-45deg) scale(1.08);
-    }
+    box-shadow:
+        inset 0 0 18px rgba(255,50,160,.07);
 }
 
-.puzzle-status{
+.puzzle-info{
     font-family:Arial,sans-serif;
 
     font-size:9px;
 
     letter-spacing:2px;
 
-    color:rgba(255,255,255,.35);
+    color:rgba(255,255,255,.34);
+
+    text-align:center;
 }
 
-
 /* =========================================================
-   LEVEL 4 KEY
+   KEY LEVEL
 ========================================================= */
-
-.key-search{
+.key-room{
     position:relative;
-
-    width:min(850px,92vw);
 
     flex:1;
 
-    margin:
-        25px 0
-        max(25px,env(safe-area-inset-bottom));
+    width:min(850px,93vw);
 
-    border-radius:22px;
+    margin:
+        20px 0
+        max(20px,env(safe-area-inset-bottom));
+
+    border-radius:24px;
 
     overflow:hidden;
 
     border:
-        1px solid rgba(255,130,190,.13);
+        1px solid rgba(255,120,190,.13);
 
     background:
         linear-gradient(
-            145deg,
-            rgba(255,255,255,.035),
-            rgba(255,255,255,.008)
+            180deg,
+            #0b0710,
+            #08050c
         );
 }
 
-.key-search:before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        );
-
-    background-size:50px 50px;
-
-    opacity:.4;
-}
-
-.search-spot{
+/* wall */
+.wall-light{
     position:absolute;
 
-    width:54px;
-    height:54px;
+    left:50%;
+    top:40%;
 
-    border:0;
+    width:260px;
+    height:260px;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.08),
-            transparent 70%
-        );
+    transform:translate(-50%,-50%);
 
     border-radius:50%;
 
-    cursor:pointer;
-
-    z-index:5;
-}
-
-.search-spot:hover{
     background:
         radial-gradient(
             circle,
-            rgba(255,100,180,.15),
+            rgba(255,65,170,.08),
             transparent 70%
         );
 }
 
-.fake-mark{
+/* recognizable furniture */
+
+.table{
+    position:absolute;
+
+    left:8%;
+    right:8%;
+    bottom:14%;
+
+    height:8px;
+
+    border-radius:8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #24121f,
+            #4b223a,
+            #24121f
+        );
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.5);
+}
+
+.table:before,
+.table:after{
+    content:"";
+
+    position:absolute;
+
+    width:8px;
+    height:70px;
+
+    bottom:-65px;
+
+    background:#1b0d18;
+}
+
+.table:before{
+    left:12%;
+}
+
+.table:after{
+    right:12%;
+}
+
+.vase{
+    position:absolute;
+
+    left:20%;
+    bottom:16%;
+
+    width:35px;
+    height:55px;
+
+    border-radius:
+        8px 8px 14px 14px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #29152a,
+            #643050,
+            #29152a
+        );
+
+    border:
+        1px solid rgba(255,130,190,.13);
+}
+
+.frame{
+    position:absolute;
+
+    right:18%;
+    top:20%;
+
+    width:85px;
+    height:110px;
+
+    border:
+        7px solid #251322;
+
+    background:
+        rgba(255,255,255,.025);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.5);
+}
+
+.frame:after{
+    content:"";
+
     position:absolute;
 
     left:50%;
     top:50%;
 
-    transform:translate(-50%,-50%);
+    width:35px;
+    height:35px;
 
-    width:7px;
-    height:7px;
+    transform:
+        translate(-50%,-50%)
+        rotate(45deg);
 
-    border-radius:50%;
-
-    background:rgba(255,255,255,.13);
+    border:
+        1px solid rgba(255,110,180,.16);
 }
 
-.real-key{
+/* key */
+.key{
     position:absolute;
 
-    width:70px;
-    height:70px;
+    right:15%;
+    bottom:30%;
+
+    width:75px;
+    height:75px;
 
     border:0;
-
-    border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(255,210,120,.28),
-            transparent 70%
+            rgba(255,205,90,.22),
+            transparent 68%
         );
 
     cursor:pointer;
 
-    z-index:10;
+    z-index:20;
 
     animation:
-        keyGlow 2s ease-in-out infinite;
+        keyPulse 1.8s ease-in-out infinite;
 }
 
-.real-key:after{
-    content:"";
+.key-shape{
+    position:absolute;
 
-    width:25px;
-    height:25px;
+    left:25px;
+    top:20px;
+
+    width:27px;
+    height:27px;
+
+    border:
+        5px solid #ffd36f;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 10px #ffd36f,
+        0 0 30px rgba(255,190,60,.7);
+}
+
+.key-shape:after{
+    content:"";
 
     position:absolute;
 
-    left:22px;
-    top:20px;
+    width:42px;
+    height:7px;
 
-    border-radius:5px 10px 5px 10px;
+    left:18px;
+    top:5px;
 
-    border:
-        3px solid #ffd879;
+    border-radius:5px;
 
-    transform:rotate(45deg);
+    background:#ffd36f;
 
     box-shadow:
-        0 0 15px rgba(255,190,70,.8);
+        0 0 10px rgba(255,190,60,.7);
 }
 
-@keyframes keyGlow{
+.key-shape:before{
+    content:"";
 
+    position:absolute;
+
+    width:7px;
+    height:13px;
+
+    left:47px;
+    top:5px;
+
+    background:#ffd36f;
+
+    box-shadow:
+        10px 0 0 #ffd36f;
+}
+
+@keyframes keyPulse{
     0%,100%{
-        transform:scale(.8);
-        opacity:.55;
+        transform:scale(.9);
+        filter:brightness(.85);
     }
-
     50%{
         transform:scale(1.15);
-        opacity:1;
+        filter:brightness(1.3);
     }
 }
 
-.key-instruction{
+.key-label{
     position:absolute;
 
     left:50%;
-    bottom:20px;
+    bottom:18px;
 
     transform:translateX(-50%);
 
@@ -1109,47 +1385,45 @@ button{
     letter-spacing:3px;
 
     color:rgba(255,255,255,.28);
-
-    white-space:nowrap;
-
-    z-index:20;
 }
 
-
 /* =========================================================
-   LEVEL 5 DOOR
+   DOOR LEVEL
 ========================================================= */
-
 .door-area{
-    margin:auto;
+    flex:1;
 
-    width:min(500px,90vw);
+    width:100%;
 
     display:flex;
 
     flex-direction:column;
 
     align-items:center;
+
+    justify-content:center;
+
+    padding:15px;
 }
 
 .door-frame{
     position:relative;
 
-    width:min(285px,70vw);
-    height:min(420px,55vh);
+    width:min(290px,70vw);
+    height:min(410px,52vh);
 
     border:
-        8px solid #171019;
+        9px solid #171019;
 
     border-bottom:0;
 
-    background:#030207;
+    background:#020207;
 
     box-shadow:
-        0 0 0 1px rgba(255,100,170,.10),
-        0 35px 90px rgba(0,0,0,.7);
+        0 0 0 1px rgba(255,100,170,.1),
+        0 35px 100px rgba(0,0,0,.7);
 
-    perspective:1000px;
+    perspective:1100px;
 }
 
 .door{
@@ -1160,64 +1434,80 @@ button{
     background:
         linear-gradient(
             90deg,
-            #120713,
-            #301027 50%,
-            #100610
+            #100611,
+            #34102a 50%,
+            #100611
         );
 
     border:
-        1px solid rgba(255,130,190,.15);
+        1px solid rgba(255,130,190,.16);
 
     transform-origin:left center;
 
     transition:
-        transform 2.2s cubic-bezier(.2,.8,.2,1);
+        transform 2.4s cubic-bezier(.18,.8,.18,1);
 }
 
-.door-inner{
+.door-panel{
     position:absolute;
 
-    inset:22px;
+    inset:25px;
 
     border:
-        1px solid rgba(255,140,195,.13);
+        1px solid rgba(255,140,195,.14);
 
     box-shadow:
         inset 0 0 40px rgba(255,30,150,.04);
 }
 
-.door-symbol{
+.door-heart{
     position:absolute;
 
     left:50%;
     top:50%;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%)
+        rotate(-45deg);
 
-    width:55px;
-    height:55px;
+    width:45px;
+    height:45px;
+
+    background:
+        #ff6bab;
+
+    border-radius:7px;
+
+    box-shadow:
+        0 0 18px rgba(255,70,170,.7);
+}
+
+.door-heart:before,
+.door-heart:after{
+    content:"";
+
+    position:absolute;
+
+    width:45px;
+    height:45px;
 
     border-radius:50%;
 
-    border:
-        1px solid rgba(255,140,195,.18);
+    background:inherit;
+}
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.door-heart:before{
+    left:22px;
+}
 
-    color:rgba(255,170,215,.6);
-
-    font-size:20px;
-
-    box-shadow:
-        0 0 25px rgba(255,50,150,.08);
+.door-heart:after{
+    top:-22px;
 }
 
 .handle{
     position:absolute;
 
-    right:25px;
+    right:23px;
     top:50%;
 
     width:13px;
@@ -1225,10 +1515,10 @@ button{
 
     border-radius:50%;
 
-    background:#e4a4c4;
+    background:#f1aecf;
 
     box-shadow:
-        0 0 15px rgba(255,120,185,.7);
+        0 0 15px rgba(255,130,190,.8);
 }
 
 .door.open{
@@ -1236,8 +1526,135 @@ button{
         rotateY(-105deg);
 }
 
-.door-info{
-    margin-top:20px;
+/* =========================================================
+   BIG UNLOCK BUTTON
+========================================================= */
+.unlock-zone{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    margin-top:22px;
+}
+
+.unlock-arrows{
+    font-family:Arial,sans-serif;
+
+    font-size:17px;
+
+    letter-spacing:5px;
+
+    color:#ff75b4;
+
+    animation:
+        arrowPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes arrowPulse{
+    0%,100%{
+        transform:translateY(0);
+        opacity:.45;
+    }
+    50%{
+        transform:translateY(5px);
+        opacity:1;
+    }
+}
+
+.unlock-button{
+    position:relative;
+
+    margin-top:7px;
+
+    min-width:230px;
+
+    padding:17px 25px;
+
+    border-radius:40px;
+
+    border:
+        1px solid rgba(255,180,220,.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            #c51b72,
+            #ff4d9b,
+            #b31368
+        );
+
+    color:white;
+
+    font-family:Arial,sans-serif;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    box-shadow:
+        0 0 15px rgba(255,60,160,.55),
+        0 0 45px rgba(255,40,150,.25),
+        inset 0 1px 0 rgba(255,255,255,.35);
+
+    cursor:pointer;
+
+    animation:
+        unlockPulse 1.7s ease-in-out infinite;
+}
+
+.unlock-button:before{
+    content:"";
+
+    position:absolute;
+
+    inset:-6px;
+
+    border-radius:50px;
+
+    border:
+        1px solid rgba(255,100,180,.35);
+
+    animation:
+        buttonRing 1.7s ease-in-out infinite;
+}
+
+.unlock-button:active{
+    transform:scale(.94);
+}
+
+@keyframes unlockPulse{
+    0%,100%{
+        transform:scale(1);
+        box-shadow:
+            0 0 15px rgba(255,60,160,.55),
+            0 0 45px rgba(255,40,150,.25);
+    }
+
+    50%{
+        transform:scale(1.06);
+        box-shadow:
+            0 0 25px rgba(255,80,175,.9),
+            0 0 70px rgba(255,40,150,.45);
+    }
+}
+
+@keyframes buttonRing{
+    0%,100%{
+        transform:scale(.92);
+        opacity:.2;
+    }
+    50%{
+        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+.door-status{
+    margin-top:13px;
 
     font-family:Arial,sans-serif;
 
@@ -1250,52 +1667,9 @@ button{
     text-align:center;
 }
 
-.unlock{
-    margin-top:14px;
-
-    padding:14px 27px;
-
-    border-radius:30px;
-
-    border:
-        1px solid rgba(255,130,190,.25);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,50,160,.16),
-            rgba(120,20,80,.14)
-        );
-
-    color:#ffd7e9;
-
-    font-family:Arial,sans-serif;
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    cursor:pointer;
-
-    transition:
-        transform .2s,
-        opacity .3s;
-}
-
-.unlock:active{
-    transform:scale(.92);
-}
-
-.unlock.disabled{
-    opacity:.25;
-    pointer-events:none;
-}
-
-
 /* =========================================================
    FINAL
 ========================================================= */
-
 #final{
     justify-content:center;
 
@@ -1303,15 +1677,15 @@ button{
         radial-gradient(
             circle at 50% 45%,
             rgba(255,30,150,.13),
-            transparent 35%
+            transparent 38%
         );
 }
 
 .final-heart{
     position:relative;
 
-    width:85px;
-    height:85px;
+    width:88px;
+    height:88px;
 
     transform:rotate(-45deg);
 
@@ -1319,46 +1693,45 @@ button{
         finalHeart 3s ease-in-out infinite;
 }
 
-.final-heart-core,
+.final-heart-main,
 .final-heart:before,
 .final-heart:after{
     position:absolute;
 
     content:"";
 
-    width:85px;
-    height:85px;
+    width:88px;
+    height:88px;
 
     border-radius:50%;
 
     background:
         linear-gradient(
             145deg,
-            #ffd5e8,
-            #ff4c9c 50%,
-            #a70956
+            #ffd7ea,
+            #ff4d9d 48%,
+            #a40755
         );
 
     box-shadow:
-        0 0 25px rgba(255,70,170,.85),
-        0 0 70px rgba(255,30,145,.45),
-        0 0 130px rgba(255,20,120,.18);
+        0 0 25px rgba(255,70,170,.9),
+        0 0 70px rgba(255,35,150,.45),
+        0 0 130px rgba(255,20,120,.2);
 }
 
 .final-heart:before{
-    left:42px;
+    left:44px;
 }
 
 .final-heart:after{
-    top:-42px;
+    top:-44px;
 }
 
-.final-heart-core{
+.final-heart-main{
     z-index:2;
 }
 
 @keyframes finalHeart{
-
     0%,100%{
         transform:
             rotate(-45deg)
@@ -1369,13 +1742,13 @@ button{
     50%{
         transform:
             rotate(-45deg)
-            translateY(-10px)
+            translateY(-9px)
             scale(1.06);
     }
 }
 
-.final-small{
-    margin-top:62px;
+.final-eyebrow{
+    margin-top:65px;
 
     font-family:Arial,sans-serif;
 
@@ -1383,32 +1756,32 @@ button{
 
     letter-spacing:5px;
 
-    color:rgba(255,255,255,.32);
+    color:rgba(255,255,255,.3);
 
     text-transform:uppercase;
 }
 
-.final-main{
-    margin-top:17px;
+.final-message{
+    margin-top:19px;
 
     font-size:
         clamp(27px,7vw,50px);
 
-    line-height:1.22;
+    line-height:1.25;
 
     font-weight:400;
 
     text-align:center;
 
     text-shadow:
-        0 0 35px rgba(255,90,180,.18);
+        0 0 35px rgba(255,80,180,.2);
 }
 
 .final-name{
-    margin-top:25px;
+    margin-top:27px;
 
     font-size:
-        clamp(38px,10vw,68px);
+        clamp(42px,11vw,72px);
 
     font-weight:400;
 
@@ -1416,9 +1789,9 @@ button{
         linear-gradient(
             100deg,
             #fff,
-            #ffb8dc,
+            #ffb7dc,
             #fff,
-            #ff6eae,
+            #ff6cab,
             #fff
         );
 
@@ -1429,11 +1802,12 @@ button{
 
     color:transparent;
 
-    animation:titleShine 5s linear infinite;
+    animation:
+        titleShine 5s linear infinite;
 }
 
 .final-sign{
-    margin-top:16px;
+    margin-top:17px;
 
     font-family:Arial,sans-serif;
 
@@ -1441,34 +1815,32 @@ button{
 
     letter-spacing:5px;
 
-    color:rgba(255,255,255,.27);
+    color:rgba(255,255,255,.28);
 }
 
-
 /* =========================================================
-   TOAST
+   TOAST / FLASH
 ========================================================= */
-
 #toast{
     position:fixed;
 
     left:50%;
-    bottom:25px;
+    bottom:24px;
 
     transform:
-        translate(-50%,30px);
+        translate(-50%,25px);
 
-    z-index:200;
+    z-index:300;
 
     padding:12px 20px;
 
     border-radius:30px;
 
     background:
-        rgba(12,4,16,.92);
+        rgba(10,3,15,.94);
 
     border:
-        1px solid rgba(255,120,190,.20);
+        1px solid rgba(255,120,190,.22);
 
     backdrop-filter:blur(15px);
 
@@ -1485,8 +1857,8 @@ button{
     pointer-events:none;
 
     transition:
-        opacity .3s,
-        transform .3s;
+        opacity .3s ease,
+        transform .3s ease;
 
     white-space:nowrap;
 }
@@ -1498,41 +1870,30 @@ button{
         translate(-50%,0);
 }
 
-
-/* =========================================================
-   FLASH
-========================================================= */
-
 #flash{
     position:fixed;
 
     inset:0;
 
-    background:white;
-
-    z-index:190;
+    background:#fff;
 
     opacity:0;
 
     pointer-events:none;
+
+    z-index:250;
 }
 
 #flash.go{
     animation:
-        flash .6s ease;
+        flash .65s ease;
 }
 
 @keyframes flash{
-
     0%{opacity:0}
     18%{opacity:.65}
     100%{opacity:0}
 }
-
-
-/* =========================================================
-   SHAKE
-========================================================= */
 
 .shake{
     animation:
@@ -1540,186 +1901,177 @@ button{
 }
 
 @keyframes shake{
-
-    0%,100%{
-        transform:translateX(0);
-    }
-
-    20%{
-        transform:translateX(-8px);
-    }
-
-    40%{
-        transform:translateX(8px);
-    }
-
-    60%{
-        transform:translateX(-5px);
-    }
-
-    80%{
-        transform:translateX(5px);
-    }
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-8px)}
+    40%{transform:translateX(8px)}
+    60%{transform:translateX(-5px)}
+    80%{transform:translateX(5px)}
 }
-
 
 /* =========================================================
    MOBILE
 ========================================================= */
-
 @media(max-width:600px){
 
-    .header{
-        padding-left:15px;
-        padding-right:15px;
-    }
-
     .title{
-        margin-top:24px;
+        margin-top:17px;
     }
 
     .subtitle{
         font-size:10px;
     }
 
-    .room,
-    .key-search{
-        width:94vw;
-        margin-top:18px;
+    .game-card{
+        margin-top:15px;
     }
 
-    #object1{
-        left:11%;
+    #objectHeart{
+        left:10%;
+        top:23%;
     }
 
-    #object2{
-        right:10%;
+    #objectStar{
+        right:9%;
+        top:29%;
     }
 
-    #object3{
-        left:43%;
+    #objectMoon{
+        left:42%;
+        bottom:21%;
     }
 
-    .code-digit{
-        width:44px;
-        height:54px;
+    .object{
+        width:75px;
+        height:75px;
     }
 
-    .lock-box{
-        padding:23px 15px;
+    .heart-target{
+        width:270px;
+        height:270px;
     }
 
-    .puzzle{
-        width:280px;
-        height:280px;
+    .puzzle-grid{
+        gap:6px;
     }
 
-    .ring1{
-        width:255px;
-        height:255px;
+    .piece-inner{
+        width:40px;
+        height:40px;
     }
 
-    .ring2{
-        width:200px;
-        height:200px;
+    .piece-inner:before,
+    .piece-inner:after{
+        width:40px;
+        height:40px;
     }
 
-    .ring3{
-        width:145px;
-        height:145px;
+    .piece-inner:before{
+        left:20px;
     }
 
-    .ring4{
-        width:90px;
-        height:90px;
+    .piece-inner:after{
+        top:-20px;
     }
 
+    .door-frame{
+        height:51vh;
+    }
+
+    .unlock-button{
+        min-width:220px;
+    }
 }
 
 @media(max-height:650px){
 
     .title{
-        margin-top:10px;
+        margin-top:7px;
     }
 
     .subtitle{
         display:none;
     }
 
-    .room,
-    .key-search{
-        margin-top:10px;
+    .game-card,
+    .key-room{
+        margin-top:8px;
     }
 
-    .puzzle{
-        width:225px;
-        height:225px;
-        margin:8px auto;
+    .lock{
+        padding:18px 15px;
     }
 
-    .ring1{
-        width:210px;
-        height:210px;
+    .code{
+        margin:12px 0;
     }
 
-    .ring2{
-        width:165px;
-        height:165px;
+    .puzzle-area{
+        padding:5px;
     }
 
-    .ring3{
-        width:120px;
-        height:120px;
+    .heart-target{
+        width:220px;
+        height:220px;
     }
 
-    .ring4{
-        width:75px;
-        height:75px;
+    .target-heart{
+        width:110px;
+        height:110px;
+    }
+
+    .target-heart:before,
+    .target-heart:after{
+        width:110px;
+        height:110px;
+    }
+
+    .target-heart:before{
+        left:55px;
+    }
+
+    .target-heart:after{
+        top:-55px;
     }
 
     .door-frame{
-        height:50vh;
+        height:46vh;
     }
 
+    .final-eyebrow{
+        margin-top:50px;
+    }
 }
 
 </style>
 </head>
-
 
 <body>
 
 <div id="app">
 
 <canvas id="stars"></canvas>
-
 <canvas id="particles"></canvas>
 
-<div class="glow"></div>
+<div class="ambient"></div>
 
 
 <!-- =====================================================
      INTRO
 ===================================================== -->
 
-<section
-    id="intro"
-    class="screen active">
+<section id="intro" class="screen active">
 
-    <div
-        class="start-orb"
-        id="startOrb">
+    <div class="orb" id="startOrb">
 
         <div class="orb-ring"></div>
-
-        <div class="orb-ring two"></div>
+        <div class="orb-ring small"></div>
 
         <div class="orb-core"></div>
 
     </div>
 
-    <div class="start-title">
-        The Escape Room
+    <div class="intro-title">
+        The Love Escape Room
     </div>
 
     <div class="subtitle">
@@ -1727,7 +2079,7 @@ button{
         One secret waiting at the end.
     </div>
 
-    <div class="start-sub">
+    <div class="start">
         Touch the light to enter
     </div>
 
@@ -1738,9 +2090,7 @@ button{
      LEVEL 1
 ===================================================== -->
 
-<section
-    id="search"
-    class="screen">
+<section id="level1" class="screen">
 
     <div class="header">
 
@@ -1759,66 +2109,97 @@ button{
     </div>
 
     <div class="subtitle">
-        Three hidden objects are waiting.<br>
-        Find them all.
+        Three objects are hidden here.<br>
+        Find them to discover the secret code.
     </div>
 
 
-    <div class="room">
+    <div class="game-card">
 
-        <div class="counter"
-             id="objectCounter">
-            OBJECTS FOUND: 0 / 3
+        <div class="room-light"></div>
+        <div class="room-floor"></div>
+
+        <div class="counter" id="counter">
+            FOUND: 0 / 3
         </div>
 
 
+        <!-- HEART -->
+
         <button
-            class="hidden-object"
-            id="object1"
-            aria-label="Find hidden crystal">
+            class="object"
+            id="objectHeart"
+            aria-label="Find the heart">
 
-            <div class="object-halo"></div>
+            <div class="object-glow"></div>
 
-            <div class="object-shape">
-                ◇
-            </div>
+            <div class="heart-icon"></div>
 
         </button>
 
 
+        <!-- STAR -->
+
         <button
-            class="hidden-object"
-            id="object2"
-            aria-label="Find hidden candle">
+            class="object"
+            id="objectStar"
+            aria-label="Find the star">
 
-            <div class="object-halo"></div>
+            <div class="object-glow"></div>
 
-            <div class="object-shape">
-                ♢
-            </div>
+            <div class="star-icon">★</div>
 
         </button>
 
 
+        <!-- MOON -->
+
         <button
-            class="hidden-object"
-            id="object3"
-            aria-label="Find hidden moon">
+            class="object"
+            id="objectMoon"
+            aria-label="Find the moon">
 
-            <div class="object-halo"></div>
+            <div class="object-glow"></div>
 
-            <div class="object-shape">
-                ☾
-            </div>
+            <div class="moon-icon"></div>
 
         </button>
 
+
+        <div class="message" id="searchMessage">
+            Search carefully. Something is hiding in the darkness...
+        </div>
+
+
+        <!-- CLUE -->
 
         <div
-            class="room-message"
-            id="roomMessage">
+            class="clue-reveal"
+            id="clueReveal">
 
-            Something is hiding in the darkness...
+            <div
+                class="clue-object"
+                id="clueObject">
+                FIRST DIGIT
+            </div>
+
+            <div
+                class="clue-number"
+                id="clueNumber">
+                4
+            </div>
+
+            <div
+                class="clue-description"
+                id="clueDescription">
+                Remember this number.
+            </div>
+
+            <button
+                class="clue-continue"
+                id="clueContinue">
+                CONTINUE
+            </button>
 
         </div>
 
@@ -1831,9 +2212,7 @@ button{
      LEVEL 2
 ===================================================== -->
 
-<section
-    id="code"
-    class="screen">
+<section id="level2" class="screen">
 
     <div class="header">
 
@@ -1852,133 +2231,65 @@ button{
     </div>
 
     <div class="subtitle">
-        The objects revealed four numbers.<br>
-        Remember what you discovered.
+        You discovered the code in the previous room.<br>
+        Now use it.
     </div>
 
 
-    <div class="lock-box">
+    <div class="center-content">
 
-        <div class="lock-icon">
-            🔐
-        </div>
+        <div class="lock">
 
-        <div class="lock-label">
-            ENTER THE FOUR DIGIT CODE
-        </div>
+            <div class="lock-top">
+                ENTER THE SECRET CODE
+            </div>
+
+            <div class="code">
+
+                <div class="digit" id="digit1">•</div>
+                <div class="digit" id="digit2">•</div>
+                <div class="digit" id="digit3">•</div>
+                <div class="digit" id="digit4">•</div>
+
+            </div>
+
+            <div class="code-hint">
+                The clues were revealed one object at a time.<br>
+                Enter the four digits in that order.
+            </div>
 
 
-        <div class="code-display">
+            <div class="pad-grid">
 
-            <div
-                class="code-digit"
-                id="digit1">
-                •
+                <button class="pad" data-number="1">1</button>
+                <button class="pad" data-number="2">2</button>
+                <button class="pad" data-number="3">3</button>
+
+                <button class="pad" data-number="4">4</button>
+                <button class="pad" data-number="5">5</button>
+                <button class="pad" data-number="6">6</button>
+
+                <button class="pad" data-number="7">7</button>
+                <button class="pad" data-number="8">8</button>
+                <button class="pad" data-number="9">9</button>
+
+                <button class="pad special" id="clearCode">
+                    CLEAR
+                </button>
+
+                <button class="pad" data-number="0">0</button>
+
+                <button class="pad" id="enterCode">
+                    ✓
+                </button>
+
             </div>
 
             <div
-                class="code-digit"
-                id="digit2">
-                •
+                class="code-status"
+                id="codeStatus">
+                The lock is waiting...
             </div>
-
-            <div
-                class="code-digit"
-                id="digit3">
-                •
-            </div>
-
-            <div
-                class="code-digit"
-                id="digit4">
-                •
-            </div>
-
-        </div>
-
-
-        <div class="keypad">
-
-            <button
-                class="pad"
-                data-number="1">
-                1
-            </button>
-
-            <button
-                class="pad"
-                data-number="2">
-                2
-            </button>
-
-            <button
-                class="pad"
-                data-number="3">
-                3
-            </button>
-
-            <button
-                class="pad"
-                data-number="4">
-                4
-            </button>
-
-            <button
-                class="pad"
-                data-number="5">
-                5
-            </button>
-
-            <button
-                class="pad"
-                data-number="6">
-                6
-            </button>
-
-            <button
-                class="pad"
-                data-number="7">
-                7
-            </button>
-
-            <button
-                class="pad"
-                data-number="8">
-                8
-            </button>
-
-            <button
-                class="pad"
-                data-number="9">
-                9
-            </button>
-
-            <button
-                class="pad special"
-                id="clear">
-                CLEAR
-            </button>
-
-            <button
-                class="pad"
-                data-number="0">
-                0
-            </button>
-
-            <button
-                class="pad"
-                id="enter">
-                ✓
-            </button>
-
-        </div>
-
-
-        <div
-            class="code-status"
-            id="codeStatus">
-
-            The lock is waiting...
 
         </div>
 
@@ -1991,9 +2302,7 @@ button{
      LEVEL 3
 ===================================================== -->
 
-<section
-    id="puzzle"
-    class="screen">
+<section id="level3" class="screen">
 
     <div class="header">
 
@@ -2012,54 +2321,104 @@ button{
     </div>
 
     <div class="subtitle">
-        The heart has lost its balance.<br>
-        Rotate the rings until everything aligns.
+        The heart has been broken apart.<br>
+        Rotate each piece until the heart is restored.
     </div>
 
 
-    <div class="puzzle-container">
+    <div class="puzzle-area">
 
-        <div
-            class="puzzle"
-            id="puzzleBoard">
+        <div class="heart-target">
 
+            <!-- faint target silhouette -->
 
-            <div
-                class="puzzle-ring ring1"
-                data-index="0">
-            </div>
+            <div class="target-heart"></div>
 
 
-            <div
-                class="puzzle-ring ring2"
-                data-index="1">
-            </div>
+            <div class="puzzle-grid">
 
+                <button
+                    class="piece"
+                    data-start="1">
 
-            <div
-                class="puzzle-ring ring3"
-                data-index="2">
-            </div>
+                    <div class="piece-inner"></div>
 
+                </button>
 
-            <div
-                class="puzzle-ring ring4"
-                data-index="3">
-            </div>
+                <button
+                    class="piece"
+                    data-start="2">
 
+                    <div class="piece-inner"></div>
 
-            <div class="heart-center">
-                <div class="final-heart-core"></div>
+                </button>
+
+                <button
+                    class="piece"
+                    data-start="3">
+
+                    <div class="piece-inner"></div>
+
+                </button>
+
+                <button
+                    class="piece"
+                    data-start="2">
+
+                    <div class="piece-inner"></div>
+
+                </button>
+
+                <button
+                    class="piece"
+                    data-start="0">
+
+                    <div class="piece-inner"></div>
+
+                </button>
+
+                <button
+                    class="piece"
+                    data-start="2">
+
+                    <div class="piece-inner"></div>
+
+                </button>
+
+                <button
+                    class="piece"
+                    data-start="3">
+
+                    <div class="piece-inner"></div>
+
+                </button>
+
+                <button
+                    class="piece"
+                    data-start="1">
+
+                    <div class="piece-inner"></div>
+
+                </button>
+
+                <button
+                    class="piece"
+                    data-start="2">
+
+                    <div class="piece-inner"></div>
+
+                </button>
+
             </div>
 
         </div>
 
 
         <div
-            class="puzzle-status"
-            id="puzzleStatus">
+            class="puzzle-info"
+            id="puzzleInfo">
 
-            ROTATE THE RINGS
+            TAP THE PIECES TO ROTATE THEM
 
         </div>
 
@@ -2072,9 +2431,7 @@ button{
      LEVEL 4
 ===================================================== -->
 
-<section
-    id="key"
-    class="screen">
+<section id="level4" class="screen">
 
     <div class="header">
 
@@ -2093,67 +2450,39 @@ button{
     </div>
 
     <div class="subtitle">
-        The final door is close.<br>
-        Somewhere in this room is the key.
+        The final door is locked.<br>
+        Find the key hidden somewhere in the room.
     </div>
 
 
-    <div
-        class="key-search"
-        id="keyRoom">
+    <div class="key-room">
+
+        <div class="wall-light"></div>
 
 
-        <!-- search spots -->
+        <!-- recognizable objects -->
 
-        <button
-            class="search-spot"
-            style="left:12%;top:20%;">
-            <span class="fake-mark"></span>
-        </button>
+        <div class="frame"></div>
 
-        <button
-            class="search-spot"
-            style="left:30%;top:62%;">
-            <span class="fake-mark"></span>
-        </button>
+        <div class="vase"></div>
+
+        <div class="table"></div>
+
+
+        <!-- real key -->
 
         <button
-            class="search-spot"
-            style="left:50%;top:25%;">
-            <span class="fake-mark"></span>
-        </button>
-
-        <button
-            class="search-spot"
-            style="right:15%;top:22%;">
-            <span class="fake-mark"></span>
-        </button>
-
-        <button
-            class="search-spot"
-            style="right:27%;bottom:25%;">
-            <span class="fake-mark"></span>
-        </button>
-
-        <button
-            class="search-spot"
-            style="left:14%;bottom:25%;">
-            <span class="fake-mark"></span>
-        </button>
-
-
-        <!-- REAL KEY -->
-
-        <button
-            class="real-key"
+            class="key"
             id="realKey"
-            aria-label="Find the key"
-            style="right:12%;bottom:16%;">
+            aria-label="Find the hidden key">
+
+            <div class="key-shape"></div>
+
         </button>
 
 
-        <div class="key-instruction">
-            SEARCH CAREFULLY
+        <div class="key-label">
+            SEARCH THE ROOM CAREFULLY
         </div>
 
     </div>
@@ -2165,9 +2494,7 @@ button{
      LEVEL 5
 ===================================================== -->
 
-<section
-    id="doorScreen"
-    class="screen">
+<section id="level5" class="screen">
 
     <div class="header">
 
@@ -2186,8 +2513,8 @@ button{
     </div>
 
     <div class="subtitle">
-        You found everything.<br>
-        Now open what was waiting for you.
+        You found the key.<br>
+        Everything has led to this moment.
     </div>
 
 
@@ -2195,15 +2522,11 @@ button{
 
         <div class="door-frame">
 
-            <div
-                class="door"
-                id="door">
+            <div class="door" id="door">
 
-                <div class="door-inner"></div>
+                <div class="door-panel"></div>
 
-                <div class="door-symbol">
-                    ♥
-                </div>
+                <div class="door-heart"></div>
 
                 <div class="handle"></div>
 
@@ -2212,22 +2535,29 @@ button{
         </div>
 
 
-        <div
-            class="door-info"
-            id="doorInfo">
+        <div class="unlock-zone">
 
-            KEY FOUND • CODE VERIFIED • HEART RESTORED
+            <div class="unlock-arrows">
+                ↓ ↓ ↓
+            </div>
+
+            <button
+                class="unlock-button"
+                id="unlockButton">
+
+                🔓 &nbsp; UNLOCK THE DOOR
+
+            </button>
+
+            <div
+                class="door-status"
+                id="doorStatus">
+
+                THE DOOR IS WAITING FOR YOU
+
+            </div>
 
         </div>
-
-
-        <button
-            class="unlock"
-            id="unlock">
-
-            UNLOCK THE DOOR
-
-        </button>
 
     </div>
 
@@ -2238,24 +2568,21 @@ button{
      FINAL
 ===================================================== -->
 
-<section
-    id="final"
-    class="screen">
-
+<section id="final" class="screen">
 
     <div class="final-heart">
 
-        <div class="final-heart-core"></div>
+        <div class="final-heart-main"></div>
 
     </div>
 
 
-    <div class="final-small">
+    <div class="final-eyebrow">
         YOU ESCAPED THE ROOM
     </div>
 
 
-    <div class="final-main">
+    <div class="final-message">
         But you're trapped<br>
         in my heart.
     </div>
@@ -2283,7 +2610,7 @@ button{
 <script>
 
 /* =========================================================
-   HELPERS
+   BASIC HELPERS
 ========================================================= */
 
 function $(id){
@@ -2292,15 +2619,19 @@ function $(id){
 
 
 /* =========================================================
-   BACKGROUND STARS
+   STAR BACKGROUND
 ========================================================= */
 
-const starCanvas = $("stars");
-const starCtx = starCanvas.getContext("2d");
+const starCanvas =
+    $("stars");
 
-let starWidth = 0;
-let starHeight = 0;
+const starCtx =
+    starCanvas.getContext("2d");
+
+let starW = 0;
+let starH = 0;
 let starList = [];
+
 
 function resizeStars(){
 
@@ -2310,23 +2641,23 @@ function resizeStars(){
             2
         );
 
-    starWidth =
+    starW =
         window.innerWidth;
 
-    starHeight =
+    starH =
         window.innerHeight;
 
     starCanvas.width =
-        starWidth * dpr;
+        starW * dpr;
 
     starCanvas.height =
-        starHeight * dpr;
+        starH * dpr;
 
     starCanvas.style.width =
-        starWidth + "px";
+        starW + "px";
 
     starCanvas.style.height =
-        starHeight + "px";
+        starH + "px";
 
     starCtx.setTransform(
         dpr,
@@ -2337,20 +2668,23 @@ function resizeStars(){
         0
     );
 
+
     const count =
         Math.min(
             150,
             Math.max(
                 65,
                 Math.floor(
-                    starWidth *
-                    starHeight /
+                    starW *
+                    starH /
                     7500
                 )
             )
         );
 
+
     starList = [];
+
 
     for(
         let i = 0;
@@ -2362,21 +2696,21 @@ function resizeStars(){
 
             x:
                 Math.random() *
-                starWidth,
+                starW,
 
             y:
                 Math.random() *
-                starHeight,
+                starH,
 
-            radius:
+            r:
                 .2 +
                 Math.random() *
                 1.2,
 
-            alpha:
+            a:
                 .15 +
                 Math.random() *
-                .65,
+                .6,
 
             speed:
                 .002 +
@@ -2394,7 +2728,9 @@ function resizeStars(){
 
 }
 
+
 resizeStars();
+
 
 window.addEventListener(
     "resize",
@@ -2407,9 +2743,10 @@ function animateStars(time){
     starCtx.clearRect(
         0,
         0,
-        starWidth,
-        starHeight
+        starW,
+        starH
     );
+
 
     for(
         const star of starList
@@ -2418,7 +2755,7 @@ function animateStars(time){
         const alpha =
             Math.max(
                 .03,
-                star.alpha +
+                star.a +
                 Math.sin(
                     time *
                     star.speed +
@@ -2427,29 +2764,36 @@ function animateStars(time){
                 .15
             );
 
+
         starCtx.beginPath();
+
 
         starCtx.arc(
             star.x,
             star.y,
-            star.radius,
+            star.r,
             0,
             Math.PI * 2
         );
+
 
         starCtx.fillStyle =
             "rgba(255,230,247," +
             alpha +
             ")";
 
+
         starCtx.fill();
 
     }
 
+
     requestAnimationFrame(
         animateStars
     );
+
 }
+
 
 requestAnimationFrame(
     animateStars
@@ -2466,10 +2810,11 @@ const particleCanvas =
 const particleCtx =
     particleCanvas.getContext("2d");
 
-let particleWidth = 0;
-let particleHeight = 0;
-
+let pW = 0;
+let pH = 0;
 let particles = [];
+let particleRunning = false;
+
 
 function resizeParticles(){
 
@@ -2479,23 +2824,23 @@ function resizeParticles(){
             2
         );
 
-    particleWidth =
+    pW =
         window.innerWidth;
 
-    particleHeight =
+    pH =
         window.innerHeight;
 
     particleCanvas.width =
-        particleWidth * dpr;
+        pW * dpr;
 
     particleCanvas.height =
-        particleHeight * dpr;
+        pH * dpr;
 
     particleCanvas.style.width =
-        particleWidth + "px";
+        pW + "px";
 
     particleCanvas.style.height =
-        particleHeight + "px";
+        pH + "px";
 
     particleCtx.setTransform(
         dpr,
@@ -2508,7 +2853,9 @@ function resizeParticles(){
 
 }
 
+
 resizeParticles();
+
 
 window.addEventListener(
     "resize",
@@ -2516,20 +2863,15 @@ window.addEventListener(
 );
 
 
-let particleAnimation = false;
-
 function burst(
     x,
     y,
-    amount
+    count = 80
 ){
-
-    amount =
-        amount || 80;
 
     for(
         let i = 0;
-        i < amount;
+        i < count;
         i++
     ){
 
@@ -2541,6 +2883,7 @@ function burst(
         const speed =
             1.5 +
             Math.random() * 6;
+
 
         particles.push({
 
@@ -2565,15 +2908,17 @@ function burst(
 
             size:
                 1 +
-                Math.random() * 3
+                Math.random() *
+                3
 
         });
 
     }
 
-    if(!particleAnimation){
 
-        particleAnimation = true;
+    if(!particleRunning){
+
+        particleRunning = true;
 
         requestAnimationFrame(
             animateParticles
@@ -2589,9 +2934,10 @@ function animateParticles(){
     particleCtx.clearRect(
         0,
         0,
-        particleWidth,
-        particleHeight
+        pW,
+        pH
     );
+
 
     for(
         let i = particles.length - 1;
@@ -2602,19 +2948,21 @@ function animateParticles(){
         const p =
             particles[i];
 
-        p.x += p.vx;
 
+        p.x += p.vx;
         p.y += p.vy;
 
         p.vx *= .985;
-
         p.vy *= .985;
 
         p.vy += .025;
 
         p.life -= p.decay;
 
-        if(p.life <= 0){
+
+        if(
+            p.life <= 0
+        ){
 
             particles.splice(
                 i,
@@ -2625,7 +2973,9 @@ function animateParticles(){
 
         }
 
+
         particleCtx.beginPath();
+
 
         particleCtx.arc(
             p.x,
@@ -2635,16 +2985,21 @@ function animateParticles(){
             Math.PI * 2
         );
 
+
         particleCtx.fillStyle =
-            "rgba(255,105,185," +
+            "rgba(255,110,190," +
             p.life +
             ")";
+
 
         particleCtx.fill();
 
     }
 
-    if(particles.length){
+
+    if(
+        particles.length
+    ){
 
         requestAnimationFrame(
             animateParticles
@@ -2652,7 +3007,7 @@ function animateParticles(){
 
     }else{
 
-        particleAnimation = false;
+        particleRunning = false;
 
     }
 
@@ -2660,8 +3015,44 @@ function animateParticles(){
 
 
 /* =========================================================
-   FLASH
+   UI EFFECTS
 ========================================================= */
+
+let toastTimer;
+
+
+function toast(message){
+
+    const element =
+        $("toast");
+
+    element.textContent =
+        message;
+
+    element.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                element.classList.remove(
+                    "show"
+                );
+
+            },
+            1700
+        );
+
+}
+
 
 function flash(){
 
@@ -2682,86 +3073,60 @@ function flash(){
 
 
 /* =========================================================
-   TOAST
+   SCREEN NAVIGATION
 ========================================================= */
 
-let toastTimer = null;
+const screens = {
 
-function toast(message){
+    intro:
+        $("intro"),
 
-    const element =
-        $("toast");
+    level1:
+        $("level1"),
 
-    element.textContent =
-        message;
+    level2:
+        $("level2"),
 
-    element.classList.add(
-        "show"
-    );
+    level3:
+        $("level3"),
 
-    clearTimeout(
-        toastTimer
-    );
+    level4:
+        $("level4"),
 
-    toastTimer =
-        setTimeout(
-            function(){
+    level5:
+        $("level5"),
 
-                element.classList.remove(
-                    "show"
-                );
+    final:
+        $("final")
 
-            },
-            1700
-        );
-
-}
-
-
-/* =========================================================
-   SCREEN SYSTEM
-========================================================= */
-
-const screenNames = [
-    "intro",
-    "search",
-    "code",
-    "puzzle",
-    "key",
-    "doorScreen",
-    "final"
-];
+};
 
 
 function showScreen(name){
 
-    screenNames.forEach(
-        function(id){
+    Object.values(
+        screens
+    ).forEach(
+        function(screen){
 
-            const element =
-                $(id);
-
-            if(element){
-
-                element.classList.remove(
-                    "active"
-                );
-
-            }
+            screen.classList.remove(
+                "active"
+            );
 
         }
     );
 
+
     setTimeout(
         function(){
 
-            $(name)
+            screens[name]
                 .classList.add(
                     "active"
                 );
 
         },
-        50
+        60
     );
 
 }
@@ -2773,23 +3138,23 @@ function showScreen(name){
 
 const game = {
 
-    objects:0,
+    found:0,
 
     code:"",
 
     correctCode:"4279",
 
-    codeOK:false,
+    codeSolved:false,
 
-    puzzleOK:false,
+    puzzleSolved:false,
 
-    key:false
+    keyFound:false
 
 };
 
 
 /* =========================================================
-   START GAME
+   START
 ========================================================= */
 
 $("startOrb")
@@ -2801,6 +3166,7 @@ $("startOrb")
                 $("startOrb")
                 .getBoundingClientRect();
 
+
             burst(
                 rect.left +
                 rect.width / 2,
@@ -2808,20 +3174,22 @@ $("startOrb")
                 rect.top +
                 rect.height / 2,
 
-                140
+                130
             );
 
+
             flash();
+
 
             setTimeout(
                 function(){
 
                     showScreen(
-                        "search"
+                        "level1"
                     );
 
                 },
-                500
+                450
             );
 
         }
@@ -2829,27 +3197,54 @@ $("startOrb")
 
 
 /* =========================================================
-   LEVEL 1 — OBJECT SEARCH
+   LEVEL 1
+   HEART = 4
+   STAR  = 2
+   MOON  = 79
 ========================================================= */
 
-const objectElements = [
+const objectData = {
 
-    $("object1"),
-    $("object2"),
-    $("object3")
+    objectHeart:{
+        title:"FIRST DIGIT",
+        number:"4",
+        description:
+            "The heart reveals the first digit."
+    },
 
-];
+    objectStar:{
+        title:"SECOND DIGIT",
+        number:"2",
+        description:
+            "The star reveals the second digit."
+    },
+
+    objectMoon:{
+        title:"LAST TWO DIGITS",
+        number:"79",
+        description:
+            "The moon reveals the final two digits."
+    }
+
+};
 
 
-objectElements.forEach(
-    function(element){
+let currentClue = null;
 
-        element.addEventListener(
+
+[
+    $("objectHeart"),
+    $("objectStar"),
+    $("objectMoon")
+].forEach(
+    function(object){
+
+        object.addEventListener(
             "click",
             function(){
 
                 if(
-                    element.classList.contains(
+                    object.classList.contains(
                         "found"
                     )
                 ){
@@ -2859,16 +3254,16 @@ objectElements.forEach(
                 }
 
 
-                element.classList.add(
+                object.classList.add(
                     "found"
                 );
 
 
-                game.objects++;
+                game.found++;
 
 
                 const rect =
-                    element
+                    object
                     .getBoundingClientRect();
 
 
@@ -2879,68 +3274,46 @@ objectElements.forEach(
                     rect.top +
                     rect.height / 2,
 
-                    35
+                    45
                 );
 
 
-                $("objectCounter")
+                $("counter")
                     .textContent =
-                    "OBJECTS FOUND: " +
-                    game.objects +
+                    "FOUND: " +
+                    game.found +
                     " / 3";
 
 
-                if(game.objects === 1){
+                currentClue =
+                    object.id;
 
-                    $("roomMessage")
-                        .textContent =
-                        "First clue discovered — the number is 4.";
 
-                    toast(
-                        "A clue has been discovered."
+                const data =
+                    objectData[
+                        object.id
+                    ];
+
+
+                $("clueObject")
+                    .textContent =
+                    data.title;
+
+
+                $("clueNumber")
+                    .textContent =
+                    data.number;
+
+
+                $("clueDescription")
+                    .textContent =
+                    data.description;
+
+
+                $("clueReveal")
+                    .classList.add(
+                        "show"
                     );
-
-                }
-
-
-                else if(game.objects === 2){
-
-                    $("roomMessage")
-                        .textContent =
-                        "Second clue discovered — the number is 2.";
-
-                    toast(
-                        "Another clue found."
-                    );
-
-                }
-
-
-                else if(game.objects === 3){
-
-                    $("roomMessage")
-                        .textContent =
-                        "Final clues discovered — the numbers are 7 and 9.";
-
-                    toast(
-                        "All clues discovered!"
-                    );
-
-
-                    setTimeout(
-                        function(){
-
-                            flash();
-
-                            showScreen(
-                                "code"
-                            );
-
-                        },
-                        1300
-                    );
-
-                }
 
             }
         );
@@ -2949,11 +3322,74 @@ objectElements.forEach(
 );
 
 
+/* Continue after clue */
+
+$("clueContinue")
+    .addEventListener(
+        "click",
+        function(){
+
+            $("clueReveal")
+                .classList.remove(
+                    "show"
+                );
+
+
+            if(
+                game.found === 1
+            ){
+
+                $("searchMessage")
+                    .textContent =
+                    "Good. Two more objects are still hidden.";
+
+            }
+
+
+            if(
+                game.found === 2
+            ){
+
+                $("searchMessage")
+                    .textContent =
+                    "You're close. Find the final object.";
+
+            }
+
+
+            if(
+                game.found === 3
+            ){
+
+                $("searchMessage")
+                    .textContent =
+                    "CODE DISCOVERED: 4 • 2 • 7 • 9";
+
+
+                setTimeout(
+                    function(){
+
+                        flash();
+
+                        showScreen(
+                            "level2"
+                        );
+
+                    },
+                    900
+                );
+
+            }
+
+        }
+    );
+
+
 /* =========================================================
    LEVEL 2 — CODE
 ========================================================= */
 
-const digitElements = [
+const codeDigits = [
 
     $("digit1"),
     $("digit2"),
@@ -2963,9 +3399,9 @@ const digitElements = [
 ];
 
 
-function updateCodeDisplay(){
+function updateCode(){
 
-    digitElements.forEach(
+    codeDigits.forEach(
         function(element,index){
 
             element.textContent =
@@ -2997,10 +3433,12 @@ document
 
                     }
 
+
                     game.code +=
                         button.dataset.number;
 
-                    updateCodeDisplay();
+
+                    updateCode();
 
                 }
             );
@@ -3009,14 +3447,14 @@ document
     );
 
 
-$("clear")
+$("clearCode")
     .addEventListener(
         "click",
         function(){
 
             game.code = "";
 
-            updateCodeDisplay();
+            updateCode();
 
             $("codeStatus")
                 .textContent =
@@ -3026,7 +3464,7 @@ $("clear")
     );
 
 
-$("enter")
+$("enterCode")
     .addEventListener(
         "click",
         function(){
@@ -3037,7 +3475,7 @@ $("enter")
 
                 $("codeStatus")
                     .textContent =
-                    "Enter four digits.";
+                    "Enter all four digits.";
 
                 return;
 
@@ -3049,24 +3487,23 @@ $("enter")
                 game.correctCode
             ){
 
-                game.codeOK = true;
+                game.codeSolved = true;
+
 
                 $("codeStatus")
                     .textContent =
                     "ACCESS GRANTED ✦";
 
-                const rect =
-                    $("lock-box")
-                    ?.getBoundingClientRect();
-
 
                 burst(
                     window.innerWidth / 2,
                     window.innerHeight / 2,
-                    120
+                    130
                 );
 
+
                 flash();
+
 
                 toast(
                     "The lock has opened."
@@ -3077,7 +3514,7 @@ $("enter")
                     function(){
 
                         showScreen(
-                            "puzzle"
+                            "level3"
                         );
 
                     },
@@ -3088,28 +3525,27 @@ $("enter")
 
                 $("codeStatus")
                     .textContent =
-                    "Wrong code. Try again.";
+                    "Incorrect code. Try again.";
 
-                $("lock-box");
 
-                document
+                const lock =
+                    document
                     .querySelector(
-                        ".lock-box"
-                    )
-                    .classList.add(
-                        "shake"
+                        ".lock"
                     );
+
+
+                lock.classList.add(
+                    "shake"
+                );
+
 
                 setTimeout(
                     function(){
 
-                        document
-                            .querySelector(
-                                ".lock-box"
-                            )
-                            .classList.remove(
-                                "shake"
-                            );
+                        lock.classList.remove(
+                            "shake"
+                        );
 
                     },
                     450
@@ -3118,7 +3554,7 @@ $("enter")
 
                 game.code = "";
 
-                updateCodeDisplay();
+                updateCode();
 
             }
 
@@ -3127,64 +3563,74 @@ $("enter")
 
 
 /* =========================================================
-   LEVEL 3 — RING PUZZLE
+   LEVEL 3 — HEART PUZZLE
 ========================================================= */
 
 /*
-   Target:
-   Every ring must reach rotation 0.
+   Each piece needs to reach rotation 0.
 
-   Starting positions:
-   Ring 1 = 1
-   Ring 2 = 2
-   Ring 3 = 3
-   Ring 4 = 1
+   Starting rotations:
+   1,2,3,
+   2,0,2,
+   3,1,2
 
-   Every tap adds 90 degrees.
+   Solution:
+   3,2,1,
+   2,0,2,
+   1,3,2
 */
 
-const rings =
+
+const pieces =
     document.querySelectorAll(
-        ".puzzle-ring"
+        ".piece"
     );
 
-const ringState =
-    [1,2,3,1];
+
+const rotations = [
+    1,2,3,
+    2,0,2,
+    3,1,2
+];
 
 
-rings.forEach(
-    function(ring,index){
+pieces.forEach(
+    function(piece,index){
 
-        ring.style.transform =
+        piece.dataset.rotation =
+            rotations[index];
+
+
+        piece.style.transform =
             "rotate(" +
             (
-                ringState[index] *
+                rotations[index] *
                 90
             ) +
             "deg)";
 
 
-        ring.addEventListener(
+        piece.addEventListener(
             "click",
             function(){
 
-                ringState[index] =
+                rotations[index] =
                     (
-                        ringState[index] +
+                        rotations[index] +
                         1
                     ) % 4;
 
 
-                ring.style.transform =
+                piece.style.transform =
                     "rotate(" +
                     (
-                        ringState[index] *
+                        rotations[index] *
                         90
                     ) +
                     "deg)";
 
 
-                checkPuzzle();
+                checkHeartPuzzle();
 
             }
         );
@@ -3193,13 +3639,13 @@ rings.forEach(
 );
 
 
-function checkPuzzle(){
+function checkHeartPuzzle(){
 
     const solved =
-        ringState.every(
-            function(value){
+        rotations.every(
+            function(rotation){
 
-                return value === 0;
+                return rotation === 0;
 
             }
         );
@@ -3207,12 +3653,24 @@ function checkPuzzle(){
 
     if(
         solved &&
-        !game.puzzleOK
+        !game.puzzleSolved
     ){
 
-        game.puzzleOK = true;
+        game.puzzleSolved = true;
 
-        $("puzzleStatus")
+
+        pieces.forEach(
+            function(piece){
+
+                piece.classList.add(
+                    "correct"
+                );
+
+            }
+        );
+
+
+        $("puzzleInfo")
             .textContent =
             "HEART RESTORED ✦";
 
@@ -3223,10 +3681,12 @@ function checkPuzzle(){
             180
         );
 
+
         flash();
 
+
         toast(
-            "The heart is complete."
+            "The heart has been restored."
         );
 
 
@@ -3234,7 +3694,7 @@ function checkPuzzle(){
             function(){
 
                 showScreen(
-                    "key"
+                    "level4"
                 );
 
             },
@@ -3255,13 +3715,16 @@ $("realKey")
         "click",
         function(){
 
-            if(game.key){
+            if(
+                game.keyFound
+            ){
 
                 return;
 
             }
 
-            game.key = true;
+
+            game.keyFound = true;
 
 
             const rect =
@@ -3276,7 +3739,7 @@ $("realKey")
                 rect.top +
                 rect.height / 2,
 
-                130
+                150
             );
 
 
@@ -3292,6 +3755,7 @@ $("realKey")
 
             flash();
 
+
             toast(
                 "You found the key!"
             );
@@ -3301,7 +3765,7 @@ $("realKey")
                 function(){
 
                     showScreen(
-                        "doorScreen"
+                        "level5"
                     );
 
                 },
@@ -3313,18 +3777,18 @@ $("realKey")
 
 
 /* =========================================================
-   LEVEL 5 — DOOR
+   LEVEL 5 — FINAL DOOR
 ========================================================= */
 
-$("unlock")
+$("unlockButton")
     .addEventListener(
         "click",
         function(){
 
             if(
-                !game.key ||
-                !game.codeOK ||
-                !game.puzzleOK
+                !game.keyFound ||
+                !game.codeSolved ||
+                !game.puzzleSolved
             ){
 
                 return;
@@ -3332,10 +3796,14 @@ $("unlock")
             }
 
 
-            $("unlock")
-                .classList.add(
-                    "disabled"
-                );
+            $("doorStatus")
+                .textContent =
+                "UNLOCKING...";
+
+
+            $("unlockButton")
+                .style.pointerEvents =
+                "none";
 
 
             $("door")
@@ -3347,27 +3815,21 @@ $("unlock")
             burst(
                 window.innerWidth / 2,
                 window.innerHeight / 2,
-                230
+                260
             );
 
 
             flash();
 
-            toast(
-                "The door is opening..."
-            );
-
 
             setTimeout(
                 function(){
 
-                    document
-                        .body
+                    $("app")
                         .style.transition =
                         "background 1.5s ease";
 
-                    document
-                        .getElementById("app")
+                    $("app")
                         .style.background =
                         "#000";
 
@@ -3384,7 +3846,7 @@ $("unlock")
                     );
 
                 },
-                2900
+                3000
             );
 
         }
@@ -3392,31 +3854,47 @@ $("unlock")
 
 
 /* =========================================================
-   PREVENT DOUBLE-TAP ZOOM
+   FINAL AMBIENT PARTICLES
 ========================================================= */
 
-let lastTouch = 0;
+setInterval(
+    function(){
 
-document.addEventListener(
-    "touchend",
-    function(event){
+        const x =
+            Math.random() *
+            window.innerWidth;
 
-        const now =
-            Date.now();
 
-        if(
-            now - lastTouch < 280
-        ){
-
-            event.preventDefault();
-
-        }
-
-        lastTouch = now;
+        burst(
+            x,
+            window.innerHeight + 5,
+            2
+        );
 
     },
-    {
-        passive:false
+    1300
+);
+
+
+/* =========================================================
+   ORIENTATION
+========================================================= */
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            function(){
+
+                resizeStars();
+
+                resizeParticles();
+
+            },
+            300
+        );
+
     }
 );
 
