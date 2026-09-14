@@ -1,3904 +1,1820 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#05030a">
-<title>Sornali — Love Escape Room</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Game For You ❤️</title>
 
 <style>
 /* =========================================================
-   RESET
-========================================================= */
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color:transparent;
+   LOVE GAME — COMPLETE SINGLE FILE
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
+:root {
+    --pink: #ff4f81;
+    --hot-pink: #ff2f68;
+    --purple: #9b5de5;
+    --deep: #160b22;
+    --card: rgba(255,255,255,0.10);
+    --border: rgba(255,255,255,0.18);
+    --white: #ffffff;
 }
 
-body{
-    background:#05030a;
-    color:#fff;
-    font-family:Georgia,"Times New Roman",serif;
-    user-select:none;
-    touch-action:manipulation;
+html, body {
+    width: 100%;
+    min-height: 100%;
 }
 
-button{
-    font-family:inherit;
-}
-
-/* =========================================================
-   APP
-========================================================= */
-#app{
-    position:relative;
-    width:100%;
-    height:100vh;
-    height:100dvh;
-    overflow:hidden;
-
+body {
+    font-family: "DM Sans", sans-serif;
     background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(130,25,100,.18),
-            transparent 34%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(90,20,80,.16),
-            transparent 50%
-        ),
-        linear-gradient(
-            180deg,
-            #030208 0%,
-            #0a0411 52%,
-            #020207 100%
-        );
+        radial-gradient(circle at 20% 20%, rgba(255, 55, 120, .20), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(155, 93, 229, .20), transparent 35%),
+        linear-gradient(135deg, #120818, #250b28 50%, #100817);
+    color: white;
+    overflow-x: hidden;
 }
 
-#stars{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
+/* ================= BACKGROUND ================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
 }
 
-#particles{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:100;
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: .35;
+    animation: floatOrb 12s ease-in-out infinite alternate;
 }
 
-.ambient{
-    position:absolute;
-    width:75vmax;
-    height:75vmax;
-    left:50%;
-    top:48%;
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,40,150,.09),
-            transparent 68%
-        );
-
-    filter:blur(30px);
-
-    animation:
-        ambientPulse 8s ease-in-out infinite;
-
-    pointer-events:none;
+.orb.one {
+    width: 250px;
+    height: 250px;
+    background: #ff3675;
+    left: -80px;
+    top: 10%;
 }
 
-@keyframes ambientPulse{
-    0%,100%{
-        transform:translate(-50%,-50%) scale(.85);
-        opacity:.5;
+.orb.two {
+    width: 300px;
+    height: 300px;
+    background: #8f4fff;
+    right: -100px;
+    bottom: 5%;
+    animation-delay: 3s;
+}
+
+.orb.three {
+    width: 180px;
+    height: 180px;
+    background: #ff9bce;
+    left: 45%;
+    top: -80px;
+    animation-delay: 5s;
+}
+
+@keyframes floatOrb {
+    from {
+        transform: translate(0,0) scale(1);
     }
-    50%{
-        transform:translate(-50%,-50%) scale(1.15);
-        opacity:1;
+    to {
+        transform: translate(40px,30px) scale(1.2);
     }
 }
 
-/* =========================================================
-   SCREEN SYSTEM
-========================================================= */
-.screen{
-    position:absolute;
-    inset:0;
+/* ================= FLOATING HEARTS ================= */
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-
-    transform:scale(1.025);
-
-    transition:
-        opacity .65s ease,
-        transform .65s ease,
-        visibility .65s ease;
-
-    z-index:5;
+.bg-heart {
+    position: fixed;
+    bottom: -50px;
+    color: rgba(255, 100, 150, .35);
+    font-size: 18px;
+    animation: riseHeart linear infinite;
+    pointer-events: none;
+    z-index: 1;
 }
 
-.screen.active{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform:scale(1);
-}
+@keyframes riseHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
 
-/* =========================================================
-   HEADER
-========================================================= */
-.header{
-    width:100%;
-    padding:
-        max(18px,env(safe-area-inset-top))
-        18px 0;
+    10% {
+        opacity: .8;
+    }
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    90% {
+        opacity: .6;
+    }
 
-    z-index:20;
-}
-
-.brand{
-    font-family:Arial,sans-serif;
-    font-size:9px;
-    letter-spacing:4px;
-    color:rgba(255,255,255,.34);
-}
-
-.level{
-    font-family:Arial,sans-serif;
-    font-size:9px;
-    letter-spacing:3px;
-    color:rgba(255,130,195,.7);
-}
-
-/* =========================================================
-   TYPOGRAPHY
-========================================================= */
-.title{
-    margin-top:20px;
-
-    font-size:clamp(28px,7vw,48px);
-    font-weight:400;
-    text-align:center;
-
-    background:
-        linear-gradient(
-            100deg,
-            #fff,
-            #ffb7dc,
-            #fff,
-            #ff72b2,
-            #fff
-        );
-
-    background-size:300% auto;
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    animation:titleShine 6s linear infinite;
-}
-
-@keyframes titleShine{
-    to{
-        background-position:300% center;
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
     }
 }
 
-.subtitle{
-    margin-top:9px;
-    padding:0 24px;
+/* ================= APP ================= */
 
-    max-width:600px;
-
-    font-family:Arial,sans-serif;
-    font-size:11px;
-    line-height:1.7;
-    text-align:center;
-
-    color:rgba(255,255,255,.42);
+#app {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
 }
 
-/* =========================================================
-   INTRO
-========================================================= */
-#intro{
-    justify-content:center;
+.screen {
+    width: 100%;
+    max-width: 850px;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.orb{
-    position:relative;
-
-    width:150px;
-    height:150px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-}
-
-.orb-ring{
-    position:absolute;
-
-    width:150px;
-    height:150px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,100,180,.25);
-
-    animation:
-        orbRing 3s ease-in-out infinite;
-}
-
-.orb-ring.small{
-    width:105px;
-    height:105px;
-
-    border-color:rgba(255,255,255,.14);
-
-    animation-delay:.5s;
-}
-
-.orb-core{
-    width:32px;
-    height:32px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            #fff,
-            #ffd7ea 18%,
-            #ff55a4 48%,
-            #980650
-        );
-
+.card {
+    width: 100%;
+    padding: 45px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     box-shadow:
-        0 0 12px #fff,
-        0 0 38px rgba(255,60,170,.95),
-        0 0 90px rgba(255,20,130,.45);
-
-    animation:
-        orbCore 2s ease-in-out infinite;
+        0 30px 80px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.10);
+    text-align: center;
+    animation: cardIn .7s ease;
 }
 
-@keyframes orbRing{
-    0%,100%{
-        transform:scale(.8);
-        opacity:.25;
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.97);
     }
-    50%{
-        transform:scale(1.15);
-        opacity:1;
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
-@keyframes orbCore{
-    0%,100%{
-        transform:scale(.8);
+/* ================= START SCREEN ================= */
+
+.big-heart {
+    font-size: 90px;
+    display: inline-block;
+    filter: drop-shadow(0 0 25px rgba(255,60,110,.7));
+    animation: heartbeat 1.4s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
     }
-    50%{
-        transform:scale(1.15);
+
+    15% {
+        transform: scale(1.18);
     }
-}
 
-.intro-title{
-    margin-top:35px;
-
-    font-size:
-        clamp(30px,8vw,52px);
-
-    font-weight:400;
-    text-align:center;
-}
-
-.start{
-    margin-top:15px;
-
-    font-family:Arial,sans-serif;
-    font-size:10px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-
-    color:rgba(255,255,255,.4);
-
-    animation:blink 2s ease-in-out infinite;
-}
-
-@keyframes blink{
-    0%,100%{opacity:.3}
-    50%{opacity:1}
-}
-
-/* =========================================================
-   LEVEL CARD
-========================================================= */
-.game-card{
-    position:relative;
-
-    width:min(850px,93vw);
-
-    flex:1;
-
-    margin:
-        20px 0
-        max(20px,env(safe-area-inset-bottom));
-
-    border-radius:24px;
-
-    overflow:hidden;
-
-    border:1px solid rgba(255,120,190,.13);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.035),
-            rgba(255,255,255,.007)
-        );
-
-    box-shadow:
-        inset 0 0 70px rgba(255,30,150,.025),
-        0 30px 90px rgba(0,0,0,.5);
-}
-
-/* =========================================================
-   LEVEL 1 ROOM
-========================================================= */
-.room-floor{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    height:24%;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent,
-            rgba(0,0,0,.35)
-        );
-
-    border-top:1px solid rgba(255,255,255,.04);
-}
-
-.room-light{
-    position:absolute;
-
-    width:260px;
-    height:260px;
-
-    left:50%;
-    top:45%;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,60,170,.08),
-            transparent 70%
-        );
-
-    pointer-events:none;
-}
-
-/* =========================================================
-   SEARCH OBJECTS
-========================================================= */
-.object{
-    position:absolute;
-
-    width:82px;
-    height:82px;
-
-    border:0;
-    background:transparent;
-
-    cursor:pointer;
-
-    z-index:10;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    transition:
-        transform .3s ease,
-        opacity .5s ease;
-}
-
-.object:active{
-    transform:scale(.85);
-}
-
-.object-glow{
-    position:absolute;
-
-    width:80px;
-    height:80px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,70,175,.22),
-            transparent 70%
-        );
-
-    animation:
-        objectPulse 2.2s ease-in-out infinite;
-}
-
-@keyframes objectPulse{
-    0%,100%{
-        transform:scale(.75);
-        opacity:.3;
+    30% {
+        transform: scale(1);
     }
-    50%{
-        transform:scale(1.2);
-        opacity:1;
+
+    45% {
+        transform: scale(1.12);
+    }
+
+    60% {
+        transform: scale(1);
     }
 }
 
-/* REAL HEART */
-.heart-icon{
-    position:relative;
+.script {
+    font-family: Pacifico, cursive;
+    color: #ff9cbd;
+}
 
-    width:34px;
-    height:34px;
+h1 {
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.1;
+    margin: 20px 0;
+}
 
-    transform:rotate(-45deg);
+h2 {
+    font-size: clamp(28px, 5vw, 45px);
+    margin-bottom: 15px;
+}
 
-    background:
-        linear-gradient(
-            145deg,
-            #ffd6e9,
-            #ff4c9c 50%,
-            #a50a57
-        );
+p {
+    color: rgba(255,255,255,.78);
+    line-height: 1.7;
+    font-size: 16px;
+}
 
-    border-radius:5px;
+.subtitle {
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
 
+/* ================= BUTTON ================= */
+
+.btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff4f81, #ff2868);
     box-shadow:
-        0 0 15px rgba(255,70,170,.9),
-        0 0 35px rgba(255,30,150,.5);
-
-    z-index:2;
+        0 10px 30px rgba(255,47,104,.3),
+        inset 0 1px 0 rgba(255,255,255,.25);
+    transition: .25s ease;
+    margin: 8px;
 }
 
-.heart-icon:before,
-.heart-icon:after{
-    content:"";
-
-    position:absolute;
-
-    width:34px;
-    height:34px;
-
-    border-radius:50%;
-
-    background:inherit;
+.btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(255,47,104,.45);
 }
 
-.heart-icon:before{
-    left:17px;
+.btn:active {
+    transform: scale(.96);
 }
 
-.heart-icon:after{
-    top:-17px;
+.btn.secondary {
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: none;
 }
 
-/* REAL STAR */
-.star-icon{
-    position:relative;
+/* ================= PROGRESS ================= */
 
-    width:50px;
-    height:50px;
-
-    z-index:2;
-
-    color:#ffe8f4;
-
-    font-family:Arial,sans-serif;
-
-    font-size:50px;
-    line-height:50px;
-
-    text-shadow:
-        0 0 7px #fff,
-        0 0 20px rgba(255,110,190,.95),
-        0 0 40px rgba(255,60,160,.65);
+.progress-wrap {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto 35px;
 }
 
-/* REAL MOON */
-.moon-icon{
-    position:relative;
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255,255,255,.6);
+    font-size: 13px;
+    margin-bottom: 8px;
+}
 
-    width:45px;
-    height:45px;
+.progress {
+    height: 7px;
+    border-radius: 99px;
+    background: rgba(255,255,255,.12);
+    overflow: hidden;
+}
 
-    border-radius:50%;
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #ff4f81, #ff9ec4, #a96bff);
+    transition: width .5s ease;
+}
 
+/* ================= QUESTION ================= */
+
+.question-number {
+    color: #ff9cbd;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.answers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 30px 0;
+}
+
+.answer {
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.13);
+    background: rgba(255,255,255,.06);
+    color: white;
+    cursor: pointer;
+    transition: .25s ease;
+    font-size: 15px;
+}
+
+.answer:hover {
+    transform: translateY(-3px);
+    background: rgba(255,79,129,.15);
+    border-color: rgba(255,100,150,.5);
+}
+
+.answer.correct {
+    background: rgba(60,220,140,.20);
+    border-color: rgba(80,255,160,.7);
+}
+
+.answer.wrong {
+    background: rgba(255,50,80,.20);
+    border-color: rgba(255,70,90,.7);
+}
+
+/* ================= CATCH HEART ================= */
+
+.game-area {
+    height: 330px;
+    margin: 25px 0;
+    border-radius: 25px;
     background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #ffd5e8 50%,
-            #f28bb9
-        );
-
-    box-shadow:
-        0 0 18px rgba(255,180,220,.75),
-        0 0 40px rgba(255,80,170,.4);
-
-    z-index:2;
+        radial-gradient(circle at center, rgba(255,80,130,.08), transparent 50%),
+        rgba(0,0,0,.12);
+    border: 1px solid rgba(255,255,255,.10);
+    position: relative;
+    overflow: hidden;
 }
 
-.moon-icon:after{
-    content:"";
-
-    position:absolute;
-
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
-
-    left:14px;
-    top:-7px;
-
-    background:#120816;
+.catch-heart {
+    position: absolute;
+    font-size: 35px;
+    cursor: pointer;
+    user-select: none;
+    animation: heartPulse .7s infinite alternate;
+    filter: drop-shadow(0 0 12px rgba(255,70,120,.8));
+    transition: transform .15s;
 }
 
-#objectHeart{
-    left:15%;
-    top:24%;
+.catch-heart:hover {
+    transform: scale(1.25);
 }
 
-#objectStar{
-    right:14%;
-    top:30%;
-}
-
-#objectMoon{
-    left:45%;
-    bottom:21%;
-}
-
-.object.found{
-    opacity:0;
-    transform:scale(1.8);
-    pointer-events:none;
-}
-
-/* =========================================================
-   SEARCH COUNTER / MESSAGE
-========================================================= */
-.counter{
-    position:absolute;
-
-    top:20px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    font-family:Arial,sans-serif;
-    font-size:9px;
-    letter-spacing:3px;
-
-    color:rgba(255,255,255,.38);
-
-    white-space:nowrap;
-
-    z-index:15;
-}
-
-.message{
-    position:absolute;
-
-    left:50%;
-    bottom:18px;
-
-    transform:translateX(-50%);
-
-    width:min(480px,82%);
-
-    padding:14px 16px;
-
-    border-radius:15px;
-
-    background:
-        rgba(7,3,12,.80);
-
-    border:
-        1px solid rgba(255,130,190,.12);
-
-    backdrop-filter:blur(12px);
-
-    font-family:Arial,sans-serif;
-
-    font-size:10px;
-
-    line-height:1.6;
-
-    text-align:center;
-
-    color:rgba(255,255,255,.48);
-
-    z-index:20;
-}
-
-/* =========================================================
-   CLUE REVEAL
-========================================================= */
-.clue-reveal{
-    position:absolute;
-    inset:0;
-
-    z-index:50;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    background:
-        rgba(4,2,8,.88);
-
-    backdrop-filter:blur(12px);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:
-        opacity .5s ease,
-        visibility .5s ease;
-}
-
-.clue-reveal.show{
-    opacity:1;
-    visibility:visible;
-}
-
-.clue-object{
-    font-family:Arial,sans-serif;
-
-    font-size:14px;
-
-    letter-spacing:4px;
-
-    color:rgba(255,255,255,.4);
-
-    text-transform:uppercase;
-}
-
-.clue-number{
-    margin-top:18px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:clamp(65px,18vw,100px);
-
-    font-weight:200;
-
-    color:#fff;
-
-    text-shadow:
-        0 0 20px rgba(255,100,185,.9),
-        0 0 60px rgba(255,40,150,.55);
-}
-
-.clue-description{
-    margin-top:10px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-
-    color:rgba(255,255,255,.4);
-
-    text-align:center;
-}
-
-.clue-continue{
-    margin-top:30px;
-
-    padding:13px 24px;
-
-    border-radius:30px;
-
-    border:
-        1px solid rgba(255,130,190,.22);
-
-    background:
-        rgba(255,60,160,.10);
-
-    color:#ffd5e8;
-
-    font-family:Arial,sans-serif;
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    cursor:pointer;
-}
-
-/* =========================================================
-   CODE LEVEL
-========================================================= */
-.center-content{
-    width:100%;
-    flex:1;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-}
-
-.lock{
-    width:min(430px,88vw);
-
-    padding:30px 20px;
-
-    border-radius:24px;
-
-    border:
-        1px solid rgba(255,120,190,.15);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.008)
-        );
-
-    box-shadow:
-        0 30px 90px rgba(0,0,0,.5);
-
-    text-align:center;
-}
-
-.lock-top{
-    font-family:Arial,sans-serif;
-
-    font-size:10px;
-
-    letter-spacing:3px;
-
-    color:rgba(255,255,255,.35);
-}
-
-.code{
-    margin:22px 0;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:10px;
-}
-
-.digit{
-    width:52px;
-    height:60px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:11px;
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:
-        1px solid rgba(255,120,190,.18);
-
-    color:#ffd5e9;
-
-    font-family:Arial,sans-serif;
-
-    font-size:25px;
-
-    box-shadow:
-        inset 0 0 20px rgba(255,40,150,.04);
-}
-
-.pad-grid{
-    width:min(280px,100%);
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:8px;
-}
-
-.pad{
-    height:48px;
-
-    border-radius:11px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    background:
-        rgba(255,255,255,.045);
-
-    color:#fff;
-
-    cursor:pointer;
-
-    font-family:Arial,sans-serif;
-
-    font-size:14px;
-
-    transition:
-        transform .15s,
-        background .15s;
-}
-
-.pad:active{
-    transform:scale(.90);
-
-    background:
-        rgba(255,50,160,.2);
-}
-
-.pad.special{
-    color:#ff91c0;
-}
-
-.code-status{
-    min-height:18px;
-
-    margin-top:15px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:9px;
-
-    letter-spacing:1px;
-
-    color:rgba(255,255,255,.35);
-}
-
-.code-hint{
-    margin-bottom:20px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:10px;
-
-    line-height:1.6;
-
-    color:rgba(255,255,255,.32);
-}
-
-/* =========================================================
-   HEART PUZZLE
-========================================================= */
-.puzzle-area{
-    flex:1;
-
-    width:100%;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    padding:15px;
-}
-
-.heart-target{
-    position:relative;
-
-    width:min(280px,72vw);
-    height:min(280px,72vw);
-
-    margin-bottom:20px;
-}
-
-/*
-   Clean heart silhouette behind puzzle.
-*/
-.target-heart{
-    position:absolute;
-
-    width:145px;
-    height:145px;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-43%)
-        rotate(-45deg);
-
-    background:
-        rgba(255,80,165,.035);
-
-    border:
-        1px solid rgba(255,100,180,.15);
-
-    border-radius:12px;
-}
-
-.target-heart:before,
-.target-heart:after{
-    content:"";
-
-    position:absolute;
-
-    width:145px;
-    height:145px;
-
-    border-radius:50%;
-
-    background:rgba(255,80,165,.035);
-
-    border:
-        1px solid rgba(255,100,180,.15);
-}
-
-.target-heart:before{
-    left:72px;
-}
-
-.target-heart:after{
-    top:-72px;
-}
-
-.puzzle-grid{
-    position:absolute;
-
-    inset:0;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    grid-template-rows:
-        repeat(3,1fr);
-
-    gap:8px;
-
-    z-index:5;
-}
-
-.piece{
-    position:relative;
-
-    border-radius:13px;
-
-    border:
-        1px solid rgba(255,150,205,.20);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,95,175,.15),
-            rgba(100,15,70,.28)
-        );
-
-    cursor:pointer;
-
-    overflow:hidden;
-
-    transition:
-        transform .35s ease,
-        border-color .3s,
-        background .3s;
-}
-
-.piece:active{
-    transform:scale(.94);
-}
-
-.piece-inner{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:46px;
-    height:46px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(-45deg);
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffd5e8,
-            #ff4c9c 50%,
-            #9d0950
-        );
-
-    border-radius:7px;
-
-    box-shadow:
-        0 0 16px rgba(255,60,160,.45);
-
-    opacity:.75;
-}
-
-.piece-inner:before,
-.piece-inner:after{
-    content:"";
-
-    position:absolute;
-
-    width:46px;
-    height:46px;
-
-    border-radius:50%;
-
-    background:inherit;
-}
-
-.piece-inner:before{
-    left:23px;
-}
-
-.piece-inner:after{
-    top:-23px;
-}
-
-.piece.correct{
-    border-color:
-        rgba(255,170,215,.45);
-
-    background:
-        rgba(255,80,170,.10);
-
-    box-shadow:
-        inset 0 0 18px rgba(255,50,160,.07);
-}
-
-.puzzle-info{
-    font-family:Arial,sans-serif;
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    color:rgba(255,255,255,.34);
-
-    text-align:center;
-}
-
-/* =========================================================
-   KEY LEVEL
-========================================================= */
-.key-room{
-    position:relative;
-
-    flex:1;
-
-    width:min(850px,93vw);
-
-    margin:
-        20px 0
-        max(20px,env(safe-area-inset-bottom));
-
-    border-radius:24px;
-
-    overflow:hidden;
-
-    border:
-        1px solid rgba(255,120,190,.13);
-
-    background:
-        linear-gradient(
-            180deg,
-            #0b0710,
-            #08050c
-        );
-}
-
-/* wall */
-.wall-light{
-    position:absolute;
-
-    left:50%;
-    top:40%;
-
-    width:260px;
-    height:260px;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,65,170,.08),
-            transparent 70%
-        );
-}
-
-/* recognizable furniture */
-
-.table{
-    position:absolute;
-
-    left:8%;
-    right:8%;
-    bottom:14%;
-
-    height:8px;
-
-    border-radius:8px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #24121f,
-            #4b223a,
-            #24121f
-        );
-
-    box-shadow:
-        0 12px 25px rgba(0,0,0,.5);
-}
-
-.table:before,
-.table:after{
-    content:"";
-
-    position:absolute;
-
-    width:8px;
-    height:70px;
-
-    bottom:-65px;
-
-    background:#1b0d18;
-}
-
-.table:before{
-    left:12%;
-}
-
-.table:after{
-    right:12%;
-}
-
-.vase{
-    position:absolute;
-
-    left:20%;
-    bottom:16%;
-
-    width:35px;
-    height:55px;
-
-    border-radius:
-        8px 8px 14px 14px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #29152a,
-            #643050,
-            #29152a
-        );
-
-    border:
-        1px solid rgba(255,130,190,.13);
-}
-
-.frame{
-    position:absolute;
-
-    right:18%;
-    top:20%;
-
-    width:85px;
-    height:110px;
-
-    border:
-        7px solid #251322;
-
-    background:
-        rgba(255,255,255,.025);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.5);
-}
-
-.frame:after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:35px;
-    height:35px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(45deg);
-
-    border:
-        1px solid rgba(255,110,180,.16);
-}
-
-/* key */
-.key{
-    position:absolute;
-
-    right:15%;
-    bottom:30%;
-
-    width:75px;
-    height:75px;
-
-    border:0;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,205,90,.22),
-            transparent 68%
-        );
-
-    cursor:pointer;
-
-    z-index:20;
-
-    animation:
-        keyPulse 1.8s ease-in-out infinite;
-}
-
-.key-shape{
-    position:absolute;
-
-    left:25px;
-    top:20px;
-
-    width:27px;
-    height:27px;
-
-    border:
-        5px solid #ffd36f;
-
-    border-radius:50%;
-
-    box-shadow:
-        0 0 10px #ffd36f,
-        0 0 30px rgba(255,190,60,.7);
-}
-
-.key-shape:after{
-    content:"";
-
-    position:absolute;
-
-    width:42px;
-    height:7px;
-
-    left:18px;
-    top:5px;
-
-    border-radius:5px;
-
-    background:#ffd36f;
-
-    box-shadow:
-        0 0 10px rgba(255,190,60,.7);
-}
-
-.key-shape:before{
-    content:"";
-
-    position:absolute;
-
-    width:7px;
-    height:13px;
-
-    left:47px;
-    top:5px;
-
-    background:#ffd36f;
-
-    box-shadow:
-        10px 0 0 #ffd36f;
-}
-
-@keyframes keyPulse{
-    0%,100%{
-        transform:scale(.9);
-        filter:brightness(.85);
+@keyframes heartPulse {
+    from {
+        transform: scale(.9);
     }
-    50%{
-        transform:scale(1.15);
-        filter:brightness(1.3);
+
+    to {
+        transform: scale(1.15);
     }
 }
 
-.key-label{
-    position:absolute;
-
-    left:50%;
-    bottom:18px;
-
-    transform:translateX(-50%);
-
-    font-family:Arial,sans-serif;
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    color:rgba(255,255,255,.28);
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 15px;
 }
 
-/* =========================================================
-   DOOR LEVEL
-========================================================= */
-.door-area{
-    flex:1;
-
-    width:100%;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:15px;
+.stat strong {
+    display: block;
+    font-size: 28px;
+    color: #ff9cbd;
 }
 
-.door-frame{
-    position:relative;
-
-    width:min(290px,70vw);
-    height:min(410px,52vh);
-
-    border:
-        9px solid #171019;
-
-    border-bottom:0;
-
-    background:#020207;
-
-    box-shadow:
-        0 0 0 1px rgba(255,100,170,.1),
-        0 35px 100px rgba(0,0,0,.7);
-
-    perspective:1100px;
+.stat span {
+    font-size: 12px;
+    color: rgba(255,255,255,.5);
 }
 
-.door{
-    position:absolute;
+/* ================= MEMORY GAME ================= */
 
-    inset:0;
-
-    background:
-        linear-gradient(
-            90deg,
-            #100611,
-            #34102a 50%,
-            #100611
-        );
-
-    border:
-        1px solid rgba(255,130,190,.16);
-
-    transform-origin:left center;
-
-    transition:
-        transform 2.4s cubic-bezier(.18,.8,.18,1);
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 500px;
+    margin: 30px auto;
 }
 
-.door-panel{
-    position:absolute;
-
-    inset:25px;
-
-    border:
-        1px solid rgba(255,140,195,.14);
-
-    box-shadow:
-        inset 0 0 40px rgba(255,30,150,.04);
+.memory-card {
+    aspect-ratio: 1;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: linear-gradient(135deg, rgba(255,79,129,.15), rgba(155,93,229,.12));
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    transition: .3s;
 }
 
-.door-heart{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(-45deg);
-
-    width:45px;
-    height:45px;
-
-    background:
-        #ff6bab;
-
-    border-radius:7px;
-
-    box-shadow:
-        0 0 18px rgba(255,70,170,.7);
+.memory-card:hover {
+    transform: scale(1.04);
 }
 
-.door-heart:before,
-.door-heart:after{
-    content:"";
-
-    position:absolute;
-
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
-
-    background:inherit;
+.memory-card.flipped {
+    background: rgba(255,255,255,.12);
+    transform: rotateY(180deg);
 }
 
-.door-heart:before{
-    left:22px;
+.memory-card.matched {
+    background: rgba(255,80,140,.25);
+    border-color: rgba(255,120,170,.6);
 }
 
-.door-heart:after{
-    top:-22px;
+/* ================= CHOICE ================= */
+
+.choice-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 30px auto;
+    max-width: 650px;
 }
 
-.handle{
-    position:absolute;
-
-    right:23px;
-    top:50%;
-
-    width:13px;
-    height:13px;
-
-    border-radius:50%;
-
-    background:#f1aecf;
-
-    box-shadow:
-        0 0 15px rgba(255,130,190,.8);
+.choice {
+    padding: 25px 15px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    cursor: pointer;
+    transition: .3s;
 }
 
-.door.open{
-    transform:
-        rotateY(-105deg);
+.choice:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255,100,160,.6);
+    background: rgba(255,70,130,.12);
 }
 
-/* =========================================================
-   BIG UNLOCK BUTTON
-========================================================= */
-.unlock-zone{
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    margin-top:22px;
+.choice-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
 }
 
-.unlock-arrows{
-    font-family:Arial,sans-serif;
+/* ================= FINAL ================= */
 
-    font-size:17px;
-
-    letter-spacing:5px;
-
-    color:#ff75b4;
-
-    animation:
-        arrowPulse 1.2s ease-in-out infinite;
+.final-screen {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@keyframes arrowPulse{
-    0%,100%{
-        transform:translateY(0);
-        opacity:.45;
-    }
-    50%{
-        transform:translateY(5px);
-        opacity:1;
-    }
+.final-card {
+    max-width: 780px;
+    position: relative;
+    padding: 55px;
 }
 
-.unlock-button{
-    position:relative;
-
-    margin-top:7px;
-
-    min-width:230px;
-
-    padding:17px 25px;
-
-    border-radius:40px;
-
-    border:
-        1px solid rgba(255,180,220,.45);
-
-    background:
-        linear-gradient(
-            135deg,
-            #c51b72,
-            #ff4d9b,
-            #b31368
-        );
-
-    color:white;
-
-    font-family:Arial,sans-serif;
-
-    font-size:11px;
-
-    font-weight:bold;
-
-    letter-spacing:3px;
-
-    box-shadow:
-        0 0 15px rgba(255,60,160,.55),
-        0 0 45px rgba(255,40,150,.25),
-        inset 0 1px 0 rgba(255,255,255,.35);
-
-    cursor:pointer;
-
-    animation:
-        unlockPulse 1.7s ease-in-out infinite;
+.final-heart {
+    font-size: 80px;
+    animation: heartbeat 1.3s infinite;
 }
 
-.unlock-button:before{
-    content:"";
-
-    position:absolute;
-
-    inset:-6px;
-
-    border-radius:50px;
-
-    border:
-        1px solid rgba(255,100,180,.35);
-
-    animation:
-        buttonRing 1.7s ease-in-out infinite;
+.love-letter {
+    margin-top: 25px;
+    text-align: left;
+    padding: 28px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.06);
+    border-left: 3px solid #ff5c91;
 }
 
-.unlock-button:active{
-    transform:scale(.94);
+.love-letter p {
+    font-size: 17px;
+    margin-bottom: 14px;
 }
 
-@keyframes unlockPulse{
-    0%,100%{
-        transform:scale(1);
-        box-shadow:
-            0 0 15px rgba(255,60,160,.55),
-            0 0 45px rgba(255,40,150,.25);
-    }
-
-    50%{
-        transform:scale(1.06);
-        box-shadow:
-            0 0 25px rgba(255,80,175,.9),
-            0 0 70px rgba(255,40,150,.45);
-    }
+.signature {
+    font-family: Pacifico, cursive;
+    color: #ff9fbe;
+    font-size: 26px;
+    margin-top: 20px;
 }
 
-@keyframes buttonRing{
-    0%,100%{
-        transform:scale(.92);
-        opacity:.2;
-    }
-    50%{
-        transform:scale(1.08);
-        opacity:1;
-    }
+/* ================= CONFETTI ================= */
+
+.confetti {
+    position: fixed;
+    width: 9px;
+    height: 14px;
+    top: -20px;
+    z-index: 999;
+    pointer-events: none;
+    animation: confettiFall linear forwards;
 }
 
-.door-status{
-    margin-top:13px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    color:rgba(255,255,255,.32);
-
-    text-align:center;
-}
-
-/* =========================================================
-   FINAL
-========================================================= */
-#final{
-    justify-content:center;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(255,30,150,.13),
-            transparent 38%
-        );
-}
-
-.final-heart{
-    position:relative;
-
-    width:88px;
-    height:88px;
-
-    transform:rotate(-45deg);
-
-    animation:
-        finalHeart 3s ease-in-out infinite;
-}
-
-.final-heart-main,
-.final-heart:before,
-.final-heart:after{
-    position:absolute;
-
-    content:"";
-
-    width:88px;
-    height:88px;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffd7ea,
-            #ff4d9d 48%,
-            #a40755
-        );
-
-    box-shadow:
-        0 0 25px rgba(255,70,170,.9),
-        0 0 70px rgba(255,35,150,.45),
-        0 0 130px rgba(255,20,120,.2);
-}
-
-.final-heart:before{
-    left:44px;
-}
-
-.final-heart:after{
-    top:-44px;
-}
-
-.final-heart-main{
-    z-index:2;
-}
-
-@keyframes finalHeart{
-    0%,100%{
+@keyframes confettiFall {
+    to {
         transform:
-            rotate(-45deg)
-            translateY(5px)
-            scale(.94);
-    }
-
-    50%{
-        transform:
-            rotate(-45deg)
-            translateY(-9px)
-            scale(1.06);
+            translateY(110vh)
+            rotate(720deg);
+        opacity: 0;
     }
 }
 
-.final-eyebrow{
-    margin-top:65px;
+/* ================= SPARKLES ================= */
 
-    font-family:Arial,sans-serif;
-
-    font-size:9px;
-
-    letter-spacing:5px;
-
-    color:rgba(255,255,255,.3);
-
-    text-transform:uppercase;
+.sparkle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 20px;
+    z-index: 998;
+    animation: sparkleOut 1s ease forwards;
 }
 
-.final-message{
-    margin-top:19px;
-
-    font-size:
-        clamp(27px,7vw,50px);
-
-    line-height:1.25;
-
-    font-weight:400;
-
-    text-align:center;
-
-    text-shadow:
-        0 0 35px rgba(255,80,180,.2);
-}
-
-.final-name{
-    margin-top:27px;
-
-    font-size:
-        clamp(42px,11vw,72px);
-
-    font-weight:400;
-
-    background:
-        linear-gradient(
-            100deg,
-            #fff,
-            #ffb7dc,
-            #fff,
-            #ff6cab,
-            #fff
-        );
-
-    background-size:300% auto;
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    animation:
-        titleShine 5s linear infinite;
-}
-
-.final-sign{
-    margin-top:17px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:10px;
-
-    letter-spacing:5px;
-
-    color:rgba(255,255,255,.28);
-}
-
-/* =========================================================
-   TOAST / FLASH
-========================================================= */
-#toast{
-    position:fixed;
-
-    left:50%;
-    bottom:24px;
-
-    transform:
-        translate(-50%,25px);
-
-    z-index:300;
-
-    padding:12px 20px;
-
-    border-radius:30px;
-
-    background:
-        rgba(10,3,15,.94);
-
-    border:
-        1px solid rgba(255,120,190,.22);
-
-    backdrop-filter:blur(15px);
-
-    font-family:Arial,sans-serif;
-
-    font-size:10px;
-
-    letter-spacing:1px;
-
-    color:#ffd5e8;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:
-        opacity .3s ease,
-        transform .3s ease;
-
-    white-space:nowrap;
-}
-
-#toast.show{
-    opacity:1;
-
-    transform:
-        translate(-50%,0);
-}
-
-#flash{
-    position:fixed;
-
-    inset:0;
-
-    background:#fff;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    z-index:250;
-}
-
-#flash.go{
-    animation:
-        flash .65s ease;
-}
-
-@keyframes flash{
-    0%{opacity:0}
-    18%{opacity:.65}
-    100%{opacity:0}
-}
-
-.shake{
-    animation:
-        shake .4s ease;
-}
-
-@keyframes shake{
-    0%,100%{transform:translateX(0)}
-    20%{transform:translateX(-8px)}
-    40%{transform:translateX(8px)}
-    60%{transform:translateX(-5px)}
-    80%{transform:translateX(5px)}
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-@media(max-width:600px){
-
-    .title{
-        margin-top:17px;
+@keyframes sparkleOut {
+    0% {
+        opacity: 1;
+        transform: scale(.5);
     }
 
-    .subtitle{
-        font-size:10px;
-    }
-
-    .game-card{
-        margin-top:15px;
-    }
-
-    #objectHeart{
-        left:10%;
-        top:23%;
-    }
-
-    #objectStar{
-        right:9%;
-        top:29%;
-    }
-
-    #objectMoon{
-        left:42%;
-        bottom:21%;
-    }
-
-    .object{
-        width:75px;
-        height:75px;
-    }
-
-    .heart-target{
-        width:270px;
-        height:270px;
-    }
-
-    .puzzle-grid{
-        gap:6px;
-    }
-
-    .piece-inner{
-        width:40px;
-        height:40px;
-    }
-
-    .piece-inner:before,
-    .piece-inner:after{
-        width:40px;
-        height:40px;
-    }
-
-    .piece-inner:before{
-        left:20px;
-    }
-
-    .piece-inner:after{
-        top:-20px;
-    }
-
-    .door-frame{
-        height:51vh;
-    }
-
-    .unlock-button{
-        min-width:220px;
+    100% {
+        opacity: 0;
+        transform: scale(1.7) translateY(-30px);
     }
 }
 
-@media(max-height:650px){
+/* ================= SHAKE ================= */
 
-    .title{
-        margin-top:7px;
+.shake {
+    animation: shake .4s ease;
+}
+
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 650px) {
+
+    #app {
+        padding: 14px;
     }
 
-    .subtitle{
-        display:none;
+    .screen {
+        min-height: 90vh;
     }
 
-    .game-card,
-    .key-room{
-        margin-top:8px;
+    .card {
+        padding: 28px 20px;
+        border-radius: 24px;
     }
 
-    .lock{
-        padding:18px 15px;
+    .big-heart {
+        font-size: 70px;
     }
 
-    .code{
-        margin:12px 0;
+    .answers,
+    .choice-container {
+        grid-template-columns: 1fr;
     }
 
-    .puzzle-area{
-        padding:5px;
+    .memory-grid {
+        gap: 8px;
     }
 
-    .heart-target{
-        width:220px;
-        height:220px;
+    .memory-card {
+        font-size: 23px;
+        border-radius: 11px;
     }
 
-    .target-heart{
-        width:110px;
-        height:110px;
+    .game-area {
+        height: 280px;
     }
 
-    .target-heart:before,
-    .target-heart:after{
-        width:110px;
-        height:110px;
+    .final-card {
+        padding: 35px 22px;
     }
 
-    .target-heart:before{
-        left:55px;
+    .love-letter {
+        padding: 20px;
     }
 
-    .target-heart:after{
-        top:-55px;
-    }
-
-    .door-frame{
-        height:46vh;
-    }
-
-    .final-eyebrow{
-        margin-top:50px;
+    .love-letter p {
+        font-size: 15px;
     }
 }
 
+/* ================= HIDDEN ================= */
+
+.hidden {
+    display: none !important;
+}
+
+.fade {
+    animation: cardIn .6s ease;
+}
 </style>
 </head>
 
 <body>
 
-<div id="app">
-
-<canvas id="stars"></canvas>
-<canvas id="particles"></canvas>
-
-<div class="ambient"></div>
-
-
-<!-- =====================================================
-     INTRO
-===================================================== -->
-
-<section id="intro" class="screen active">
-
-    <div class="orb" id="startOrb">
-
-        <div class="orb-ring"></div>
-        <div class="orb-ring small"></div>
-
-        <div class="orb-core"></div>
-
-    </div>
-
-    <div class="intro-title">
-        The Love Escape Room
-    </div>
-
-    <div class="subtitle">
-        Five challenges.<br>
-        One secret waiting at the end.
-    </div>
-
-    <div class="start">
-        Touch the light to enter
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     LEVEL 1
-===================================================== -->
-
-<section id="level1" class="screen">
-
-    <div class="header">
-
-        <div class="brand">
-            SORNALI
-        </div>
-
-        <div class="level">
-            LEVEL 01 / 05
-        </div>
-
-    </div>
-
-    <div class="title">
-        Search the Room
-    </div>
-
-    <div class="subtitle">
-        Three objects are hidden here.<br>
-        Find them to discover the secret code.
-    </div>
-
-
-    <div class="game-card">
-
-        <div class="room-light"></div>
-        <div class="room-floor"></div>
-
-        <div class="counter" id="counter">
-            FOUND: 0 / 3
-        </div>
-
-
-        <!-- HEART -->
-
-        <button
-            class="object"
-            id="objectHeart"
-            aria-label="Find the heart">
-
-            <div class="object-glow"></div>
-
-            <div class="heart-icon"></div>
-
-        </button>
-
-
-        <!-- STAR -->
-
-        <button
-            class="object"
-            id="objectStar"
-            aria-label="Find the star">
-
-            <div class="object-glow"></div>
-
-            <div class="star-icon">★</div>
-
-        </button>
-
-
-        <!-- MOON -->
-
-        <button
-            class="object"
-            id="objectMoon"
-            aria-label="Find the moon">
-
-            <div class="object-glow"></div>
-
-            <div class="moon-icon"></div>
-
-        </button>
-
-
-        <div class="message" id="searchMessage">
-            Search carefully. Something is hiding in the darkness...
-        </div>
-
-
-        <!-- CLUE -->
-
-        <div
-            class="clue-reveal"
-            id="clueReveal">
-
-            <div
-                class="clue-object"
-                id="clueObject">
-                FIRST DIGIT
-            </div>
-
-            <div
-                class="clue-number"
-                id="clueNumber">
-                4
-            </div>
-
-            <div
-                class="clue-description"
-                id="clueDescription">
-                Remember this number.
-            </div>
-
-            <button
-                class="clue-continue"
-                id="clueContinue">
-                CONTINUE
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     LEVEL 2
-===================================================== -->
-
-<section id="level2" class="screen">
-
-    <div class="header">
-
-        <div class="brand">
-            SORNALI
-        </div>
-
-        <div class="level">
-            LEVEL 02 / 05
-        </div>
-
-    </div>
-
-    <div class="title">
-        Crack the Lock
-    </div>
-
-    <div class="subtitle">
-        You discovered the code in the previous room.<br>
-        Now use it.
-    </div>
-
-
-    <div class="center-content">
-
-        <div class="lock">
-
-            <div class="lock-top">
-                ENTER THE SECRET CODE
-            </div>
-
-            <div class="code">
-
-                <div class="digit" id="digit1">•</div>
-                <div class="digit" id="digit2">•</div>
-                <div class="digit" id="digit3">•</div>
-                <div class="digit" id="digit4">•</div>
-
-            </div>
-
-            <div class="code-hint">
-                The clues were revealed one object at a time.<br>
-                Enter the four digits in that order.
-            </div>
-
-
-            <div class="pad-grid">
-
-                <button class="pad" data-number="1">1</button>
-                <button class="pad" data-number="2">2</button>
-                <button class="pad" data-number="3">3</button>
-
-                <button class="pad" data-number="4">4</button>
-                <button class="pad" data-number="5">5</button>
-                <button class="pad" data-number="6">6</button>
-
-                <button class="pad" data-number="7">7</button>
-                <button class="pad" data-number="8">8</button>
-                <button class="pad" data-number="9">9</button>
-
-                <button class="pad special" id="clearCode">
-                    CLEAR
-                </button>
-
-                <button class="pad" data-number="0">0</button>
-
-                <button class="pad" id="enterCode">
-                    ✓
-                </button>
-
-            </div>
-
-            <div
-                class="code-status"
-                id="codeStatus">
-                The lock is waiting...
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     LEVEL 3
-===================================================== -->
-
-<section id="level3" class="screen">
-
-    <div class="header">
-
-        <div class="brand">
-            SORNALI
-        </div>
-
-        <div class="level">
-            LEVEL 03 / 05
-        </div>
-
-    </div>
-
-    <div class="title">
-        Restore the Heart
-    </div>
-
-    <div class="subtitle">
-        The heart has been broken apart.<br>
-        Rotate each piece until the heart is restored.
-    </div>
-
-
-    <div class="puzzle-area">
-
-        <div class="heart-target">
-
-            <!-- faint target silhouette -->
-
-            <div class="target-heart"></div>
-
-
-            <div class="puzzle-grid">
-
-                <button
-                    class="piece"
-                    data-start="1">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-                <button
-                    class="piece"
-                    data-start="2">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-                <button
-                    class="piece"
-                    data-start="3">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-                <button
-                    class="piece"
-                    data-start="2">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-                <button
-                    class="piece"
-                    data-start="0">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-                <button
-                    class="piece"
-                    data-start="2">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-                <button
-                    class="piece"
-                    data-start="3">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-                <button
-                    class="piece"
-                    data-start="1">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-                <button
-                    class="piece"
-                    data-start="2">
-
-                    <div class="piece-inner"></div>
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="puzzle-info"
-            id="puzzleInfo">
-
-            TAP THE PIECES TO ROTATE THEM
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     LEVEL 4
-===================================================== -->
-
-<section id="level4" class="screen">
-
-    <div class="header">
-
-        <div class="brand">
-            SORNALI
-        </div>
-
-        <div class="level">
-            LEVEL 04 / 05
-        </div>
-
-    </div>
-
-    <div class="title">
-        Find the Key
-    </div>
-
-    <div class="subtitle">
-        The final door is locked.<br>
-        Find the key hidden somewhere in the room.
-    </div>
-
-
-    <div class="key-room">
-
-        <div class="wall-light"></div>
-
-
-        <!-- recognizable objects -->
-
-        <div class="frame"></div>
-
-        <div class="vase"></div>
-
-        <div class="table"></div>
-
-
-        <!-- real key -->
-
-        <button
-            class="key"
-            id="realKey"
-            aria-label="Find the hidden key">
-
-            <div class="key-shape"></div>
-
-        </button>
-
-
-        <div class="key-label">
-            SEARCH THE ROOM CAREFULLY
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     LEVEL 5
-===================================================== -->
-
-<section id="level5" class="screen">
-
-    <div class="header">
-
-        <div class="brand">
-            SORNALI
-        </div>
-
-        <div class="level">
-            FINAL LEVEL
-        </div>
-
-    </div>
-
-    <div class="title">
-        The Final Door
-    </div>
-
-    <div class="subtitle">
-        You found the key.<br>
-        Everything has led to this moment.
-    </div>
-
-
-    <div class="door-area">
-
-        <div class="door-frame">
-
-            <div class="door" id="door">
-
-                <div class="door-panel"></div>
-
-                <div class="door-heart"></div>
-
-                <div class="handle"></div>
-
-            </div>
-
-        </div>
-
-
-        <div class="unlock-zone">
-
-            <div class="unlock-arrows">
-                ↓ ↓ ↓
-            </div>
-
-            <button
-                class="unlock-button"
-                id="unlockButton">
-
-                🔓 &nbsp; UNLOCK THE DOOR
-
-            </button>
-
-            <div
-                class="door-status"
-                id="doorStatus">
-
-                THE DOOR IS WAITING FOR YOU
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     FINAL
-===================================================== -->
-
-<section id="final" class="screen">
-
-    <div class="final-heart">
-
-        <div class="final-heart-main"></div>
-
-    </div>
-
-
-    <div class="final-eyebrow">
-        YOU ESCAPED THE ROOM
-    </div>
-
-
-    <div class="final-message">
-        But you're trapped<br>
-        in my heart.
-    </div>
-
-
-    <div class="final-name">
-        Sornali ❤️
-    </div>
-
-
-    <div class="final-sign">
-        — DIP
-    </div>
-
-</section>
-
-
-<div id="toast"></div>
-
-<div id="flash"></div>
-
+<div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
 </div>
+
+<div id="floatingHearts"></div>
+
+<div id="app"></div>
 
 
 <script>
 
 /* =========================================================
-   BASIC HELPERS
-========================================================= */
+   ❤️ PERSONALIZE YOUR GAME HERE
+   ========================================================= */
 
-function $(id){
-    return document.getElementById(id);
-}
+const YOU = "Your Name";
+const HER = "My Love";
 
+/*
+   Change the final message here.
+*/
+const FINAL_MESSAGE = `
+If you ever wonder how important you are to me,
+just remember this little game.
 
-/* =========================================================
-   STAR BACKGROUND
-========================================================= */
+Every level was created for one simple reason —
+to remind you that somewhere in this huge world,
+there is someone who feels incredibly lucky
+to have you in his life.
 
-const starCanvas =
-    $("stars");
+You are not just someone I love.
 
-const starCtx =
-    starCanvas.getContext("2d");
+You are the person who makes ordinary moments
+feel special, boring days feel brighter,
+and my world feel a little more beautiful.
 
-let starW = 0;
-let starH = 0;
-let starList = [];
+I don't know what the future has planned for us,
+but I know one thing...
 
+If I get to choose,
+I will keep choosing you.
 
-function resizeStars(){
+Again.
+And again.
+And again. ❤️
 
-    const dpr =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
+Thank you for being you.
 
-    starW =
-        window.innerWidth;
-
-    starH =
-        window.innerHeight;
-
-    starCanvas.width =
-        starW * dpr;
-
-    starCanvas.height =
-        starH * dpr;
-
-    starCanvas.style.width =
-        starW + "px";
-
-    starCanvas.style.height =
-        starH + "px";
-
-    starCtx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
-    );
-
-
-    const count =
-        Math.min(
-            150,
-            Math.max(
-                65,
-                Math.floor(
-                    starW *
-                    starH /
-                    7500
-                )
-            )
-        );
-
-
-    starList = [];
-
-
-    for(
-        let i = 0;
-        i < count;
-        i++
-    ){
-
-        starList.push({
-
-            x:
-                Math.random() *
-                starW,
-
-            y:
-                Math.random() *
-                starH,
-
-            r:
-                .2 +
-                Math.random() *
-                1.2,
-
-            a:
-                .15 +
-                Math.random() *
-                .6,
-
-            speed:
-                .002 +
-                Math.random() *
-                .008,
-
-            phase:
-                Math.random() *
-                Math.PI *
-                2
-
-        });
-
-    }
-
-}
-
-
-resizeStars();
-
-
-window.addEventListener(
-    "resize",
-    resizeStars
-);
-
-
-function animateStars(time){
-
-    starCtx.clearRect(
-        0,
-        0,
-        starW,
-        starH
-    );
-
-
-    for(
-        const star of starList
-    ){
-
-        const alpha =
-            Math.max(
-                .03,
-                star.a +
-                Math.sin(
-                    time *
-                    star.speed +
-                    star.phase
-                ) *
-                .15
-            );
-
-
-        starCtx.beginPath();
-
-
-        starCtx.arc(
-            star.x,
-            star.y,
-            star.r,
-            0,
-            Math.PI * 2
-        );
-
-
-        starCtx.fillStyle =
-            "rgba(255,230,247," +
-            alpha +
-            ")";
-
-
-        starCtx.fill();
-
-    }
-
-
-    requestAnimationFrame(
-        animateStars
-    );
-
-}
-
-
-requestAnimationFrame(
-    animateStars
-);
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-const particleCanvas =
-    $("particles");
-
-const particleCtx =
-    particleCanvas.getContext("2d");
-
-let pW = 0;
-let pH = 0;
-let particles = [];
-let particleRunning = false;
-
-
-function resizeParticles(){
-
-    const dpr =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
-
-    pW =
-        window.innerWidth;
-
-    pH =
-        window.innerHeight;
-
-    particleCanvas.width =
-        pW * dpr;
-
-    particleCanvas.height =
-        pH * dpr;
-
-    particleCanvas.style.width =
-        pW + "px";
-
-    particleCanvas.style.height =
-        pH + "px";
-
-    particleCtx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
-    );
-
-}
-
-
-resizeParticles();
-
-
-window.addEventListener(
-    "resize",
-    resizeParticles
-);
-
-
-function burst(
-    x,
-    y,
-    count = 80
-){
-
-    for(
-        let i = 0;
-        i < count;
-        i++
-    ){
-
-        const angle =
-            Math.random() *
-            Math.PI *
-            2;
-
-        const speed =
-            1.5 +
-            Math.random() * 6;
-
-
-        particles.push({
-
-            x:x,
-
-            y:y,
-
-            vx:
-                Math.cos(angle) *
-                speed,
-
-            vy:
-                Math.sin(angle) *
-                speed,
-
-            life:1,
-
-            decay:
-                .012 +
-                Math.random() *
-                .015,
-
-            size:
-                1 +
-                Math.random() *
-                3
-
-        });
-
-    }
-
-
-    if(!particleRunning){
-
-        particleRunning = true;
-
-        requestAnimationFrame(
-            animateParticles
-        );
-
-    }
-
-}
-
-
-function animateParticles(){
-
-    particleCtx.clearRect(
-        0,
-        0,
-        pW,
-        pH
-    );
-
-
-    for(
-        let i = particles.length - 1;
-        i >= 0;
-        i--
-    ){
-
-        const p =
-            particles[i];
-
-
-        p.x += p.vx;
-        p.y += p.vy;
-
-        p.vx *= .985;
-        p.vy *= .985;
-
-        p.vy += .025;
-
-        p.life -= p.decay;
-
-
-        if(
-            p.life <= 0
-        ){
-
-            particles.splice(
-                i,
-                1
-            );
-
-            continue;
-
-        }
-
-
-        particleCtx.beginPath();
-
-
-        particleCtx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI * 2
-        );
-
-
-        particleCtx.fillStyle =
-            "rgba(255,110,190," +
-            p.life +
-            ")";
-
-
-        particleCtx.fill();
-
-    }
-
-
-    if(
-        particles.length
-    ){
-
-        requestAnimationFrame(
-            animateParticles
-        );
-
-    }else{
-
-        particleRunning = false;
-
-    }
-
-}
-
-
-/* =========================================================
-   UI EFFECTS
-========================================================= */
-
-let toastTimer;
-
-
-function toast(message){
-
-    const element =
-        $("toast");
-
-    element.textContent =
-        message;
-
-    element.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            function(){
-
-                element.classList.remove(
-                    "show"
-                );
-
-            },
-            1700
-        );
-
-}
-
-
-function flash(){
-
-    const element =
-        $("flash");
-
-    element.classList.remove(
-        "go"
-    );
-
-    void element.offsetWidth;
-
-    element.classList.add(
-        "go"
-    );
-
-}
-
-
-/* =========================================================
-   SCREEN NAVIGATION
-========================================================= */
-
-const screens = {
-
-    intro:
-        $("intro"),
-
-    level1:
-        $("level1"),
-
-    level2:
-        $("level2"),
-
-    level3:
-        $("level3"),
-
-    level4:
-        $("level4"),
-
-    level5:
-        $("level5"),
-
-    final:
-        $("final")
-
-};
-
-
-function showScreen(name){
-
-    Object.values(
-        screens
-    ).forEach(
-        function(screen){
-
-            screen.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    setTimeout(
-        function(){
-
-            screens[name]
-                .classList.add(
-                    "active"
-                );
-
-        },
-        60
-    );
-
-}
+I love you more than these little words
+could ever explain.
+`;
 
 
 /* =========================================================
    GAME STATE
-========================================================= */
+   ========================================================= */
 
-const game = {
+let level = 0;
+let score = 0;
 
-    found:0,
-
-    code:"",
-
-    correctCode:"4279",
-
-    codeSolved:false,
-
-    puzzleSolved:false,
-
-    keyFound:false
-
-};
+const app = document.getElementById("app");
 
 
 /* =========================================================
-   START
-========================================================= */
+   BACKGROUND HEARTS
+   ========================================================= */
 
-$("startOrb")
-    .addEventListener(
-        "click",
-        function(){
+function createBackgroundHeart() {
 
-            const rect =
-                $("startOrb")
-                .getBoundingClientRect();
+    const heart = document.createElement("div");
+
+    heart.className = "bg-heart";
+
+    const hearts = ["❤️","💕","💗","💖","💘","💓","♥"];
+
+    heart.innerText =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.fontSize =
+        (12 + Math.random() * 22) + "px";
+
+    heart.style.animationDuration =
+        (7 + Math.random() * 9) + "s";
+
+    heart.style.animationDelay =
+        Math.random() * 3 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 18000);
+}
+
+setInterval(createBackgroundHeart, 600);
 
 
-            burst(
-                rect.left +
-                rect.width / 2,
+/* =========================================================
+   SPARKLE EFFECT
+   ========================================================= */
 
-                rect.top +
-                rect.height / 2,
+function sparkle(x, y) {
 
-                130
-            );
+    const s = document.createElement("div");
+
+    s.className = "sparkle";
+    s.innerText = "✨";
+
+    s.style.left = x + "px";
+    s.style.top = y + "px";
+
+    document.body.appendChild(s);
+
+    setTimeout(() => s.remove(), 1000);
+}
 
 
-            flash();
+/* =========================================================
+   CONFETTI
+   ========================================================= */
+
+function confetti(count = 100) {
+
+    for(let i = 0; i < count; i++) {
+
+        const c = document.createElement("div");
+
+        c.className = "confetti";
+
+        const symbols = ["♥","✦","●","◆","★"];
+
+        c.innerText =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        c.style.left =
+            Math.random() * 100 + "vw";
+
+        c.style.fontSize =
+            (8 + Math.random() * 15) + "px";
+
+        c.style.animationDuration =
+            (2.5 + Math.random() * 3) + "s";
+
+        c.style.animationDelay =
+            Math.random() * .8 + "s";
+
+        document.body.appendChild(c);
+
+        setTimeout(() => c.remove(), 6000);
+    }
+}
 
 
-            setTimeout(
-                function(){
+/* =========================================================
+   SCREEN HELPER
+   ========================================================= */
 
-                    showScreen(
-                        "level1"
-                    );
+function render(content, extraClass = "") {
 
-                },
-                450
-            );
+    app.innerHTML = `
+        <div class="screen ${extraClass}">
+            ${content}
+        </div>
+    `;
 
-        }
-    );
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================================
+   START SCREEN
+   ========================================================= */
+
+function startScreen() {
+
+    render(`
+
+        <div class="card">
+
+            <div class="big-heart">❤️</div>
+
+            <div class="script">
+                A little something for you...
+            </div>
+
+            <h1>
+                Hey, ${HER}
+            </h1>
+
+            <p class="subtitle">
+                I made you a tiny game.
+                <br>
+                There are 5 levels.
+                <br><br>
+                And there might be a little surprise
+                waiting at the end...
+            </p>
+
+            <button class="btn" onclick="startGame()">
+                Start Our Story 💕
+            </button>
+
+        </div>
+    `);
+}
+
+
+/* =========================================================
+   START GAME
+   ========================================================= */
+
+function startGame() {
+
+    level = 1;
+    score = 0;
+
+    showLevel1();
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+function progressHTML() {
+
+    return `
+        <div class="progress-wrap">
+
+            <div class="progress-top">
+                <span>Our little journey</span>
+                <span>Level ${level} / 5</span>
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    style="width:${(level/5)*100}%"
+                ></div>
+            </div>
+
+        </div>
+    `;
+}
 
 
 /* =========================================================
    LEVEL 1
-   HEART = 4
-   STAR  = 2
-   MOON  = 79
-========================================================= */
+   ========================================================= */
 
-const objectData = {
+const questions = [
 
-    objectHeart:{
-        title:"FIRST DIGIT",
-        number:"4",
-        description:
-            "The heart reveals the first digit."
+    {
+        question: "What do you think makes me smile the most?",
+        answers: [
+            "You ❤️",
+            "Money 💰",
+            "Food 🍕",
+            "Sleeping 😴"
+        ],
+        correct: 0
     },
 
-    objectStar:{
-        title:"SECOND DIGIT",
-        number:"2",
-        description:
-            "The star reveals the second digit."
+    {
+        question: "If we could disappear somewhere together, what sounds best?",
+        answers: [
+            "A cozy little trip 🌙",
+            "Office work 💻",
+            "Grocery shopping 🛒",
+            "Standing in a queue 😭"
+        ],
+        correct: 0
     },
 
-    objectMoon:{
-        title:"LAST TWO DIGITS",
-        number:"79",
-        description:
-            "The moon reveals the final two digits."
+    {
+        question: "What is my favorite thing about you?",
+        answers: [
+            "Your heart ❤️",
+            "Your kindness 🌸",
+            "Your smile 😊",
+            "All of the above 💖"
+        ],
+        correct: 3
     }
-
-};
-
-
-let currentClue = null;
-
-
-[
-    $("objectHeart"),
-    $("objectStar"),
-    $("objectMoon")
-].forEach(
-    function(object){
-
-        object.addEventListener(
-            "click",
-            function(){
-
-                if(
-                    object.classList.contains(
-                        "found"
-                    )
-                ){
-
-                    return;
-
-                }
-
-
-                object.classList.add(
-                    "found"
-                );
-
-
-                game.found++;
-
-
-                const rect =
-                    object
-                    .getBoundingClientRect();
-
-
-                burst(
-                    rect.left +
-                    rect.width / 2,
-
-                    rect.top +
-                    rect.height / 2,
-
-                    45
-                );
-
-
-                $("counter")
-                    .textContent =
-                    "FOUND: " +
-                    game.found +
-                    " / 3";
-
-
-                currentClue =
-                    object.id;
-
-
-                const data =
-                    objectData[
-                        object.id
-                    ];
-
-
-                $("clueObject")
-                    .textContent =
-                    data.title;
-
-
-                $("clueNumber")
-                    .textContent =
-                    data.number;
-
-
-                $("clueDescription")
-                    .textContent =
-                    data.description;
-
-
-                $("clueReveal")
-                    .classList.add(
-                        "show"
-                    );
-
-            }
-        );
-
-    }
-);
-
-
-/* Continue after clue */
-
-$("clueContinue")
-    .addEventListener(
-        "click",
-        function(){
-
-            $("clueReveal")
-                .classList.remove(
-                    "show"
-                );
-
-
-            if(
-                game.found === 1
-            ){
-
-                $("searchMessage")
-                    .textContent =
-                    "Good. Two more objects are still hidden.";
-
-            }
-
-
-            if(
-                game.found === 2
-            ){
-
-                $("searchMessage")
-                    .textContent =
-                    "You're close. Find the final object.";
-
-            }
-
-
-            if(
-                game.found === 3
-            ){
-
-                $("searchMessage")
-                    .textContent =
-                    "CODE DISCOVERED: 4 • 2 • 7 • 9";
-
-
-                setTimeout(
-                    function(){
-
-                        flash();
-
-                        showScreen(
-                            "level2"
-                        );
-
-                    },
-                    900
-                );
-
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   LEVEL 2 — CODE
-========================================================= */
-
-const codeDigits = [
-
-    $("digit1"),
-    $("digit2"),
-    $("digit3"),
-    $("digit4")
 
 ];
 
+let questionIndex = 0;
 
-function updateCode(){
+function showLevel1() {
 
-    codeDigits.forEach(
-        function(element,index){
+    questionIndex = 0;
 
-            element.textContent =
-                game.code[index] ||
-                "•";
-
-        }
-    );
-
+    renderLevel1Question();
 }
 
 
-document
-    .querySelectorAll(
-        ".pad[data-number]"
-    )
-    .forEach(
-        function(button){
+function renderLevel1Question() {
 
-            button.addEventListener(
-                "click",
-                function(){
+    const q = questions[questionIndex];
 
-                    if(
-                        game.code.length >= 4
-                    ){
+    render(`
 
-                        return;
+        <div class="card">
 
-                    }
+            ${progressHTML()}
 
+            <div class="question-number">
+                Level 1 • Question ${questionIndex + 1}
+            </div>
 
-                    game.code +=
-                        button.dataset.number;
+            <h2>${q.question}</h2>
 
+            <div class="answers">
 
-                    updateCode();
+                ${q.answers.map((answer, i) => `
 
-                }
-            );
+                    <button
+                        class="answer"
+                        onclick="answerQuestion(${i})"
+                    >
+                        ${answer}
+                    </button>
 
-        }
-    );
+                `).join("")}
 
+            </div>
 
-$("clearCode")
-    .addEventListener(
-        "click",
-        function(){
+            <p>
+                Don't overthink it... 👀
+            </p>
 
-            game.code = "";
+        </div>
+    `);
+}
 
-            updateCode();
 
-            $("codeStatus")
-                .textContent =
-                "The lock is waiting...";
+function answerQuestion(index) {
 
-        }
-    );
+    const q = questions[questionIndex];
 
+    const buttons =
+        document.querySelectorAll(".answer");
 
-$("enterCode")
-    .addEventListener(
-        "click",
-        function(){
+    buttons.forEach(btn => btn.disabled = true);
 
-            if(
-                game.code.length !== 4
-            ){
+    if(index === q.correct) {
 
-                $("codeStatus")
-                    .textContent =
-                    "Enter all four digits.";
+        buttons[index].classList.add("correct");
 
-                return;
+        score += 10;
 
-            }
-
-
-            if(
-                game.code ===
-                game.correctCode
-            ){
-
-                game.codeSolved = true;
-
-
-                $("codeStatus")
-                    .textContent =
-                    "ACCESS GRANTED ✦";
-
-
-                burst(
-                    window.innerWidth / 2,
-                    window.innerHeight / 2,
-                    130
-                );
-
-
-                flash();
-
-
-                toast(
-                    "The lock has opened."
-                );
-
-
-                setTimeout(
-                    function(){
-
-                        showScreen(
-                            "level3"
-                        );
-
-                    },
-                    1100
-                );
-
-            }else{
-
-                $("codeStatus")
-                    .textContent =
-                    "Incorrect code. Try again.";
-
-
-                const lock =
-                    document
-                    .querySelector(
-                        ".lock"
-                    );
-
-
-                lock.classList.add(
-                    "shake"
-                );
-
-
-                setTimeout(
-                    function(){
-
-                        lock.classList.remove(
-                            "shake"
-                        );
-
-                    },
-                    450
-                );
-
-
-                game.code = "";
-
-                updateCode();
-
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   LEVEL 3 — HEART PUZZLE
-========================================================= */
-
-/*
-   Each piece needs to reach rotation 0.
-
-   Starting rotations:
-   1,2,3,
-   2,0,2,
-   3,1,2
-
-   Solution:
-   3,2,1,
-   2,0,2,
-   1,3,2
-*/
-
-
-const pieces =
-    document.querySelectorAll(
-        ".piece"
-    );
-
-
-const rotations = [
-    1,2,3,
-    2,0,2,
-    3,1,2
-];
-
-
-pieces.forEach(
-    function(piece,index){
-
-        piece.dataset.rotation =
-            rotations[index];
-
-
-        piece.style.transform =
-            "rotate(" +
-            (
-                rotations[index] *
-                90
-            ) +
-            "deg)";
-
-
-        piece.addEventListener(
-            "click",
-            function(){
-
-                rotations[index] =
-                    (
-                        rotations[index] +
-                        1
-                    ) % 4;
-
-
-                piece.style.transform =
-                    "rotate(" +
-                    (
-                        rotations[index] *
-                        90
-                    ) +
-                    "deg)";
-
-
-                checkHeartPuzzle();
-
-            }
-        );
-
-    }
-);
-
-
-function checkHeartPuzzle(){
-
-    const solved =
-        rotations.every(
-            function(rotation){
-
-                return rotation === 0;
-
-            }
-        );
-
-
-    if(
-        solved &&
-        !game.puzzleSolved
-    ){
-
-        game.puzzleSolved = true;
-
-
-        pieces.forEach(
-            function(piece){
-
-                piece.classList.add(
-                    "correct"
-                );
-
-            }
-        );
-
-
-        $("puzzleInfo")
-            .textContent =
-            "HEART RESTORED ✦";
-
-
-        burst(
+        sparkle(
             window.innerWidth / 2,
-            window.innerHeight / 2,
-            180
+            window.innerHeight / 2
         );
 
+    } else {
 
-        flash();
+        buttons[index].classList.add("wrong");
 
-
-        toast(
-            "The heart has been restored."
-        );
-
-
-        setTimeout(
-            function(){
-
-                showScreen(
-                    "level4"
-                );
-
-            },
-            1400
-        );
-
+        buttons[q.correct].classList.add("correct");
     }
 
+    setTimeout(() => {
+
+        questionIndex++;
+
+        if(questionIndex >= questions.length) {
+
+            showLevelComplete(
+                1,
+                "Not bad... ❤️",
+                "You survived the first level.",
+                showLevel2
+            );
+
+        } else {
+
+            renderLevel1Question();
+
+        }
+
+    }, 900);
 }
 
 
 /* =========================================================
-   LEVEL 4 — KEY
-========================================================= */
+   LEVEL COMPLETE
+   ========================================================= */
 
-$("realKey")
-    .addEventListener(
-        "click",
-        function(){
+function showLevelComplete(
+    completedLevel,
+    title,
+    message,
+    nextFunction
+) {
 
-            if(
-                game.keyFound
-            ){
+    confetti(50);
 
-                return;
+    render(`
 
-            }
+        <div class="card">
 
+            <div class="big-heart">💖</div>
 
-            game.keyFound = true;
+            <div class="question-number">
+                LEVEL ${completedLevel} COMPLETE
+            </div>
 
+            <h2>${title}</h2>
 
-            const rect =
-                $("realKey")
-                .getBoundingClientRect();
+            <p class="subtitle">
+                ${message}
+            </p>
 
+            <button class="btn" onclick="(${nextFunction.name})()">
+                Continue 💕
+            </button>
 
-            burst(
-                rect.left +
-                rect.width / 2,
-
-                rect.top +
-                rect.height / 2,
-
-                150
-            );
-
-
-            $("realKey")
-                .style.opacity =
-                "0";
-
-
-            $("realKey")
-                .style.pointerEvents =
-                "none";
-
-
-            flash();
-
-
-            toast(
-                "You found the key!"
-            );
-
-
-            setTimeout(
-                function(){
-
-                    showScreen(
-                        "level5"
-                    );
-
-                },
-                1000
-            );
-
-        }
-    );
+        </div>
+    `);
+}
 
 
 /* =========================================================
-   LEVEL 5 — FINAL DOOR
-========================================================= */
+   LEVEL 2 — CATCH HEARTS
+   ========================================================= */
 
-$("unlockButton")
-    .addEventListener(
-        "click",
-        function(){
+let heartsCaught = 0;
+let heartsNeeded = 8;
+let heartTimer;
+let heartInterval;
 
-            if(
-                !game.keyFound ||
-                !game.codeSolved ||
-                !game.puzzleSolved
-            ){
+function showLevel2() {
 
-                return;
+    heartsCaught = 0;
 
-            }
+    render(`
+
+        <div class="card">
+
+            ${progressHTML()}
+
+            <div class="question-number">
+                Level 2 • Catch My Heart
+            </div>
+
+            <h2>
+                Catch the hearts! 💕
+            </h2>
+
+            <p>
+                You have 20 seconds.
+                <br>
+                Catch at least ${heartsNeeded} hearts.
+            </p>
+
+            <div class="game-stats">
+
+                <div class="stat">
+                    <strong id="heartScore">0</strong>
+                    <span>HEARTS</span>
+                </div>
+
+                <div class="stat">
+                    <strong id="heartTime">20</strong>
+                    <span>SECONDS</span>
+                </div>
+
+            </div>
+
+            <div
+                class="game-area"
+                id="heartGame"
+            ></div>
+
+        </div>
+    `);
+
+    startHeartGame();
+}
 
 
-            $("doorStatus")
-                .textContent =
-                "UNLOCKING...";
+function startHeartGame() {
 
+    let time = 20;
 
-            $("unlockButton")
-                .style.pointerEvents =
-                "none";
+    heartTimer = setInterval(() => {
 
+        time--;
 
-            $("door")
-                .classList.add(
-                    "open"
+        const timer =
+            document.getElementById("heartTime");
+
+        if(timer)
+            timer.innerText = time;
+
+        if(time <= 0) {
+
+            clearInterval(heartTimer);
+            clearInterval(heartInterval);
+
+            if(heartsCaught >= heartsNeeded) {
+
+                showLevelComplete(
+                    2,
+                    "You caught my heart! ❤️",
+                    "Okay... that was actually adorable.",
+                    showLevel3
                 );
 
+            } else {
 
-            burst(
-                window.innerWidth / 2,
-                window.innerHeight / 2,
-                260
-            );
+                render(`
+
+                    <div class="card">
+
+                        <div class="big-heart">🥺</div>
+
+                        <h2>Almost!</h2>
+
+                        <p class="subtitle">
+                            My heart is a little slippery.
+                            <br>
+                            Let's try again.
+                        </p>
+
+                        <button
+                            class="btn"
+                            onclick="showLevel2()"
+                        >
+                            Try Again 💗
+                        </button>
+
+                    </div>
+                `);
+
+            }
+        }
+
+    }, 1000);
+
+    heartInterval = setInterval(spawnHeart, 650);
+}
 
 
-            flash();
+function spawnHeart() {
 
+    const area =
+        document.getElementById("heartGame");
 
-            setTimeout(
-                function(){
+    if(!area) return;
 
-                    $("app")
-                        .style.transition =
-                        "background 1.5s ease";
+    const heart =
+        document.createElement("div");
 
-                    $("app")
-                        .style.background =
-                        "#000";
+    heart.className = "catch-heart";
 
-                },
-                1600
-            );
+    const choices =
+        ["❤️","💖","💗","💘","💕"];
 
+    heart.innerText =
+        choices[Math.floor(Math.random() * choices.length)];
 
-            setTimeout(
-                function(){
+    const maxX =
+        area.clientWidth - 45;
 
-                    showScreen(
-                        "final"
-                    );
+    const maxY =
+        area.clientHeight - 45;
 
-                },
-                3000
-            );
+    heart.style.left =
+        Math.max(5, Math.random() * maxX) + "px";
+
+    heart.style.top =
+        Math.max(5, Math.random() * maxY) + "px";
+
+    heart.onclick = function(e) {
+
+        heartsCaught++;
+
+        score += 5;
+
+        document.getElementById("heartScore").innerText =
+            heartsCaught;
+
+        sparkle(
+            e.clientX,
+            e.clientY
+        );
+
+        heart.remove();
+
+        if(heartsCaught >= heartsNeeded) {
+
+            clearInterval(heartTimer);
+            clearInterval(heartInterval);
+
+            setTimeout(() => {
+
+                showLevelComplete(
+                    2,
+                    "You caught my heart! ❤️",
+                    "And somehow you made it look easy.",
+                    showLevel3
+                );
+
+            }, 300);
 
         }
-    );
+    };
+
+    area.appendChild(heart);
+
+    setTimeout(() => {
+
+        if(heart.isConnected)
+            heart.remove();
+
+    }, 1400);
+}
 
 
 /* =========================================================
-   FINAL AMBIENT PARTICLES
-========================================================= */
+   LEVEL 3 — MEMORY
+   ========================================================= */
 
-setInterval(
-    function(){
+let memoryValues = [];
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let matchedPairs = 0;
+
+function showLevel3() {
+
+    const emojis = [
+        "❤️","❤️",
+        "🌹","🌹",
+        "💍","💍",
+        "🌙","🌙",
+        "✨","✨",
+        "🥰","🥰",
+        "💕","💕",
+        "💋","💋"
+    ];
+
+    memoryValues =
+        emojis.sort(() => Math.random() - .5);
+
+    matchedPairs = 0;
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+
+    render(`
+
+        <div class="card">
+
+            ${progressHTML()}
+
+            <div class="question-number">
+                Level 3 • Memory of Us
+            </div>
+
+            <h2>
+                Find the matching hearts 💞
+            </h2>
+
+            <p>
+                Match all the pairs to unlock the next level.
+            </p>
+
+            <div
+                class="memory-grid"
+                id="memoryGrid"
+            ></div>
+
+        </div>
+    `);
+
+    createMemoryBoard();
+}
+
+
+function createMemoryBoard() {
+
+    const grid =
+        document.getElementById("memoryGrid");
+
+    memoryValues.forEach((value, index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "memory-card";
+
+        card.dataset.value = value;
+        card.dataset.index = index;
+
+        card.innerText = "💗";
+
+        card.onclick =
+            () => flipCard(card);
+
+        grid.appendChild(card);
+    });
+}
+
+
+function flipCard(card) {
+
+    if(lockBoard) return;
+    if(card === firstCard) return;
+    if(card.classList.contains("matched")) return;
+
+    card.classList.add("flipped");
+    card.innerText = card.dataset.value;
+
+    if(!firstCard) {
+
+        firstCard = card;
+        return;
+    }
+
+    secondCard = card;
+
+    checkMemoryMatch();
+}
+
+
+function checkMemoryMatch() {
+
+    const match =
+        firstCard.dataset.value ===
+        secondCard.dataset.value;
+
+    if(match) {
+
+        firstCard.classList.add("matched");
+        secondCard.classList.add("matched");
+
+        matchedPairs++;
+
+        resetMemoryCards();
+
+        if(matchedPairs === 8) {
+
+            setTimeout(() => {
+
+                showLevelComplete(
+                    3,
+                    "You remembered them all! ✨",
+                    "Maybe that's a sign we should make more memories together.",
+                    showLevel4
+                );
+
+            }, 600);
+        }
+
+    } else {
+
+        lockBoard = true;
+
+        setTimeout(() => {
+
+            firstCard.classList.remove("flipped");
+            secondCard.classList.remove("flipped");
+
+            firstCard.innerText = "💗";
+            secondCard.innerText = "💗";
+
+            resetMemoryCards();
+
+        }, 800);
+    }
+}
+
+
+function resetMemoryCards() {
+
+    [firstCard, secondCard] =
+        [null, null];
+
+    lockBoard = false;
+}
+
+
+/* =========================================================
+   LEVEL 4 — CHOICES
+   ========================================================= */
+
+function showLevel4() {
+
+    render(`
+
+        <div class="card">
+
+            ${progressHTML()}
+
+            <div class="question-number">
+                Level 4 • One Important Question
+            </div>
+
+            <h2>
+                What should we do together? 🌙
+            </h2>
+
+            <p>
+                There is no wrong answer...
+                but choose carefully. 👀
+            </p>
+
+            <div class="choice-container">
+
+                <div
+                    class="choice"
+                    onclick="chooseLove('movie')"
+                >
+                    <div class="choice-icon">🎬</div>
+                    <strong>Movie Night</strong>
+                    <p>Blanket + snacks + you.</p>
+                </div>
+
+                <div
+                    class="choice"
+                    onclick="chooseLove('trip')"
+                >
+                    <div class="choice-icon">🌍</div>
+                    <strong>Little Trip</strong>
+                    <p>Just disappear somewhere.</p>
+                </div>
+
+                <div
+                    class="choice"
+                    onclick="chooseLove('food')"
+                >
+                    <div class="choice-icon">🍕</div>
+                    <strong>Food Date</strong>
+                    <p>Because food makes everything better.</p>
+                </div>
+
+                <div
+                    class="choice"
+                    onclick="chooseLove('forever')"
+                >
+                    <div class="choice-icon">💍</div>
+                    <strong>Something More</strong>
+                    <p>Maybe... forever?</p>
+                </div>
+
+            </div>
+
+        </div>
+    `);
+}
+
+
+function chooseLove(choice) {
+
+    let message = "";
+
+    if(choice === "movie") {
+
+        message =
+            "Good choice. But I'm probably going to spend half the movie looking at you. 😌❤️";
+
+    } else if(choice === "trip") {
+
+        message =
+            "Pack your bags. Somewhere beautiful sounds better when you're there. 🌍💕";
+
+    } else if(choice === "food") {
+
+        message =
+            "Excellent choice. I'll bring the food. You just bring that smile. 😋❤️";
+
+    } else {
+
+        message =
+            "Hmm... now THAT is the answer I was hoping for. 👀💍❤️";
+
+    }
+
+    render(`
+
+        <div class="card">
+
+            <div class="big-heart">🥰</div>
+
+            <h2>
+                I like your answer.
+            </h2>
+
+            <p class="subtitle">
+                ${message}
+            </p>
+
+            <button
+                class="btn"
+                onclick="showLevel5()"
+            >
+                One More Level 💖
+            </button>
+
+        </div>
+    `);
+}
+
+
+/* =========================================================
+   LEVEL 5 — FINAL QUESTION
+   ========================================================= */
+
+function showLevel5() {
+
+    render(`
+
+        <div class="card">
+
+            ${progressHTML()}
+
+            <div class="question-number">
+                Level 5 • The Final Question
+            </div>
+
+            <div class="big-heart">
+                💗
+            </div>
+
+            <h2>
+                ${HER}, will you stay with me
+                through all the little moments?
+            </h2>
+
+            <p class="subtitle">
+                The random laughs.
+                <br>
+                The silly arguments.
+                <br>
+                The late-night conversations.
+                <br>
+                The adventures.
+                <br>
+                And all the ordinary days in between.
+            </p>
+
+            <div style="margin-top:25px">
+
+                <button
+                    class="btn"
+                    onclick="finalYes()"
+                >
+                    Yes ❤️
+                </button>
+
+                <button
+                    class="btn secondary"
+                    id="noButton"
+                    onclick="runAway()"
+                >
+                    No 🙈
+                </button>
+
+            </div>
+
+        </div>
+    `);
+}
+
+
+/* =========================================================
+   RUNAWAY NO BUTTON
+   ========================================================= */
+
+function runAway() {
+
+    const btn =
+        document.getElementById("noButton");
+
+    if(!btn) return;
+
+    btn.style.position = "fixed";
+
+    const maxX =
+        window.innerWidth - btn.offsetWidth - 20;
+
+    const maxY =
+        window.innerHeight - btn.offsetHeight - 20;
+
+    btn.style.left =
+        Math.random() * maxX + "px";
+
+    btn.style.top =
+        Math.random() * maxY + "px";
+
+    btn.innerText =
+        ["Are you sure? 🥺",
+         "Try again 😭",
+         "Nope 😂",
+         "You can't escape ❤️",
+         "Nice try 😏"][Math.floor(Math.random()*5)];
+
+    sparkle(
+        Math.random() * window.innerWidth,
+        Math.random() * window.innerHeight
+    );
+}
+
+
+/* =========================================================
+   FINAL SCREEN
+   ========================================================= */
+
+function finalYes() {
+
+    confetti(180);
+
+    setTimeout(() => {
+
+        render(`
+
+            <div class="final-screen">
+
+                <div class="card final-card">
+
+                    <div class="final-heart">
+                        💖
+                    </div>
+
+                    <div class="script">
+                        You made it to the end...
+                    </div>
+
+                    <h1>
+                        ${HER}
+                    </h1>
+
+                    <div class="love-letter">
+
+                        ${FINAL_MESSAGE
+                            .trim()
+                            .split("\n")
+                            .map(line =>
+                                line.trim()
+                                ? `<p>${line}</p>`
+                                : ""
+                            )
+                            .join("")
+                        }
+
+                        <div class="signature">
+                            — ${YOU} ❤️
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="btn"
+                        onclick="restartGame()"
+                    >
+                        Play Again 💕
+                    </button>
+
+                </div>
+
+            </div>
+
+        `);
+
+        createMassiveHeartExplosion();
+
+    }, 500);
+}
+
+
+/* =========================================================
+   FINAL HEART EXPLOSION
+   ========================================================= */
+
+function createMassiveHeartExplosion() {
+
+    const hearts =
+        ["❤️","💖","💕","💗","💘","💓","💞","✨"];
+
+    for(let i = 0; i < 70; i++) {
+
+        const h =
+            document.createElement("div");
+
+        h.style.position = "fixed";
+        h.style.left = "50%";
+        h.style.top = "50%";
+        h.style.zIndex = "999";
+        h.style.pointerEvents = "none";
+
+        h.innerText =
+            hearts[Math.floor(Math.random()*hearts.length)];
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const distance =
+            100 + Math.random() * 450;
 
         const x =
-            Math.random() *
-            window.innerWidth;
+            Math.cos(angle) * distance;
 
+        const y =
+            Math.sin(angle) * distance;
 
-        burst(
-            x,
-            window.innerHeight + 5,
-            2
+        h.animate(
+            [
+                {
+                    transform: "translate(-50%, -50%) scale(.2)",
+                    opacity: 1
+                },
+                {
+                    transform:
+                        `translate(calc(-50% + ${x}px),
+                                   calc(-50% + ${y}px))
+                         scale(${.7 + Math.random()})`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 1500 + Math.random()*1000,
+                easing: "cubic-bezier(.2,.8,.3,1)"
+            }
         );
 
-    },
-    1300
-);
+        document.body.appendChild(h);
+
+        setTimeout(() => h.remove(), 2800);
+    }
+}
 
 
 /* =========================================================
-   ORIENTATION
-========================================================= */
+   RESTART
+   ========================================================= */
 
-window.addEventListener(
-    "orientationchange",
-    function(){
+function restartGame() {
 
-        setTimeout(
-            function(){
+    startScreen();
+}
 
-                resizeStars();
 
-                resizeParticles();
+/* =========================================================
+   CLICK SPARKLES
+   ========================================================= */
 
-            },
-            300
+document.addEventListener("click", function(e) {
+
+    if(
+        e.target.tagName === "BUTTON" ||
+        e.target.classList.contains("choice") ||
+        e.target.classList.contains("memory-card")
+    ) {
+
+        sparkle(
+            e.clientX,
+            e.clientY
         );
-
     }
-);
+
+});
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+startScreen();
 
 </script>
 
 </body>
 </html>
+```
