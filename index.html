@@ -1,23 +1,13 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#120914">
+<meta name="theme-color" content="#100810">
 
-<title>আমাদের Date Plan ❤️</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+<title>আমাদের Date ❤️</title>
 
 <style>
-
-/* =========================================================
-   LIGHTWEIGHT ROMANTIC DATE PLANNER
-========================================================= */
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -25,15 +15,15 @@
 }
 
 :root{
-    --bg:#0b060d;
-    --bg2:#170a18;
-    --card:#18101b;
-    --card2:#21131f;
-    --pink:#ff4d82;
-    --pink-light:#ff9fbd;
+    --bg:#0c070d;
+    --bg2:#170b17;
+    --card:#191019;
+    --card2:#211420;
+    --pink:#ff4d7f;
+    --pink2:#ff8eae;
     --text:#fff;
-    --muted:#bcaebb;
-    --line:rgba(255,255,255,.10);
+    --muted:#b9a9b6;
+    --border:rgba(255,255,255,.10);
 }
 
 html{
@@ -45,13 +35,13 @@ body{
     background:
         radial-gradient(
             circle at 85% 10%,
-            rgba(255,65,125,.12),
-            transparent 28%
+            rgba(255,70,125,.13),
+            transparent 27%
         ),
         radial-gradient(
             circle at 10% 90%,
-            rgba(130,75,200,.10),
-            transparent 30%
+            rgba(135,80,190,.10),
+            transparent 28%
         ),
         linear-gradient(
             145deg,
@@ -60,18 +50,25 @@ body{
         );
 
     color:var(--text);
-    font-family:"Noto Serif Bengali",serif;
+
+    font-family:
+        "Noto Serif Bengali",
+        "Nirmala UI",
+        "Vrinda",
+        Georgia,
+        serif;
+
+    overflow-x:hidden;
 }
 
-/* =========================================================
-   SIMPLE STARS
-========================================================= */
+/* =========================
+   STARS
+========================= */
 
 #stars{
     position:fixed;
     inset:0;
     pointer-events:none;
-    overflow:hidden;
     z-index:0;
 }
 
@@ -80,40 +77,43 @@ body{
     width:2px;
     height:2px;
     border-radius:50%;
-    background:#fff;
-    opacity:.45;
+    background:white;
+    opacity:.4;
     animation:twinkle 3s ease-in-out infinite;
 }
 
 @keyframes twinkle{
-    0%,100%{opacity:.2}
-    50%{opacity:.8}
+    0%,100%{opacity:.18}
+    50%{opacity:.65}
 }
 
-/* =========================================================
+/* =========================
    APP
-========================================================= */
+========================= */
 
 #app{
     position:relative;
     z-index:1;
+
     min-height:100vh;
-    width:100%;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:24px;
+
+    padding:20px;
 }
 
 .page{
     width:min(760px,100%);
-    animation:pageIn .45s ease;
+
+    animation:pageIn .35s ease;
 }
 
 @keyframes pageIn{
     from{
         opacity:0;
-        transform:translateY(12px);
+        transform:translateY(10px);
     }
 
     to{
@@ -122,78 +122,78 @@ body{
     }
 }
 
-/* =========================================================
+/* =========================
    CARD
-========================================================= */
+========================= */
 
 .card{
-    width:100%;
-    padding:clamp(25px,5vw,48px);
-
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.065),
-            rgba(255,255,255,.025)
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.02)
         );
 
-    border:1px solid var(--line);
-    border-radius:28px;
+    border:1px solid var(--border);
+
+    border-radius:26px;
+
+    padding:
+        clamp(22px,5vw,46px);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.35);
+        0 22px 60px rgba(0,0,0,.32);
 
     text-align:center;
 }
 
-/* =========================================================
-   TYPOGRAPHY
-========================================================= */
+/* =========================
+   TEXT
+========================= */
 
-.script{
-    font-family:"Tiro Bangla",serif;
-    font-style:italic;
-    color:var(--pink-light);
-}
-
-.eyebrow{
+.kicker{
+    color:var(--pink2);
     font-size:12px;
-    letter-spacing:2px;
-    color:var(--pink-light);
-    margin-bottom:12px;
+    letter-spacing:1.5px;
+    margin-bottom:10px;
 }
 
 h1{
-    font-size:clamp(38px,8vw,70px);
+    font-size:clamp(40px,8vw,70px);
     line-height:1.2;
 }
 
 h2{
-    font-size:clamp(27px,5vw,42px);
+    font-size:clamp(27px,5vw,41px);
     line-height:1.4;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 p{
     color:var(--muted);
-    line-height:1.9;
+    line-height:1.85;
     font-size:16px;
 }
 
-/* =========================================================
-   HEART
-========================================================= */
-
-.hero-heart{
-    font-size:72px;
-    line-height:1;
-    margin-bottom:22px;
-
-    animation:
-        heartBeat 1.8s ease-in-out infinite;
+.script{
+    color:var(--pink2);
+    font-size:21px;
+    font-style:italic;
 }
 
-@keyframes heartBeat{
+/* =========================
+   HEART
+========================= */
+
+.big-heart{
+    font-size:65px;
+    line-height:1;
+    margin-bottom:20px;
+
+    animation:heartbeat 1.8s ease-in-out infinite;
+}
+
+@keyframes heartbeat{
     0%,100%{
         transform:scale(1);
     }
@@ -211,47 +211,91 @@ p{
     }
 }
 
-/* =========================================================
-   BUTTON
-========================================================= */
+/* =========================
+   PROGRESS
+========================= */
+
+.progress{
+    margin-bottom:30px;
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+
+    color:#887885;
+    font-size:12px;
+
+    margin-bottom:7px;
+}
+
+.progress-track{
+    height:5px;
+    border-radius:20px;
+
+    background:rgba(255,255,255,.07);
+
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ed396d,
+            #ff92af
+        );
+
+    border-radius:20px;
+
+    transition:width .3s ease;
+}
+
+/* =========================
+   BUTTONS
+========================= */
 
 .btn{
-    border:0;
+    border:none;
+    outline:none;
+
+    padding:13px 26px;
+
     min-height:48px;
 
-    padding:13px 27px;
-
     border-radius:50px;
+
+    color:white;
 
     background:
         linear-gradient(
             135deg,
-            #ef396e,
-            #ff709b
+            #ed3a6d,
+            #ff7099
         );
-
-    color:#fff;
 
     font-family:inherit;
     font-size:15px;
-    font-weight:600;
+    font-weight:bold;
 
     cursor:pointer;
 
-    margin-top:22px;
+    margin-top:20px;
 
     box-shadow:
-        0 8px 25px rgba(255,55,110,.22);
+        0 8px 22px rgba(255,60,115,.20);
 
     transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+        transform .18s ease,
+        box-shadow .18s ease;
 }
 
 .btn:hover{
     transform:translateY(-2px);
     box-shadow:
-        0 12px 30px rgba(255,55,110,.32);
+        0 11px 26px rgba(255,60,115,.28);
 }
 
 .btn:active{
@@ -259,148 +303,61 @@ p{
 }
 
 .btn.secondary{
-    background:#251726;
-    border:1px solid var(--line);
+    background:#241725;
+    border:1px solid var(--border);
     box-shadow:none;
 }
 
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress-area{
-    margin-bottom:32px;
-}
-
-.progress-top{
-    display:flex;
-    justify-content:space-between;
-
-    font-size:12px;
-    color:#897987;
-
-    margin-bottom:7px;
-}
-
-.progress{
-    height:5px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border-radius:20px;
-
-    overflow:hidden;
-}
-
-.progress-bar{
-    height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #e9366d,
-            #ff91b0
-        );
-
-    border-radius:20px;
-
-    transition:width .35s ease;
-}
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.form-group{
-    max-width:620px;
-    margin:22px auto;
-    text-align:left;
-}
-
-label{
-    display:block;
-    color:#e6b1c3;
+.btn.small{
+    padding:10px 18px;
+    min-height:42px;
     font-size:14px;
-    margin-bottom:8px;
 }
 
-input,
-textarea,
-select{
-    width:100%;
+/* =========================
+   OPTION GRID
+========================= */
 
-    padding:14px 15px;
-
-    background:#0e090f;
-
-    color:#fff;
-
-    border:1px solid var(--line);
-
-    border-radius:14px;
-
-    font-family:inherit;
-    font-size:16px;
-
-    outline:none;
-
-    transition:border-color .2s;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:rgba(255,100,150,.6);
-}
-
-textarea{
-    min-height:120px;
-    resize:vertical;
-}
-
-select option{
-    background:#170c18;
-}
-
-/* =========================================================
-   GRID
-========================================================= */
-
-.grid{
+.option-grid{
     display:grid;
     gap:12px;
+
+    margin:28px auto;
+
+    max-width:650px;
 }
 
-.two{
+.grid-2{
     grid-template-columns:repeat(2,1fr);
 }
 
-.three{
+.grid-3{
     grid-template-columns:repeat(3,1fr);
 }
 
-/* =========================================================
-   LOCATION
-========================================================= */
-
 .option{
-    padding:20px 12px;
+    width:100%;
+
+    border:1px solid var(--border);
 
     background:
         rgba(255,255,255,.035);
 
-    border:
-        1px solid var(--line);
+    color:white;
 
-    border-radius:18px;
+    border-radius:17px;
+
+    padding:18px 12px;
+
+    font-family:inherit;
+    font-size:15px;
 
     cursor:pointer;
 
     transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease;
+        background .18s ease,
+        border-color .18s ease,
+        transform .18s ease;
 }
 
 .option:hover{
@@ -409,178 +366,488 @@ select option{
 
 .option.selected{
     background:
-        rgba(255,70,120,.10);
+        rgba(255,70,120,.12);
 
     border-color:
-        rgba(255,100,150,.65);
+        rgba(255,110,150,.65);
 }
 
-.option-icon{
-    font-size:32px;
-    margin-bottom:7px;
+.icon{
+    display:block;
+    font-size:28px;
+    margin-bottom:6px;
 }
 
-.option-title{
-    font-weight:600;
-}
-
-.option-description{
-    color:#8e7f8e;
+.small-text{
+    color:#8d7d8b;
     font-size:12px;
     margin-top:4px;
 }
 
-/* =========================================================
-   FOOD
-========================================================= */
+/* =========================
+   FORM
+========================= */
 
-.food{
-    padding:17px 10px;
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
 }
 
-.food .option-icon{
-    font-size:27px;
-}
-
-/* =========================================================
-   COLOR
-========================================================= */
-
-.color{
-    padding:15px 8px;
-}
-
-.color-circle{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-
-    margin:0 auto 7px;
-
-    border:2px solid rgba(255,255,255,.25);
-}
-
-.color.selected{
-    border-color:#fff;
-
-    box-shadow:
-        0 0 0 2px rgba(255,100,150,.3);
-}
-
-/* =========================================================
-   ACTIVITIES
-========================================================= */
-
-.activity{
+.form-group{
     text-align:left;
-    padding:17px;
+    margin:18px 0;
 }
 
-.activity-icon{
-    font-size:24px;
-    margin-right:7px;
+label{
+    display:block;
+
+    color:#e4afc1;
+
+    font-size:14px;
+
+    margin-bottom:8px;
 }
 
-/* =========================================================
+input,
+textarea,
+select{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    background:#0d080e;
+
+    color:white;
+
+    padding:13px 14px;
+
+    font-family:inherit;
+    font-size:15px;
+
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:rgba(255,100,145,.7);
+}
+
+textarea{
+    min-height:125px;
+    resize:vertical;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+
+    margin-top:24px;
+}
+
+.nav .btn{
+    margin-top:0;
+}
+
+/* =========================
    SUMMARY
-========================================================= */
+========================= */
 
 .summary-head{
-    padding:28px 20px;
+    padding:25px 18px;
 
-    border-radius:22px;
+    margin:22px 0;
+
+    border-radius:20px;
+
+    border:1px solid var(--border);
 
     background:
         linear-gradient(
             135deg,
             rgba(255,70,120,.10),
-            rgba(140,80,200,.08)
+            rgba(150,80,190,.07)
         );
-
-    border:1px solid var(--line);
-
-    margin:20px 0;
 }
 
 .summary-title{
-    font-family:"Tiro Bangla",serif;
-    font-size:30px;
     color:#ffabc3;
+    font-size:29px;
+    margin-bottom:5px;
 }
 
 .summary-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:11px;
+
     text-align:left;
 }
 
 .summary-item{
-    padding:17px;
-    background:rgba(255,255,255,.035);
-    border:1px solid var(--line);
-    border-radius:17px;
+    padding:16px;
+
+    border-radius:15px;
+
+    border:1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.035);
+}
+
+.summary-icon{
+    font-size:21px;
+    margin-bottom:4px;
 }
 
 .summary-item small{
     display:block;
-    color:#827482;
+
+    color:#817180;
+
     font-size:11px;
+
     margin-bottom:5px;
 }
 
 .summary-item strong{
     display:block;
-    color:#fff;
-    font-size:15px;
-    line-height:1.6;
+
+    color:white;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    word-break:break-word;
 }
 
-.summary-icon{
-    font-size:22px;
-    margin-bottom:5px;
-}
-
-.note{
+.message{
     text-align:left;
+
     margin-top:12px;
-    padding:18px;
+
+    padding:17px;
 
     border-left:
         3px solid var(--pink);
 
     border-radius:
-        0 15px 15px 0;
+        0 14px 14px 0;
 
     background:
         rgba(255,70,120,.06);
 }
 
-.note small{
-    color:var(--pink-light);
+.message-title{
+    color:var(--pink2);
+    font-size:12px;
 }
 
-.note p{
-    color:#fff;
+.message p{
+    color:white;
+    margin-top:6px;
+}
+
+.success{
+    margin-top:18px;
+
+    padding:13px;
+
+    border-radius:13px;
+
+    color:#ffb3c8;
+
+    background:
+        rgba(255,70,120,.055);
+}
+
+/* =========================
+   PDF AREA
+   Kept off-screen, not display:none
+========================= */
+
+#pdfContainer{
+    position:fixed;
+
+    left:-10000px;
+    top:0;
+
+    width:794px;
+
+    background:white;
+
+    z-index:-999;
+
+    pointer-events:none;
+}
+
+.pdf-page{
+    width:794px;
+    min-height:1123px;
+
+    padding:65px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff8fb,
+            #ffffff
+        );
+
+    color:#24151f;
+
+    font-family:
+        "Noto Serif Bengali",
+        "Nirmala UI",
+        "Vrinda",
+        Georgia,
+        serif;
+}
+
+.pdf-inner{
+    min-height:993px;
+
+    border:2px solid #e8b3c6;
+
+    border-radius:24px;
+
+    padding:45px;
+
+    position:relative;
+}
+
+.pdf-heart{
+    text-align:center;
+
+    color:#e83d6e;
+
+    font-family:Arial,sans-serif;
+
+    font-size:52px;
+
+    margin-bottom:8px;
+}
+
+.pdf-kicker{
+    text-align:center;
+
+    color:#a64a68;
+
+    font-family:Arial,sans-serif;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+}
+
+.pdf-title{
+    text-align:center;
+
+    color:#842b4c;
+
+    font-size:36px;
+
+    font-weight:bold;
+
+    margin-top:9px;
+}
+
+.pdf-names{
+    text-align:center;
+
+    color:#896071;
+
+    font-size:14px;
+
+    margin-top:5px;
+}
+
+.pdf-date{
+    margin:34px auto 26px;
+
+    padding:19px;
+
+    max-width:560px;
+
+    text-align:center;
+
+    background:#fff0f5;
+
+    border:1px solid #efc1d0;
+
+    border-radius:17px;
+}
+
+.pdf-date-label{
+    color:#ad5674;
+
+    font-size:12px;
+}
+
+.pdf-date-value{
+    color:#63233e;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    margin-top:4px;
+}
+
+.pdf-section{
+    margin-top:25px;
+}
+
+.pdf-section-title{
+    color:#963957;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    border-bottom:1px solid #ecd3dc;
+
+    padding-bottom:8px;
+
+    margin-bottom:4px;
+}
+
+.pdf-row{
+    display:flex;
+
+    gap:15px;
+
+    padding:11px 0;
+
+    border-bottom:1px solid #f0e0e6;
+}
+
+.pdf-label{
+    width:120px;
+
+    color:#987080;
+
+    font-size:12px;
+
+    flex-shrink:0;
+}
+
+.pdf-value{
+    color:#30202a;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    word-break:break-word;
+}
+
+.pdf-message{
+    margin-top:24px;
+
+    padding:17px;
+
+    background:#fff3f7;
+
+    border-left:4px solid #e64273;
+
+    border-radius:0 12px 12px 0;
+}
+
+.pdf-message-title{
+    color:#a33e60;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+.pdf-message-text{
+    color:#34232c;
+
+    font-size:13px;
+
+    line-height:1.8;
+
     margin-top:7px;
 }
 
-/* =========================================================
-   SUCCESS
-========================================================= */
+.pdf-footer{
+    position:absolute;
 
-.success{
-    margin-top:20px;
-    padding:15px;
-    border-radius:15px;
-    color:#ffb5ca;
-    background:rgba(255,70,120,.07);
-    border:1px solid rgba(255,100,150,.12);
+    bottom:34px;
+
+    left:45px;
+    right:45px;
+
+    text-align:center;
+
+    color:#a47787;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
 }
 
-/* =========================================================
+.pdf-footer strong{
+    display:block;
+
+    color:#8d3151;
+
+    font-size:12px;
+
+    margin-bottom:3px;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+    position:fixed;
+
+    inset:0;
+
+    z-index:9999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(10,5,10,.92);
+
+    color:white;
+
+    font-size:17px;
+
+    text-align:center;
+}
+
+.loading-box{
+    padding:25px;
+
+    border-radius:18px;
+
+    background:#1c111d;
+
+    border:1px solid var(--border);
+}
+
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media(max-width:600px){
 
@@ -589,18 +856,19 @@ select option{
     }
 
     .card{
-        padding:25px 17px;
-        border-radius:23px;
+        padding:23px 16px;
+        border-radius:22px;
     }
 
-    .two,
-    .three,
-    .summary-grid{
+    .grid-2,
+    .grid-3,
+    .summary-grid,
+    .form-row{
         grid-template-columns:1fr;
     }
 
-    .food{
-        padding:15px 8px;
+    .option{
+        padding:16px 10px;
     }
 
     h1{
@@ -610,385 +878,44 @@ select option{
     p{
         font-size:15px;
     }
-}
 
-/* =========================================================
-   PRINT / PDF
-========================================================= */
-
-@media print{
-
-    @page{
-        size:A4;
-        margin:0;
+    .nav{
+        flex-wrap:wrap;
     }
 
-    body{
-        background:#fff !important;
-        color:#211421 !important;
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation:none !important;
+        transition:none !important;
     }
 
-    #stars,
-    #app{
-        display:none !important;
-    }
-
-    #printPage{
-        display:block !important;
-    }
-}
-
-#printPage{
-    display:none;
-}
-
-/* =========================================================
-   PRINT DESIGN
-========================================================= */
-
-.print-sheet{
-    width:210mm;
-    min-height:297mm;
-
-    padding:18mm;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff8fb,
-            #fff
-        );
-
-    color:#241622;
-
-    font-family:"Noto Serif Bengali",serif;
-
-    position:relative;
-}
-
-.print-border{
-    position:absolute;
-    inset:9mm;
-
-    border:1px solid #edb7c8;
-    border-radius:8mm;
-
-    pointer-events:none;
-}
-
-.print-cover{
-    text-align:center;
-
-    padding-top:22mm;
-    padding-bottom:14mm;
-}
-
-.print-heart{
-    font-size:45px;
-    color:#e8396b;
-}
-
-.print-kicker{
-    color:#b75a78;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-top:8px;
-}
-
-.print-title{
-    font-family:"Tiro Bangla",serif;
-    font-size:32px;
-    color:#8e294d;
-    margin-top:8px;
-}
-
-.print-subtitle{
-    font-size:13px;
-    color:#755b68;
-    margin-top:7px;
-}
-
-.print-date{
-    margin:14mm auto 7mm;
-
-    width:150mm;
-
-    padding:7mm;
-
-    border-radius:6mm;
-
-    background:#fff0f5;
-
-    border:1px solid #f0c4d2;
-
-    text-align:center;
-}
-
-.print-date-label{
-    color:#ae5876;
-    font-size:10px;
-}
-
-.print-date-value{
-    color:#5f243a;
-    font-size:19px;
-    font-weight:600;
-    margin-top:3px;
-}
-
-.print-section{
-    margin-top:8mm;
-}
-
-.print-section-title{
-    color:#9d3e61;
-    font-size:13px;
-    font-weight:700;
-
-    padding-bottom:3mm;
-
-    border-bottom:
-        1px solid #efd0da;
-}
-
-.print-row{
-    display:flex;
-
-    padding:4mm 0;
-
-    border-bottom:
-        1px solid #f2e2e7;
-}
-
-.print-label{
-    width:38mm;
-
-    color:#9a7482;
-
-    font-size:10px;
-}
-
-.print-value{
-    flex:1;
-
-    color:#30202a;
-
-    font-size:12px;
-
-    line-height:1.7;
-}
-
-.print-note{
-    margin-top:8mm;
-
-    padding:6mm;
-
-    background:#fff4f7;
-
-    border-left:
-        3px solid #e84a78;
-
-    border-radius:
-        0 4mm 4mm 0;
-}
-
-.print-note-title{
-    color:#a53e61;
-    font-size:11px;
-}
-
-.print-note-text{
-    margin-top:3mm;
-    font-size:12px;
-    line-height:1.8;
-}
-
-.print-footer{
-    position:absolute;
-
-    bottom:17mm;
-
-    left:0;
-    right:0;
-
-    text-align:center;
-
-    color:#ad7b8d;
-
-    font-size:9px;
-}
-
-.print-footer strong{
-    display:block;
-    color:#923450;
-    font-size:11px;
-    margin-bottom:2px;
 }
 
 </style>
 </head>
 
-
 <body>
-
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
 
 <div id="stars"></div>
 
-<!-- =====================================================
-     APP
-===================================================== -->
-
 <div id="app"></div>
 
-
-<!-- =====================================================
-     PRINT PDF PAGE
-===================================================== -->
-
-<div id="printPage">
-
-    <div class="print-sheet">
-
-        <div class="print-border"></div>
-
-        <div class="print-cover">
-
-            <div class="print-heart">
-                ♥
-            </div>
-
-            <div class="print-kicker">
-                A DATE MADE WITH LOVE
-            </div>
-
-            <div class="print-title">
-                আমাদের Date Plan
-            </div>
-
-            <div class="print-subtitle">
-                ${HER_NAME} ♥ ${YOUR_NAME}
-            </div>
-
-            <div class="print-date">
-
-                <div class="print-date-label">
-                    আমাদের দেখা করার দিন
-                </div>
-
-                <div
-                    class="print-date-value"
-                    id="printDate">
-                </div>
-
-                <div
-                    class="print-subtitle"
-                    id="printTime">
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="print-section">
-
-            <div class="print-section-title">
-                ✦ Date Details
-            </div>
-
-            <div class="print-row">
-
-                <div class="print-label">
-                    📍 কোথায়
-                </div>
-
-                <div
-                    class="print-value"
-                    id="printLocation">
-                </div>
-
-            </div>
-
-            <div class="print-row">
-
-                <div class="print-label">
-                    🍽️ কী খাব
-                </div>
-
-                <div
-                    class="print-value"
-                    id="printFood">
-                </div>
-
-            </div>
-
-            <div class="print-row">
-
-                <div class="print-label">
-                    👗 Dress
-                </div>
-
-                <div
-                    class="print-value"
-                    id="printDress">
-                </div>
-
-            </div>
-
-            <div class="print-row">
-
-                <div class="print-label">
-                    ✨ কী করব
-                </div>
-
-                <div
-                    class="print-value"
-                    id="printActivities">
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="print-note"
-            id="printNoteBox">
-
-            <div class="print-note-title">
-                💌 তোমার জন্য একটা কথা
-            </div>
-
-            <div
-                class="print-note-text"
-                id="printNote">
-            </div>
-
-        </div>
-
-
-        <div class="print-footer">
-
-            <strong>
-                ${YOUR_NAME} ♥ ${HER_NAME}
-            </strong>
-
-            এই Date Plan-টা একদিন একটা সুন্দর স্মৃতি হয়ে যাবে।
-
-        </div>
-
-    </div>
-
-</div>
+<div id="pdfContainer"></div>
 
 
 <script>
 
 /* =========================================================
-   PERSONALIZE
+   PERSONALIZE THESE TWO NAMES
 ========================================================= */
 
 const YOUR_NAME = "তোমার মানুষ";
@@ -996,67 +923,45 @@ const HER_NAME = "আমার প্রিয়";
 
 
 /* =========================================================
-   STATE
+   DATA
 ========================================================= */
 
 const plan = {
-
     date:"",
     time:"",
+    duration:"",
     location:"",
     customLocation:"",
     food:[],
+    customFood:"",
     dress:"",
+    customDress:"",
     activities:[],
     note:""
-
 };
 
-
-/* =========================================================
-   APP
-========================================================= */
-
-const app =
-    document.getElementById("app");
+let currentStep = 0;
 
 
 /* =========================================================
-   STARS
-   Only 45 stars — deliberately lightweight.
+   SMALL HELPERS
 ========================================================= */
 
-function createStars(){
+const app = document.getElementById("app");
 
-    const stars =
-        document.getElementById("stars");
 
-    for(let i=0;i<45;i++){
+function escapeHTML(value){
 
-        const s =
-            document.createElement("div");
-
-        s.className="star";
-
-        s.style.left =
-            Math.random()*100+"%";
-
-        s.style.top =
-            Math.random()*100+"%";
-
-        s.style.animationDelay =
-            Math.random()*3+"s";
-
-        stars.appendChild(s);
-    }
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
 
 
-/* =========================================================
-   RENDER
-========================================================= */
-
-function render(html){
+function show(html){
 
     app.innerHTML = html;
 
@@ -1067,19 +972,69 @@ function render(html){
 }
 
 
+function goBack(){
+
+    if(currentStep <= 1){
+        home();
+        return;
+    }
+
+    currentStep--;
+
+    if(currentStep===1) step1();
+    if(currentStep===2) step2();
+    if(currentStep===3) step3();
+    if(currentStep===4) step4();
+    if(currentStep===5) step5();
+    if(currentStep===6) step6();
+}
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+function createStars(){
+
+    const box =
+        document.getElementById("stars");
+
+    for(let i=0;i<35;i++){
+
+        const star =
+            document.createElement("span");
+
+        star.className="star";
+
+        star.style.left =
+            Math.random()*100+"%";
+
+        star.style.top =
+            Math.random()*100+"%";
+
+        star.style.animationDelay =
+            Math.random()*3+"s";
+
+        box.appendChild(star);
+    }
+}
+
+
 /* =========================================================
    HOME
 ========================================================= */
 
 function home(){
 
-    render(`
+    currentStep=0;
+
+    show(`
 
         <main class="page">
 
             <section class="card">
 
-                <div class="hero-heart">
+                <div class="big-heart">
                     ❤️
                 </div>
 
@@ -1088,73 +1043,62 @@ function home(){
                 </div>
 
                 <h1>
-                    ${HER_NAME}
+                    ${escapeHTML(HER_NAME)}
                 </h1>
 
-                <p style="max-width:570px;margin:20px auto">
+                <p style="max-width:570px;margin:18px auto">
 
                     আমার সাথে একটা Date-এ যাবে? 🌹
 
                     <br><br>
 
-                    তবে এবার Date-এর পুরো plan
-                    তোমাকেই করতে হবে।
+                    এবার আমাদের Date-এর পুরো plan
+                    তুমি নিজেই বানাবে।
 
                     <br>
 
-                    আমি শুধু তোমার plan follow করব। 😌
+                    আমি শুধু তোমার সাথে থাকব। ❤️
 
                 </p>
 
 
-                <div
-                    class="grid three"
-                    style="margin-top:30px">
+                <div class="option-grid grid-3">
 
                     <button
                         class="option"
-                        type="button"
-                        onclick="start()">
+                        onclick="startDate()">
 
-                        <div class="option-icon">
+                        <span class="icon">
                             💕
-                        </div>
+                        </span>
 
-                        <div class="option-title">
-                            অবশ্যই!
-                        </div>
+                        অবশ্যই!
 
                     </button>
 
 
                     <button
                         class="option"
-                        type="button"
-                        onclick="start()">
+                        onclick="startDate()">
 
-                        <div class="option-icon">
+                        <span class="icon">
                             🌹
-                        </div>
+                        </span>
 
-                        <div class="option-title">
-                            চল যাই!
-                        </div>
+                        চল যাই!
 
                     </button>
 
 
                     <button
                         class="option"
-                        type="button"
-                        onclick="start()">
+                        onclick="startDate()">
 
-                        <div class="option-icon">
+                        <span class="icon">
                             😌
-                        </div>
+                        </span>
 
-                        <div class="option-title">
-                            এতক্ষণে জিজ্ঞেস করছো?
-                        </div>
+                        এতক্ষণে জিজ্ঞেস করছো?
 
                     </button>
 
@@ -1165,7 +1109,6 @@ function home(){
         </main>
 
     `);
-
 }
 
 
@@ -1177,7 +1120,7 @@ function progress(step,title){
 
     return `
 
-        <div class="progress-area">
+        <div class="progress">
 
             <div class="progress-top">
 
@@ -1186,16 +1129,16 @@ function progress(step,title){
                 </span>
 
                 <span>
-                    ${step} / 7
+                    ${step} / 6
                 </span>
 
             </div>
 
-            <div class="progress">
+            <div class="progress-track">
 
                 <div
-                    class="progress-bar"
-                    style="width:${step/7*100}%">
+                    class="progress-fill"
+                    style="width:${step/6*100}%">
                 </div>
 
             </div>
@@ -1210,10 +1153,11 @@ function progress(step,title){
    START
 ========================================================= */
 
-function start(){
+function startDate(){
+
+    currentStep=1;
 
     step1();
-
 }
 
 
@@ -1223,19 +1167,18 @@ function start(){
 
 function step1(){
 
-    render(`
+    currentStep=1;
+
+    show(`
 
         <main class="page">
 
             <section class="card">
 
-                ${progress(
-                    1,
-                    "কবে দেখা হবে?"
-                )}
+                ${progress(1,"কবে দেখা হবে?")}
 
-                <div class="eyebrow">
-                    প্রথমে একটা দিন ঠিক করি
+                <div class="kicker">
+                    STEP 01
                 </div>
 
                 <h2>
@@ -1243,19 +1186,11 @@ function step1(){
                 </h2>
 
                 <p>
-                    এমন একটা দিন বেছে নাও
-                    যেদিন দুজনেরই সময় থাকবে।
+                    একটা সুন্দর দিন আর সময় বেছে নাও।
                 </p>
 
 
-                <div class="dateTimeGrid"
-                     style="
-                        max-width:620px;
-                        margin:auto;
-                        display:grid;
-                        grid-template-columns:1fr 1fr;
-                        gap:14px;
-                     ">
+                <div class="form-row">
 
                     <div class="form-group">
 
@@ -1264,8 +1199,9 @@ function step1(){
                         </label>
 
                         <input
-                            id="date"
-                            type="date">
+                            id="dateInput"
+                            type="date"
+                            value="${plan.date}">
 
                     </div>
 
@@ -1277,8 +1213,9 @@ function step1(){
                         </label>
 
                         <input
-                            id="time"
-                            type="time">
+                            id="timeInput"
+                            type="time"
+                            value="${plan.time}">
 
                     </div>
 
@@ -1288,28 +1225,40 @@ function step1(){
                 <div class="form-group">
 
                     <label>
-                        ⏳ Date কতক্ষণ চলবে?
+                        ⏳ কতক্ষণ?
                     </label>
 
-                    <select id="duration">
+                    <select id="durationInput">
 
                         <option value="">
                             বেছে নাও
                         </option>
 
-                        <option>
+                        <option ${
+                            plan.duration==="১–২ ঘণ্টা"
+                            ? "selected":""
+                        }>
                             ১–২ ঘণ্টা
                         </option>
 
-                        <option>
+                        <option ${
+                            plan.duration==="২–৩ ঘণ্টা"
+                            ? "selected":""
+                        }>
                             ২–৩ ঘণ্টা
                         </option>
 
-                        <option>
+                        <option ${
+                            plan.duration==="৩–৫ ঘণ্টা"
+                            ? "selected":""
+                        }>
                             ৩–৫ ঘণ্টা
                         </option>
 
-                        <option>
+                        <option ${
+                            plan.duration==="পুরো দিন ❤️"
+                            ? "selected":""
+                        }>
                             পুরো দিন ❤️
                         </option>
 
@@ -1318,71 +1267,85 @@ function step1(){
                 </div>
 
 
-                <button
-                    class="btn"
-                    type="button"
-                    onclick="save1()">
+                <div class="nav">
 
-                    পরের ধাপ ✨
+                    <button
+                        class="btn"
+                        onclick="saveStep1()">
 
-                </button>
+                        পরের ধাপ ✨
+
+                    </button>
+
+                </div>
 
             </section>
 
         </main>
 
     `);
-
 }
 
 
-/* =========================================================
-   SAVE 1
-========================================================= */
-
-function save1(){
+function saveStep1(){
 
     const date =
-        document.getElementById("date").value;
+        document.getElementById("dateInput").value;
 
     const time =
-        document.getElementById("time").value;
+        document.getElementById("timeInput").value;
 
-    if(!date || !time){
+    const duration =
+        document.getElementById("durationInput").value;
 
-        alert(
-            "তারিখ আর সময় দুটোই বেছে নাও ❤️"
-        );
 
+    if(!date){
+
+        alert("Date-এর তারিখটা বেছে নাও ❤️");
         return;
     }
 
+    if(!time){
+
+        alert("Date-এর সময়টাও বেছে নাও 🕐");
+        return;
+    }
+
+    if(!duration){
+
+        alert("Date কতক্ষণ হবে সেটা বেছে নাও ⏳");
+        return;
+    }
+
+
     plan.date=date;
     plan.time=time;
+    plan.duration=duration;
+
+    currentStep=2;
 
     step2();
 }
 
 
 /* =========================================================
-   STEP 2
+   STEP 2 LOCATION
 ========================================================= */
 
 function step2(){
 
-    render(`
+    currentStep=2;
+
+    show(`
 
         <main class="page">
 
             <section class="card">
 
-                ${progress(
-                    2,
-                    "কোথায় যাব?"
-                )}
+                ${progress(2,"কোথায় যাব?")}
 
-                <div class="eyebrow">
-                    এবার location
+                <div class="kicker">
+                    STEP 02
                 </div>
 
                 <h2>
@@ -1390,37 +1353,34 @@ function step2(){
                 </h2>
 
                 <p>
-                    একটা option বেছে নাও অথবা
-                    নিজের জায়গা লিখে দাও।
+                    একটা জায়গা বেছে নাও।
                 </p>
 
 
-                <div
-                    class="grid two"
-                    style="max-width:650px;margin:30px auto">
+                <div class="option-grid grid-2">
 
-                    ${location(
+                    ${locationOption(
                         "☕",
                         "Café",
                         "Coffee + গল্প",
                         "Café"
                     )}
 
-                    ${location(
+                    ${locationOption(
                         "🍽️",
                         "Restaurant",
-                        "Dinner date",
+                        "একসাথে খাওয়া",
                         "Restaurant"
                     )}
 
-                    ${location(
+                    ${locationOption(
                         "🌳",
                         "Park",
-                        "হাঁটাহাঁটি",
+                        "হাঁটাহাঁটি + গল্প",
                         "Park"
                     )}
 
-                    ${location(
+                    ${locationOption(
                         "🎬",
                         "Cinema",
                         "Movie date",
@@ -1433,54 +1393,67 @@ function step2(){
                 <div class="form-group">
 
                     <label>
-                        📍 নিজের location
+                        📍 অথবা নিজের location লিখো
                     </label>
 
                     <input
-                        id="customLocation"
-                        placeholder="যেমন: Dhanmondi Lake, Bashundhara City..."
-                    >
+                        id="locationInput"
+                        value="${escapeHTML(plan.customLocation)}"
+                        placeholder="যেমন: Dhanmondi Lake">
 
                 </div>
 
 
-                <button
-                    class="btn"
-                    type="button"
-                    onclick="save2()">
+                <div class="nav">
 
-                    Location ঠিক আছে ❤️
+                    <button
+                        class="btn secondary"
+                        onclick="goBack()">
 
-                </button>
+                        ← পিছনে
+
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="saveStep2()">
+
+                        পরের ধাপ ✨
+
+                    </button>
+
+                </div>
 
             </section>
 
         </main>
 
     `);
-
 }
 
 
-function location(icon,title,desc,value){
+function locationOption(icon,title,desc,value){
+
+    const selected =
+        plan.location===value &&
+        !plan.customLocation;
 
     return `
 
         <button
-            class="option"
-            type="button"
-            data-location="${value}"
-            onclick="selectLocation(this)">
+            class="option ${selected?"selected":""}"
+            data-location="${escapeHTML(value)}"
+            onclick="chooseLocation(this)">
 
-            <div class="option-icon">
+            <span class="icon">
                 ${icon}
-            </div>
+            </span>
 
-            <div class="option-title">
+            <strong>
                 ${title}
-            </div>
+            </strong>
 
-            <div class="option-description">
+            <div class="small-text">
                 ${desc}
             </div>
 
@@ -1490,42 +1463,56 @@ function location(icon,title,desc,value){
 }
 
 
-function selectLocation(el){
+function chooseLocation(el){
 
     document
         .querySelectorAll("[data-location]")
         .forEach(
-            x=>x.classList.remove("selected")
+            item=>item.classList.remove("selected")
         );
 
     el.classList.add("selected");
 
     plan.location =
         el.dataset.location;
+
+    plan.customLocation="";
+    
+    const input =
+        document.getElementById("locationInput");
+
+    if(input){
+        input.value="";
+    }
 }
 
 
-function save2(){
+function saveStep2(){
 
     const custom =
         document
-            .getElementById("customLocation")
+            .getElementById("locationInput")
             .value
             .trim();
 
     plan.customLocation=custom;
 
+    if(custom){
+
+        plan.location="";
+
+    }
+
     if(
         !plan.location &&
-        !custom
+        !plan.customLocation
     ){
 
-        alert(
-            "একটা location তো বেছে নাও ❤️"
-        );
-
+        alert("একটা location বেছে নাও 📍");
         return;
     }
+
+    currentStep=3;
 
     step3();
 }
@@ -1537,19 +1524,18 @@ function save2(){
 
 function step3(){
 
-    render(`
+    currentStep=3;
+
+    show(`
 
         <main class="page">
 
             <section class="card">
 
-                ${progress(
-                    3,
-                    "কি খাব?"
-                )}
+                ${progress(3,"কি খাব?")}
 
-                <div class="eyebrow">
-                    Date-এর সবচেয়ে important প্রশ্ন 😋
+                <div class="kicker">
+                    STEP 03
                 </div>
 
                 <h2>
@@ -1561,19 +1547,17 @@ function step3(){
                 </p>
 
 
-                <div
-                    class="grid three"
-                    style="max-width:650px;margin:30px auto">
+                <div class="option-grid grid-3">
 
-                    ${food("🍕","Pizza")}
-                    ${food("🍔","Burger")}
-                    ${food("🍝","Pasta")}
-                    ${food("🍗","Chicken")}
-                    ${food("🍰","Cake")}
-                    ${food("🍨","Ice Cream")}
-                    ${food("☕","Coffee")}
-                    ${food("🥤","Drinks")}
-                    ${food("🍛","বিরিয়ানি")}
+                    ${foodOption("🍕","Pizza")}
+                    ${foodOption("🍔","Burger")}
+                    ${foodOption("🍝","Pasta")}
+                    ${foodOption("🍗","Chicken")}
+                    ${foodOption("🍰","Cake")}
+                    ${foodOption("🍨","Ice Cream")}
+                    ${foodOption("☕","Coffee")}
+                    ${foodOption("🥤","Drinks")}
+                    ${foodOption("🍛","বিরিয়ানি")}
 
                 </div>
 
@@ -1585,44 +1569,56 @@ function step3(){
                     </label>
 
                     <input
-                        id="customFood"
-                        placeholder="নিজের পছন্দের খাবার..."
-                    >
+                        id="customFoodInput"
+                        value="${escapeHTML(plan.customFood)}"
+                        placeholder="নিজের পছন্দের খাবার">
 
                 </div>
 
 
-                <button
-                    class="btn"
-                    type="button"
-                    onclick="save3()">
+                <div class="nav">
 
-                    Yummy! পরের ধাপ 😋
+                    <button
+                        class="btn secondary"
+                        onclick="goBack()">
 
-                </button>
+                        ← পিছনে
+
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="saveStep3()">
+
+                        Yummy! 😋
+
+                    </button>
+
+                </div>
 
             </section>
 
         </main>
 
     `);
-
 }
 
 
-function food(icon,name){
+function foodOption(icon,name){
+
+    const selected =
+        plan.food.includes(name);
 
     return `
 
         <button
-            class="option food"
-            type="button"
-            data-food="${name}"
+            class="option ${selected?"selected":""}"
+            data-food="${escapeHTML(name)}"
             onclick="toggleFood(this)">
 
-            <div class="option-icon">
+            <span class="icon">
                 ${icon}
-            </div>
+            </span>
 
             ${name}
 
@@ -1639,13 +1635,11 @@ function toggleFood(el){
 
     el.classList.toggle("selected");
 
-    if(
-        plan.food.includes(name)
-    ){
+    if(plan.food.includes(name)){
 
         plan.food =
             plan.food.filter(
-                x=>x!==name
+                item=>item!==name
             );
 
     }else{
@@ -1656,28 +1650,37 @@ function toggleFood(el){
 }
 
 
-function save3(){
+function saveStep3(){
 
-    const custom =
+    plan.customFood =
         document
-            .getElementById("customFood")
+            .getElementById("customFoodInput")
             .value
             .trim();
 
-    if(custom){
+    if(plan.customFood){
 
-        plan.food.push(custom);
+        if(
+            !plan.food.includes(
+                plan.customFood
+            )
+        ){
+
+            plan.food.push(
+                plan.customFood
+            );
+
+        }
 
     }
 
     if(plan.food.length===0){
 
-        alert(
-            "কমপক্ষে একটা খাবার বেছে নাও 😋"
-        );
-
+        alert("কমপক্ষে একটা খাবার বেছে নাও 🍕");
         return;
     }
+
+    currentStep=4;
 
     step4();
 }
@@ -1689,19 +1692,18 @@ function save3(){
 
 function step4(){
 
-    render(`
+    currentStep=4;
+
+    show(`
 
         <main class="page">
 
             <section class="card">
 
-                ${progress(
-                    4,
-                    "আজ কী পরবে?"
-                )}
+                ${progress(4,"আজ কী পরবে?")}
 
-                <div class="eyebrow">
-                    এখন আসল গুরুত্বপূর্ণ বিষয় 👀
+                <div class="kicker">
+                    STEP 04
                 </div>
 
                 <h2>
@@ -1709,23 +1711,21 @@ function step4(){
                 </h2>
 
                 <p>
-                    আমি কিন্তু আগে থেকেই imagine করছি। 😌
+                    তোমার পছন্দের color বেছে নাও।
                 </p>
 
 
-                <div
-                    class="grid three"
-                    style="max-width:600px;margin:30px auto">
+                <div class="option-grid grid-3">
 
-                    ${color("#e83d65","লাল")}
-                    ${color("#ffffff","সাদা")}
-                    ${color("#111111","কালো")}
-                    ${color("#e9bd42","হলুদ")}
-                    ${color("#df6f9e","গোলাপি")}
-                    ${color("#547fd1","নীল")}
-                    ${color("#63976b","সবুজ")}
-                    ${color("#9066bb","বেগুনি")}
-                    ${color("#b993d1","Lavender")}
+                    ${colorOption("❤️","লাল")}
+                    ${colorOption("🤍","সাদা")}
+                    ${colorOption("🖤","কালো")}
+                    ${colorOption("💛","হলুদ")}
+                    ${colorOption("💗","গোলাপি")}
+                    ${colorOption("💙","নীল")}
+                    ${colorOption("💚","সবুজ")}
+                    ${colorOption("💜","বেগুনি")}
+                    ${colorOption("🪻","Lavender")}
 
                 </div>
 
@@ -1733,49 +1733,60 @@ function step4(){
                 <div class="form-group">
 
                     <label>
-                        👗 অন্য কিছু হলে লিখে দাও
+                        👗 অন্য কিছু হলে লিখো
                     </label>
 
                     <input
-                        id="customDress"
-                        placeholder="যেমন: Black saree / Lavender dress..."
-                    >
+                        id="customDressInput"
+                        value="${escapeHTML(plan.customDress)}"
+                        placeholder="যেমন: Black saree">
 
                 </div>
 
 
-                <button
-                    class="btn"
-                    type="button"
-                    onclick="save4()">
+                <div class="nav">
 
-                    সুন্দর! ✨
+                    <button
+                        class="btn secondary"
+                        onclick="goBack()">
 
-                </button>
+                        ← পিছনে
+
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="saveStep4()">
+
+                        সুন্দর! ✨
+
+                    </button>
+
+                </div>
 
             </section>
 
         </main>
 
     `);
-
 }
 
 
-function color(hex,name){
+function colorOption(icon,name){
+
+    const selected =
+        plan.dress===name;
 
     return `
 
         <button
-            class="option color"
-            type="button"
-            data-color="${name}"
-            onclick="selectColor(this)">
+            class="option ${selected?"selected":""}"
+            data-color="${escapeHTML(name)}"
+            onclick="chooseColor(this)">
 
-            <div
-                class="color-circle"
-                style="background:${hex}">
-            </div>
+            <span class="icon">
+                ${icon}
+            </span>
 
             ${name}
 
@@ -1785,28 +1796,32 @@ function color(hex,name){
 }
 
 
-function selectColor(el){
+function chooseColor(el){
 
     document
         .querySelectorAll("[data-color]")
         .forEach(
-            x=>x.classList.remove("selected")
+            item=>item.classList.remove("selected")
         );
 
     el.classList.add("selected");
 
     plan.dress =
         el.dataset.color;
+
+    plan.customDress="";
 }
 
 
-function save4(){
+function saveStep4(){
 
     const custom =
         document
-            .getElementById("customDress")
+            .getElementById("customDressInput")
             .value
             .trim();
+
+    plan.customDress=custom;
 
     if(custom){
 
@@ -1816,12 +1831,11 @@ function save4(){
 
     if(!plan.dress){
 
-        alert(
-            "Dress-এর color-টা তো বলো 👗"
-        );
-
+        alert("Dress-এর color-টা বেছে নাও 👗");
         return;
     }
+
+    currentStep=5;
 
     step5();
 }
@@ -1833,19 +1847,18 @@ function save4(){
 
 function step5(){
 
-    render(`
+    currentStep=5;
+
+    show(`
 
         <main class="page">
 
             <section class="card">
 
-                ${progress(
-                    5,
-                    "Date-এ কী করব?"
-                )}
+                ${progress(5,"Date-এ কী করব?")}
 
-                <div class="eyebrow">
-                    আমাদের Date-এর activities
+                <div class="kicker">
+                    STEP 05
                 </div>
 
                 <h2>
@@ -1857,51 +1870,61 @@ function step5(){
                 </p>
 
 
-                <div
-                    class="grid two"
-                    style="max-width:650px;margin:30px auto">
+                <div class="option-grid grid-2">
 
-                    ${activity("📸","অনেক ছবি তুলব")}
-                    ${activity("🚶","একসাথে হাঁটব")}
-                    ${activity("🎬","Movie দেখব")}
-                    ${activity("☕","Coffee খাব")}
-                    ${activity("🌆","শহর ঘুরব")}
-                    ${activity("🎁","একটা surprise থাকবে")}
-                    ${activity("🎵","Music শুনব")}
-                    ${activity("💬","অনেক গল্প করব")}
+                    ${activityOption("📸","অনেক ছবি তুলব")}
+                    ${activityOption("🚶","একসাথে হাঁটব")}
+                    ${activityOption("🎬","Movie দেখব")}
+                    ${activityOption("☕","Coffee খাব")}
+                    ${activityOption("🌆","শহর ঘুরব")}
+                    ${activityOption("🎁","একটা surprise থাকবে")}
+                    ${activityOption("🎵","Music শুনব")}
+                    ${activityOption("💬","অনেক গল্প করব")}
 
                 </div>
 
 
-                <button
-                    class="btn"
-                    type="button"
-                    onclick="save5()">
+                <div class="nav">
 
-                    সব ঠিক আছে ❤️
+                    <button
+                        class="btn secondary"
+                        onclick="goBack()">
 
-                </button>
+                        ← পিছনে
+
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="saveStep5()">
+
+                        পরের ধাপ ❤️
+
+                    </button>
+
+                </div>
 
             </section>
 
         </main>
 
     `);
-
 }
 
 
-function activity(icon,name){
+function activityOption(icon,name){
+
+    const selected =
+        plan.activities.includes(name);
 
     return `
 
         <button
-            class="option activity"
-            type="button"
-            data-activity="${name}"
+            class="option ${selected?"selected":""}"
+            data-activity="${escapeHTML(name)}"
             onclick="toggleActivity(this)">
 
-            <span class="activity-icon">
+            <span class="icon">
                 ${icon}
             </span>
 
@@ -1920,13 +1943,11 @@ function toggleActivity(el){
 
     el.classList.toggle("selected");
 
-    if(
-        plan.activities.includes(name)
-    ){
+    if(plan.activities.includes(name)){
 
         plan.activities =
             plan.activities.filter(
-                x=>x!==name
+                item=>item!==name
             );
 
     }else{
@@ -1937,16 +1958,18 @@ function toggleActivity(el){
 }
 
 
-function save5(){
+function saveStep5(){
 
     if(plan.activities.length===0){
 
         alert(
-            "কমপক্ষে একটা activity বেছে নাও ❤️"
+            "কমপক্ষে একটা activity বেছে নাও ✨"
         );
 
         return;
     }
+
+    currentStep=6;
 
     step6();
 }
@@ -1958,23 +1981,26 @@ function save5(){
 
 function step6(){
 
-    render(`
+    currentStep=6;
+
+    show(`
 
         <main class="page">
 
             <section class="card">
 
-                ${progress(
-                    6,
-                    "শেষ একটা কথা"
-                )}
+                ${progress(6,"শেষ একটা কথা")}
 
-                <div class="hero-heart">
+                <div class="big-heart">
                     💌
                 </div>
 
+                <div class="kicker">
+                    STEP 06
+                </div>
+
                 <h2>
-                    আমার জন্য একটা ছোট্ট message?
+                    আমার জন্য একটা message?
                 </h2>
 
                 <p>
@@ -1990,35 +2016,45 @@ function step6(){
                     </label>
 
                     <textarea
-                        id="note"
-                        placeholder="যেমন: সেদিন কিন্তু আমাকে সুন্দর করে সাজতে হবে... ❤️"></textarea>
+                        id="noteInput"
+                        placeholder="যেমন: সেদিন কিন্তু আমাকে সুন্দর করে সাজতে হবে... ❤️">${escapeHTML(plan.note)}</textarea>
 
                 </div>
 
 
-                <button
-                    class="btn"
-                    type="button"
-                    onclick="save6()">
+                <div class="nav">
 
-                    Date Plan তৈরি করি 🌹
+                    <button
+                        class="btn secondary"
+                        onclick="goBack()">
 
-                </button>
+                        ← পিছনে
+
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="finishPlan()">
+
+                        Date Plan তৈরি করি 🌹
+
+                    </button>
+
+                </div>
 
             </section>
 
         </main>
 
     `);
-
 }
 
 
-function save6(){
+function finishPlan(){
 
     plan.note =
         document
-            .getElementById("note")
+            .getElementById("noteInput")
             .value
             .trim();
 
@@ -2032,13 +2068,35 @@ function save6(){
 
 function summary(){
 
-    render(`
+    currentStep=7;
+
+    const note =
+        plan.note
+        ?
+        `
+        <div class="message">
+
+            <div class="message-title">
+                💌 তোমার message
+            </div>
+
+            <p>
+                ${escapeHTML(plan.note)}
+            </p>
+
+        </div>
+        `
+        :
+        "";
+
+
+    show(`
 
         <main class="page">
 
             <section class="card">
 
-                <div class="hero-heart">
+                <div class="big-heart">
                     💖
                 </div>
 
@@ -2051,7 +2109,8 @@ function summary(){
                 </h2>
 
                 <p>
-                    ${HER_NAME}, এই plan-টা তুমি নিজেই বানিয়েছো।
+                    ${escapeHTML(HER_NAME)},
+                    এই plan-টা তুমি নিজেই বানিয়েছো।
                 </p>
 
 
@@ -2085,6 +2144,12 @@ function summary(){
                     )}
 
                     ${summaryItem(
+                        "⏳",
+                        "সময়কাল",
+                        plan.duration
+                    )}
+
+                    ${summaryItem(
                         "📍",
                         "Location",
                         locationText()
@@ -2093,83 +2158,64 @@ function summary(){
                     ${summaryItem(
                         "🍽️",
                         "খাবার",
-                        plan.food.join(", ")
+                        plan.food.join(" • ")
                     )}
 
                     ${summaryItem(
                         "👗",
-                        "Dress Color",
+                        "Dress",
                         plan.dress
                     )}
 
                     ${summaryItem(
                         "✨",
                         "Activities",
-                        plan.activities.join(", ")
+                        plan.activities.join(" • ")
                     )}
 
                 </div>
 
 
-                ${
-                    plan.note
-                    ?
-                    `
-                    <div class="note">
-
-                        <small>
-                            💌 তোমার message
-                        </small>
-
-                        <p>
-                            ${escapeHTML(plan.note)}
-                        </p>
-
-                    </div>
-                    `
-                    :
-                    ""
-                }
+                ${note}
 
 
                 <div class="success">
 
-                    Date plan complete! 🥰
+                    Date Plan complete! 🥰
 
                     <br>
 
-                    এখন এটাকে সুন্দর একটা PDF বানিয়ে
+                    এখন সুন্দর করে PDF download করে
                     আমাকে পাঠিয়ে দাও। ❤️
 
                 </div>
 
 
-                <button
-                    class="btn"
-                    type="button"
-                    onclick="makePDF()">
+                <div class="nav">
 
-                    📜 PDF বানাও
+                    <button
+                        class="btn secondary"
+                        onclick="step6()">
 
-                </button>
+                        ← Edit
 
-                <br>
+                    </button>
 
-                <button
-                    class="btn secondary"
-                    type="button"
-                    onclick="home()">
+                    <button
+                        class="btn"
+                        onclick="downloadPDF()">
 
-                    আবার শুরু করো
+                        📜 Download PDF
 
-                </button>
+                    </button>
+
+                </div>
 
             </section>
 
         </main>
 
     `);
-
 }
 
 
@@ -2192,7 +2238,7 @@ function summaryItem(icon,label,value){
             </small>
 
             <strong>
-                ${escapeHTML(String(value))}
+                ${escapeHTML(value || "—")}
             </strong>
 
         </div>
@@ -2202,20 +2248,7 @@ function summaryItem(icon,label,value){
 
 
 /* =========================================================
-   LOCATION TEXT
-========================================================= */
-
-function locationText(){
-
-    if(plan.customLocation)
-        return plan.customLocation;
-
-    return plan.location;
-}
-
-
-/* =========================================================
-   DATE FORMAT
+   FORMAT DATE
 ========================================================= */
 
 function formatDate(value){
@@ -2246,7 +2279,7 @@ function formatDate(value){
 
 
 /* =========================================================
-   TIME FORMAT
+   FORMAT TIME
 ========================================================= */
 
 function formatTime(value){
@@ -2254,106 +2287,422 @@ function formatTime(value){
     if(!value)
         return "—";
 
-    const [hours,minutes] =
+    const parts =
         value.split(":");
 
-    let h =
-        Number(hours);
+    let hours =
+        Number(parts[0]);
 
-    const suffix =
-        h >= 12
-        ? "PM"
-        : "AM";
+    const minutes =
+        parts[1];
 
-    h =
-        h % 12 || 12;
+    const ampm =
+        hours>=12 ? "PM" : "AM";
 
-    return `${h}:${minutes} ${suffix}`;
+    hours =
+        hours%12 || 12;
+
+    return `${hours}:${minutes} ${ampm}`;
 }
 
 
 /* =========================================================
-   ESCAPE
+   LOCATION
 ========================================================= */
 
-function escapeHTML(value){
+function locationText(){
 
-    return value
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return plan.customLocation ||
+           plan.location ||
+           "—";
 }
 
 
 /* =========================================================
-   PREPARE PRINT PAGE
+   LOAD SCRIPT ONLY WHEN PDF IS NEEDED
 ========================================================= */
 
-function preparePrint(){
+function loadScript(src){
 
-    document.getElementById("printDate").textContent =
-        formatDate(plan.date);
+    return new Promise(
+        (resolve,reject)=>{
 
-    document.getElementById("printTime").textContent =
-        formatTime(plan.time);
+            const existing =
+                document.querySelector(
+                    `script[src="${src}"]`
+                );
 
-    document.getElementById("printLocation").textContent =
-        locationText();
+            if(existing){
 
-    document.getElementById("printFood").textContent =
-        plan.food.join(" • ");
+                existing.addEventListener(
+                    "load",
+                    resolve
+                );
 
-    document.getElementById("printDress").textContent =
-        plan.dress;
+                existing.addEventListener(
+                    "error",
+                    reject
+                );
 
-    document.getElementById("printActivities").textContent =
-        plan.activities.join(" • ");
+                return;
+            }
+
+            const script =
+                document.createElement("script");
+
+            script.src=src;
+
+            script.onload=resolve;
+            script.onerror=reject;
+
+            document.head.appendChild(script);
+
+        }
+    );
+}
 
 
-    const noteBox =
-        document.getElementById("printNoteBox");
+/* =========================================================
+   CREATE PDF HTML
+========================================================= */
 
-    if(plan.note){
+function buildPDF(){
 
-        noteBox.style.display="block";
+    const noteHTML =
+        plan.note
+        ?
+        `
+        <div class="pdf-message">
 
-        document.getElementById("printNote").textContent =
-            plan.note;
+            <div class="pdf-message-title">
+                💌 তোমার জন্য একটা কথা
+            </div>
 
-    }else{
+            <div class="pdf-message-text">
+                ${escapeHTML(plan.note)}
+            </div>
 
-        noteBox.style.display="none";
+        </div>
+        `
+        :
+        "";
+
+
+    return `
+
+        <div class="pdf-page">
+
+            <div class="pdf-inner">
+
+                <div class="pdf-heart">
+                    ♥
+                </div>
+
+                <div class="pdf-kicker">
+                    A DATE MADE WITH LOVE
+                </div>
+
+                <div class="pdf-title">
+                    আমাদের Date Plan
+                </div>
+
+                <div class="pdf-names">
+                    ${escapeHTML(YOUR_NAME)}
+                    ♥
+                    ${escapeHTML(HER_NAME)}
+                </div>
+
+
+                <div class="pdf-date">
+
+                    <div class="pdf-date-label">
+                        আমাদের দেখা করার দিন
+                    </div>
+
+                    <div class="pdf-date-value">
+                        ${escapeHTML(formatDate(plan.date))}
+                    </div>
+
+                    <div>
+                        ${escapeHTML(formatTime(plan.time))}
+                    </div>
+
+                </div>
+
+
+                <div class="pdf-section">
+
+                    <div class="pdf-section-title">
+                        ✦ Date Details
+                    </div>
+
+
+                    <div class="pdf-row">
+
+                        <div class="pdf-label">
+                            📍 Location
+                        </div>
+
+                        <div class="pdf-value">
+                            ${escapeHTML(locationText())}
+                        </div>
+
+                    </div>
+
+
+                    <div class="pdf-row">
+
+                        <div class="pdf-label">
+                            🕐 সময়
+                        </div>
+
+                        <div class="pdf-value">
+                            ${escapeHTML(formatTime(plan.time))}
+                        </div>
+
+                    </div>
+
+
+                    <div class="pdf-row">
+
+                        <div class="pdf-label">
+                            ⏳ সময়কাল
+                        </div>
+
+                        <div class="pdf-value">
+                            ${escapeHTML(plan.duration)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="pdf-row">
+
+                        <div class="pdf-label">
+                            🍽️ খাবার
+                        </div>
+
+                        <div class="pdf-value">
+                            ${escapeHTML(plan.food.join(" • "))}
+                        </div>
+
+                    </div>
+
+
+                    <div class="pdf-row">
+
+                        <div class="pdf-label">
+                            👗 Dress
+                        </div>
+
+                        <div class="pdf-value">
+                            ${escapeHTML(plan.dress)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="pdf-row">
+
+                        <div class="pdf-label">
+                            ✨ Activities
+                        </div>
+
+                        <div class="pdf-value">
+                            ${escapeHTML(plan.activities.join(" • "))}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                ${noteHTML}
+
+
+                <div class="pdf-footer">
+
+                    <strong>
+                        ${escapeHTML(YOUR_NAME)}
+                        ♥
+                        ${escapeHTML(HER_NAME)}
+                    </strong>
+
+                    এই Date Plan-টা একদিন
+                    একটা সুন্দর স্মৃতি হয়ে যাবে। ❤️
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   ACTUAL PDF DOWNLOAD
+========================================================= */
+
+async function downloadPDF(){
+
+    const loading =
+        document.createElement("div");
+
+    loading.className="loading";
+
+    loading.innerHTML=`
+
+        <div class="loading-box">
+
+            <div style="font-size:35px;margin-bottom:10px">
+                💖
+            </div>
+
+            PDF তৈরি হচ্ছে...
+
+            <br>
+
+            <small style="color:#a996a5">
+                একটু অপেক্ষা করো
+            </small>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(loading);
+
+
+    try{
+
+        /*
+           These libraries are loaded ONLY when the
+           user actually asks for a PDF.
+        */
+
+        await loadScript(
+            "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        );
+
+        await loadScript(
+            "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+        );
+
+
+        const container =
+            document.getElementById(
+                "pdfContainer"
+            );
+
+        container.innerHTML =
+            buildPDF();
+
+
+        /*
+           Give the browser a moment to render
+           Bengali text and layout.
+        */
+
+        await new Promise(
+            resolve=>setTimeout(resolve,300)
+        );
+
+
+        const pdfElement =
+            container.querySelector(
+                ".pdf-page"
+            );
+
+
+        const canvas =
+            await html2canvas(
+                pdfElement,
+                {
+                    scale:1.5,
+                    useCORS:true,
+                    backgroundColor:"#ffffff",
+                    logging:false
+                }
+            );
+
+
+        const image =
+            canvas.toDataURL(
+                "image/jpeg",
+                .95
+            );
+
+
+        const {
+            jsPDF
+        } =
+            window.jspdf;
+
+
+        const pdf =
+            new jsPDF({
+                orientation:"portrait",
+                unit:"mm",
+                format:"a4"
+            });
+
+
+        const pageWidth =
+            210;
+
+        const pageHeight =
+            297;
+
+
+        pdf.addImage(
+            image,
+            "JPEG",
+            0,
+            0,
+            pageWidth,
+            pageHeight,
+            undefined,
+            "FAST"
+        );
+
+
+        const fileName =
+            "Our-Date-Plan-" +
+            (
+                plan.date ||
+                "date"
+            ) +
+            ".pdf";
+
+
+        pdf.save(fileName);
+
+
+        container.innerHTML="";
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "PDF তৈরি করা যায়নি।\n\n" +
+            "ইন্টারনেট connection আছে কিনা " +
+            "check করে আবার চেষ্টা করো।"
+        );
+
+    }finally{
+
+        loading.remove();
 
     }
 }
 
 
 /* =========================================================
-   PDF / PRINT
-========================================================= */
-
-function makePDF(){
-
-    preparePrint();
-
-    /*
-       Browser print gives us proper Bengali font
-       rendering and a polished A4 layout.
-    */
-
-    setTimeout(()=>{
-
-        window.print();
-
-    },100);
-
-}
-
-
-/* =========================================================
-   INITIALIZE
+   START
 ========================================================= */
 
 createStars();
@@ -2364,4 +2713,3 @@ home();
 
 </body>
 </html>
-```
