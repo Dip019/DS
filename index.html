@@ -1,24 +1,20 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#120914">
 
 <title>আমাদের Date Plan ❤️</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
-
-<!-- PDF GENERATOR -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 
 /* =========================================================
-   ROOT
+   LIGHTWEIGHT ROMANTIC DATE PLANNER
 ========================================================= */
 
 *{
@@ -28,45 +24,38 @@
 }
 
 :root{
-    --pink:#ff477e;
-    --pink2:#ff8eaf;
-    --rose:#e92d63;
-    --purple:#8c62d9;
-
-    --dark:#08050b;
-    --dark2:#130914;
-
-    --glass:rgba(255,255,255,.075);
-    --border:rgba(255,255,255,.12);
-
+    --bg:#0b060d;
+    --bg2:#170a18;
+    --card:#18101b;
+    --card2:#21131f;
+    --pink:#ff4d82;
+    --pink-light:#ff9fbd;
     --text:#fff;
-    --muted:rgba(255,255,255,.65);
+    --muted:#bcaebb;
+    --line:rgba(255,255,255,.10);
 }
 
 html{
-    scroll-behavior:smooth;
+    min-height:100%;
 }
 
 body{
     min-height:100vh;
-    overflow-x:hidden;
-
     background:
         radial-gradient(
-            circle at 20% 20%,
-            rgba(255,60,120,.15),
-            transparent 30%
+            circle at 85% 10%,
+            rgba(255,65,125,.12),
+            transparent 28%
         ),
         radial-gradient(
-            circle at 80% 80%,
-            rgba(130,70,220,.16),
-            transparent 35%
+            circle at 10% 90%,
+            rgba(130,75,200,.10),
+            transparent 30%
         ),
         linear-gradient(
-            135deg,
-            #050308,
-            #160a17 50%,
-            #08040d
+            145deg,
+            var(--bg),
+            var(--bg2)
         );
 
     color:var(--text);
@@ -74,14 +63,14 @@ body{
 }
 
 /* =========================================================
-   BACKGROUND
+   SIMPLE STARS
 ========================================================= */
 
-#background{
+#stars{
     position:fixed;
     inset:0;
-    overflow:hidden;
     pointer-events:none;
+    overflow:hidden;
     z-index:0;
 }
 
@@ -89,102 +78,15 @@ body{
     position:absolute;
     width:2px;
     height:2px;
-    background:white;
     border-radius:50%;
-    opacity:.4;
-
-    animation:
-        twinkle 2s infinite alternate;
+    background:#fff;
+    opacity:.45;
+    animation:twinkle 3s ease-in-out infinite;
 }
 
 @keyframes twinkle{
-
-    from{
-        opacity:.15;
-        transform:scale(.6);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1.4);
-    }
-}
-
-.glow{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(90px);
-    opacity:.25;
-    animation:glowFloat 12s ease-in-out infinite alternate;
-}
-
-.glow.one{
-    width:350px;
-    height:350px;
-    background:#ff2e6d;
-    left:-180px;
-    top:15%;
-}
-
-.glow.two{
-    width:400px;
-    height:400px;
-    background:#7747e8;
-    right:-220px;
-    bottom:-150px;
-    animation-delay:3s;
-}
-
-@keyframes glowFloat{
-
-    from{
-        transform:translate(0,0);
-    }
-
-    to{
-        transform:translate(70px,-40px);
-    }
-}
-
-/* =========================================================
-   FLOATING HEARTS
-========================================================= */
-
-#floatingHearts{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:2;
-}
-
-.heartParticle{
-    position:absolute;
-    bottom:-40px;
-    opacity:0;
-    animation:heartRise linear forwards;
-}
-
-@keyframes heartRise{
-
-    0%{
-        transform:translateY(0) rotate(0deg);
-        opacity:0;
-    }
-
-    10%{
-        opacity:.6;
-    }
-
-    90%{
-        opacity:.4;
-    }
-
-    100%{
-        transform:
-            translateY(-110vh)
-            rotate(360deg);
-        opacity:0;
-    }
+    0%,100%{opacity:.2}
+    50%{opacity:.8}
 }
 
 /* =========================================================
@@ -193,67 +95,52 @@ body{
 
 #app{
     position:relative;
-    z-index:5;
-
-    width:100%;
+    z-index:1;
     min-height:100vh;
-
+    width:100%;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    padding:25px;
+    padding:24px;
 }
 
 .page{
-    width:min(850px,100%);
-    animation:pageIn .7s ease;
+    width:min(760px,100%);
+    animation:pageIn .45s ease;
 }
 
 @keyframes pageIn{
-
     from{
         opacity:0;
-        transform:
-            translateY(25px)
-            scale(.98);
-        filter:blur(7px);
+        transform:translateY(12px);
     }
 
     to{
         opacity:1;
-        transform:none;
-        filter:blur(0);
+        transform:translateY(0);
     }
 }
 
 /* =========================================================
-   GLASS CARD
+   CARD
 ========================================================= */
 
 .card{
     width:100%;
-
-    padding:
-        clamp(28px,6vw,55px);
-
-    border-radius:34px;
+    padding:clamp(25px,5vw,48px);
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.085),
+            rgba(255,255,255,.065),
             rgba(255,255,255,.025)
         );
 
-    border:1px solid var(--border);
-
-    backdrop-filter:blur(30px);
-    -webkit-backdrop-filter:blur(30px);
+    border:1px solid var(--line);
+    border-radius:28px;
 
     box-shadow:
-        0 35px 100px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.07);
+        0 25px 70px rgba(0,0,0,.35);
 
     text-align:center;
 }
@@ -265,87 +152,53 @@ body{
 .script{
     font-family:"Tiro Bangla",serif;
     font-style:italic;
-    color:#ff9ebc;
+    color:var(--pink-light);
 }
 
 .eyebrow{
     font-size:12px;
-    letter-spacing:3px;
-    color:#ff9bb9;
-    margin-bottom:15px;
+    letter-spacing:2px;
+    color:var(--pink-light);
+    margin-bottom:12px;
 }
 
 h1{
-    font-size:clamp(38px,8vw,75px);
+    font-size:clamp(38px,8vw,70px);
     line-height:1.2;
 }
 
 h2{
-    font-size:clamp(28px,5vw,45px);
-    line-height:1.35;
-    margin-bottom:14px;
+    font-size:clamp(27px,5vw,42px);
+    line-height:1.4;
+    margin-bottom:12px;
 }
 
 p{
     color:var(--muted);
-    font-size:16px;
     line-height:1.9;
+    font-size:16px;
 }
 
 /* =========================================================
-   HERO HEART
+   HEART
 ========================================================= */
 
-.heroHeart{
-    width:130px;
-    height:130px;
+.hero-heart{
+    font-size:72px;
+    line-height:1;
+    margin-bottom:22px;
 
-    margin:0 auto 25px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:65px;
-
-    position:relative;
-
-    animation:heartbeat 1.5s infinite;
-
-    filter:
-        drop-shadow(
-            0 0 25px
-            rgba(255,50,110,.7)
-        );
+    animation:
+        heartBeat 1.8s ease-in-out infinite;
 }
 
-.heroHeart:before,
-.heroHeart:after{
-
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    border:1px solid rgba(255,90,140,.22);
-
-    border-radius:50%;
-
-    animation:ring 2.5s infinite;
-}
-
-.heroHeart:after{
-    animation-delay:1s;
-}
-
-@keyframes heartbeat{
-
+@keyframes heartBeat{
     0%,100%{
         transform:scale(1);
     }
 
     15%{
-        transform:scale(1.12);
+        transform:scale(1.08);
     }
 
     30%{
@@ -353,20 +206,7 @@ p{
     }
 
     45%{
-        transform:scale(1.08);
-    }
-}
-
-@keyframes ring{
-
-    from{
-        transform:scale(.7);
-        opacity:.8;
-    }
-
-    to{
-        transform:scale(1.7);
-        opacity:0;
+        transform:scale(1.05);
     }
 }
 
@@ -375,48 +215,42 @@ p{
 ========================================================= */
 
 .btn{
-
     border:0;
-    outline:0;
-
-    padding:15px 28px;
-
     min-height:48px;
 
-    border-radius:999px;
+    padding:13px 27px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef396e,
+            #ff709b
+        );
+
+    color:#fff;
 
     font-family:inherit;
     font-size:15px;
     font-weight:600;
 
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff3d77,
-            #ff7fa5
-        );
-
     cursor:pointer;
 
-    margin-top:20px;
+    margin-top:22px;
 
     box-shadow:
-        0 12px 35px rgba(255,50,110,.25);
+        0 8px 25px rgba(255,55,110,.22);
 
-    transition:.3s ease;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .btn:hover{
-
-    transform:
-        translateY(-3px)
-        scale(1.02);
-
+    transform:translateY(-2px);
     box-shadow:
-        0 18px 45px
-        rgba(255,50,110,.4);
+        0 12px 30px rgba(255,55,110,.32);
 }
 
 .btn:active{
@@ -424,623 +258,570 @@ p{
 }
 
 .btn.secondary{
-
-    background:
-        rgba(255,255,255,.07);
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
+    background:#251726;
+    border:1px solid var(--line);
     box-shadow:none;
-}
-
-/* =========================================================
-   YES OPTIONS
-========================================================= */
-
-.yesOptions{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:14px;
-
-    max-width:650px;
-
-    margin:35px auto 0;
-}
-
-.yesOption{
-
-    padding:22px 15px;
-
-    border-radius:22px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    background:
-        rgba(255,255,255,.045);
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.yesOption:hover{
-
-    transform:translateY(-6px);
-
-    background:
-        rgba(255,70,130,.1);
-
-    border-color:
-        rgba(255,100,160,.4);
-}
-
-.yesOption .emoji{
-    font-size:35px;
-    margin-bottom:8px;
-}
-
-.yesOption strong{
-    display:block;
-    font-size:16px;
 }
 
 /* =========================================================
    PROGRESS
 ========================================================= */
 
-.progressArea{
-    max-width:700px;
-    margin:0 auto 35px;
+.progress-area{
+    margin-bottom:32px;
 }
 
-.progressInfo{
-
+.progress-top{
     display:flex;
     justify-content:space-between;
 
     font-size:12px;
+    color:#897987;
 
-    color:rgba(255,255,255,.45);
-
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
 .progress{
-
-    width:100%;
-    height:6px;
+    height:5px;
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.07);
 
-    border-radius:99px;
+    border-radius:20px;
 
     overflow:hidden;
 }
 
-.progressBar{
-
+.progress-bar{
     height:100%;
-
-    border-radius:99px;
 
     background:
         linear-gradient(
             90deg,
-            #ff3f78,
-            #ff9cbb,
-            #9b70e8
+            #e9366d,
+            #ff91b0
         );
 
-    transition:
-        width .5s ease;
+    border-radius:20px;
+
+    transition:width .35s ease;
 }
 
 /* =========================================================
    FORM
 ========================================================= */
 
-.formGroup{
-
-    max-width:650px;
-
-    margin:25px auto;
-
+.form-group{
+    max-width:620px;
+    margin:22px auto;
     text-align:left;
 }
 
 label{
-
     display:block;
-
-    margin-bottom:9px;
-
+    color:#e6b1c3;
     font-size:14px;
-
-    color:#ffb0c6;
+    margin-bottom:8px;
 }
 
 input,
 textarea,
 select{
-
     width:100%;
 
-    border:
-        1px solid
-        rgba(255,255,255,.12);
+    padding:14px 15px;
 
-    outline:0;
+    background:#0e090f;
 
-    border-radius:16px;
+    color:#fff;
 
-    padding:15px 16px;
+    border:1px solid var(--line);
 
-    color:white;
+    border-radius:14px;
 
     font-family:inherit;
-
     font-size:16px;
 
-    background:
-        rgba(0,0,0,.2);
+    outline:none;
 
-    transition:.25s;
-}
-
-select option{
-    background:#170c18;
-    color:white;
-}
-
-textarea{
-    min-height:130px;
-    resize:vertical;
+    transition:border-color .2s;
 }
 
 input:focus,
 textarea:focus,
 select:focus{
+    border-color:rgba(255,100,150,.6);
+}
 
-    border-color:
-        rgba(255,100,160,.7);
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
 
-    box-shadow:
-        0 0 0 3px
-        rgba(255,70,130,.08);
+select option{
+    background:#170c18;
 }
 
 /* =========================================================
-   DATE/TIME
+   GRID
 ========================================================= */
 
-.dateTimeGrid{
-
+.grid{
     display:grid;
+    gap:12px;
+}
 
-    grid-template-columns:
-        1fr 1fr;
+.two{
+    grid-template-columns:repeat(2,1fr);
+}
 
-    gap:15px;
+.three{
+    grid-template-columns:repeat(3,1fr);
 }
 
 /* =========================================================
-   LOCATION CARDS
+   LOCATION
 ========================================================= */
 
-.locationGrid{
+.option{
+    padding:20px 12px;
 
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:15px;
-
-    max-width:700px;
-
-    margin:30px auto;
-}
-
-.locationCard{
-
-    padding:22px;
-
-    border-radius:22px;
+    background:
+        rgba(255,255,255,.035);
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    background:
-        rgba(255,255,255,.045);
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.locationCard.selected{
-
-    background:
-        rgba(255,70,130,.12);
-
-    border-color:
-        rgba(255,100,160,.65);
-
-    box-shadow:
-        0 0 25px
-        rgba(255,60,120,.1);
-}
-
-.locationCard:hover{
-    transform:translateY(-4px);
-}
-
-.locationIcon{
-    font-size:36px;
-    margin-bottom:8px;
-}
-
-/* =========================================================
-   FOOD GRID
-========================================================= */
-
-.foodGrid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:13px;
-
-    max-width:700px;
-
-    margin:30px auto;
-}
-
-.foodCard{
-
-    padding:18px 10px;
+        1px solid var(--line);
 
     border-radius:18px;
 
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
     cursor:pointer;
 
-    transition:.3s;
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
 }
 
-.foodCard.selected{
+.option:hover{
+    transform:translateY(-2px);
+}
 
+.option.selected{
     background:
-        rgba(255,70,130,.12);
+        rgba(255,70,120,.10);
 
     border-color:
-        rgba(255,100,160,.65);
-
+        rgba(255,100,150,.65);
 }
 
-.foodCard:hover{
-    transform:translateY(-3px);
-}
-
-.foodEmoji{
+.option-icon{
     font-size:32px;
+    margin-bottom:7px;
+}
+
+.option-title{
+    font-weight:600;
+}
+
+.option-description{
+    color:#8e7f8e;
+    font-size:12px;
+    margin-top:4px;
 }
 
 /* =========================================================
-   COLORS
+   FOOD
 ========================================================= */
 
-.colorGrid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:14px;
-
-    max-width:600px;
-
-    margin:30px auto;
+.food{
+    padding:17px 10px;
 }
 
-.colorChoice{
+.food .option-icon{
+    font-size:27px;
+}
 
+/* =========================================================
+   COLOR
+========================================================= */
+
+.color{
     padding:15px 8px;
-
-    border-radius:18px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    cursor:pointer;
-
-    background:
-        rgba(255,255,255,.04);
-
-    transition:.3s;
 }
 
-.colorChoice.selected{
-
-    border-color:white;
-
-    transform:
-        translateY(-4px)
-        scale(1.02);
-
-}
-
-.colorCircle{
-
-    width:40px;
-    height:40px;
-
-    margin:auto auto 8px;
-
+.color-circle{
+    width:38px;
+    height:38px;
     border-radius:50%;
 
-    border:2px solid
-        rgba(255,255,255,.4);
+    margin:0 auto 7px;
+
+    border:2px solid rgba(255,255,255,.25);
+}
+
+.color.selected{
+    border-color:#fff;
+
+    box-shadow:
+        0 0 0 2px rgba(255,100,150,.3);
 }
 
 /* =========================================================
    ACTIVITIES
 ========================================================= */
 
-.activityGrid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:14px;
-
-    max-width:650px;
-
-    margin:30px auto;
-}
-
 .activity{
-
-    padding:20px;
-
-    border-radius:20px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    background:
-        rgba(255,255,255,.045);
-
-    cursor:pointer;
-
     text-align:left;
-
-    transition:.3s;
+    padding:17px;
 }
 
-.activity.selected{
-
-    background:
-        rgba(255,70,130,.12);
-
-    border-color:
-        rgba(255,100,160,.6);
-}
-
-.activity:hover{
-    transform:translateY(-3px);
-}
-
-.activity span{
-    font-size:25px;
-    margin-right:8px;
+.activity-icon{
+    font-size:24px;
+    margin-right:7px;
 }
 
 /* =========================================================
    SUMMARY
 ========================================================= */
 
-.summaryHero{
+.summary-head{
+    padding:28px 20px;
 
-    padding:30px;
-
-    border-radius:28px;
+    border-radius:22px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,70,130,.12),
-            rgba(120,70,220,.1)
+            rgba(255,70,120,.10),
+            rgba(140,80,200,.08)
         );
 
-    border:
-        1px solid
-        rgba(255,255,255,.1);
+    border:1px solid var(--line);
 
-    margin:25px 0;
+    margin:20px 0;
 }
 
-.summaryTitle{
-
+.summary-title{
     font-family:"Tiro Bangla",serif;
-
-    font-size:34px;
-
-    color:#ffabc4;
+    font-size:30px;
+    color:#ffabc3;
 }
 
-.summaryGrid{
-
+.summary-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:14px;
-
-    margin-top:25px;
-
+    grid-template-columns:repeat(2,1fr);
+    gap:11px;
     text-align:left;
 }
 
-.summaryItem{
-
-    padding:20px;
-
-    border-radius:20px;
-
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
+.summary-item{
+    padding:17px;
+    background:rgba(255,255,255,.035);
+    border:1px solid var(--line);
+    border-radius:17px;
 }
 
-.summaryItem .icon{
-    font-size:24px;
-    margin-bottom:7px;
-}
-
-.summaryItem small{
-
+.summary-item small{
     display:block;
-
-    color:
-        rgba(255,255,255,.4);
-
-    font-size:12px;
-
+    color:#827482;
+    font-size:11px;
     margin-bottom:5px;
 }
 
-.summaryItem strong{
-    font-size:16px;
+.summary-item strong{
+    display:block;
     color:#fff;
+    font-size:15px;
+    line-height:1.6;
 }
 
-.noteBox{
+.summary-icon{
+    font-size:22px;
+    margin-bottom:5px;
+}
 
-    margin-top:18px;
-
-    padding:22px;
-
-    border-radius:20px;
-
+.note{
     text-align:left;
-
-    background:
-        rgba(255,70,130,.07);
+    margin-top:12px;
+    padding:18px;
 
     border-left:
-        3px solid
-        #ff5b91;
+        3px solid var(--pink);
+
+    border-radius:
+        0 15px 15px 0;
+
+    background:
+        rgba(255,70,120,.06);
+}
+
+.note small{
+    color:var(--pink-light);
+}
+
+.note p{
+    color:#fff;
+    margin-top:7px;
 }
 
 /* =========================================================
-   CONFETTI
+   SUCCESS
 ========================================================= */
 
-.confetti{
-
-    position:fixed;
-
-    top:-20px;
-
-    z-index:100;
-
-    pointer-events:none;
-
-    animation:
-        fall linear forwards;
-}
-
-@keyframes fall{
-
-    to{
-
-        transform:
-            translateY(110vh)
-            rotate(720deg);
-
-        opacity:0;
-    }
+.success{
+    margin-top:20px;
+    padding:15px;
+    border-radius:15px;
+    color:#ffb5ca;
+    background:rgba(255,70,120,.07);
+    border:1px solid rgba(255,100,150,.12);
 }
 
 /* =========================================================
-   RESPONSIVE
+   MOBILE
 ========================================================= */
 
-@media(max-width:650px){
+@media(max-width:600px){
 
     #app{
-        padding:14px;
+        padding:12px;
     }
 
     .card{
-        border-radius:27px;
+        padding:25px 17px;
+        border-radius:23px;
     }
 
-    .yesOptions{
+    .two,
+    .three,
+    .summary-grid{
         grid-template-columns:1fr;
     }
 
-    .locationGrid{
-        grid-template-columns:1fr;
-    }
-
-    .foodGrid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .colorGrid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .activityGrid{
-        grid-template-columns:1fr;
-    }
-
-    .summaryGrid{
-        grid-template-columns:1fr;
-    }
-
-    .dateTimeGrid{
-        grid-template-columns:1fr;
+    .food{
+        padding:15px 8px;
     }
 
     h1{
-        font-size:45px;
+        font-size:43px;
     }
 
     p{
         font-size:15px;
     }
+}
+
+/* =========================================================
+   PRINT / PDF
+========================================================= */
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:0;
+    }
+
+    body{
+        background:#fff !important;
+        color:#211421 !important;
+    }
+
+    #stars,
+    #app{
+        display:none !important;
+    }
+
+    #printPage{
+        display:block !important;
+    }
+}
+
+#printPage{
+    display:none;
+}
+
+/* =========================================================
+   PRINT DESIGN
+========================================================= */
+
+.print-sheet{
+    width:210mm;
+    min-height:297mm;
+
+    padding:18mm;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff8fb,
+            #fff
+        );
+
+    color:#241622;
+
+    font-family:"Noto Serif Bengali",serif;
+
+    position:relative;
+}
+
+.print-border{
+    position:absolute;
+    inset:9mm;
+
+    border:1px solid #edb7c8;
+    border-radius:8mm;
+
+    pointer-events:none;
+}
+
+.print-cover{
+    text-align:center;
+
+    padding-top:22mm;
+    padding-bottom:14mm;
+}
+
+.print-heart{
+    font-size:45px;
+    color:#e8396b;
+}
+
+.print-kicker{
+    color:#b75a78;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-top:8px;
+}
+
+.print-title{
+    font-family:"Tiro Bangla",serif;
+    font-size:32px;
+    color:#8e294d;
+    margin-top:8px;
+}
+
+.print-subtitle{
+    font-size:13px;
+    color:#755b68;
+    margin-top:7px;
+}
+
+.print-date{
+    margin:14mm auto 7mm;
+
+    width:150mm;
+
+    padding:7mm;
+
+    border-radius:6mm;
+
+    background:#fff0f5;
+
+    border:1px solid #f0c4d2;
+
+    text-align:center;
+}
+
+.print-date-label{
+    color:#ae5876;
+    font-size:10px;
+}
+
+.print-date-value{
+    color:#5f243a;
+    font-size:19px;
+    font-weight:600;
+    margin-top:3px;
+}
+
+.print-section{
+    margin-top:8mm;
+}
+
+.print-section-title{
+    color:#9d3e61;
+    font-size:13px;
+    font-weight:700;
+
+    padding-bottom:3mm;
+
+    border-bottom:
+        1px solid #efd0da;
+}
+
+.print-row{
+    display:flex;
+
+    padding:4mm 0;
+
+    border-bottom:
+        1px solid #f2e2e7;
+}
+
+.print-label{
+    width:38mm;
+
+    color:#9a7482;
+
+    font-size:10px;
+}
+
+.print-value{
+    flex:1;
+
+    color:#30202a;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+.print-note{
+    margin-top:8mm;
+
+    padding:6mm;
+
+    background:#fff4f7;
+
+    border-left:
+        3px solid #e84a78;
+
+    border-radius:
+        0 4mm 4mm 0;
+}
+
+.print-note-title{
+    color:#a53e61;
+    font-size:11px;
+}
+
+.print-note-text{
+    margin-top:3mm;
+    font-size:12px;
+    line-height:1.8;
+}
+
+.print-footer{
+    position:absolute;
+
+    bottom:17mm;
+
+    left:0;
+    right:0;
+
+    text-align:center;
+
+    color:#ad7b8d;
+
+    font-size:9px;
+}
+
+.print-footer strong{
+    display:block;
+    color:#923450;
+    font-size:11px;
+    margin-bottom:2px;
 }
 
 </style>
@@ -1053,26 +834,163 @@ select:focus{
      BACKGROUND
 ===================================================== -->
 
-<div id="background">
+<div id="stars"></div>
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-
-</div>
-
-<div id="floatingHearts"></div>
+<!-- =====================================================
+     APP
+===================================================== -->
 
 <div id="app"></div>
+
+
+<!-- =====================================================
+     PRINT PDF PAGE
+===================================================== -->
+
+<div id="printPage">
+
+    <div class="print-sheet">
+
+        <div class="print-border"></div>
+
+        <div class="print-cover">
+
+            <div class="print-heart">
+                ♥
+            </div>
+
+            <div class="print-kicker">
+                A DATE MADE WITH LOVE
+            </div>
+
+            <div class="print-title">
+                আমাদের Date Plan
+            </div>
+
+            <div class="print-subtitle">
+                ${HER_NAME} ♥ ${YOUR_NAME}
+            </div>
+
+            <div class="print-date">
+
+                <div class="print-date-label">
+                    আমাদের দেখা করার দিন
+                </div>
+
+                <div
+                    class="print-date-value"
+                    id="printDate">
+                </div>
+
+                <div
+                    class="print-subtitle"
+                    id="printTime">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="print-section">
+
+            <div class="print-section-title">
+                ✦ Date Details
+            </div>
+
+            <div class="print-row">
+
+                <div class="print-label">
+                    📍 কোথায়
+                </div>
+
+                <div
+                    class="print-value"
+                    id="printLocation">
+                </div>
+
+            </div>
+
+            <div class="print-row">
+
+                <div class="print-label">
+                    🍽️ কী খাব
+                </div>
+
+                <div
+                    class="print-value"
+                    id="printFood">
+                </div>
+
+            </div>
+
+            <div class="print-row">
+
+                <div class="print-label">
+                    👗 Dress
+                </div>
+
+                <div
+                    class="print-value"
+                    id="printDress">
+                </div>
+
+            </div>
+
+            <div class="print-row">
+
+                <div class="print-label">
+                    ✨ কী করব
+                </div>
+
+                <div
+                    class="print-value"
+                    id="printActivities">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="print-note"
+            id="printNoteBox">
+
+            <div class="print-note-title">
+                💌 তোমার জন্য একটা কথা
+            </div>
+
+            <div
+                class="print-note-text"
+                id="printNote">
+            </div>
+
+        </div>
+
+
+        <div class="print-footer">
+
+            <strong>
+                ${YOUR_NAME} ♥ ${HER_NAME}
+            </strong>
+
+            এই Date Plan-টা একদিন একটা সুন্দর স্মৃতি হয়ে যাবে।
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script>
 
 /* =========================================================
-   ❤️ PERSONALIZATION
+   PERSONALIZE
 ========================================================= */
 
 const YOUR_NAME = "তোমার মানুষ";
-
 const HER_NAME = "আমার প্রিয়";
 
 
@@ -1080,29 +998,22 @@ const HER_NAME = "আমার প্রিয়";
    STATE
 ========================================================= */
 
-const datePlan = {
-
-    going:false,
+const plan = {
 
     date:"",
     time:"",
-
     location:"",
     customLocation:"",
-
     food:[],
-
-    dressColor:"",
-
+    dress:"",
     activities:[],
-
     note:""
 
 };
 
 
 /* =========================================================
-   ELEMENT
+   APP
 ========================================================= */
 
 const app =
@@ -1110,87 +1021,34 @@ const app =
 
 
 /* =========================================================
-   BACKGROUND STARS
+   STARS
+   Only 45 stars — deliberately lightweight.
 ========================================================= */
 
 function createStars(){
 
-    const bg =
-        document.getElementById("background");
+    const stars =
+        document.getElementById("stars");
 
-    for(let i=0;i<120;i++){
+    for(let i=0;i<45;i++){
 
-        const star =
+        const s =
             document.createElement("div");
 
-        star.className="star";
+        s.className="star";
 
-        star.style.left =
+        s.style.left =
             Math.random()*100+"%";
 
-        star.style.top =
+        s.style.top =
             Math.random()*100+"%";
 
-        const size =
-            Math.random()*2.5+.5;
+        s.style.animationDelay =
+            Math.random()*3+"s";
 
-        star.style.width=size+"px";
-        star.style.height=size+"px";
-
-        star.style.animationDelay =
-            Math.random()*4+"s";
-
-        bg.appendChild(star);
+        stars.appendChild(s);
     }
 }
-
-
-/* =========================================================
-   FLOATING HEARTS
-========================================================= */
-
-function floatingHeart(){
-
-    const heart =
-        document.createElement("div");
-
-    heart.className="heartParticle";
-
-    const icons=[
-        "♡",
-        "♥",
-        "💕",
-        "💗",
-        "✨"
-    ];
-
-    heart.innerText =
-        icons[
-            Math.floor(
-                Math.random()*icons.length
-            )
-        ];
-
-    heart.style.left =
-        Math.random()*100+"%";
-
-    heart.style.fontSize =
-        (12+Math.random()*18)+"px";
-
-    heart.style.animationDuration =
-        (8+Math.random()*8)+"s";
-
-    document
-        .getElementById("floatingHearts")
-        .appendChild(heart);
-
-    setTimeout(
-        ()=>heart.remove(),
-        17000
-    );
-}
-
-setInterval(floatingHeart,800);
 
 
 /* =========================================================
@@ -1199,7 +1057,7 @@ setInterval(floatingHeart,800);
 
 function render(html){
 
-    app.innerHTML=html;
+    app.innerHTML = html;
 
     window.scrollTo({
         top:0,
@@ -1209,69 +1067,121 @@ function render(html){
 
 
 /* =========================================================
-   CONFETTI
+   HOME
 ========================================================= */
 
-function confetti(amount=80){
+function home(){
 
-    const symbols=[
-        "♥",
-        "💕",
-        "✨",
-        "♡",
-        "✦"
-    ];
+    render(`
 
-    for(let i=0;i<amount;i++){
+        <main class="page">
 
-        const c =
-            document.createElement("div");
+            <section class="card">
 
-        c.className="confetti";
+                <div class="hero-heart">
+                    ❤️
+                </div>
 
-        c.innerText =
-            symbols[
-                Math.floor(
-                    Math.random()*symbols.length
-                )
-            ];
+                <div class="script">
+                    একটা ছোট্ট প্রশ্ন...
+                </div>
 
-        c.style.left =
-            Math.random()*100+"vw";
+                <h1>
+                    ${HER_NAME}
+                </h1>
 
-        c.style.fontSize =
-            (10+Math.random()*15)+"px";
+                <p style="max-width:570px;margin:20px auto">
 
-        c.style.animationDuration =
-            (2.5+Math.random()*3)+"s";
+                    আমার সাথে একটা Date-এ যাবে? 🌹
 
-        c.style.animationDelay =
-            Math.random()*.8+"s";
+                    <br><br>
 
-        document.body.appendChild(c);
+                    তবে এবার Date-এর পুরো plan
+                    তোমাকেই করতে হবে।
 
-        setTimeout(
-            ()=>c.remove(),
-            6000
-        );
-    }
+                    <br>
+
+                    আমি শুধু তোমার plan follow করব। 😌
+
+                </p>
+
+
+                <div
+                    class="grid three"
+                    style="margin-top:30px">
+
+                    <button
+                        class="option"
+                        type="button"
+                        onclick="start()">
+
+                        <div class="option-icon">
+                            💕
+                        </div>
+
+                        <div class="option-title">
+                            অবশ্যই!
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="option"
+                        type="button"
+                        onclick="start()">
+
+                        <div class="option-icon">
+                            🌹
+                        </div>
+
+                        <div class="option-title">
+                            চল যাই!
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="option"
+                        type="button"
+                        onclick="start()">
+
+                        <div class="option-icon">
+                            😌
+                        </div>
+
+                        <div class="option-title">
+                            এতক্ষণে জিজ্ঞেস করছো?
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    `);
+
 }
 
 
 /* =========================================================
-   STEP HEADER
+   PROGRESS
 ========================================================= */
 
-function stepHeader(step,title){
+function progress(step,title){
 
     return `
 
-        <div class="progressArea">
+        <div class="progress-area">
 
-            <div class="progressInfo">
+            <div class="progress-top">
 
                 <span>
-                    আমাদের Date Plan
+                    ${title}
                 </span>
 
                 <span>
@@ -1283,113 +1193,15 @@ function stepHeader(step,title){
             <div class="progress">
 
                 <div
-                    class="progressBar"
-                    style="width:${(step/7)*100}%">
+                    class="progress-bar"
+                    style="width:${step/7*100}%">
                 </div>
 
             </div>
 
         </div>
 
-        <div class="eyebrow">
-            ধাপ ${step} • ${title}
-        </div>
     `;
-}
-
-
-/* =========================================================
-   PAGE 1
-========================================================= */
-
-function home(){
-
-    render(`
-
-        <div class="page">
-
-            <div class="card">
-
-                <div class="heroHeart">
-                    ❤️
-                </div>
-
-                <div class="script"
-                     style="font-size:23px">
-
-                    একটা গুরুত্বপূর্ণ প্রশ্ন আছে...
-
-                </div>
-
-                <h1>
-                    ${HER_NAME}
-                </h1>
-
-                <p style="max-width:600px;margin:20px auto">
-
-                    আমার সাথে একটা Date-এ যাবে? 🌹
-
-                    <br><br>
-
-                    এইবার কিন্তু শুধু "হ্যাঁ" বললেই হবে না...
-                    <br>
-                    আমাদের পুরো Date-টা তোমাকেই plan করতে হবে। 😌
-
-                </p>
-
-                <div class="yesOptions">
-
-                    <div
-                        class="yesOption"
-                        onclick="startPlan('yes')">
-
-                        <div class="emoji">
-                            💕
-                        </div>
-
-                        <strong>
-                            অবশ্যই যাব!
-                        </strong>
-
-                    </div>
-
-
-                    <div
-                        class="yesOption"
-                        onclick="startPlan('yes')">
-
-                        <div class="emoji">
-                            🌹
-                        </div>
-
-                        <strong>
-                            হ্যাঁ, চল!
-                        </strong>
-
-                    </div>
-
-
-                    <div
-                        class="yesOption"
-                        onclick="startPlan('yes')">
-
-                        <div class="emoji">
-                            😌
-                        </div>
-
-                        <strong>
-                            এতক্ষণে জিজ্ঞেস করছো?
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `);
 }
 
 
@@ -1397,289 +1209,302 @@ function home(){
    START
 ========================================================= */
 
-function startPlan(){
-
-    datePlan.going=true;
+function start(){
 
     step1();
+
 }
 
 
 /* =========================================================
-   STEP 1 — DATE
+   STEP 1
 ========================================================= */
 
 function step1(){
 
     render(`
 
-        <div class="page">
+        <main class="page">
 
-            <div class="card">
+            <section class="card">
 
-                ${stepHeader(
+                ${progress(
                     1,
                     "কবে দেখা হবে?"
                 )}
 
+                <div class="eyebrow">
+                    প্রথমে একটা দিন ঠিক করি
+                </div>
+
                 <h2>
-                    আমাদের Date কবে? 🌙
+                    আমাদের Date কবে? 📅
                 </h2>
 
                 <p>
                     এমন একটা দিন বেছে নাও
-                    যেদিন শুধু আমাদের জন্য একটু সময় থাকবে।
+                    যেদিন দুজনেরই সময় থাকবে।
                 </p>
 
-                <div class="formGroup">
 
-                    <label>
-                        📅 Date
-                    </label>
+                <div class="dateTimeGrid"
+                     style="
+                        max-width:620px;
+                        margin:auto;
+                        display:grid;
+                        grid-template-columns:1fr 1fr;
+                        gap:14px;
+                     ">
 
-                    <input
-                        id="dateInput"
-                        type="date"
-                    >
-
-                </div>
-
-                <div class="dateTimeGrid">
-
-                    <div class="formGroup">
+                    <div class="form-group">
 
                         <label>
-                            🕐 দেখা হবে কয়টায়?
+                            📅 তারিখ
                         </label>
 
                         <input
-                            id="timeInput"
-                            type="time"
-                        >
+                            id="date"
+                            type="date">
 
                     </div>
 
-                    <div class="formGroup">
+
+                    <div class="form-group">
 
                         <label>
-                            ⏳ আনুমানিক কতক্ষণ?
+                            🕐 সময়
                         </label>
 
-                        <select id="durationInput">
-
-                            <option value="">
-                                বেছে নাও
-                            </option>
-
-                            <option>
-                                ১–২ ঘণ্টা
-                            </option>
-
-                            <option>
-                                ২–৩ ঘণ্টা
-                            </option>
-
-                            <option>
-                                ৩–৫ ঘণ্টা
-                            </option>
-
-                            <option>
-                                পুরো দিন ❤️
-                            </option>
-
-                        </select>
+                        <input
+                            id="time"
+                            type="time">
 
                     </div>
 
                 </div>
 
+
+                <div class="form-group">
+
+                    <label>
+                        ⏳ Date কতক্ষণ চলবে?
+                    </label>
+
+                    <select id="duration">
+
+                        <option value="">
+                            বেছে নাও
+                        </option>
+
+                        <option>
+                            ১–২ ঘণ্টা
+                        </option>
+
+                        <option>
+                            ২–৩ ঘণ্টা
+                        </option>
+
+                        <option>
+                            ৩–৫ ঘণ্টা
+                        </option>
+
+                        <option>
+                            পুরো দিন ❤️
+                        </option>
+
+                    </select>
+
+                </div>
+
+
                 <button
                     class="btn"
-                    onclick="saveStep1()">
+                    type="button"
+                    onclick="save1()">
 
-                    পরেরটা দেখি ✨
+                    পরের ধাপ ✨
 
                 </button>
 
-            </div>
+            </section>
 
-        </div>
+        </main>
 
     `);
+
 }
 
 
-function saveStep1(){
+/* =========================================================
+   SAVE 1
+========================================================= */
+
+function save1(){
 
     const date =
-        document.getElementById("dateInput").value;
+        document.getElementById("date").value;
 
     const time =
-        document.getElementById("timeInput").value;
+        document.getElementById("time").value;
 
     if(!date || !time){
 
-        alert("Date আর সময় দুটোই বেছে নাও ❤️");
+        alert(
+            "তারিখ আর সময় দুটোই বেছে নাও ❤️"
+        );
 
         return;
     }
 
-    datePlan.date=date;
-    datePlan.time=time;
+    plan.date=date;
+    plan.time=time;
 
     step2();
 }
 
 
 /* =========================================================
-   STEP 2 — LOCATION
+   STEP 2
 ========================================================= */
 
 function step2(){
 
     render(`
 
-        <div class="page">
+        <main class="page">
 
-            <div class="card">
+            <section class="card">
 
-                ${stepHeader(
+                ${progress(
                     2,
                     "কোথায় যাব?"
                 )}
 
+                <div class="eyebrow">
+                    এবার location
+                </div>
+
                 <h2>
-                    আমাদের Date কোথায় হবে? 📍
+                    কোথায় দেখা হবে? 📍
                 </h2>
 
                 <p>
-                    জায়গাটা বেছে নাও।
+                    একটা option বেছে নাও অথবা
+                    নিজের জায়গা লিখে দাও।
                 </p>
 
-                <div class="locationGrid">
 
-                    <div
-                        class="locationCard"
-                        onclick="selectLocation(this,'☕ Café')">
+                <div
+                    class="grid two"
+                    style="max-width:650px;margin:30px auto">
 
-                        <div class="locationIcon">
-                            ☕
-                        </div>
+                    ${location(
+                        "☕",
+                        "Café",
+                        "Coffee + গল্প",
+                        "Café"
+                    )}
 
-                        <strong>
-                            Cozy Café
-                        </strong>
+                    ${location(
+                        "🍽️",
+                        "Restaurant",
+                        "Dinner date",
+                        "Restaurant"
+                    )}
 
-                        <p>
-                            Coffee + গল্প
-                        </p>
+                    ${location(
+                        "🌳",
+                        "Park",
+                        "হাঁটাহাঁটি",
+                        "Park"
+                    )}
 
-                    </div>
-
-
-                    <div
-                        class="locationCard"
-                        onclick="selectLocation(this,'🍽️ Restaurant')">
-
-                        <div class="locationIcon">
-                            🍽️
-                        </div>
-
-                        <strong>
-                            Restaurant
-                        </strong>
-
-                        <p>
-                            সুন্দর dinner
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="locationCard"
-                        onclick="selectLocation(this,'🌳 Park')">
-
-                        <div class="locationIcon">
-                            🌳
-                        </div>
-
-                        <strong>
-                            Park
-                        </strong>
-
-                        <p>
-                            হাঁটাহাঁটি + আড্ডা
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="locationCard"
-                        onclick="selectLocation(this,'🎬 Cinema')">
-
-                        <div class="locationIcon">
-                            🎬
-                        </div>
-
-                        <strong>
-                            Cinema
-                        </strong>
-
-                        <p>
-                            Movie date
-                        </p>
-
-                    </div>
+                    ${location(
+                        "🎬",
+                        "Cinema",
+                        "Movie date",
+                        "Cinema"
+                    )}
 
                 </div>
 
-                <div class="formGroup">
+
+                <div class="form-group">
 
                     <label>
-                        📍 অথবা নিজের জায়গা লিখে দাও
+                        📍 নিজের location
                     </label>
 
                     <input
                         id="customLocation"
-                        placeholder="যেমন: Bashundhara City / Dhanmondi Lake..."
+                        placeholder="যেমন: Dhanmondi Lake, Bashundhara City..."
                     >
 
                 </div>
 
+
                 <button
                     class="btn"
-                    onclick="saveStep2()">
+                    type="button"
+                    onclick="save2()">
 
-                    ঠিক আছে ❤️
+                    Location ঠিক আছে ❤️
 
                 </button>
 
-            </div>
+            </section>
 
-        </div>
+        </main>
 
     `);
+
 }
 
 
-function selectLocation(el,value){
+function location(icon,title,desc,value){
+
+    return `
+
+        <button
+            class="option"
+            type="button"
+            data-location="${value}"
+            onclick="selectLocation(this)">
+
+            <div class="option-icon">
+                ${icon}
+            </div>
+
+            <div class="option-title">
+                ${title}
+            </div>
+
+            <div class="option-description">
+                ${desc}
+            </div>
+
+        </button>
+
+    `;
+}
+
+
+function selectLocation(el){
 
     document
-        .querySelectorAll(".locationCard")
-        .forEach(x=>
-            x.classList.remove("selected")
+        .querySelectorAll("[data-location]")
+        .forEach(
+            x=>x.classList.remove("selected")
         );
 
     el.classList.add("selected");
 
-    datePlan.location=value;
-
+    plan.location =
+        el.dataset.location;
 }
 
 
-function saveStep2(){
+function save2(){
 
     const custom =
         document
@@ -1687,18 +1512,16 @@ function saveStep2(){
             .value
             .trim();
 
-    if(custom){
-
-        datePlan.customLocation=custom;
-
-    }
+    plan.customLocation=custom;
 
     if(
-        !datePlan.location &&
-        !datePlan.customLocation
+        !plan.location &&
+        !custom
     ){
 
-        alert("একটা জায়গা তো বেছে নাও ❤️");
+        alert(
+            "একটা location তো বেছে নাও ❤️"
+        );
 
         return;
     }
@@ -1708,45 +1531,53 @@ function saveStep2(){
 
 
 /* =========================================================
-   STEP 3 — FOOD
+   STEP 3 FOOD
 ========================================================= */
 
 function step3(){
 
     render(`
 
-        <div class="page">
+        <main class="page">
 
-            <div class="card">
+            <section class="card">
 
-                ${stepHeader(
+                ${progress(
                     3,
-                    "কি খাওয়া হবে?"
+                    "কি খাব?"
                 )}
 
+                <div class="eyebrow">
+                    Date-এর সবচেয়ে important প্রশ্ন 😋
+                </div>
+
                 <h2>
-                    Date-এ কী খাবে? 🍽️
+                    কী খাওয়া হবে? 🍽️
                 </h2>
 
                 <p>
-                    একাধিক option বেছে নিতে পারো।
+                    যতগুলো ইচ্ছা select করতে পারো।
                 </p>
 
-                <div class="foodGrid">
 
-                    ${foodOption("🍕","Pizza")}
-                    ${foodOption("🍔","Burger")}
-                    ${foodOption("🍝","Pasta")}
-                    ${foodOption("🍣","Sushi")}
-                    ${foodOption("🍗","Chicken")}
-                    ${foodOption("🥗","Salad")}
-                    ${foodOption("🍰","Cake")}
-                    ${foodOption("🍨","Ice Cream")}
-                    ${foodOption("☕","Coffee")}
+                <div
+                    class="grid three"
+                    style="max-width:650px;margin:30px auto">
+
+                    ${food("🍕","Pizza")}
+                    ${food("🍔","Burger")}
+                    ${food("🍝","Pasta")}
+                    ${food("🍗","Chicken")}
+                    ${food("🍰","Cake")}
+                    ${food("🍨","Ice Cream")}
+                    ${food("☕","Coffee")}
+                    ${food("🥤","Drinks")}
+                    ${food("🍛","বিরিয়ানি")}
 
                 </div>
 
-                <div class="formGroup">
+
+                <div class="form-group">
 
                     <label>
                         🍴 অন্য কিছু?
@@ -1754,71 +1585,77 @@ function step3(){
 
                     <input
                         id="customFood"
-                        placeholder="যেমন: বিরিয়ানি, ফুচকা..."
+                        placeholder="নিজের পছন্দের খাবার..."
                     >
 
                 </div>
 
+
                 <button
                     class="btn"
-                    onclick="saveStep3()">
+                    type="button"
+                    onclick="save3()">
 
-                    ক্ষুধা লাগছে 😋
+                    Yummy! পরের ধাপ 😋
 
                 </button>
 
-            </div>
+            </section>
 
-        </div>
+        </main>
 
     `);
 
 }
 
 
-function foodOption(icon,name){
+function food(icon,name){
 
     return `
 
-        <div
-            class="foodCard"
-            onclick="toggleFood(this,'${name}')">
+        <button
+            class="option food"
+            type="button"
+            data-food="${name}"
+            onclick="toggleFood(this)">
 
-            <div class="foodEmoji">
+            <div class="option-icon">
                 ${icon}
             </div>
 
-            <div>
-                ${name}
-            </div>
+            ${name}
 
-        </div>
+        </button>
+
     `;
 }
 
 
-function toggleFood(el,name){
+function toggleFood(el){
+
+    const name =
+        el.dataset.food;
 
     el.classList.toggle("selected");
 
     if(
-        datePlan.food.includes(name)
+        plan.food.includes(name)
     ){
 
-        datePlan.food =
-            datePlan.food.filter(
+        plan.food =
+            plan.food.filter(
                 x=>x!==name
             );
 
     }else{
 
-        datePlan.food.push(name);
+        plan.food.push(name);
 
     }
 }
 
 
-function saveStep3(){
+function save3(){
 
     const custom =
         document
@@ -1828,13 +1665,15 @@ function saveStep3(){
 
     if(custom){
 
-        datePlan.food.push(custom);
+        plan.food.push(custom);
 
     }
 
-    if(datePlan.food.length===0){
+    if(plan.food.length===0){
 
-        alert("কমপক্ষে একটা খাবার তো বেছে নাও 😋");
+        alert(
+            "কমপক্ষে একটা খাবার বেছে নাও 😋"
+        );
 
         return;
     }
@@ -1844,124 +1683,141 @@ function saveStep3(){
 
 
 /* =========================================================
-   STEP 4 — DRESS COLOR
+   STEP 4 DRESS
 ========================================================= */
 
 function step4(){
 
     render(`
 
-        <div class="page">
+        <main class="page">
 
-            <div class="card">
+            <section class="card">
 
-                ${stepHeader(
+                ${progress(
                     4,
-                    "আজ কী রঙের dress?"
+                    "আজ কী পরবে?"
                 )}
 
+                <div class="eyebrow">
+                    এখন আসল গুরুত্বপূর্ণ বিষয় 👀
+                </div>
+
                 <h2>
-                    তোমার Date outfit-এর color কী হবে? 👗
+                    Date outfit-এর color কী? 👗
                 </h2>
 
                 <p>
-                    কারণ আমি আগে থেকেই imagine করতে চাই। 👀
+                    আমি কিন্তু আগে থেকেই imagine করছি। 😌
                 </p>
 
-                <div class="colorGrid">
 
-                    ${colorOption("#ff557d","লাল")}
-                    ${colorOption("#f5f5f5","সাদা")}
-                    ${colorOption("#111111","কালো")}
-                    ${colorOption("#f5b642","হলুদ")}
-                    ${colorOption("#d66b9c","গোলাপি")}
-                    ${colorOption("#5b82d8","নীল")}
-                    ${colorOption("#5b9b68","সবুজ")}
-                    ${colorOption("#9b6ac9","বেগুনি")}
+                <div
+                    class="grid three"
+                    style="max-width:600px;margin:30px auto">
+
+                    ${color("#e83d65","লাল")}
+                    ${color("#ffffff","সাদা")}
+                    ${color("#111111","কালো")}
+                    ${color("#e9bd42","হলুদ")}
+                    ${color("#df6f9e","গোলাপি")}
+                    ${color("#547fd1","নীল")}
+                    ${color("#63976b","সবুজ")}
+                    ${color("#9066bb","বেগুনি")}
+                    ${color("#b993d1","Lavender")}
 
                 </div>
 
-                <div class="formGroup">
+
+                <div class="form-group">
 
                     <label>
-                        👗 অন্য কোনো color / outfit?
+                        👗 অন্য কিছু হলে লিখে দাও
                     </label>
 
                     <input
-                        id="customColor"
-                        placeholder="যেমন: Lavender saree..."
+                        id="customDress"
+                        placeholder="যেমন: Black saree / Lavender dress..."
                     >
 
                 </div>
 
+
                 <button
                     class="btn"
-                    onclick="saveStep4()">
+                    type="button"
+                    onclick="save4()">
 
                     সুন্দর! ✨
 
                 </button>
 
-            </div>
+            </section>
 
-        </div>
+        </main>
 
     `);
+
 }
 
 
-function colorOption(color,name){
+function color(hex,name){
 
     return `
 
-        <div
-            class="colorChoice"
-            onclick="selectColor(this,'${name}')">
+        <button
+            class="option color"
+            type="button"
+            data-color="${name}"
+            onclick="selectColor(this)">
 
             <div
-                class="colorCircle"
-                style="background:${color}">
+                class="color-circle"
+                style="background:${hex}">
             </div>
 
             ${name}
 
-        </div>
+        </button>
 
     `;
 }
 
 
-function selectColor(el,name){
+function selectColor(el){
 
     document
-        .querySelectorAll(".colorChoice")
-        .forEach(x=>
-            x.classList.remove("selected")
+        .querySelectorAll("[data-color]")
+        .forEach(
+            x=>x.classList.remove("selected")
         );
 
     el.classList.add("selected");
 
-    datePlan.dressColor=name;
+    plan.dress =
+        el.dataset.color;
 }
 
 
-function saveStep4(){
+function save4(){
 
     const custom =
         document
-            .getElementById("customColor")
+            .getElementById("customDress")
             .value
             .trim();
 
     if(custom){
 
-        datePlan.dressColor=custom;
+        plan.dress=custom;
 
     }
 
-    if(!datePlan.dressColor){
+    if(!plan.dress){
 
-        alert("Dress-এর color-টা তো বলো 👗❤️");
+        alert(
+            "Dress-এর color-টা তো বলো 👗"
+        );
 
         return;
     }
@@ -1971,36 +1827,43 @@ function saveStep4(){
 
 
 /* =========================================================
-   STEP 5 — ACTIVITIES
+   STEP 5 ACTIVITIES
 ========================================================= */
 
 function step5(){
 
     render(`
 
-        <div class="page">
+        <main class="page">
 
-            <div class="card">
+            <section class="card">
 
-                ${stepHeader(
+                ${progress(
                     5,
-                    "কি কি করব?"
+                    "Date-এ কী করব?"
                 )}
 
+                <div class="eyebrow">
+                    আমাদের Date-এর activities
+                </div>
+
                 <h2>
-                    Date-এ কী কী হবে? ✨
+                    কী কী করতে চাও? ✨
                 </h2>
 
                 <p>
                     যতগুলো ইচ্ছা select করো।
                 </p>
 
-                <div class="activityGrid">
 
-                    ${activity("📸","ছবি তুলব")}
+                <div
+                    class="grid two"
+                    style="max-width:650px;margin:30px auto">
+
+                    ${activity("📸","অনেক ছবি তুলব")}
                     ${activity("🚶","একসাথে হাঁটব")}
                     ${activity("🎬","Movie দেখব")}
-                    ${activity("☕","Coffee date")}
+                    ${activity("☕","Coffee খাব")}
                     ${activity("🌆","শহর ঘুরব")}
                     ${activity("🎁","একটা surprise থাকবে")}
                     ${activity("🎵","Music শুনব")}
@@ -2008,19 +1871,22 @@ function step5(){
 
                 </div>
 
+
                 <button
                     class="btn"
-                    onclick="saveStep5()">
+                    type="button"
+                    onclick="save5()">
 
-                    আরও একটা জিনিস... 💌
+                    সব ঠিক আছে ❤️
 
                 </button>
 
-            </div>
+            </section>
 
-        </div>
+        </main>
 
     `);
+
 }
 
 
@@ -2028,46 +1894,55 @@ function activity(icon,name){
 
     return `
 
-        <div
-            class="activity"
-            onclick="toggleActivity(this,'${name}')">
+        <button
+            class="option activity"
+            type="button"
+            data-activity="${name}"
+            onclick="toggleActivity(this)">
 
-            <span>
+            <span class="activity-icon">
                 ${icon}
             </span>
 
             ${name}
 
-        </div>
+        </button>
 
     `;
 }
 
 
-function toggleActivity(el,name){
+function toggleActivity(el){
+
+    const name =
+        el.dataset.activity;
 
     el.classList.toggle("selected");
 
-    if(datePlan.activities.includes(name)){
+    if(
+        plan.activities.includes(name)
+    ){
 
-        datePlan.activities =
-            datePlan.activities.filter(
+        plan.activities =
+            plan.activities.filter(
                 x=>x!==name
             );
 
     }else{
 
-        datePlan.activities.push(name);
+        plan.activities.push(name);
 
     }
 }
 
 
-function saveStep5(){
+function save5(){
 
-    if(datePlan.activities.length===0){
+    if(plan.activities.length===0){
 
-        alert("একটা activity তো বেছে নাও ❤️");
+        alert(
+            "কমপক্ষে একটা activity বেছে নাও ❤️"
+        );
 
         return;
     }
@@ -2077,235 +1952,176 @@ function saveStep5(){
 
 
 /* =========================================================
-   STEP 6 — PERSONAL NOTE
+   STEP 6 NOTE
 ========================================================= */
 
 function step6(){
 
     render(`
 
-        <div class="page">
+        <main class="page">
 
-            <div class="card">
+            <section class="card">
 
-                ${stepHeader(
+                ${progress(
                     6,
-                    "একটা ছোট্ট কথা"
+                    "শেষ একটা কথা"
                 )}
 
+                <div class="hero-heart">
+                    💌
+                </div>
+
                 <h2>
-                    আমার জন্য কিছু লিখবে? 💌
+                    আমার জন্য একটা ছোট্ট message?
                 </h2>
 
                 <p>
-                    Date-এর আগে আমাকে একটা ছোট্ট message
-                    লিখে যেতে পারো।
+                    চাইলে Date Plan-এর সাথে
+                    আমাকে একটা ছোট্ট note দিয়ে যেতে পারো।
                 </p>
 
-                <div class="formGroup">
+
+                <div class="form-group">
 
                     <label>
                         💕 তোমার message
                     </label>
 
                     <textarea
-                        id="noteInput"
-                        placeholder="যেমন: সেদিন কিন্তু সুন্দর করে dress করে আসবে... ❤️">
-                    </textarea>
+                        id="note"
+                        placeholder="যেমন: সেদিন কিন্তু আমাকে সুন্দর করে সাজতে হবে... ❤️"></textarea>
 
                 </div>
 
+
                 <button
                     class="btn"
-                    onclick="saveStep6()">
+                    type="button"
+                    onclick="save6()">
 
-                    শেষ ধাপে যাই 🌹
+                    Date Plan তৈরি করি 🌹
 
                 </button>
 
-            </div>
+            </section>
 
-        </div>
+        </main>
 
     `);
+
 }
 
 
-function saveStep6(){
+function save6(){
 
-    datePlan.note =
+    plan.note =
         document
-            .getElementById("noteInput")
+            .getElementById("note")
             .value
             .trim();
 
-    step7();
+    summary();
 }
 
 
 /* =========================================================
-   STEP 7 — SUMMARY
+   SUMMARY
 ========================================================= */
 
-function step7(){
+function summary(){
 
     render(`
 
-        <div class="page">
+        <main class="page">
 
-            <div class="card">
+            <section class="card">
 
-                ${stepHeader(
-                    7,
-                    "আমাদের Date Plan"
-                )}
-
-                <div class="heroHeart">
+                <div class="hero-heart">
                     💖
                 </div>
 
+                <div class="script">
+                    সবকিছু ঠিকঠাক হয়ে গেছে...
+                </div>
+
                 <h2>
-                    Date Plan Ready!
+                    আমাদের Date Plan ❤️
                 </h2>
 
                 <p>
-                    ${HER_NAME}, তুমি আমাদের Date-এর
-                    পুরো plan বানিয়ে ফেলেছো। ❤️
+                    ${HER_NAME}, এই plan-টা তুমি নিজেই বানিয়েছো।
                 </p>
 
-                <div class="summaryHero">
 
-                    <div class="summaryTitle">
+                <div class="summary-head">
+
+                    <div class="summary-title">
                         আমাদের Date 🌹
                     </div>
 
                     <p>
-                        ${formatDate(datePlan.date)}
-                        •
-                        ${formatTime(datePlan.time)}
+                        ${formatDate(plan.date)}
+                        <br>
+                        ${formatTime(plan.time)}
                     </p>
 
                 </div>
 
 
-                <div class="summaryGrid">
+                <div class="summary-grid">
 
-                    <div class="summaryItem">
+                    ${summaryItem(
+                        "📅",
+                        "তারিখ",
+                        formatDate(plan.date)
+                    )}
 
-                        <div class="icon">
-                            📅
-                        </div>
+                    ${summaryItem(
+                        "🕐",
+                        "সময়",
+                        formatTime(plan.time)
+                    )}
 
-                        <small>
-                            DATE
-                        </small>
+                    ${summaryItem(
+                        "📍",
+                        "Location",
+                        locationText()
+                    )}
 
-                        <strong>
-                            ${formatDate(datePlan.date)}
-                        </strong>
+                    ${summaryItem(
+                        "🍽️",
+                        "খাবার",
+                        plan.food.join(", ")
+                    )}
 
-                    </div>
+                    ${summaryItem(
+                        "👗",
+                        "Dress Color",
+                        plan.dress
+                    )}
 
-
-                    <div class="summaryItem">
-
-                        <div class="icon">
-                            🕐
-                        </div>
-
-                        <small>
-                            TIME
-                        </small>
-
-                        <strong>
-                            ${formatTime(datePlan.time)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="summaryItem">
-
-                        <div class="icon">
-                            📍
-                        </div>
-
-                        <small>
-                            LOCATION
-                        </small>
-
-                        <strong>
-                            ${locationText()}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="summaryItem">
-
-                        <div class="icon">
-                            🍽️
-                        </div>
-
-                        <small>
-                            FOOD
-                        </small>
-
-                        <strong>
-                            ${datePlan.food.join(", ")}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="summaryItem">
-
-                        <div class="icon">
-                            👗
-                        </div>
-
-                        <small>
-                            DRESS COLOR
-                        </small>
-
-                        <strong>
-                            ${datePlan.dressColor}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="summaryItem">
-
-                        <div class="icon">
-                            ✨
-                        </div>
-
-                        <small>
-                            ACTIVITIES
-                        </small>
-
-                        <strong>
-                            ${datePlan.activities.join(", ")}
-                        </strong>
-
-                    </div>
+                    ${summaryItem(
+                        "✨",
+                        "Activities",
+                        plan.activities.join(", ")
+                    )}
 
                 </div>
 
 
                 ${
-                    datePlan.note
+                    plan.note
                     ?
                     `
-                    <div class="noteBox">
+                    <div class="note">
 
                         <small>
-                            💌 ${HER_NAME}-এর message
+                            💌 তোমার message
                         </small>
 
-                        <p style="margin-top:8px;color:white">
-                            ${escapeHTML(datePlan.note)}
+                        <p>
+                            ${escapeHTML(plan.note)}
                         </p>
 
                     </div>
@@ -2315,12 +2131,24 @@ function step7(){
                 }
 
 
+                <div class="success">
+
+                    Date plan complete! 🥰
+
+                    <br>
+
+                    এখন এটাকে সুন্দর একটা PDF বানিয়ে
+                    আমাকে পাঠিয়ে দাও। ❤️
+
+                </div>
+
+
                 <button
                     class="btn"
-                    onclick="downloadPDF()">
+                    type="button"
+                    onclick="makePDF()">
 
-                    📜 আমাদের Date Plan PDF
-                    ডাউনলোড করো
+                    📜 PDF বানাও
 
                 </button>
 
@@ -2328,19 +2156,60 @@ function step7(){
 
                 <button
                     class="btn secondary"
+                    type="button"
                     onclick="home()">
 
-                    আবার নতুন করে বানাই
+                    আবার শুরু করো
 
                 </button>
 
-            </div>
+            </section>
 
-        </div>
+        </main>
 
     `);
 
-    confetti(70);
+}
+
+
+/* =========================================================
+   SUMMARY ITEM
+========================================================= */
+
+function summaryItem(icon,label,value){
+
+    return `
+
+        <div class="summary-item">
+
+            <div class="summary-icon">
+                ${icon}
+            </div>
+
+            <small>
+                ${label}
+            </small>
+
+            <strong>
+                ${escapeHTML(String(value))}
+            </strong>
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   LOCATION TEXT
+========================================================= */
+
+function locationText(){
+
+    if(plan.customLocation)
+        return plan.customLocation;
+
+    return plan.location;
 }
 
 
@@ -2356,16 +2225,17 @@ function formatDate(value){
     const parts =
         value.split("-");
 
-    const d =
+    const date =
         new Date(
             Number(parts[0]),
             Number(parts[1])-1,
             Number(parts[2])
         );
 
-    return d.toLocaleDateString(
+    return date.toLocaleDateString(
         "bn-BD",
         {
+            weekday:"long",
             day:"numeric",
             month:"long",
             year:"numeric"
@@ -2374,49 +2244,40 @@ function formatDate(value){
 }
 
 
+/* =========================================================
+   TIME FORMAT
+========================================================= */
+
 function formatTime(value){
 
     if(!value)
         return "—";
 
-    const [h,m]=
+    const [hours,minutes] =
         value.split(":");
 
-    let hour=
-        parseInt(h);
-
-    const minute=m;
+    let h =
+        Number(hours);
 
     const suffix =
-        hour>=12
+        h >= 12
         ? "PM"
         : "AM";
 
-    hour =
-        hour%12 || 12;
+    h =
+        h % 12 || 12;
 
-    return `${hour}:${minute} ${suffix}`;
-}
-
-
-function locationText(){
-
-    if(
-        datePlan.customLocation
-    )
-        return datePlan.customLocation;
-
-    return datePlan.location;
+    return `${h}:${minutes} ${suffix}`;
 }
 
 
 /* =========================================================
-   HTML ESCAPE
+   ESCAPE
 ========================================================= */
 
-function escapeHTML(text){
+function escapeHTML(value){
 
-    return text
+    return value
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -2426,487 +2287,72 @@ function escapeHTML(text){
 
 
 /* =========================================================
-   PDF
+   PREPARE PRINT PAGE
 ========================================================= */
 
-async function downloadPDF(){
+function preparePrint(){
 
-    const {
-        jsPDF
-    } = window.jspdf;
+    document.getElementById("printDate").textContent =
+        formatDate(plan.date);
 
-    const pdf =
-        new jsPDF({
-            orientation:"portrait",
-            unit:"mm",
-            format:"a4"
-        });
+    document.getElementById("printTime").textContent =
+        formatTime(plan.time);
 
+    document.getElementById("printLocation").textContent =
+        locationText();
 
-    /*
-       IMPORTANT:
-       jsPDF does not natively support Bengali
-       Unicode fonts.
+    document.getElementById("printFood").textContent =
+        plan.food.join(" • ");
 
-       Therefore this PDF uses an elegant
-       Latin transliteration-safe layout for
-       browser compatibility.
+    document.getElementById("printDress").textContent =
+        plan.dress;
 
-       The original Bengali information is also
-       included through a rendered summary image.
-    */
+    document.getElementById("printActivities").textContent =
+        plan.activities.join(" • ");
 
 
-    /* =====================================================
-       PAGE BACKGROUND
-    ===================================================== */
+    const noteBox =
+        document.getElementById("printNoteBox");
 
-    pdf.setFillColor(
-        20,
-        8,
-        20
-    );
+    if(plan.note){
 
-    pdf.rect(
-        0,
-        0,
-        210,
-        297,
-        "F"
-    );
+        noteBox.style.display="block";
 
+        document.getElementById("printNote").textContent =
+            plan.note;
 
-    /* =====================================================
-       DECORATIVE TOP
-    ===================================================== */
+    }else{
 
-    pdf.setFillColor(
-        235,
-        55,
-        105
-    );
-
-    pdf.circle(
-        105,
-        45,
-        28,
-        "F"
-    );
-
-    pdf.setFillColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.setFontSize(30);
-
-    pdf.text(
-        "♥",
-        105,
-        54,
-        {
-            align:"center"
-        }
-    );
-
-
-    /* =====================================================
-       TITLE
-    ===================================================== */
-
-    pdf.setFontSize(28);
-
-    pdf.setTextColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.text(
-        "OUR DATE PLAN",
-        105,
-        92,
-        {
-            align:"center"
-        }
-    );
-
-
-    pdf.setFontSize(12);
-
-    pdf.setTextColor(
-        255,
-        155,
-        185
-    );
-
-    pdf.text(
-        "A little plan made with a lot of love",
-        105,
-        101,
-        {
-            align:"center"
-        }
-    );
-
-
-    /* =====================================================
-       COUPLE
-    ===================================================== */
-
-    pdf.setFontSize(18);
-
-    pdf.setTextColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.text(
-        `${YOUR_NAME}  ♥  ${HER_NAME}`,
-        105,
-        120,
-        {
-            align:"center"
-        }
-    );
-
-
-    /* =====================================================
-       DATE HERO
-    ===================================================== */
-
-    pdf.setFillColor(
-        45,
-        20,
-        42
-    );
-
-    roundedRect(
-        pdf,
-        25,
-        135,
-        160,
-        38,
-        8,
-        "F"
-    );
-
-    pdf.setFontSize(11);
-
-    pdf.setTextColor(
-        255,
-        150,
-        180
-    );
-
-    pdf.text(
-        "DATE",
-        35,
-        148
-    );
-
-    pdf.setFontSize(17);
-
-    pdf.setTextColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.text(
-        formatDate(datePlan.date),
-        35,
-        159
-    );
-
-    pdf.setFontSize(11);
-
-    pdf.setTextColor(
-        255,
-        150,
-        180
-    );
-
-    pdf.text(
-        "TIME",
-        125,
-        148
-    );
-
-    pdf.setFontSize(17);
-
-    pdf.setTextColor(
-        255,
-        255,
-        255
-    );
-
-    pdf.text(
-        formatTime(datePlan.time),
-        125,
-        159
-    );
-
-
-    /* =====================================================
-       DETAILS
-    ===================================================== */
-
-    let y=190;
-
-    const details=[
-
-        [
-            "LOCATION",
-            locationText()
-        ],
-
-        [
-            "FOOD",
-            datePlan.food.join(", ")
-        ],
-
-        [
-            "DRESS COLOR",
-            datePlan.dressColor
-        ],
-
-        [
-            "ACTIVITIES",
-            datePlan.activities.join(", ")
-        ]
-
-    ];
-
-
-    details.forEach(
-        ([label,value])=>{
-
-            pdf.setFillColor(
-                32,
-                15,
-                30
-            );
-
-            roundedRect(
-                pdf,
-                25,
-                y,
-                160,
-                17,
-                5,
-                "F"
-            );
-
-            pdf.setFontSize(8);
-
-            pdf.setTextColor(
-                255,
-                125,
-                160
-            );
-
-            pdf.text(
-                label,
-                33,
-                y+7
-            );
-
-            pdf.setFontSize(10);
-
-            pdf.setTextColor(
-                255,
-                255,
-                255
-            );
-
-            const lines =
-                pdf.splitTextToSize(
-                    String(value),
-                    100
-                );
-
-            pdf.text(
-                lines,
-                78,
-                y+7
-            );
-
-            y +=
-                21 +
-                Math.max(
-                    0,
-                    lines.length-1
-                )*4;
-
-        }
-    );
-
-
-    /* =====================================================
-       NOTE
-    ===================================================== */
-
-    if(datePlan.note){
-
-        if(y>245){
-
-            pdf.addPage();
-
-            pdf.setFillColor(
-                20,
-                8,
-                20
-            );
-
-            pdf.rect(
-                0,
-                0,
-                210,
-                297,
-                "F"
-            );
-
-            y=30;
-
-        }
-
-        pdf.setFillColor(
-            45,
-            20,
-            42
-        );
-
-        roundedRect(
-            pdf,
-            25,
-            y,
-            160,
-            35,
-            7,
-            "F"
-        );
-
-        pdf.setFontSize(9);
-
-        pdf.setTextColor(
-            255,
-            150,
-            180
-        );
-
-        pdf.text(
-            `${HER_NAME}'S NOTE`,
-            33,
-            y+10
-        );
-
-        pdf.setFontSize(10);
-
-        pdf.setTextColor(
-            255,
-            255,
-            255
-        );
-
-        const noteLines =
-            pdf.splitTextToSize(
-                datePlan.note,
-                140
-            );
-
-        pdf.text(
-            noteLines,
-            33,
-            y+19
-        );
-
-        y+=48;
+        noteBox.style.display="none";
 
     }
-
-
-    /* =====================================================
-       FOOTER
-    ===================================================== */
-
-    pdf.setFontSize(12);
-
-    pdf.setTextColor(
-        255,
-        150,
-        180
-    );
-
-    pdf.text(
-        "Made for a very special date ♥",
-        105,
-        280,
-        {
-            align:"center"
-        }
-    );
-
-    pdf.setFontSize(8);
-
-    pdf.setTextColor(
-        120,
-        100,
-        120
-    );
-
-    pdf.text(
-        "Keep this plan. One day it will become a memory.",
-        105,
-        287,
-        {
-            align:"center"
-        }
-    );
-
-
-    /* =====================================================
-       SAVE
-    ===================================================== */
-
-    pdf.save(
-        "Our-Date-Plan.pdf"
-    );
-
 }
 
 
 /* =========================================================
-   PDF ROUNDED RECT HELPER
+   PDF / PRINT
 ========================================================= */
 
-function roundedRect(
-    pdf,
-    x,
-    y,
-    w,
-    h,
-    r,
-    style
-){
+function makePDF(){
 
-    pdf.roundedRect(
-        x,
-        y,
-        w,
-        h,
-        r,
-        r,
-        style
-    );
+    preparePrint();
+
+    /*
+       Browser print gives us proper Bengali font
+       rendering and a polished A4 layout.
+    */
+
+    setTimeout(()=>{
+
+        window.print();
+
+    },100);
 
 }
 
 
 /* =========================================================
-   INIT
+   INITIALIZE
 ========================================================= */
 
 createStars();
